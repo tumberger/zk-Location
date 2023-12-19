@@ -22,7 +22,6 @@ type Float struct {
 }
 
 func (f *Float) NewF64(v frontend.Variable) F64 {
-	// v := math.Float64bits(x)
 	outputs, err := f.api.Compiler().NewHint(hint.DecodeFloatHint, 2, v)
 	if err != nil {
 		panic(err)
@@ -40,12 +39,8 @@ func (f *Float) NewF64(v frontend.Variable) F64 {
 	mantissa_is_zero := f.api.IsZero(m)
 	mantissa_is_not_zero := f.api.Sub(big.NewInt(1), mantissa_is_zero)
 	f.api.Compiler().MarkBoolean(mantissa_is_not_zero)
-	exponent_is_min := f.api.IsZero(
-		f.api.Sub(exponent, big.NewInt(-1023)),
-	)
-	exponent_is_max := f.api.IsZero(
-		f.api.Sub(exponent, big.NewInt(1024)),
-	)
+	exponent_is_min := f.gadget.IsEq(exponent, big.NewInt(-1023))
+	exponent_is_max := f.gadget.IsEq(exponent, big.NewInt(1024))
 
 	outputs, err = f.api.Compiler().NewHint(hint.NormalizeHint, 2, m, big.NewInt(52))
 	if err != nil {
@@ -130,7 +125,7 @@ func (f *Float) round(
 		f.api.Mul(mantissa, new(big.Int).Lsh(big.NewInt(1), uint(shift_max))),
 	)
 
-	is_half := f.api.And(f.api.IsZero(f.api.Sub(rr, new(big.Int).Lsh(big.NewInt(1), uint(r_idx)))), half_flag)
+	is_half := f.api.And(f.gadget.IsEq(rr, new(big.Int).Lsh(big.NewInt(1), uint(r_idx))), half_flag)
 
 	carry := f.api.Select(is_half, q, r)
 
@@ -142,9 +137,7 @@ func (f *Float) fixOverflow(
 	exponent frontend.Variable,
 	input_is_abnormal frontend.Variable,
 ) (frontend.Variable, frontend.Variable, frontend.Variable) {
-	mantissa_overflow := f.api.IsZero(
-		f.api.Sub(mantissa, new(big.Int).Lsh(big.NewInt(1), 53)),
-	)
+	mantissa_overflow := f.gadget.IsEq(mantissa, new(big.Int).Lsh(big.NewInt(1), 53))
 	exponent = f.api.Add(exponent, mantissa_overflow)
 	is_abnormal := f.api.Or(f.gadget.IsPositive(f.api.Sub(exponent, big.NewInt(1024)), 12), input_is_abnormal)
 
@@ -269,9 +262,7 @@ func (f *Float) Add(x, y F64) F64 {
 	)
 
 	sign := f.api.Select(
-		f.api.IsZero(
-			f.api.Sub(x.sign, y.sign),
-		),
+		f.gadget.IsEq(x.sign, y.sign),
 		x.sign,
 		mantissa_lt_0,
 	)
@@ -301,7 +292,7 @@ func (f *Float) Add(x, y F64) F64 {
 			f.api.Select(
 				f.api.Or(
 					y_is_not_abnormal,
-					f.api.IsZero(f.api.Sub(xx, yy)),
+					f.gadget.IsEq(xx, yy),
 				),
 				x.mantissa,
 				big.NewInt(0),

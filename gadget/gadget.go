@@ -58,3 +58,7 @@ func (f *IntGadget) Min(a, b frontend.Variable, diff_length uint64) frontend.Var
 		a,
 	)
 }
+
+func (f *IntGadget) IsEq(a, b frontend.Variable) frontend.Variable {
+	return f.api.IsZero(f.api.Sub(a, b))
+}

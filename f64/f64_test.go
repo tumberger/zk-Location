@@ -4,22 +4,24 @@ import (
 	"bufio"
 	"fmt"
 	"gnark-float/gadget"
-	"math"
 	"math/big"
 	"os"
 	"path/filepath"
+	"reflect"
 	"strings"
 	"testing"
 
 	"github.com/consensys/gnark-crypto/ecc"
+	"github.com/consensys/gnark/backend"
 	"github.com/consensys/gnark/frontend"
 	"github.com/consensys/gnark/test"
 )
 
 type Circuit struct {
-	X frontend.Variable `gnark:",secret"`
-	Y frontend.Variable `gnark:",secret"`
-	Z frontend.Variable `gnark:",public"`
+	X  frontend.Variable `gnark:",secret"`
+	Y  frontend.Variable `gnark:",secret"`
+	Z  frontend.Variable `gnark:",public"`
+	op string
 }
 
 func (c *Circuit) Define(api frontend.API) error {
@@ -28,47 +30,33 @@ func (c *Circuit) Define(api frontend.API) error {
 	x := ctx.NewF64(c.X)
 	y := ctx.NewF64(c.Y)
 	z := ctx.NewF64(c.Z)
-	ctx.AssertIsEqual(ctx.Add(x, y), z)
+	ctx.AssertIsEqual(reflect.ValueOf(&ctx).MethodByName(c.op).Call([]reflect.Value{reflect.ValueOf(x), reflect.ValueOf(y)})[0].Interface().(F64), z)
 	return nil
 }
 
 func TestCircuit(t *testing.T) {
 	assert := test.NewAssert(t)
 
-	path, _ := filepath.Abs("../data/f64/add")
-	file, err := os.Open(path)
-	assert.NoError(err)
-	defer file.Close()
+	ops := []string{"Add", "Sub", "Mul", "Div"}
 
-	scanner := bufio.NewScanner(file)
-	for scanner.Scan() {
-		data := strings.Fields(scanner.Text())
-		a, _ := new(big.Int).SetString(data[0], 16)
-		b, _ := new(big.Int).SetString(data[1], 16)
-		c, _ := new(big.Int).SetString(data[2], 16)
+	for _, op := range ops {
+		path, _ := filepath.Abs(fmt.Sprintf("../data/f64/%s", strings.ToLower(op)))
+		file, _ := os.Open(path)
+		defer file.Close()
 
-		fmt.Printf(
-			"%v %v %v \n",
-			math.Float64frombits(a.Uint64()),
-			math.Float64frombits(b.Uint64()),
-			math.Float64frombits(c.Uint64()),
-		)
+		scanner := bufio.NewScanner(file)
+		for scanner.Scan() {
+			data := strings.Fields(scanner.Text())
+			a, _ := new(big.Int).SetString(data[0], 16)
+			b, _ := new(big.Int).SetString(data[1], 16)
+			c, _ := new(big.Int).SetString(data[2], 16)
 
-		circuit := Circuit{
-			X: a,
-			Y: b,
-			Z: c,
+			assert.ProverSucceeded(
+				&Circuit{X: 0, Y: 0, Z: 0, op: op},
+				&Circuit{X: a, Y: b, Z: c, op: op},
+				test.WithCurves(ecc.BN254),
+				test.WithBackends(backend.GROTH16, backend.PLONK),
+			)
 		}
-		witness := Circuit{
-			X: a,
-			Y: b,
-			Z: c,
-		}
-
-		err := test.IsSolved(&circuit, &witness, ecc.BN254.ScalarField(), test.SetAllVariablesAsConstants())
-		assert.NoError(err)
-
-		// TODO: fixme
-		// assert.ProverSucceeded(&circuit, &witness, test.WithCurves(ecc.BN254))
 	}
 }
