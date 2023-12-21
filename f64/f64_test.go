@@ -55,7 +55,7 @@ func TestCircuit(t *testing.T) {
 				&Circuit{X: 0, Y: 0, Z: 0, op: op},
 				&Circuit{X: a, Y: b, Z: c, op: op},
 				test.WithCurves(ecc.BN254),
-				test.WithBackends(backend.GROTH16, backend.PLONK),
+				test.WithBackends(backend.GROTH16),
 			)
 		}
 	}

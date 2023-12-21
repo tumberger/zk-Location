@@ -1,48 +1,50 @@
 package f64
 
 import (
+	"math"
 	"math/big"
 
 	"github.com/consensys/gnark/frontend"
+	comparator "github.com/consensys/gnark/std/math/cmp"
 
 	"gnark-float/gadget"
 	"gnark-float/hint"
 )
 
 type F64 struct {
-	sign        frontend.Variable
-	exponent    frontend.Variable
-	mantissa    frontend.Variable
-	is_abnormal frontend.Variable
+	Sign        frontend.Variable
+	Exponent    frontend.Variable
+	Mantissa    frontend.Variable
+	Is_abnormal frontend.Variable
 }
 
 type Float struct {
-	api    frontend.API
-	gadget gadget.IntGadget
+	Api    frontend.API
+	Gadget gadget.IntGadget
 }
 
 func (f *Float) NewF64(v frontend.Variable) F64 {
-	outputs, err := f.api.Compiler().NewHint(hint.DecodeFloatHint, 2, v)
+	outputs, err := f.Api.Compiler().NewHint(hint.DecodeFloatHint, 2, v)
 	if err != nil {
 		panic(err)
 	}
 	s := outputs[0]
 	e := outputs[1]
-	m := f.api.Sub(v, f.api.Add(f.api.Mul(s, new(big.Int).Lsh(big.NewInt(1), 63)), f.api.Mul(e, new(big.Int).Lsh(big.NewInt(1), 52))))
+	m := f.Api.Sub(v, f.Api.Add(f.Api.Mul(s, new(big.Int).Lsh(big.NewInt(1), 63)), f.Api.Mul(e, new(big.Int).Lsh(big.NewInt(1), 52))))
 
-	f.api.AssertIsBoolean(s)
-	f.gadget.AssertBitLength(e, 11)
-	f.gadget.AssertBitLength(m, 52)
+	f.Api.AssertIsBoolean(s)
+	f.Gadget.AssertBitLength(e, 11)
+	f.Gadget.AssertBitLength(m, 52)
 
-	exponent := f.api.Sub(e, big.NewInt(1023))
+	exponent := f.Api.Sub(e, big.NewInt(1023))
 
-	mantissa_is_zero := f.api.IsZero(m)
-	mantissa_is_not_zero := f.api.Sub(big.NewInt(1), mantissa_is_zero)
-	f.api.Compiler().MarkBoolean(mantissa_is_not_zero)
-	exponent_is_min := f.gadget.IsEq(exponent, big.NewInt(-1023))
-	exponent_is_max := f.gadget.IsEq(exponent, big.NewInt(1024))
+	mantissa_is_zero := f.Api.IsZero(m)
+	mantissa_is_not_zero := f.Api.Sub(big.NewInt(1), mantissa_is_zero)
+	f.Api.Compiler().MarkBoolean(mantissa_is_not_zero)
+	exponent_is_min := f.Gadget.IsEq(exponent, big.NewInt(-1023))
+	exponent_is_max := f.Gadget.IsEq(exponent, big.NewInt(1024))
 
-	outputs, err = f.api.Compiler().NewHint(hint.NormalizeHint, 2, m, big.NewInt(52))
+	outputs, err = f.Api.Compiler().NewHint(hint.NormalizeHint, 2, m, big.NewInt(52))
 	if err != nil {
 		panic(err)
 	}
@@ -50,35 +52,35 @@ func (f *Float) NewF64(v frontend.Variable) F64 {
 	two_to_shift := outputs[1]
 	// TODO: enforce (shift, two_to_shift) is in lookup table [0, 52]
 
-	shifted_mantissa := f.api.Mul(m, two_to_shift)
-	f.gadget.AssertBitLength(
-		f.api.Sub(
+	shifted_mantissa := f.Api.Mul(m, two_to_shift)
+	f.Gadget.AssertBitLength(
+		f.Api.Sub(
 			shifted_mantissa,
-			f.api.Mul(mantissa_is_not_zero, new(big.Int).Lsh(big.NewInt(1), 51)),
+			f.Api.Mul(mantissa_is_not_zero, new(big.Int).Lsh(big.NewInt(1), 51)),
 		),
 		51,
 	)
 
-	exponent = f.api.Select(
+	exponent = f.Api.Select(
 		exponent_is_min,
-		f.api.Sub(f.api.Neg(shift), big.NewInt(1023)),
+		f.Api.Sub(f.Api.Neg(shift), big.NewInt(1023)),
 		exponent,
 	)
-	mantissa := f.api.Select(
+	mantissa := f.Api.Select(
 		exponent_is_min,
-		f.api.Add(shifted_mantissa, shifted_mantissa),
-		f.api.Select(
-			f.api.And(exponent_is_max, mantissa_is_not_zero),
+		f.Api.Add(shifted_mantissa, shifted_mantissa),
+		f.Api.Select(
+			f.Api.And(exponent_is_max, mantissa_is_not_zero),
 			big.NewInt(0),
-			f.api.Add(m, new(big.Int).Lsh(big.NewInt(1), 52)),
+			f.Api.Add(m, new(big.Int).Lsh(big.NewInt(1), 52)),
 		),
 	)
 
 	return F64{
-		sign:        s,
-		exponent:    exponent,
-		mantissa:    mantissa,
-		is_abnormal: exponent_is_max,
+		Sign:        s,
+		Exponent:    exponent,
+		Mantissa:    mantissa,
+		Is_abnormal: exponent_is_max,
 	}
 }
 
@@ -89,7 +91,7 @@ func (f *Float) round(
 	shift_max uint64,
 	half_flag frontend.Variable,
 ) frontend.Variable {
-	outputs, err := f.api.Compiler().NewHint(hint.PowerOfTwoHint, 1, shift)
+	outputs, err := f.Api.Compiler().NewHint(hint.PowerOfTwoHint, 1, shift)
 	if err != nil {
 		panic(err)
 	}
@@ -102,7 +104,7 @@ func (f *Float) round(
 	p_len := uint64(52)
 	s_len := r_idx
 
-	outputs, err = f.api.Compiler().NewHint(hint.DecomposeMantissaForRoundingHint, 4, mantissa, two_to_shift, shift_max, p_idx, q_idx, r_idx)
+	outputs, err = f.Api.Compiler().NewHint(hint.DecomposeMantissaForRoundingHint, 4, mantissa, two_to_shift, shift_max, p_idx, q_idx, r_idx)
 	if err != nil {
 		panic(err)
 	}
@@ -112,24 +114,24 @@ func (f *Float) round(
 	r := outputs[2]
 	s := outputs[3]
 
-	f.api.AssertIsBoolean(q)
-	f.api.AssertIsBoolean(r)
-	f.gadget.AssertBitLength(p, p_len)
-	f.gadget.AssertBitLength(s, s_len)
+	f.Api.AssertIsBoolean(q)
+	f.Api.AssertIsBoolean(r)
+	f.Gadget.AssertBitLength(p, p_len)
+	f.Gadget.AssertBitLength(s, s_len)
 
-	qq := f.api.Add(p, p, q)
-	rr := f.api.Add(f.api.Mul(r, new(big.Int).Lsh(big.NewInt(1), uint(r_idx))), s)
+	qq := f.Api.Add(p, p, q)
+	rr := f.Api.Add(f.Api.Mul(r, new(big.Int).Lsh(big.NewInt(1), uint(r_idx))), s)
 
-	f.api.AssertIsEqual(
-		f.api.Mul(f.api.Add(f.api.Mul(qq, new(big.Int).Lsh(big.NewInt(1), uint(q_idx))), rr), two_to_shift),
-		f.api.Mul(mantissa, new(big.Int).Lsh(big.NewInt(1), uint(shift_max))),
+	f.Api.AssertIsEqual(
+		f.Api.Mul(f.Api.Add(f.Api.Mul(qq, new(big.Int).Lsh(big.NewInt(1), uint(q_idx))), rr), two_to_shift),
+		f.Api.Mul(mantissa, new(big.Int).Lsh(big.NewInt(1), uint(shift_max))),
 	)
 
-	is_half := f.api.And(f.gadget.IsEq(rr, new(big.Int).Lsh(big.NewInt(1), uint(r_idx))), half_flag)
+	is_half := f.Api.And(f.Gadget.IsEq(rr, new(big.Int).Lsh(big.NewInt(1), uint(r_idx))), half_flag)
 
-	carry := f.api.Select(is_half, q, r)
+	carry := f.Api.Select(is_half, q, r)
 
-	return f.api.Mul(f.api.Add(qq, carry), two_to_shift)
+	return f.Api.Mul(f.Api.Add(qq, carry), two_to_shift)
 }
 
 func (f *Float) fixOverflow(
@@ -137,58 +139,58 @@ func (f *Float) fixOverflow(
 	exponent frontend.Variable,
 	input_is_abnormal frontend.Variable,
 ) (frontend.Variable, frontend.Variable, frontend.Variable) {
-	mantissa_overflow := f.gadget.IsEq(mantissa, new(big.Int).Lsh(big.NewInt(1), 53))
-	exponent = f.api.Add(exponent, mantissa_overflow)
-	is_abnormal := f.api.Or(f.gadget.IsPositive(f.api.Sub(exponent, big.NewInt(1024)), 12), input_is_abnormal)
+	mantissa_overflow := f.Gadget.IsEq(mantissa, new(big.Int).Lsh(big.NewInt(1), 53))
+	exponent = f.Api.Add(exponent, mantissa_overflow)
+	Is_abnormal := f.Api.Or(f.Gadget.IsPositive(f.Api.Sub(exponent, big.NewInt(1024)), 12), input_is_abnormal)
 
-	return f.api.Select(
-			f.api.Or(mantissa_overflow, is_abnormal),
+	return f.Api.Select(
+			f.Api.Or(mantissa_overflow, Is_abnormal),
 			new(big.Int).Lsh(big.NewInt(1), 52),
 			mantissa,
-		), f.api.Select(
-			is_abnormal,
+		), f.Api.Select(
+			Is_abnormal,
 			big.NewInt(1024),
 			exponent,
-		), is_abnormal
+		), Is_abnormal
 }
 
 func (f *Float) AssertIsEqual(x, y F64) {
-	is_nan := f.api.Or(
-		f.api.And(x.is_abnormal, f.api.IsZero(x.mantissa)),
-		f.api.And(y.is_abnormal, f.api.IsZero(y.mantissa)),
+	is_nan := f.Api.Or(
+		f.Api.And(x.Is_abnormal, f.Api.IsZero(x.Mantissa)),
+		f.Api.And(y.Is_abnormal, f.Api.IsZero(y.Mantissa)),
 	)
-	f.api.AssertIsEqual(f.api.Select(
+	f.Api.AssertIsEqual(f.Api.Select(
 		is_nan,
 		0,
-		x.sign,
-	), f.api.Select(
+		x.Sign,
+	), f.Api.Select(
 		is_nan,
 		0,
-		y.sign,
+		y.Sign,
 	))
-	f.api.AssertIsEqual(f.api.Sub(x.exponent, y.exponent), 0)
-	f.api.AssertIsEqual(x.mantissa, y.mantissa)
-	f.api.AssertIsEqual(x.is_abnormal, y.is_abnormal)
+	f.Api.AssertIsEqual(f.Api.Sub(x.Exponent, y.Exponent), 0)
+	f.Api.AssertIsEqual(x.Mantissa, y.Mantissa)
+	f.Api.AssertIsEqual(x.Is_abnormal, y.Is_abnormal)
 }
 
 func (f *Float) Add(x, y F64) F64 {
 	D := 55
 
-	delta, ex_le_ey := f.gadget.Abs(f.api.Sub(y.exponent, x.exponent), 12)
-	exponent := f.api.Add(
-		f.api.Select(
+	delta, ex_le_ey := f.Gadget.Abs(f.Api.Sub(y.Exponent, x.Exponent), 12)
+	exponent := f.Api.Add(
+		f.Api.Select(
 			ex_le_ey,
-			y.exponent,
-			x.exponent,
+			y.Exponent,
+			x.Exponent,
 		),
 		big.NewInt(1),
 	)
-	delta = f.gadget.Max(
-		f.api.Sub(D, delta),
+	delta = f.Gadget.Max(
+		f.Api.Sub(D, delta),
 		big.NewInt(0),
 		11,
 	)
-	outputs, err := f.api.NewHint(
+	outputs, err := f.Api.NewHint(
 		hint.PowerOfTwoHint,
 		1,
 		delta,
@@ -199,38 +201,38 @@ func (f *Float) Add(x, y F64) F64 {
 	two_to_delta := outputs[0]
 	// TODO: enforce (delta, two_to_delta) is in lookup table [0, >=55]
 
-	xx := f.api.Select(
-		x.sign,
-		f.api.Neg(x.mantissa),
-		x.mantissa,
+	xx := f.Api.Select(
+		x.Sign,
+		f.Api.Neg(x.Mantissa),
+		x.Mantissa,
 	)
-	yy := f.api.Select(
-		y.sign,
-		f.api.Neg(y.mantissa),
-		y.mantissa,
+	yy := f.Api.Select(
+		y.Sign,
+		f.Api.Neg(y.Mantissa),
+		y.Mantissa,
 	)
-	zz := f.api.Select(
+	zz := f.Api.Select(
 		ex_le_ey,
 		xx,
 		yy,
 	)
-	ww := f.api.Sub(f.api.Add(xx, yy), zz)
+	ww := f.Api.Sub(f.Api.Add(xx, yy), zz)
 
-	s := f.api.Add(f.api.Mul(zz, two_to_delta), f.api.Mul(ww, new(big.Int).Lsh(big.NewInt(1), uint(D))))
+	s := f.Api.Add(f.Api.Mul(zz, two_to_delta), f.Api.Mul(ww, new(big.Int).Lsh(big.NewInt(1), uint(D))))
 
 	L := D + 53 + 1
 
-	outputs, err = f.api.Compiler().NewHint(hint.AbsHint, 2, s)
+	outputs, err = f.Api.Compiler().NewHint(hint.AbsHint, 2, s)
 	if err != nil {
 		panic(err)
 	}
 	mantissa_ge_0 := outputs[0]
 	mantissa_abs := outputs[1]
-	f.api.AssertIsBoolean(mantissa_ge_0)
-	mantissa_lt_0 := f.api.Sub(big.NewInt(1), mantissa_ge_0)
-	f.api.Compiler().MarkBoolean(mantissa_lt_0)
+	f.Api.AssertIsBoolean(mantissa_ge_0)
+	mantissa_lt_0 := f.Api.Sub(big.NewInt(1), mantissa_ge_0)
+	f.Api.Compiler().MarkBoolean(mantissa_lt_0)
 
-	outputs, err = f.api.Compiler().NewHint(hint.NormalizeHint, 2, mantissa_abs, big.NewInt(int64(L)))
+	outputs, err = f.Api.Compiler().NewHint(hint.NormalizeHint, 2, mantissa_abs, big.NewInt(int64(L)))
 	if err != nil {
 		panic(err)
 	}
@@ -239,31 +241,31 @@ func (f *Float) Add(x, y F64) F64 {
 	// TODO: enforce range of shift [0, 56]
 	// TODO: enforce (shift, two_to_shift) is in lookup table
 
-	mantissa := f.api.Mul(
-		f.api.Select(
+	mantissa := f.Api.Mul(
+		f.Api.Select(
 			mantissa_ge_0,
 			s,
-			f.api.Neg(s),
+			f.Api.Neg(s),
 		),
 		two_to_shift,
 	)
 
-	mantissa_is_zero := f.api.IsZero(mantissa)
-	mantissa_is_not_zero := f.api.Sub(big.NewInt(1), mantissa_is_zero)
-	f.api.Compiler().MarkBoolean(mantissa_is_not_zero)
-	f.gadget.AssertBitLength(
-		f.api.Sub(mantissa, f.api.Mul(mantissa_is_not_zero, new(big.Int).Lsh(big.NewInt(1), uint(L-1)))),
+	mantissa_is_zero := f.Api.IsZero(mantissa)
+	mantissa_is_not_zero := f.Api.Sub(big.NewInt(1), mantissa_is_zero)
+	f.Api.Compiler().MarkBoolean(mantissa_is_not_zero)
+	f.Gadget.AssertBitLength(
+		f.Api.Sub(mantissa, f.Api.Mul(mantissa_is_not_zero, new(big.Int).Lsh(big.NewInt(1), uint(L-1)))),
 		uint64(L-1),
 	)
-	exponent = f.api.Select(
+	exponent = f.Api.Select(
 		mantissa_is_zero,
 		big.NewInt(-1075),
-		f.api.Sub(exponent, shift),
+		f.Api.Sub(exponent, shift),
 	)
 
-	sign := f.api.Select(
-		f.gadget.IsEq(x.sign, y.sign),
-		x.sign,
+	sign := f.Api.Select(
+		f.Gadget.IsEq(x.Sign, y.Sign),
+		x.Sign,
 		mantissa_lt_0,
 	)
 
@@ -275,46 +277,46 @@ func (f *Float) Add(x, y F64) F64 {
 		1,
 	)
 
-	mantissa, exponent, is_abnormal := f.fixOverflow(
+	mantissa, exponent, Is_abnormal := f.fixOverflow(
 		mantissa,
 		exponent,
-		f.api.Or(x.is_abnormal, y.is_abnormal),
+		f.Api.Or(x.Is_abnormal, y.Is_abnormal),
 	)
 
-	y_is_not_abnormal := f.api.Sub(big.NewInt(1), y.is_abnormal)
-	f.api.Compiler().MarkBoolean(y_is_not_abnormal)
+	y_is_not_abnormal := f.Api.Sub(big.NewInt(1), y.Is_abnormal)
+	f.Api.Compiler().MarkBoolean(y_is_not_abnormal)
 
 	return F64{
-		sign:     sign,
-		exponent: exponent,
-		mantissa: f.api.Select(
-			x.is_abnormal,
-			f.api.Select(
-				f.api.Or(
+		Sign:     sign,
+		Exponent: exponent,
+		Mantissa: f.Api.Select(
+			x.Is_abnormal,
+			f.Api.Select(
+				f.Api.Or(
 					y_is_not_abnormal,
-					f.gadget.IsEq(xx, yy),
+					f.Gadget.IsEq(xx, yy),
 				),
-				x.mantissa,
+				x.Mantissa,
 				big.NewInt(0),
 			),
-			f.api.Select(
-				y.is_abnormal,
-				y.mantissa,
+			f.Api.Select(
+				y.Is_abnormal,
+				y.Mantissa,
 				mantissa,
 			),
 		),
-		is_abnormal: is_abnormal,
+		Is_abnormal: Is_abnormal,
 	}
 }
 
 func (f *Float) Neg(x F64) F64 {
-	neg_sign := f.api.Sub(big.NewInt(1), x.sign)
-	f.api.Compiler().MarkBoolean(neg_sign)
+	neg_sign := f.Api.Sub(big.NewInt(1), x.Sign)
+	f.Api.Compiler().MarkBoolean(neg_sign)
 	return F64{
-		sign:        neg_sign,
-		exponent:    x.exponent,
-		mantissa:    x.mantissa,
-		is_abnormal: x.is_abnormal,
+		Sign:        neg_sign,
+		Exponent:    x.Exponent,
+		Mantissa:    x.Mantissa,
+		Is_abnormal: x.Is_abnormal,
 	}
 }
 
@@ -323,36 +325,36 @@ func (f *Float) Sub(x, y F64) F64 {
 }
 
 func (f *Float) Mul(x, y F64) F64 {
-	sign := f.api.Xor(x.sign, y.sign)
-	mantissa := f.api.Mul(x.mantissa, y.mantissa)
+	sign := f.Api.Xor(x.Sign, y.Sign)
+	mantissa := f.Api.Mul(x.Mantissa, y.Mantissa)
 	L := 106
-	outputs, err := f.api.Compiler().NewHint(hint.NthBitHint, 1, mantissa, big.NewInt(int64(L-1)))
+	outputs, err := f.Api.Compiler().NewHint(hint.NthBitHint, 1, mantissa, big.NewInt(int64(L-1)))
 	if err != nil {
 		panic(err)
 	}
 	mantissa_msb := outputs[0]
-	f.api.AssertIsBoolean(mantissa_msb)
-	f.gadget.AssertBitLength(
-		f.api.Sub(mantissa, f.api.Mul(mantissa_msb, new(big.Int).Lsh(big.NewInt(1), uint(L-1)))),
+	f.Api.AssertIsBoolean(mantissa_msb)
+	f.Gadget.AssertBitLength(
+		f.Api.Sub(mantissa, f.Api.Mul(mantissa_msb, new(big.Int).Lsh(big.NewInt(1), uint(L-1)))),
 		uint64(L-1),
 	)
-	mantissa = f.api.Add(
+	mantissa = f.Api.Add(
 		mantissa,
-		f.api.Select(
+		f.Api.Select(
 			mantissa_msb,
 			big.NewInt(0),
 			mantissa,
 		),
 	)
-	exponent := f.api.Add(f.api.Add(x.exponent, y.exponent), mantissa_msb)
+	exponent := f.Api.Add(f.Api.Add(x.Exponent, y.Exponent), mantissa_msb)
 
 	U := 54
 	mantissa = f.round(
 		mantissa,
 		uint64(L),
-		f.gadget.Max(
-			f.gadget.Min(
-				f.api.Sub(f.api.Neg(exponent), big.NewInt(1022)),
+		f.Gadget.Max(
+			f.Gadget.Min(
+				f.Api.Sub(f.Api.Neg(exponent), big.NewInt(1022)),
 				big.NewInt(int64(U)),
 				12,
 			),
@@ -363,78 +365,78 @@ func (f *Float) Mul(x, y F64) F64 {
 		1,
 	)
 
-	mantissa_is_zero := f.api.IsZero(mantissa)
-	exponent = f.api.Select(
+	mantissa_is_zero := f.Api.IsZero(mantissa)
+	exponent = f.Api.Select(
 		mantissa_is_zero,
 		big.NewInt(-1075),
 		exponent,
 	)
-	input_is_abnormal := f.api.Or(x.is_abnormal, y.is_abnormal)
-	mantissa, exponent, is_abnormal := f.fixOverflow(
+	input_is_abnormal := f.Api.Or(x.Is_abnormal, y.Is_abnormal)
+	mantissa, exponent, Is_abnormal := f.fixOverflow(
 		mantissa,
 		exponent,
 		input_is_abnormal,
 	)
 
 	return F64{
-		sign:     sign,
-		exponent: exponent,
-		mantissa: f.api.Select(
+		Sign:     sign,
+		Exponent: exponent,
+		Mantissa: f.Api.Select(
 			mantissa_is_zero,
 			big.NewInt(0),
 			mantissa,
 		),
-		is_abnormal: is_abnormal,
+		Is_abnormal: Is_abnormal,
 	}
 }
 
 func (f *Float) Div(x, y F64) F64 {
 	Q := 54
-	sign := f.api.Xor(x.sign, y.sign)
-	x_is_zero := f.api.IsZero(x.mantissa)
-	y_is_zero := f.api.IsZero(y.mantissa)
+	sign := f.Api.Xor(x.Sign, y.Sign)
+	x_is_zero := f.Api.IsZero(x.Mantissa)
+	y_is_zero := f.Api.IsZero(y.Mantissa)
 
-	y_mantissa := f.api.Select(
+	y_mantissa := f.Api.Select(
 		y_is_zero,
 		big.NewInt(1<<52),
-		y.mantissa,
+		y.Mantissa,
 	)
-	outputs, err := f.api.Compiler().NewHint(hint.DivHint, 1, x.mantissa, y_mantissa, big.NewInt(int64(Q)))
+	outputs, err := f.Api.Compiler().NewHint(hint.DivHint, 1, x.Mantissa, y_mantissa, big.NewInt(int64(Q)))
 	if err != nil {
 		panic(err)
 	}
 	mantissa := outputs[0]
-	outputs, err = f.api.Compiler().NewHint(hint.NthBitHint, 1, mantissa, big.NewInt(int64(Q)))
+	outputs, err = f.Api.Compiler().NewHint(hint.NthBitHint, 1, mantissa, big.NewInt(int64(Q)))
 	if err != nil {
 		panic(err)
 	}
 	mantissa_msb := outputs[0]
-	f.api.AssertIsBoolean(mantissa_msb)
-	flipped_mantissa_msb := f.api.Sub(big.NewInt(1), mantissa_msb)
-	f.api.Compiler().MarkBoolean(flipped_mantissa_msb)
+	f.Api.AssertIsBoolean(mantissa_msb)
+	flipped_mantissa_msb := f.Api.Sub(big.NewInt(1), mantissa_msb)
+	f.Api.Compiler().MarkBoolean(flipped_mantissa_msb)
 	L := Q + 1
-	remainder := f.api.Sub(f.api.Mul(x.mantissa, new(big.Int).Lsh(big.NewInt(1), uint(Q))), f.api.Mul(mantissa, y_mantissa))
-	f.gadget.AssertBitLength(remainder, 53)
-	f.gadget.AssertBitLength(f.api.Sub(y_mantissa, f.api.Add(remainder, big.NewInt(1))), 53)
-	f.gadget.AssertBitLength(f.api.Sub(mantissa, f.api.Mul(mantissa_msb, new(big.Int).Lsh(big.NewInt(1), uint(L-1)))), uint64(L-1))
+	remainder := f.Api.Sub(f.Api.Mul(x.Mantissa, new(big.Int).Lsh(big.NewInt(1), uint(Q))), f.Api.Mul(mantissa, y_mantissa))
+	f.Gadget.AssertBitLength(remainder, 53)
+	f.Gadget.AssertBitLength(f.Api.Sub(y_mantissa, f.Api.Add(remainder, big.NewInt(1))), 53)
+	f.Gadget.AssertBitLength(f.Api.Sub(mantissa, f.Api.Mul(mantissa_msb, new(big.Int).Lsh(big.NewInt(1), uint(L-1)))), uint64(L-1))
 
-	mantissa = f.api.Add(
+	mantissa = f.Api.Add(
 		mantissa,
-		f.api.Select(
+		f.Api.Select(
 			mantissa_msb,
 			big.NewInt(0),
 			mantissa,
 		),
 	)
-	exponent := f.api.Sub(f.api.Sub(x.exponent, y.exponent), flipped_mantissa_msb)
+	exponent := f.Api.Sub(f.Api.Sub(x.Exponent, y.Exponent), flipped_mantissa_msb)
 
 	U := 54
 	mantissa = f.round(
 		mantissa,
 		uint64(L),
-		f.gadget.Max(
-			f.gadget.Min(
-				f.api.Sub(f.api.Neg(exponent), big.NewInt(1022)),
+		f.Gadget.Max(
+			f.Gadget.Min(
+				f.Api.Sub(f.Api.Neg(exponent), big.NewInt(1022)),
 				big.NewInt(int64(U)),
 				12,
 			),
@@ -442,33 +444,72 @@ func (f *Float) Div(x, y F64) F64 {
 			12,
 		),
 		uint64(U),
-		f.api.IsZero(remainder),
+		f.Api.IsZero(remainder),
 	)
 
-	mantissa, exponent, is_abnormal := f.fixOverflow(
+	mantissa, exponent, Is_abnormal := f.fixOverflow(
 		mantissa,
 		exponent,
-		f.api.Or(x.is_abnormal, y_is_zero),
+		f.Api.Or(x.Is_abnormal, y_is_zero),
 	)
-	is_not_abnormal := f.api.Sub(big.NewInt(1), is_abnormal)
-	f.api.Compiler().MarkBoolean(is_not_abnormal)
+	is_not_abnormal := f.Api.Sub(big.NewInt(1), Is_abnormal)
+	f.Api.Compiler().MarkBoolean(is_not_abnormal)
 
-	mantissa = f.api.Select(
-		f.api.Or(x_is_zero, y.is_abnormal),
+	mantissa = f.Api.Select(
+		f.Api.Or(x_is_zero, y.Is_abnormal),
 		big.NewInt(0),
 		mantissa,
 	)
-	mantissa_is_zero := f.api.IsZero(mantissa)
-	exponent = f.api.Select(
-		f.api.And(mantissa_is_zero, is_not_abnormal),
+	mantissa_is_zero := f.Api.IsZero(mantissa)
+	exponent = f.Api.Select(
+		f.Api.And(mantissa_is_zero, is_not_abnormal),
 		big.NewInt(-1075),
 		exponent,
 	)
 
 	return F64{
-		sign:        sign,
-		exponent:    exponent,
-		mantissa:    mantissa,
-		is_abnormal: is_abnormal,
+		Sign:        sign,
+		Exponent:    exponent,
+		Mantissa:    mantissa,
+		Is_abnormal: Is_abnormal,
 	}
+}
+
+// Exponent Bitwidth for float64
+var k = 11
+
+func (f *Float) GreaterThan(floatOne F64, floatTwo F64) frontend.Variable {
+
+	// Make exponents positive for correct comparison
+	floatOne.Exponent = f.Api.Add(floatOne.Exponent, int(math.Pow(2, float64(k-1)))-1)
+	floatTwo.Exponent = f.Api.Add(floatTwo.Exponent, int(math.Pow(2, float64(k-1)))-1)
+
+	// Check if e1 > e2?
+	eLT := f.Api.Sub(1, comparator.IsLess(f.Api, floatOne.Exponent, floatTwo.Exponent))
+	// Check if e1 == e2?
+	eEQ := f.Api.IsZero(f.Api.Sub(floatOne.Exponent, floatTwo.Exponent))
+	// Check if x[1] > y[1]?
+	mLT := f.Api.Sub(1, comparator.IsLess(f.Api, floatOne.Mantissa, floatTwo.Mantissa))
+
+	eEQANDmLT := f.Api.Select(eEQ, mLT, 0)
+
+	return f.Api.Select(eLT, f.Api.Sub(1, eEQANDmLT), eEQANDmLT)
+}
+
+func ToFloat64(in float64) F64 {
+
+	// ToDo - Handle Sign Bit
+
+	var ret F64
+
+	f := new(big.Float).SetFloat64(in).SetPrec(23)
+	m := new(big.Float)
+	ret.Exponent = f.MantExp(m) - 1
+	out, acc := m.Float32()
+	if acc < 0 {
+		println(out)
+	}
+	ret.Mantissa = int(math.Float32bits(out)&0x007FFFFF) + int(math.Pow(2, 23))
+
+	return ret
 }
