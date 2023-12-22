@@ -25,9 +25,9 @@ type F32Circuit struct {
 
 func (c *F32Circuit) Define(api frontend.API) error {
 	ctx := NewContext(api, 8, 23)
-	x := ctx.NewF64(c.X)
-	y := ctx.NewF64(c.Y)
-	z := ctx.NewF64(c.Z)
+	x := ctx.NewFloat(c.X)
+	y := ctx.NewFloat(c.Y)
+	z := ctx.NewFloat(c.Z)
 	ctx.AssertIsEqual(reflect.ValueOf(&ctx).MethodByName(c.op).Call([]reflect.Value{reflect.ValueOf(x), reflect.ValueOf(y)})[0].Interface().(FloatVar), z)
 	return nil
 }
@@ -41,9 +41,9 @@ type F64Circuit struct {
 
 func (c *F64Circuit) Define(api frontend.API) error {
 	ctx := NewContext(api, 11, 52)
-	x := ctx.NewF64(c.X)
-	y := ctx.NewF64(c.Y)
-	z := ctx.NewF64(c.Z)
+	x := ctx.NewFloat(c.X)
+	y := ctx.NewFloat(c.Y)
+	z := ctx.NewFloat(c.Z)
 	ctx.AssertIsEqual(reflect.ValueOf(&ctx).MethodByName(c.op).Call([]reflect.Value{reflect.ValueOf(x), reflect.ValueOf(y)})[0].Interface().(FloatVar), z)
 	return nil
 }

@@ -63,7 +63,7 @@ func NewContext(api frontend.API, E, M uint) Context {
 // Allocate a variable in the constraint system from a value.
 // This function decomposes the value into sign, exponent, and mantissa,
 // and enforces they are well-formed.
-func (f *Context) NewF64(v frontend.Variable) FloatVar {
+func (f *Context) NewFloat(v frontend.Variable) FloatVar {
 	// Extract sign, exponent, and mantissa from the value
 	outputs, err := f.api.Compiler().NewHint(hint.DecodeFloatHint, 2, v, f.E, f.M)
 	if err != nil {
