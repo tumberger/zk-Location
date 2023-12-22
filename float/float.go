@@ -702,3 +702,90 @@ func (f *Context) Div(x, y FloatVar) FloatVar {
 		is_abnormal: is_abnormal,
 	}
 }
+
+func (f *Context) less(x, y FloatVar, allow_eq uint) frontend.Variable {
+	xe_ge_ye := f.gadget.IsPositive(f.api.Sub(x.exponent, y.exponent), f.E+1)
+	xm_ge_ym := f.gadget.IsPositive(f.api.Sub(x.mantissa, y.mantissa), f.M+1)
+
+	b := f.api.Select(
+		f.api.Or(
+			f.api.And(x.is_abnormal, f.api.IsZero(x.mantissa)),
+			f.api.And(y.is_abnormal, f.api.IsZero(y.mantissa)),
+		),
+		// If either `x` or `y` is NaN, the result is always false.
+		0,
+		/*
+		 * Equivalent to:
+		 * ```
+		 * if x.sign == y.sign {
+		 *     if x.exponent == y.exponent {
+		 *         if x.mantissa == y.mantissa {
+		 *             return allow_eq;
+		 *         } else {
+		 *             if x.sign {
+		 *                 return x.mantissa > y.mantissa;
+		 *             } else {
+		 *                 return x.mantissa < y.mantissa;
+		 *             }
+		 *         }
+		 *     } else {
+		 *         if x.sign {
+		 *             return x.exponent > y.exponent;
+		 *         } else {
+		 *             return x.exponent < y.exponent;
+		 *         }
+		 *     }
+		 * } else {
+		 *     if x.mantissa + y.mantissa == 0 {
+		 *         return allow_eq;
+		 *     } else {
+		 *         return x.sign;
+		 *     }
+		 * }
+		 * ```
+		 */
+		f.api.Select(
+			f.gadget.IsEq(x.sign, y.sign),
+			f.api.Select(
+				f.gadget.IsEq(x.exponent, y.exponent),
+				f.api.Select(
+					f.gadget.IsEq(x.mantissa, y.mantissa),
+					allow_eq,
+					f.api.Select(
+						x.sign,
+						xm_ge_ym,
+						f.api.Sub(big.NewInt(1), xm_ge_ym),
+					),
+				),
+				f.api.Select(
+					x.sign,
+					xe_ge_ye,
+					f.api.Sub(big.NewInt(1), xe_ge_ye),
+				),
+			),
+			f.api.Select(
+				f.api.IsZero(f.api.Add(x.mantissa, y.mantissa)),
+				allow_eq,
+				x.sign,
+			),
+		),
+	)
+	f.api.Compiler().MarkBoolean(b)
+	return b
+}
+
+func (f *Context) IsLt(x, y FloatVar) frontend.Variable {
+	return f.less(x, y, 0)
+}
+
+func (f *Context) IsLe(x, y FloatVar) frontend.Variable {
+	return f.less(x, y, 1)
+}
+
+func (f *Context) IsGt(x, y FloatVar) frontend.Variable {
+	return f.less(y, x, 0)
+}
+
+func (f *Context) IsGe(x, y FloatVar) frontend.Variable {
+	return f.less(y, x, 1)
+}
