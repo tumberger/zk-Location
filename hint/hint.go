@@ -18,8 +18,10 @@ func init() {
 
 func DecodeFloatHint(field *big.Int, inputs []*big.Int, outputs []*big.Int) error {
 	v := inputs[0].Uint64()
-	s := v >> 63
-	e := (v >> 52) - (s << 11)
+	E := inputs[1].Uint64()
+	M := inputs[2].Uint64()
+	s := v >> (E + M)
+	e := (v >> M) - (s << E)
 
 	outputs[0].SetUint64(s)
 	outputs[1].SetUint64(e)

@@ -17,12 +17,12 @@ func New(api frontend.API) IntGadget {
 	return IntGadget{api, rangechecker}
 }
 
-func (f *IntGadget) AssertBitLength(v frontend.Variable, bit_length uint64) {
+func (f *IntGadget) AssertBitLength(v frontend.Variable, bit_length uint) {
 	// TODO
 	// f.rangechecker.Check(v, int(bit_length))
 }
 
-func (f *IntGadget) Abs(v frontend.Variable, length uint64) (frontend.Variable, frontend.Variable) {
+func (f *IntGadget) Abs(v frontend.Variable, length uint) (frontend.Variable, frontend.Variable) {
 	outputs, err := f.api.Compiler().NewHint(hint.AbsHint, 2, v)
 	if err != nil {
 		panic(err)
@@ -38,12 +38,12 @@ func (f *IntGadget) Abs(v frontend.Variable, length uint64) (frontend.Variable, 
 	return abs, is_positive
 }
 
-func (f *IntGadget) IsPositive(v frontend.Variable, length uint64) frontend.Variable {
+func (f *IntGadget) IsPositive(v frontend.Variable, length uint) frontend.Variable {
 	_, is_positive := f.Abs(v, length)
 	return is_positive
 }
 
-func (f *IntGadget) Max(a, b frontend.Variable, diff_length uint64) frontend.Variable {
+func (f *IntGadget) Max(a, b frontend.Variable, diff_length uint) frontend.Variable {
 	return f.api.Select(
 		f.IsPositive(f.api.Sub(a, b), diff_length),
 		a,
@@ -51,7 +51,7 @@ func (f *IntGadget) Max(a, b frontend.Variable, diff_length uint64) frontend.Var
 	)
 }
 
-func (f *IntGadget) Min(a, b frontend.Variable, diff_length uint64) frontend.Variable {
+func (f *IntGadget) Min(a, b frontend.Variable, diff_length uint) frontend.Variable {
 	return f.api.Select(
 		f.IsPositive(f.api.Sub(a, b), diff_length),
 		b,
