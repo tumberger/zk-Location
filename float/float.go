@@ -703,6 +703,130 @@ func (f *Context) Div(x, y FloatVar) FloatVar {
 	}
 }
 
+func (f *Context) Sqrt(x FloatVar) FloatVar {
+	delta := f.E_MIN
+	if delta.Bit(0) == 1 {
+		delta = new(big.Int).Sub(delta, big.NewInt(1))
+	}
+	// Get the LSB of the exponent and provide it as a hint to the circuit.
+	outputs, err := f.api.Compiler().NewHint(hint.NthBitHint, 1, f.api.Sub(x.exponent, delta), 0)
+	if err != nil {
+		panic(err)
+	}
+	e_lsb := outputs[0]
+	f.api.AssertIsBoolean(e_lsb)
+
+	// Compute `x.exponent >> 1`
+	exponent := f.api.Mul(
+		f.api.Sub(x.exponent, e_lsb),
+		f.api.Inverse(big.NewInt(2)),
+	)
+	// Enforce that `|exponent|` only has `E - 1` bits.
+	// This ensures that `e_lsb` is indeed the LSB of the exponent, as otherwise `x.exponent` will be odd,
+	// but `x.exponent * 2^(-1)` will not fit in `E - 1` bits for all odd `x.exponent` between `E_MIN` and `E_MAX`.
+	f.gadget.Abs(exponent, f.E-1)
+
+	// TODO: `M + 3` is obtained by empirical analysis. We need to find why it works.
+	mantissa_bit_length := f.M + 3
+	// We are going to find `n` such that `n^2 <= m < (n + 1)^2`, and `r = m - n^2` decides the rounding direction.
+	// To this end, we shift `x.mantissa` to the left to allow a more accurate `r`.
+	// TODO: `mantissa_bit_length * 2 - (M + 2)` is obtained by empirical analysis. We need to find why it works.
+	m := f.api.Mul(x.mantissa, new(big.Int).Lsh(big.NewInt(1), mantissa_bit_length*2-(f.M+2)))
+	// `sqrt(2^e * m) == sqrt(2^(e - 1) * 2m)`
+	// If `e` is even, then the result is `sqrt(2^e * m) = 2^(e >> 1) * sqrt(m)`.
+	// If `e` is odd, then the result is `sqrt(2^(e - 1) * 2m) = 2^(e >> 1) * sqrt(2m)`.
+	m = f.api.Select(
+		e_lsb,
+		f.api.Add(m, m),
+		m,
+	)
+
+	// Compute `sqrt(m)` and find how many bits to shift the mantissa to the left to have the
+	// `mantissa_bit_length - 1`-th bit equal to 1.
+	// Prodive these values as hints to the circuit.
+	outputs, err = f.api.Compiler().NewHint(hint.SqrtHint, 1, m)
+	if err != nil {
+		panic(err)
+	}
+	n := outputs[0]
+	outputs, err = f.api.Compiler().NewHint(hint.NormalizeHint, 2, n, mantissa_bit_length)
+	if err != nil {
+		panic(err)
+	}
+	shift := outputs[0]
+	two_to_shift := outputs[1]
+	// TODO: enforce range of shift `[0, mantissa_bit_length]`
+	// TODO: enforce `(shift, two_to_shift)` is in lookup table
+
+	// Compute the remainder `r = m - n^2`.
+	r := f.api.Sub(m, f.api.Mul(n, n))
+	// Enforce that `n^2 <= m < (n + 1)^2`.
+	f.gadget.AssertBitLength(r, mantissa_bit_length+1)                             // n^2 <= m  =>  m - n^2 >= 0
+	f.gadget.AssertBitLength(f.api.Sub(f.api.Add(n, n), r), mantissa_bit_length+1) // (n + 1)^2 > m  =>  n^2 + 2n + 1 - m > 0  =>  n^2 + 2n - m >= 0
+
+	n_is_zero := f.api.IsZero(n)
+	n_is_not_zero := f.api.Sub(big.NewInt(1), n_is_zero)
+	f.api.Compiler().MarkBoolean(n_is_not_zero)
+	// Compute the shifted value of `n`
+	n = f.api.Mul(n, two_to_shift)
+	// Enforce that the MSB of the shifted `n` is 1 unless `n` is zero.
+	// Soundness holds because
+	// * `n` has at most `mantissa_bit_length` bits. Otherwise,
+	// `n - !n_is_zero << (mantissa_bit_length - 1)` will be greater than or equal to
+	// `2^(mantissa_bit_length - 1)` and cannot fit in `mantissa_bit_length - 1` bits.
+	// * `n`'s MSB is 1 unless `n_is_zero`. Otherwise, `n - 1 << (mantissa_bit_length - 1)`
+	// will be negative and cannot fit in `mantissa_bit_length - 1` bits.
+	f.gadget.AssertBitLength(
+		f.api.Sub(n, f.api.Mul(f.api.Sub(big.NewInt(1), n_is_zero), new(big.Int).Lsh(big.NewInt(1), mantissa_bit_length-1))),
+		mantissa_bit_length-1,
+	)
+
+	// Decrement the exponent by `shift`.
+	exponent = f.api.Sub(exponent, shift)
+
+	mantissa := f.round(
+		n,
+		mantissa_bit_length,
+		// The result is always normal or 0, as `exponent = (x.exponent >> 1) - shift > E_NORMAL_MIN`.
+		// Therefore, we don't need to clear the lower bits.
+		big.NewInt(0),
+		0,
+		f.api.IsZero(r),
+	)
+
+	// If `x` is negative and `x` is not `-0`, the result is NaN.
+	// If `x` is NaN, the result is NaN.
+	// If `x` is +infinty, the result is +infinity.
+	// Below we combine all these cases.
+	is_abnormal := f.api.Or(
+		f.api.And(x.sign, n_is_not_zero),
+		x.is_abnormal,
+	)
+
+	return FloatVar{
+		sign: x.sign, // Edge case: sqrt(-0.0) = -0.0
+		exponent: f.api.Select(
+			is_abnormal,
+			// If the result is abnormal, we set the exponent to infinity/NaN's exponent.
+			f.E_MAX,
+			f.api.Select(
+				n_is_zero,
+				// If the result is 0, we set the exponent to 0's exponent.
+				f.E_MIN,
+				// Otherwise, return the original exponent.
+				exponent,
+			),
+		),
+		mantissa: f.api.Select(
+			x.sign,
+			// If `x` is negative, we set the mantissa to NaN's mantissa.
+			big.NewInt(0),
+			mantissa,
+		),
+		is_abnormal: is_abnormal,
+	}
+}
+
 func (f *Context) less(x, y FloatVar, allow_eq uint) frontend.Variable {
 	xe_ge_ye := f.gadget.IsPositive(f.api.Sub(x.exponent, y.exponent), f.E+1)
 	xm_ge_ym := f.gadget.IsPositive(f.api.Sub(x.mantissa, y.mantissa), f.M+1)

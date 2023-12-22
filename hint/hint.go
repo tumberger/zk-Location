@@ -14,6 +14,7 @@ func init() {
 	solver.RegisterHint(NormalizeHint)
 	solver.RegisterHint(AbsHint)
 	solver.RegisterHint(DivHint)
+	solver.RegisterHint(SqrtHint)
 }
 
 func DecodeFloatHint(field *big.Int, inputs []*big.Int, outputs []*big.Int) error {
@@ -109,12 +110,23 @@ func DivHint(
 	inputs []*big.Int,
 	outputs []*big.Int,
 ) error {
-
 	x := new(big.Int).Set(inputs[0])
 	y := new(big.Int).Set(inputs[1])
 	Q := uint(inputs[2].Uint64())
 
 	outputs[0].Div(new(big.Int).Lsh(x, Q), y)
+
+	return nil
+}
+
+func SqrtHint(
+	field *big.Int,
+	inputs []*big.Int,
+	outputs []*big.Int,
+) error {
+	x := new(big.Int).Set(inputs[0])
+
+	outputs[0].Sqrt(x)
 
 	return nil
 }
