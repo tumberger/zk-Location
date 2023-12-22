@@ -63,6 +63,18 @@ func (c *F32ComparisonCircuit) Define(api frontend.API) error {
 	return nil
 }
 
+type F32AllocationCircuit struct {
+	X  frontend.Variable `gnark:",secret"`
+	y  uint64
+}
+
+func (c *F32AllocationCircuit) Define(api frontend.API) error {
+	ctx := NewContext(api, 8, 23)
+	x := ctx.NewFloat(c.X)
+	ctx.AssertIsEqual(x, ctx.NewConstant(c.y))
+	return nil
+}
+
 type F64UnaryCircuit struct {
 	X  frontend.Variable `gnark:",secret"`
 	Y  frontend.Variable `gnark:",public"`
@@ -107,6 +119,18 @@ func (c *F64ComparisonCircuit) Define(api frontend.API) error {
 	z := c.Z
 	api.AssertIsBoolean(z)
 	api.AssertIsEqual(reflect.ValueOf(&ctx).MethodByName(c.op).Call([]reflect.Value{reflect.ValueOf(x), reflect.ValueOf(y)})[0].Interface(), z)
+	return nil
+}
+
+type F64AllocationCircuit struct {
+	X  frontend.Variable `gnark:",secret"`
+	y  uint64
+}
+
+func (c *F64AllocationCircuit) Define(api frontend.API) error {
+	ctx := NewContext(api, 11, 52)
+	x := ctx.NewFloat(c.X)
+	ctx.AssertIsEqual(x, ctx.NewConstant(c.y))
 	return nil
 }
 
@@ -190,6 +214,27 @@ func TestF32ComparisonCircuit(t *testing.T) {
 	}
 }
 
+func TestF32ConstantAllocation(t *testing.T) {
+	assert := test.NewAssert(t)
+
+	path, _ := filepath.Abs("../data/f32/add")
+	file, _ := os.Open(path)
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		data := strings.Fields(scanner.Text())
+		a, _ := new(big.Int).SetString(data[0], 16)
+
+		assert.ProverSucceeded(
+			&F32AllocationCircuit{X: 0, y: a.Uint64()},
+			&F32AllocationCircuit{X: a, y: a.Uint64()},
+			test.WithCurves(ecc.BN254),
+			test.WithBackends(backend.GROTH16, backend.PLONK),
+		)
+	}
+}
+
 func TestF64UnaryCircuit(t *testing.T) {
 	assert := test.NewAssert(t)
 
@@ -267,5 +312,26 @@ func TestF64ComparisonCircuit(t *testing.T) {
 				test.WithBackends(backend.GROTH16, backend.PLONK),
 			)
 		}
+	}
+}
+
+func TestF64ConstantAllocation(t *testing.T) {
+	assert := test.NewAssert(t)
+
+	path, _ := filepath.Abs("../data/f64/add")
+	file, _ := os.Open(path)
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		data := strings.Fields(scanner.Text())
+		a, _ := new(big.Int).SetString(data[0], 16)
+
+		assert.ProverSucceeded(
+			&F64AllocationCircuit{X: 0, y: a.Uint64()},
+			&F64AllocationCircuit{X: a, y: a.Uint64()},
+			test.WithCurves(ecc.BN254),
+			test.WithBackends(backend.GROTH16, backend.PLONK),
+		)
 	}
 }

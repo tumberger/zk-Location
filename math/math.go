@@ -205,7 +205,7 @@ func FloatSine(f *float.Context, x float.FloatVar) float.FloatVar {
 
 		nominator := f.Mul(term, xSquare)
 
-		dnm := f.NewFloat(math.Float64bits(float64(2 * i * (2*i + 1))))
+		dnm := f.NewF64Constant(float64(2 * i * (2*i + 1)))
 
 		// ToDo - quick fix because ToFloat does not consider sign bit or un-normal numbers
 		dnm.Sign = 0

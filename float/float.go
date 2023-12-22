@@ -1,6 +1,7 @@
 package float
 
 import (
+	"math"
 	"math/big"
 
 	"github.com/consensys/gnark/frontend"
@@ -151,6 +152,64 @@ func (f *Context) NewFloat(v frontend.Variable) FloatVar {
 	}
 }
 
+// Allocate a constant in the constraint system.
+func (f *Context) NewConstant(v uint64) FloatVar {
+	s := v >> (f.E + f.M)
+	e := (v >> f.M) - (s << f.E)
+	m := v - (s << (f.E + f.M)) - (e << f.M)
+
+	exponent_min := new(big.Int).Sub(f.E_NORMAL_MIN, big.NewInt(1))
+	exponent_max := f.E_MAX
+
+	exponent := new(big.Int).Add(big.NewInt(int64(e)), exponent_min)
+
+	mantissa_is_not_zero := m != 0
+	exponent_is_min := exponent.Cmp(exponent_min) == 0
+	exponent_is_max := exponent.Cmp(exponent_max) == 0
+
+	mantissa := big.NewInt(int64(m))
+	shift := uint(0)
+	for i := int(f.M - 1); i >= 0; i-- {
+		if mantissa.Bit(i) != 0 {
+			break
+		}
+		shift++
+	}
+
+	shifted_mantissa := new(big.Int).Lsh(new(big.Int).Set(mantissa), shift)
+	
+	if exponent_is_min {
+		exponent = new(big.Int).Sub(exponent, big.NewInt(int64(shift)))
+		mantissa = new(big.Int).Lsh(shifted_mantissa, 1)
+	} else {
+		if exponent_is_max && mantissa_is_not_zero {
+			mantissa.SetUint64(0)
+		} else {
+			mantissa = new(big.Int).Add(mantissa, new(big.Int).Lsh(big.NewInt(1), f.M))
+		}
+	}
+
+	is_abnormal := big.NewInt(0)
+	if exponent_is_max {
+		is_abnormal.SetUint64(1)
+	}
+
+	return FloatVar{
+		Sign:       s,
+		Exponent:   exponent,
+		Mantissa:   mantissa,
+		IsAbnormal: is_abnormal,
+	}
+}
+
+func (f *Context) NewF32Constant(v float32) FloatVar {
+	return f.NewConstant(uint64(math.Float32bits(v)))
+}
+
+func (f *Context) NewF64Constant(v float64) FloatVar {
+	return f.NewConstant(math.Float64bits(v))
+}
+
 // Round the mantissa.
 // Note that the precision for subnormal numbers should be smaller than normal numbers, but in
 // our representation, the mantissa of subnormal numbers also has `M + 1` bits, and we have to set
@@ -278,8 +337,6 @@ func (f *Context) fixOverflow(
 
 // Enforce the equality between two numbers.
 func (f *Context) AssertIsEqual(x, y FloatVar) {
-	f.Api.Println(x.Sign, x.Exponent, x.Mantissa, x.IsAbnormal)
-	f.Api.Println(y.Sign, y.Exponent, y.Mantissa, y.IsAbnormal)
 	is_nan := f.Api.Or(
 		f.Api.And(x.IsAbnormal, f.Api.IsZero(x.Mantissa)),
 		f.Api.And(y.IsAbnormal, f.Api.IsZero(y.Mantissa)),
