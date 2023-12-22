@@ -10,8 +10,8 @@ import (
 )
 
 type Context struct {
-	api          frontend.API
-	gadget       gadget.IntGadget
+	Api          frontend.API
+	Gadget       gadget.IntGadget
 	E            uint // The number of bits in the encoded exponent
 	M            uint // The number of bits in the encoded mantissa
 	E_MAX        *big.Int
@@ -24,25 +24,25 @@ type Context struct {
 // In the circuit, we don't store the encoded form, but directly record all the components,
 // together with a flag indicating whether the number is abnormal (NaN or infinity).
 type FloatVar struct {
-	// `sign` is true if and only if the number is negative.
-	sign frontend.Variable
-	// `exponent` is the unbiased exponent of the number.
-	// The biased exponent is in the range `[0, 2^E - 1]`, and the unbiased exponent should be
+	// `Sign` is true if and only if the number is negative.
+	Sign frontend.Variable
+	// `Exponent` is the unbiased Exponent of the number.
+	// The biased Exponent is in the range `[0, 2^E - 1]`, and the unbiased Exponent should be
 	// in the range `[-2^(E - 1) + 1, 2^(E - 1)]`.
 	// However, to save constraints in subsequent operations, we shift the mantissa of a
 	// subnormal number to the left so that the most significant bit of the mantissa is 1,
-	// and the exponent is decremented accordingly.
-	// Therefore, the minimum exponent is actually `-2^(E - 1) + 1 - M`, and our exponent
+	// and the Exponent is decremented accordingly.
+	// Therefore, the minimum Exponent is actually `-2^(E - 1) + 1 - M`, and our Exponent
 	// is in the range `[-2^(E - 1) + 1 - M, 2^(E - 1)]`.
-	exponent frontend.Variable
-	// `mantissa` is the mantissa of the number with explicit leading 1, and hence is either
+	Exponent frontend.Variable
+	// `Mantissa` is the Mantissa of the number with explicit leading 1, and hence is either
 	// 0 or in the range `[2^M, 2^(M + 1) - 1]`.
-	// This is true even for subnormal numbers, where the mantissa is shifted to the left
+	// This is true even for subnormal numbers, where the Mantissa is shifted to the left
 	// to make the most significant bit 1.
-	// To save constraints when handling NaN, we set the mantissa of NaN to 0.
-	mantissa frontend.Variable
-	// `is_abnormal` is true if and only if the number is NaN or infinity.
-	is_abnormal frontend.Variable
+	// To save constraints when handling NaN, we set the Mantissa of NaN to 0.
+	Mantissa frontend.Variable
+	// `IsAbnormal` is true if and only if the number is NaN or infinity.
+	IsAbnormal frontend.Variable
 }
 
 func NewContext(api frontend.API, E, M uint) Context {
@@ -50,8 +50,8 @@ func NewContext(api frontend.API, E, M uint) Context {
 	E_NORMAL_MIN := new(big.Int).Sub(big.NewInt(2), E_MAX)
 	E_MIN := new(big.Int).Sub(E_NORMAL_MIN, big.NewInt(int64(M+1)))
 	return Context{
-		api:          api,
-		gadget:       gadget.New(api),
+		Api:          api,
+		Gadget:       gadget.New(api),
 		E:            E,
 		M:            M,
 		E_MAX:        E_MAX,
@@ -65,34 +65,34 @@ func NewContext(api frontend.API, E, M uint) Context {
 // and enforces they are well-formed.
 func (f *Context) NewFloat(v frontend.Variable) FloatVar {
 	// Extract sign, exponent, and mantissa from the value
-	outputs, err := f.api.Compiler().NewHint(hint.DecodeFloatHint, 2, v, f.E, f.M)
+	outputs, err := f.Api.Compiler().NewHint(hint.DecodeFloatHint, 2, v, f.E, f.M)
 	if err != nil {
 		panic(err)
 	}
 	s := outputs[0]
 	e := outputs[1]
-	m := f.api.Sub(v, f.api.Add(f.api.Mul(s, new(big.Int).Lsh(big.NewInt(1), f.E+f.M)), f.api.Mul(e, new(big.Int).Lsh(big.NewInt(1), f.M))))
+	m := f.Api.Sub(v, f.Api.Add(f.Api.Mul(s, new(big.Int).Lsh(big.NewInt(1), f.E+f.M)), f.Api.Mul(e, new(big.Int).Lsh(big.NewInt(1), f.M))))
 
 	// Enforce the bit length of sign, exponent and mantissa
-	f.api.AssertIsBoolean(s)
-	f.gadget.AssertBitLength(e, f.E)
-	f.gadget.AssertBitLength(m, f.M)
+	f.Api.AssertIsBoolean(s)
+	f.Gadget.AssertBitLength(e, f.E)
+	f.Gadget.AssertBitLength(m, f.M)
 
 	exponent_min := new(big.Int).Sub(f.E_NORMAL_MIN, big.NewInt(1))
 	exponent_max := f.E_MAX
 
 	// Compute the unbiased exponent
-	exponent := f.api.Add(e, exponent_min)
+	exponent := f.Api.Add(e, exponent_min)
 
-	mantissa_is_zero := f.api.IsZero(m)
-	mantissa_is_not_zero := f.api.Sub(big.NewInt(1), mantissa_is_zero)
-	f.api.Compiler().MarkBoolean(mantissa_is_not_zero)
-	exponent_is_min := f.gadget.IsEq(exponent, exponent_min)
-	exponent_is_max := f.gadget.IsEq(exponent, exponent_max)
+	mantissa_is_zero := f.Api.IsZero(m)
+	mantissa_is_not_zero := f.Api.Sub(big.NewInt(1), mantissa_is_zero)
+	f.Api.Compiler().MarkBoolean(mantissa_is_not_zero)
+	exponent_is_min := f.Gadget.IsEq(exponent, exponent_min)
+	exponent_is_max := f.Gadget.IsEq(exponent, exponent_max)
 
 	// Find how many bits to shift the mantissa to the left to have the `(M - 1)`-th bit equal to 1
 	// and prodive it as a hint to the circuit
-	outputs, err = f.api.Compiler().NewHint(hint.NormalizeHint, 2, m, big.NewInt(int64(f.M)))
+	outputs, err = f.Api.Compiler().NewHint(hint.NormalizeHint, 2, m, f.M)
 	if err != nil {
 		panic(err)
 	}
@@ -103,7 +103,7 @@ func (f *Context) NewFloat(v frontend.Variable) FloatVar {
 	// Compute the shifted mantissa. Multiplication here is safe because we already know that
 	// mantissa is less than `2^M`, and `2^shift` is less than or equal to `2^M`. If `M` is not too large,
 	// overflow should not happen.
-	shifted_mantissa := f.api.Mul(m, two_to_shift)
+	shifted_mantissa := f.Api.Mul(m, two_to_shift)
 	// Enforce the shifted mantissa, after removing the leading bit, has only `M - 1` bits,
 	// where the leading bit is set to 0 if the mantissa is zero, and set to 1 otherwise.
 	// This does not bound the value of `shift` if the mantissa is zero, but it is fine since
@@ -115,39 +115,39 @@ func (f *Context) NewFloat(v frontend.Variable) FloatVar {
 	// 2. `shifted_mantissa` is less than `2^M`, since otherwise,
 	// `shifted_mantissa - F::from(1u128 << (M - 1))` will be greater than `2^(M - 1) - 1`, which
 	// takes at least `M` bits to represent.
-	f.gadget.AssertBitLength(
-		f.api.Sub(
+	f.Gadget.AssertBitLength(
+		f.Api.Sub(
 			shifted_mantissa,
-			f.api.Mul(mantissa_is_not_zero, new(big.Int).Lsh(big.NewInt(1), f.M-1)),
+			f.Api.Mul(mantissa_is_not_zero, new(big.Int).Lsh(big.NewInt(1), f.M-1)),
 		),
 		f.M-1,
 	)
 
-	exponent = f.api.Select(
+	exponent = f.Api.Select(
 		exponent_is_min,
 		// If subnormal, decrement the exponent by `shift`
-		f.api.Sub(exponent, shift),
+		f.Api.Sub(exponent, shift),
 		// Otherwise, keep the exponent unchanged
 		exponent,
 	)
-	mantissa := f.api.Select(
+	mantissa := f.Api.Select(
 		exponent_is_min,
 		// If subnormal, shift the mantissa to the left by 1 to make its `M`-th bit 1
-		f.api.Add(shifted_mantissa, shifted_mantissa),
-		f.api.Select(
-			f.api.And(exponent_is_max, mantissa_is_not_zero),
+		f.Api.Add(shifted_mantissa, shifted_mantissa),
+		f.Api.Select(
+			f.Api.And(exponent_is_max, mantissa_is_not_zero),
 			// If NaN, set the mantissa to 0
 			big.NewInt(0),
 			// Otherwise, add `2^M` to the mantissa to make its `M`-th bit 1
-			f.api.Add(m, new(big.Int).Lsh(big.NewInt(1), f.M)),
+			f.Api.Add(m, new(big.Int).Lsh(big.NewInt(1), f.M)),
 		),
 	)
 
 	return FloatVar{
-		sign:        s,
-		exponent:    exponent,
-		mantissa:    mantissa,
-		is_abnormal: exponent_is_max,
+		Sign:       s,
+		Exponent:   exponent,
+		Mantissa:   mantissa,
+		IsAbnormal: exponent_is_max,
 	}
 }
 
@@ -170,7 +170,7 @@ func (f *Context) round(
 	shift_max uint,
 	half_flag frontend.Variable,
 ) frontend.Variable {
-	outputs, err := f.api.Compiler().NewHint(hint.PowerOfTwoHint, 1, shift)
+	outputs, err := f.Api.Compiler().NewHint(hint.PowerOfTwoHint, 1, shift)
 	if err != nil {
 		panic(err)
 	}
@@ -195,7 +195,7 @@ func (f *Context) round(
 	// is equivalent to checking both `t` and `2^shift - t - 1` have `shift_max` bits.
 	// However, in the second case, we only need to check `s` has `shift_max + mantissa_bit_length - M - 2`
 	// bits, which costs less than the first case.
-	outputs, err = f.api.Compiler().NewHint(hint.DecomposeMantissaForRoundingHint, 4, mantissa, two_to_shift, shift_max, p_idx, q_idx, r_idx)
+	outputs, err = f.Api.Compiler().NewHint(hint.DecomposeMantissaForRoundingHint, 4, mantissa, two_to_shift, shift_max, p_idx, q_idx, r_idx)
 	if err != nil {
 		panic(err)
 	}
@@ -205,35 +205,35 @@ func (f *Context) round(
 	s := outputs[3]
 
 	// Enforce the bit length of `p`, `q`, `r` and `s`
-	f.api.AssertIsBoolean(q)
-	f.api.AssertIsBoolean(r)
-	f.gadget.AssertBitLength(p, p_len)
-	f.gadget.AssertBitLength(s, s_len)
+	f.Api.AssertIsBoolean(q)
+	f.Api.AssertIsBoolean(r)
+	f.Gadget.AssertBitLength(p, p_len)
+	f.Gadget.AssertBitLength(s, s_len)
 
 	// Concatenate `p || q`, `r || s`, and `p || q || r || s`.
 	// `p || q` is what we want, i.e., the final mantissa, and `r || s` will be thrown away.
-	pq := f.api.Add(p, p, q)
-	rs := f.api.Add(f.api.Mul(r, new(big.Int).Lsh(big.NewInt(1), r_idx)), s)
-	pqrs := f.api.Add(f.api.Mul(pq, new(big.Int).Lsh(big.NewInt(1), q_idx)), rs)
+	pq := f.Api.Add(p, p, q)
+	rs := f.Api.Add(f.Api.Mul(r, new(big.Int).Lsh(big.NewInt(1), r_idx)), s)
+	pqrs := f.Api.Add(f.Api.Mul(pq, new(big.Int).Lsh(big.NewInt(1), q_idx)), rs)
 
 	// Enforce that `(p || q || r || s) << shift` is equal to `mantissa << shift_max`
 	// Multiplication here is safe because `p || q || r || s` has `shift_max + mantissa_bit_length` bits,
 	// and `2^shift` has at most `shift_max` bits, hence the product has `2 * shift_max + mantissa_bit_length`
 	// bits, which (at least for f32 and f64) is less than `F::MODULUS_BIT_SIZE` and will not overflow.
 	// This constraint guarantees that `p || q || r || s` is indeed `mantissa << (shift_max - shift)`.
-	f.api.AssertIsEqual(
-		f.api.Mul(pqrs, two_to_shift),
-		f.api.Mul(mantissa, new(big.Int).Lsh(big.NewInt(1), shift_max)),
+	f.Api.AssertIsEqual(
+		f.Api.Mul(pqrs, two_to_shift),
+		f.Api.Mul(mantissa, new(big.Int).Lsh(big.NewInt(1), shift_max)),
 	)
 
 	// Determine whether `r == 1` and `s == 0`. If so, we need to round the mantissa according to `q`,
 	// and otherwise, we need to round the mantissa according to `r`.
 	// Also, we use `half_flag` to allow the caller to specify the rounding direction.
-	is_half := f.api.And(f.gadget.IsEq(rs, new(big.Int).Lsh(big.NewInt(1), r_idx)), half_flag)
-	carry := f.api.Select(is_half, q, r)
+	is_half := f.Api.And(f.Gadget.IsEq(rs, new(big.Int).Lsh(big.NewInt(1), r_idx)), half_flag)
+	carry := f.Api.Select(is_half, q, r)
 
 	// Round the mantissa according to `carry` and shift it back to the original position.
-	return f.api.Mul(f.api.Add(pq, carry), two_to_shift)
+	return f.Api.Mul(f.Api.Add(pq, carry), two_to_shift)
 }
 
 // Fix mantissa and exponent overflow.
@@ -247,26 +247,26 @@ func (f *Context) fixOverflow(
 	// Since the mantissa without carry is always smaller than `2^(M + 1)`, overflow only happens
 	// when the original mantissa is `2^(M + 1) - 1` and the carry is 1. Therefore, the only possible
 	// value of mantissa in this case is `2^(M + 1)`.
-	mantissa_overflow := f.gadget.IsEq(mantissa, new(big.Int).Lsh(big.NewInt(1), f.M+1))
+	mantissa_overflow := f.Gadget.IsEq(mantissa, new(big.Int).Lsh(big.NewInt(1), f.M+1))
 	// If mantissa overflows, we need to increment the exponent
-	exponent = f.api.Add(exponent, mantissa_overflow)
+	exponent = f.Api.Add(exponent, mantissa_overflow)
 	// Check if exponent overflows. If so, the result is abnormal.
 	// Also, if the input is already abnormal, the result is of course abnormal.
-	is_abnormal := f.api.Or(f.gadget.IsPositive(f.api.Sub(exponent, f.E_MAX), f.E+1), input_is_abnormal)
+	is_abnormal := f.Api.Or(f.Gadget.IsPositive(f.Api.Sub(exponent, f.E_MAX), f.E+1), input_is_abnormal)
 
-	return f.api.Select(
-			f.api.Or(mantissa_overflow, is_abnormal),
+	return f.Api.Select(
+			f.Api.Or(mantissa_overflow, is_abnormal),
 			// If mantissa overflows, we right shift the mantissa by 1 and obtain `2^M`.
 			// If the result is abnormal, we set the mantissa to infinity's mantissa.
 			// We can combine both cases as inifinity's mantissa is `2^M`.
 			// We will adjust the mantissa latter if the result is NaN.
 			new(big.Int).Lsh(big.NewInt(1), f.M),
 			mantissa,
-		), f.api.Select(
+		), f.Api.Select(
 			is_abnormal,
 			// If the result is abnormal, we set the exponent to infinity/NaN's exponent.
 			f.E_MAX,
-			f.api.Select(
+			f.Api.Select(
 				mantissa_is_zero,
 				// If the result is 0, we set the exponent to 0's exponent.
 				f.E_MIN,
@@ -278,38 +278,38 @@ func (f *Context) fixOverflow(
 
 // Enforce the equality between two numbers.
 func (f *Context) AssertIsEqual(x, y FloatVar) {
-	f.api.Println(x.sign, x.exponent, x.mantissa, x.is_abnormal)
-	f.api.Println(y.sign, y.exponent, y.mantissa, y.is_abnormal)
-	is_nan := f.api.Or(
-		f.api.And(x.is_abnormal, f.api.IsZero(x.mantissa)),
-		f.api.And(y.is_abnormal, f.api.IsZero(y.mantissa)),
+	f.Api.Println(x.Sign, x.Exponent, x.Mantissa, x.IsAbnormal)
+	f.Api.Println(y.Sign, y.Exponent, y.Mantissa, y.IsAbnormal)
+	is_nan := f.Api.Or(
+		f.Api.And(x.IsAbnormal, f.Api.IsZero(x.Mantissa)),
+		f.Api.And(y.IsAbnormal, f.Api.IsZero(y.Mantissa)),
 	)
-	f.api.AssertIsEqual(f.api.Select(
+	f.Api.AssertIsEqual(f.Api.Select(
 		is_nan,
 		0,
-		x.sign,
-	), f.api.Select(
+		x.Sign,
+	), f.Api.Select(
 		is_nan,
 		0,
-		y.sign,
+		y.Sign,
 	))
-	f.api.AssertIsEqual(f.api.Sub(x.exponent, y.exponent), 0)
-	f.api.AssertIsEqual(x.mantissa, y.mantissa)
-	f.api.AssertIsEqual(x.is_abnormal, y.is_abnormal)
+	f.Api.AssertIsEqual(f.Api.Sub(x.Exponent, y.Exponent), 0)
+	f.Api.AssertIsEqual(x.Mantissa, y.Mantissa)
+	f.Api.AssertIsEqual(x.IsAbnormal, y.IsAbnormal)
 }
 
 // Add two numbers.
 func (f *Context) Add(x, y FloatVar) FloatVar {
 	// Compute `y.exponent - x.exponent`'s absolute value and sign.
 	// Since `delta` is the absolute value, `delta >= 0`.
-	delta, ex_le_ey := f.gadget.Abs(f.api.Sub(y.exponent, x.exponent), f.E+1)
+	delta, ex_le_ey := f.Gadget.Abs(f.Api.Sub(y.Exponent, x.Exponent), f.E+1)
 
 	// The exponent of the result is at most `max(x.exponent, y.exponent) + 1`, where 1 is the possible carry.
-	exponent := f.api.Add(
-		f.api.Select(
+	exponent := f.Api.Add(
+		f.Api.Select(
 			ex_le_ey,
-			y.exponent,
-			x.exponent,
+			y.Exponent,
+			x.Exponent,
 		),
 		big.NewInt(1),
 	)
@@ -322,12 +322,12 @@ func (f *Context) Add(x, y FloatVar) FloatVar {
 	// Therefore, the actual right shift count is `min(delta, M + 3)`.
 	// As discussed in `Self::round`, we can shift left by `M + 3 - min(delta, M + 3) = max(M + 3 - delta, 0)`
 	// bits instead of shifting right by `min(delta, M + 3)` bits in order to save constraints.
-	delta = f.gadget.Max(
-		f.api.Sub(f.M+3, delta),
+	delta = f.Gadget.Max(
+		f.Api.Sub(f.M+3, delta),
 		big.NewInt(0),
 		f.E,
 	)
-	outputs, err := f.api.NewHint(
+	outputs, err := f.Api.NewHint(
 		hint.PowerOfTwoHint,
 		1,
 		delta,
@@ -339,23 +339,23 @@ func (f *Context) Add(x, y FloatVar) FloatVar {
 	// TODO: enforce `(delta, two_to_delta)` is in lookup table `[0, >=M + 3]`
 
 	// Compute the signed mantissas
-	xx := f.api.Select(
-		x.sign,
-		f.api.Neg(x.mantissa),
-		x.mantissa,
+	xx := f.Api.Select(
+		x.Sign,
+		f.Api.Neg(x.Mantissa),
+		x.Mantissa,
 	)
-	yy := f.api.Select(
-		y.sign,
-		f.api.Neg(y.mantissa),
-		y.mantissa,
+	yy := f.Api.Select(
+		y.Sign,
+		f.Api.Neg(y.Mantissa),
+		y.Mantissa,
 	)
 	// `zz` is the mantissa of the number with smaller exponent, and `ww` is the mantissa of another number.
-	zz := f.api.Select(
+	zz := f.Api.Select(
 		ex_le_ey,
 		xx,
 		yy,
 	)
-	ww := f.api.Sub(f.api.Add(xx, yy), zz)
+	ww := f.Api.Sub(f.Api.Add(xx, yy), zz)
 
 	// Align `zz` and `ww`.
 	// Naively, we can shift `zz` to the right by `delta` bits and keep `ww` unchanged.
@@ -367,7 +367,7 @@ func (f *Context) Add(x, y FloatVar) FloatVar {
 	// and `ww << (M + 3)` has `E_NORMAL_MIN - y.exponent + M + 3` trailing 0s.
 	// This implies that `s` also has `E_NORMAL_MIN - y.exponent + M + 3` trailing 0s.
 	// Generally, `s` should have `max(E_NORMAL_MIN - max(x.exponent, y.exponent), 0) + M + 3` trailing 0s.
-	s := f.api.Add(f.api.Mul(zz, two_to_delta), f.api.Mul(ww, new(big.Int).Lsh(big.NewInt(1), f.M+3)))
+	s := f.Api.Add(f.Api.Mul(zz, two_to_delta), f.Api.Mul(ww, new(big.Int).Lsh(big.NewInt(1), f.M+3)))
 
 	// The shift count is at most `M + 3`, and both `zz` and `ww` have `M + 1` bits, hence the result has at most
 	// `(M + 3) + (M + 1) + 1` bits, where 1 is the possible carry.
@@ -376,16 +376,16 @@ func (f *Context) Add(x, y FloatVar) FloatVar {
 	// Get the sign of the mantissa and find how many bits to shift the mantissa to the left to have the
 	// `mantissa_bit_length - 1`-th bit equal to 1.
 	// Prodive these values as hints to the circuit
-	outputs, err = f.api.Compiler().NewHint(hint.AbsHint, 2, s)
+	outputs, err = f.Api.Compiler().NewHint(hint.AbsHint, 2, s)
 	if err != nil {
 		panic(err)
 	}
 	mantissa_ge_0 := outputs[0]
 	mantissa_abs := outputs[1]
-	f.api.AssertIsBoolean(mantissa_ge_0)
-	mantissa_lt_0 := f.api.Sub(big.NewInt(1), mantissa_ge_0)
-	f.api.Compiler().MarkBoolean(mantissa_lt_0)
-	outputs, err = f.api.Compiler().NewHint(hint.NormalizeHint, 2, mantissa_abs, big.NewInt(int64(mantissa_bit_length)))
+	f.Api.AssertIsBoolean(mantissa_ge_0)
+	mantissa_lt_0 := f.Api.Sub(big.NewInt(1), mantissa_ge_0)
+	f.Api.Compiler().MarkBoolean(mantissa_lt_0)
+	outputs, err = f.Api.Compiler().NewHint(hint.NormalizeHint, 2, mantissa_abs, big.NewInt(int64(mantissa_bit_length)))
 	if err != nil {
 		panic(err)
 	}
@@ -395,18 +395,18 @@ func (f *Context) Add(x, y FloatVar) FloatVar {
 	// TODO: enforce `(shift, two_to_shift)` is in lookup table
 
 	// Compute the shifted absolute value of mantissa
-	mantissa := f.api.Mul(
-		f.api.Select(
+	mantissa := f.Api.Mul(
+		f.Api.Select(
 			mantissa_ge_0,
 			s,
-			f.api.Neg(s),
+			f.Api.Neg(s),
 		),
 		two_to_shift,
 	)
 
-	mantissa_is_zero := f.api.IsZero(mantissa)
-	mantissa_is_not_zero := f.api.Sub(big.NewInt(1), mantissa_is_zero)
-	f.api.Compiler().MarkBoolean(mantissa_is_not_zero)
+	mantissa_is_zero := f.Api.IsZero(mantissa)
+	mantissa_is_not_zero := f.Api.Sub(big.NewInt(1), mantissa_is_zero)
+	f.Api.Compiler().MarkBoolean(mantissa_is_not_zero)
 
 	// Enforce that the MSB of the shifted absolute value of mantissa is 1 unless the mantissa is zero.
 	// Soundness holds because
@@ -417,19 +417,19 @@ func (f *Context) Add(x, y FloatVar) FloatVar {
 	// `2^(mantissa_bit_length - 1)` and cannot fit in `mantissa_bit_length - 1` bits.
 	// * `mantissa`'s MSB is 1 unless `mantissa_is_zero`. Otherwise, `mantissa - 1 << (mantissa_bit_length - 1)`
 	// will be negative and cannot fit in `mantissa_bit_length - 1` bits.
-	f.gadget.AssertBitLength(
-		f.api.Sub(mantissa, f.api.Mul(mantissa_is_not_zero, new(big.Int).Lsh(big.NewInt(1), mantissa_bit_length-1))),
+	f.Gadget.AssertBitLength(
+		f.Api.Sub(mantissa, f.Api.Mul(mantissa_is_not_zero, new(big.Int).Lsh(big.NewInt(1), mantissa_bit_length-1))),
 		mantissa_bit_length-1,
 	)
 	// Decrement the exponent by `shift`.
-	exponent = f.api.Sub(exponent, shift)
+	exponent = f.Api.Sub(exponent, shift)
 
 	// `mantissa_ge_0` can be directly used to determine the sign of the result, except for the case
 	// `-0 + -0`. Therefore, we first check whether the signs of `x` and `y` are the same. If so,
 	// we use `x`'s sign as the sign of the result. Otherwise, we use the negation of `mantissa_ge_0`.
-	sign := f.api.Select(
-		f.gadget.IsEq(x.sign, y.sign),
-		x.sign,
+	sign := f.Api.Select(
+		f.Gadget.IsEq(x.Sign, y.Sign),
+		x.Sign,
 		mantissa_lt_0,
 	)
 
@@ -455,15 +455,15 @@ func (f *Context) Add(x, y FloatVar) FloatVar {
 		mantissa,
 		mantissa_is_zero,
 		exponent,
-		f.api.Or(x.is_abnormal, y.is_abnormal),
+		f.Api.Or(x.IsAbnormal, y.IsAbnormal),
 	)
 
-	y_is_not_abnormal := f.api.Sub(big.NewInt(1), y.is_abnormal)
-	f.api.Compiler().MarkBoolean(y_is_not_abnormal)
+	y_is_not_abnormal := f.Api.Sub(big.NewInt(1), y.IsAbnormal)
+	f.Api.Compiler().MarkBoolean(y_is_not_abnormal)
 
 	return FloatVar{
-		sign:     sign,
-		exponent: exponent,
+		Sign:     sign,
+		Exponent: exponent,
 		// Rule of addition:
 		// |       | +Inf | -Inf | NaN | other |
 		// |-------|------|------|-----|-------|
@@ -471,42 +471,42 @@ func (f *Context) Add(x, y FloatVar) FloatVar {
 		// | -Inf  |   0  | -Inf | NaN | -Inf  |
 		// | NaN   |  NaN |  NaN | NaN |  NaN  |
 		// | other | +Inf | -Inf | NaN |       |
-		mantissa: f.api.Select(
-			x.is_abnormal,
+		Mantissa: f.Api.Select(
+			x.IsAbnormal,
 			// If `x` is abnormal ...
-			f.api.Select(
-				f.api.Or(
+			f.Api.Select(
+				f.Api.Or(
 					y_is_not_abnormal,
-					f.gadget.IsEq(xx, yy),
+					f.Gadget.IsEq(xx, yy),
 				),
 				// If `y` is not abnormal, then the result is `x`.
 				// If `x`'s signed mantissa is equal to `y`'s, then the result is also `x`.
-				x.mantissa,
+				x.Mantissa,
 				// Otherwise, the result is 0 or NaN, whose mantissa is 0.
 				big.NewInt(0),
 			),
 			// If `x` is not abnormal ...
-			f.api.Select(
-				y.is_abnormal,
+			f.Api.Select(
+				y.IsAbnormal,
 				// If `y` is abnormal, then the result is `y`.
-				y.mantissa,
+				y.Mantissa,
 				// Otherwise, the result is our computed mantissa.
 				mantissa,
 			),
 		),
-		is_abnormal: is_abnormal,
+		IsAbnormal: is_abnormal,
 	}
 }
 
 // Negate the number by flipping the sign.
 func (f *Context) Neg(x FloatVar) FloatVar {
-	neg_sign := f.api.Sub(big.NewInt(1), x.sign)
-	f.api.Compiler().MarkBoolean(neg_sign)
+	neg_sign := f.Api.Sub(big.NewInt(1), x.Sign)
+	f.Api.Compiler().MarkBoolean(neg_sign)
 	return FloatVar{
-		sign:        neg_sign,
-		exponent:    x.exponent,
-		mantissa:    x.mantissa,
-		is_abnormal: x.is_abnormal,
+		Sign:       neg_sign,
+		Exponent:   x.Exponent,
+		Mantissa:   x.Mantissa,
+		IsAbnormal: x.IsAbnormal,
 	}
 }
 
@@ -519,35 +519,35 @@ func (f *Context) Sub(x, y FloatVar) FloatVar {
 // Multiply two numbers.
 func (f *Context) Mul(x, y FloatVar) FloatVar {
 	// The result is negative if and only if the signs of x and y are different.
-	sign := f.api.Xor(x.sign, y.sign)
-	mantissa := f.api.Mul(x.mantissa, y.mantissa)
+	sign := f.Api.Xor(x.Sign, y.Sign)
+	mantissa := f.Api.Mul(x.Mantissa, y.Mantissa)
 	// Since both `x.mantissa` and `y.mantissa` are in the range [2^M, 2^(M + 1)), the product is
 	// in the range [2^(2M), 2^(2M + 2)) and requires 2M + 2 bits to represent.
 	mantissa_bit_length := (f.M + 1) * 2
 
 	// Get the MSB of the mantissa and provide it as a hint to the circuit.
-	outputs, err := f.api.Compiler().NewHint(hint.NthBitHint, 1, mantissa, big.NewInt(int64(mantissa_bit_length-1)))
+	outputs, err := f.Api.Compiler().NewHint(hint.NthBitHint, 1, mantissa, big.NewInt(int64(mantissa_bit_length-1)))
 	if err != nil {
 		panic(err)
 	}
 	mantissa_msb := outputs[0]
-	f.api.AssertIsBoolean(mantissa_msb)
+	f.Api.AssertIsBoolean(mantissa_msb)
 	// Enforce that `mantissa_msb` is indeed the MSB of the mantissa.
 	// Soundness holds because
 	// * If `mantissa_msb == 0` but the actual MSB is 1, then the subtraction result will have at least
 	// mantissa_bit_length bits.
 	// * If `mantissa_msb == 1` but the actual MSB is 0, then the subtraction will underflow to a negative
 	// value.
-	f.gadget.AssertBitLength(
-		f.api.Sub(mantissa, f.api.Mul(mantissa_msb, new(big.Int).Lsh(big.NewInt(1), mantissa_bit_length-1))),
+	f.Gadget.AssertBitLength(
+		f.Api.Sub(mantissa, f.Api.Mul(mantissa_msb, new(big.Int).Lsh(big.NewInt(1), mantissa_bit_length-1))),
 		mantissa_bit_length-1,
 	)
 	// Shift the mantissa to the left to make the MSB 1.
 	// Since `mantissa` is in the range `[2^(2M), 2^(2M + 2))`, either the MSB is 1 or the second MSB is 1.
 	// Therefore, we can simply double the mantissa if the MSB is 0.
-	mantissa = f.api.Add(
+	mantissa = f.Api.Add(
 		mantissa,
-		f.api.Select(
+		f.Api.Select(
 			mantissa_msb,
 			big.NewInt(0),
 			mantissa,
@@ -555,7 +555,7 @@ func (f *Context) Mul(x, y FloatVar) FloatVar {
 	)
 	// Compute the exponent of the result. We should increment the exponent if the multiplication
 	// carries, i.e., if the MSB of the mantissa is 1.
-	exponent := f.api.Add(f.api.Add(x.exponent, y.exponent), mantissa_msb)
+	exponent := f.Api.Add(f.Api.Add(x.Exponent, y.Exponent), mantissa_msb)
 
 	shift_max := f.M + 2
 	mantissa = f.round(
@@ -563,9 +563,9 @@ func (f *Context) Mul(x, y FloatVar) FloatVar {
 		mantissa_bit_length,
 		// If `exponent >= E_NORMAL_MIN`, i.e., the result is normal, we don't need to clear the lower bits.
 		// Otherwise, we need to clear `min(E_NORMAL_MIN - exponent, shift_max)` bits of the rounded mantissa.
-		f.gadget.Max(
-			f.gadget.Min(
-				f.api.Sub(f.E_NORMAL_MIN, exponent),
+		f.Gadget.Max(
+			f.Gadget.Min(
+				f.Api.Sub(f.E_NORMAL_MIN, exponent),
 				big.NewInt(int64(shift_max)),
 				f.E+1,
 			),
@@ -576,8 +576,8 @@ func (f *Context) Mul(x, y FloatVar) FloatVar {
 		1,
 	)
 
-	mantissa_is_zero := f.api.IsZero(mantissa)
-	input_is_abnormal := f.api.Or(x.is_abnormal, y.is_abnormal)
+	mantissa_is_zero := f.Api.IsZero(mantissa)
+	input_is_abnormal := f.Api.Or(x.IsAbnormal, y.IsAbnormal)
 	mantissa, exponent, is_abnormal := f.fixOverflow(
 		mantissa,
 		mantissa_is_zero,
@@ -586,30 +586,30 @@ func (f *Context) Mul(x, y FloatVar) FloatVar {
 	)
 
 	return FloatVar{
-		sign:     sign,
-		exponent: exponent,
+		Sign:     sign,
+		Exponent: exponent,
 		// If the mantissa before fixing overflow is zero, we reset the final mantissa to 0,
 		// as `Self::fix_overflow` incorrectly sets NaN's mantissa to infinity's mantissa.
-		mantissa: f.api.Select(
+		Mantissa: f.Api.Select(
 			mantissa_is_zero,
 			big.NewInt(0),
 			mantissa,
 		),
-		is_abnormal: is_abnormal,
+		IsAbnormal: is_abnormal,
 	}
 }
 
 // Divide two numbers.
 func (f *Context) Div(x, y FloatVar) FloatVar {
 	// The result is negative if and only if the signs of `x` and `y` are different.
-	sign := f.api.Xor(x.sign, y.sign)
-	y_is_zero := f.api.IsZero(y.mantissa)
+	sign := f.Api.Xor(x.Sign, y.Sign)
+	y_is_zero := f.Api.IsZero(y.Mantissa)
 
 	// If the divisor is 0, we increase it to `2^M`, because we cannot represent an infinite value in circuit.
-	y_mantissa := f.api.Select(
+	y_mantissa := f.Api.Select(
 		y_is_zero,
 		new(big.Int).Lsh(big.NewInt(1), f.M),
-		y.mantissa,
+		y.Mantissa,
 	)
 	// The result's mantissa is the quotient of `x.mantissa << (M + 2)` and `y_mantissa`.
 	// Since both `x.mantissa` and `y_mantissa` are in the range `[2^M, 2^(M + 1))`, the quotient is in the range
@@ -617,37 +617,37 @@ func (f *Context) Div(x, y FloatVar) FloatVar {
 	mantissa_bit_length := (f.M + 2) + 1
 	// Compute `(x.mantissa << (M + 2)) / y_mantissa` and get the MSB of the quotient.
 	// Provide the quotient and the MSB as hints to the circuit.
-	outputs, err := f.api.Compiler().NewHint(hint.DivHint, 1, x.mantissa, y_mantissa, big.NewInt(int64(f.M+2)))
+	outputs, err := f.Api.Compiler().NewHint(hint.DivHint, 1, x.Mantissa, y_mantissa, big.NewInt(int64(f.M+2)))
 	if err != nil {
 		panic(err)
 	}
 	mantissa := outputs[0]
-	outputs, err = f.api.Compiler().NewHint(hint.NthBitHint, 1, mantissa, big.NewInt(int64(f.M+2)))
+	outputs, err = f.Api.Compiler().NewHint(hint.NthBitHint, 1, mantissa, big.NewInt(int64(f.M+2)))
 	if err != nil {
 		panic(err)
 	}
 	mantissa_msb := outputs[0]
-	f.api.AssertIsBoolean(mantissa_msb)
-	flipped_mantissa_msb := f.api.Sub(big.NewInt(1), mantissa_msb)
-	f.api.Compiler().MarkBoolean(flipped_mantissa_msb)
+	f.Api.AssertIsBoolean(mantissa_msb)
+	flipped_mantissa_msb := f.Api.Sub(big.NewInt(1), mantissa_msb)
+	f.Api.Compiler().MarkBoolean(flipped_mantissa_msb)
 	// Compute the remainder `(x.mantissa << (M + 2)) % y_mantissa`.
-	remainder := f.api.Sub(f.api.Mul(x.mantissa, new(big.Int).Lsh(big.NewInt(1), f.M+2)), f.api.Mul(mantissa, y_mantissa))
+	remainder := f.Api.Sub(f.Api.Mul(x.Mantissa, new(big.Int).Lsh(big.NewInt(1), f.M+2)), f.Api.Mul(mantissa, y_mantissa))
 	// Enforce that `0 <= remainder < y_mantissa`.
-	f.gadget.AssertBitLength(remainder, f.M+1)
-	f.gadget.AssertBitLength(f.api.Sub(y_mantissa, f.api.Add(remainder, big.NewInt(1))), f.M+1)
+	f.Gadget.AssertBitLength(remainder, f.M+1)
+	f.Gadget.AssertBitLength(f.Api.Sub(y_mantissa, f.Api.Add(remainder, big.NewInt(1))), f.M+1)
 	// Enforce that `mantissa_msb` is indeed the MSB of the mantissa.
 	// Soundness holds because
 	// * If `mantissa_msb == 0` but the actual MSB is 1, then the subtraction result will have at least
 	// mantissa_bit_length bits.
 	// * If `mantissa_msb == 1` but the actual MSB is 0, then the subtraction will underflow to a negative
 	// value.
-	f.gadget.AssertBitLength(f.api.Sub(mantissa, f.api.Mul(mantissa_msb, new(big.Int).Lsh(big.NewInt(1), mantissa_bit_length-1))), mantissa_bit_length-1)
+	f.Gadget.AssertBitLength(f.Api.Sub(mantissa, f.Api.Mul(mantissa_msb, new(big.Int).Lsh(big.NewInt(1), mantissa_bit_length-1))), mantissa_bit_length-1)
 
 	// Since `mantissa` is in the range `[2^(2M), 2^(2M + 2))`, either the MSB is 1 or the second MSB is 1.
 	// Therefore, we can simply double the mantissa if the MSB is 0.
-	mantissa = f.api.Add(
+	mantissa = f.Api.Add(
 		mantissa,
-		f.api.Select(
+		f.Api.Select(
 			mantissa_msb,
 			big.NewInt(0),
 			mantissa,
@@ -655,7 +655,7 @@ func (f *Context) Div(x, y FloatVar) FloatVar {
 	)
 	// Compute the exponent of the result. We should decrement the exponent if the division
 	// borrows, i.e., if the MSB of the mantissa is 0.
-	exponent := f.api.Sub(f.api.Sub(x.exponent, y.exponent), flipped_mantissa_msb)
+	exponent := f.Api.Sub(f.Api.Sub(x.Exponent, y.Exponent), flipped_mantissa_msb)
 
 	shift_max := f.M + 2
 	mantissa = f.round(
@@ -663,9 +663,9 @@ func (f *Context) Div(x, y FloatVar) FloatVar {
 		mantissa_bit_length,
 		// If `exponent >= E_NORMAL_MIN`, i.e., the result is normal, we don't need to clear the lower bits.
 		// Otherwise, we need to clear `min(E_NORMAL_MIN - exponent, shift_max)` bits of the rounded mantissa.
-		f.gadget.Max(
-			f.gadget.Min(
-				f.api.Sub(f.E_NORMAL_MIN, exponent),
+		f.Gadget.Max(
+			f.Gadget.Min(
+				f.Api.Sub(f.E_NORMAL_MIN, exponent),
 				big.NewInt(int64(shift_max)),
 				f.E+1,
 			),
@@ -673,33 +673,33 @@ func (f *Context) Div(x, y FloatVar) FloatVar {
 			f.E+1,
 		),
 		shift_max,
-		f.api.IsZero(remainder),
+		f.Api.IsZero(remainder),
 	)
 
 	// If `y` is infinity, the result is zero.
 	// If `y` is NaN, the result is NaN.
 	// Since both zero and NaN have mantissa 0, we can combine both cases and set the mantissa to 0
 	// when `y` is abnormal.
-	mantissa_is_zero := f.api.Or(f.api.IsZero(mantissa), y.is_abnormal)
+	mantissa_is_zero := f.Api.Or(f.Api.IsZero(mantissa), y.IsAbnormal)
 
 	mantissa, exponent, is_abnormal := f.fixOverflow(
 		mantissa,
 		mantissa_is_zero,
 		exponent,
-		f.api.Or(x.is_abnormal, y_is_zero),
+		f.Api.Or(x.IsAbnormal, y_is_zero),
 	)
 
 	return FloatVar{
-		sign:     sign,
-		exponent: exponent,
+		Sign:     sign,
+		Exponent: exponent,
 		// If the mantissa before fixing overflow is zero, we reset the final mantissa to 0,
 		// as `Self::fix_overflow` incorrectly sets NaN's mantissa to infinity's mantissa.
-		mantissa: f.api.Select(
+		Mantissa: f.Api.Select(
 			mantissa_is_zero,
 			big.NewInt(0),
 			mantissa,
 		),
-		is_abnormal: is_abnormal,
+		IsAbnormal: is_abnormal,
 	}
 }
 
@@ -709,47 +709,47 @@ func (f *Context) Sqrt(x FloatVar) FloatVar {
 		delta = new(big.Int).Sub(delta, big.NewInt(1))
 	}
 	// Get the LSB of the exponent and provide it as a hint to the circuit.
-	outputs, err := f.api.Compiler().NewHint(hint.NthBitHint, 1, f.api.Sub(x.exponent, delta), 0)
+	outputs, err := f.Api.Compiler().NewHint(hint.NthBitHint, 1, f.Api.Sub(x.Exponent, delta), 0)
 	if err != nil {
 		panic(err)
 	}
 	e_lsb := outputs[0]
-	f.api.AssertIsBoolean(e_lsb)
+	f.Api.AssertIsBoolean(e_lsb)
 
 	// Compute `x.exponent >> 1`
-	exponent := f.api.Mul(
-		f.api.Sub(x.exponent, e_lsb),
-		f.api.Inverse(big.NewInt(2)),
+	exponent := f.Api.Mul(
+		f.Api.Sub(x.Exponent, e_lsb),
+		f.Api.Inverse(big.NewInt(2)),
 	)
 	// Enforce that `|exponent|` only has `E - 1` bits.
 	// This ensures that `e_lsb` is indeed the LSB of the exponent, as otherwise `x.exponent` will be odd,
 	// but `x.exponent * 2^(-1)` will not fit in `E - 1` bits for all odd `x.exponent` between `E_MIN` and `E_MAX`.
-	f.gadget.Abs(exponent, f.E-1)
+	f.Gadget.Abs(exponent, f.E-1)
 
 	// TODO: `M + 3` is obtained by empirical analysis. We need to find why it works.
 	mantissa_bit_length := f.M + 3
 	// We are going to find `n` such that `n^2 <= m < (n + 1)^2`, and `r = m - n^2` decides the rounding direction.
 	// To this end, we shift `x.mantissa` to the left to allow a more accurate `r`.
 	// TODO: `mantissa_bit_length * 2 - (M + 2)` is obtained by empirical analysis. We need to find why it works.
-	m := f.api.Mul(x.mantissa, new(big.Int).Lsh(big.NewInt(1), mantissa_bit_length*2-(f.M+2)))
+	m := f.Api.Mul(x.Mantissa, new(big.Int).Lsh(big.NewInt(1), mantissa_bit_length*2-(f.M+2)))
 	// `sqrt(2^e * m) == sqrt(2^(e - 1) * 2m)`
 	// If `e` is even, then the result is `sqrt(2^e * m) = 2^(e >> 1) * sqrt(m)`.
 	// If `e` is odd, then the result is `sqrt(2^(e - 1) * 2m) = 2^(e >> 1) * sqrt(2m)`.
-	m = f.api.Select(
+	m = f.Api.Select(
 		e_lsb,
-		f.api.Add(m, m),
+		f.Api.Add(m, m),
 		m,
 	)
 
 	// Compute `sqrt(m)` and find how many bits to shift the mantissa to the left to have the
 	// `mantissa_bit_length - 1`-th bit equal to 1.
 	// Prodive these values as hints to the circuit.
-	outputs, err = f.api.Compiler().NewHint(hint.SqrtHint, 1, m)
+	outputs, err = f.Api.Compiler().NewHint(hint.SqrtHint, 1, m)
 	if err != nil {
 		panic(err)
 	}
 	n := outputs[0]
-	outputs, err = f.api.Compiler().NewHint(hint.NormalizeHint, 2, n, mantissa_bit_length)
+	outputs, err = f.Api.Compiler().NewHint(hint.NormalizeHint, 2, n, mantissa_bit_length)
 	if err != nil {
 		panic(err)
 	}
@@ -759,16 +759,16 @@ func (f *Context) Sqrt(x FloatVar) FloatVar {
 	// TODO: enforce `(shift, two_to_shift)` is in lookup table
 
 	// Compute the remainder `r = m - n^2`.
-	r := f.api.Sub(m, f.api.Mul(n, n))
+	r := f.Api.Sub(m, f.Api.Mul(n, n))
 	// Enforce that `n^2 <= m < (n + 1)^2`.
-	f.gadget.AssertBitLength(r, mantissa_bit_length+1)                             // n^2 <= m  =>  m - n^2 >= 0
-	f.gadget.AssertBitLength(f.api.Sub(f.api.Add(n, n), r), mantissa_bit_length+1) // (n + 1)^2 > m  =>  n^2 + 2n + 1 - m > 0  =>  n^2 + 2n - m >= 0
+	f.Gadget.AssertBitLength(r, mantissa_bit_length+1)                             // n^2 <= m  =>  m - n^2 >= 0
+	f.Gadget.AssertBitLength(f.Api.Sub(f.Api.Add(n, n), r), mantissa_bit_length+1) // (n + 1)^2 > m  =>  n^2 + 2n + 1 - m > 0  =>  n^2 + 2n - m >= 0
 
-	n_is_zero := f.api.IsZero(n)
-	n_is_not_zero := f.api.Sub(big.NewInt(1), n_is_zero)
-	f.api.Compiler().MarkBoolean(n_is_not_zero)
+	n_is_zero := f.Api.IsZero(n)
+	n_is_not_zero := f.Api.Sub(big.NewInt(1), n_is_zero)
+	f.Api.Compiler().MarkBoolean(n_is_not_zero)
 	// Compute the shifted value of `n`
-	n = f.api.Mul(n, two_to_shift)
+	n = f.Api.Mul(n, two_to_shift)
 	// Enforce that the MSB of the shifted `n` is 1 unless `n` is zero.
 	// Soundness holds because
 	// * `n` has at most `mantissa_bit_length` bits. Otherwise,
@@ -776,13 +776,13 @@ func (f *Context) Sqrt(x FloatVar) FloatVar {
 	// `2^(mantissa_bit_length - 1)` and cannot fit in `mantissa_bit_length - 1` bits.
 	// * `n`'s MSB is 1 unless `n_is_zero`. Otherwise, `n - 1 << (mantissa_bit_length - 1)`
 	// will be negative and cannot fit in `mantissa_bit_length - 1` bits.
-	f.gadget.AssertBitLength(
-		f.api.Sub(n, f.api.Mul(f.api.Sub(big.NewInt(1), n_is_zero), new(big.Int).Lsh(big.NewInt(1), mantissa_bit_length-1))),
+	f.Gadget.AssertBitLength(
+		f.Api.Sub(n, f.Api.Mul(f.Api.Sub(big.NewInt(1), n_is_zero), new(big.Int).Lsh(big.NewInt(1), mantissa_bit_length-1))),
 		mantissa_bit_length-1,
 	)
 
 	// Decrement the exponent by `shift`.
-	exponent = f.api.Sub(exponent, shift)
+	exponent = f.Api.Sub(exponent, shift)
 
 	mantissa := f.round(
 		n,
@@ -791,25 +791,25 @@ func (f *Context) Sqrt(x FloatVar) FloatVar {
 		// Therefore, we don't need to clear the lower bits.
 		big.NewInt(0),
 		0,
-		f.api.IsZero(r),
+		f.Api.IsZero(r),
 	)
 
 	// If `x` is negative and `x` is not `-0`, the result is NaN.
 	// If `x` is NaN, the result is NaN.
 	// If `x` is +infinty, the result is +infinity.
 	// Below we combine all these cases.
-	is_abnormal := f.api.Or(
-		f.api.And(x.sign, n_is_not_zero),
-		x.is_abnormal,
+	is_abnormal := f.Api.Or(
+		f.Api.And(x.Sign, n_is_not_zero),
+		x.IsAbnormal,
 	)
 
 	return FloatVar{
-		sign: x.sign, // Edge case: sqrt(-0.0) = -0.0
-		exponent: f.api.Select(
+		Sign: x.Sign, // Edge case: sqrt(-0.0) = -0.0
+		Exponent: f.Api.Select(
 			is_abnormal,
 			// If the result is abnormal, we set the exponent to infinity/NaN's exponent.
 			f.E_MAX,
-			f.api.Select(
+			f.Api.Select(
 				n_is_zero,
 				// If the result is 0, we set the exponent to 0's exponent.
 				f.E_MIN,
@@ -817,24 +817,24 @@ func (f *Context) Sqrt(x FloatVar) FloatVar {
 				exponent,
 			),
 		),
-		mantissa: f.api.Select(
-			x.sign,
+		Mantissa: f.Api.Select(
+			x.Sign,
 			// If `x` is negative, we set the mantissa to NaN's mantissa.
 			big.NewInt(0),
 			mantissa,
 		),
-		is_abnormal: is_abnormal,
+		IsAbnormal: is_abnormal,
 	}
 }
 
 func (f *Context) less(x, y FloatVar, allow_eq uint) frontend.Variable {
-	xe_ge_ye := f.gadget.IsPositive(f.api.Sub(x.exponent, y.exponent), f.E+1)
-	xm_ge_ym := f.gadget.IsPositive(f.api.Sub(x.mantissa, y.mantissa), f.M+1)
+	xe_ge_ye := f.Gadget.IsPositive(f.Api.Sub(x.Exponent, y.Exponent), f.E+1)
+	xm_ge_ym := f.Gadget.IsPositive(f.Api.Sub(x.Mantissa, y.Mantissa), f.M+1)
 
-	b := f.api.Select(
-		f.api.Or(
-			f.api.And(x.is_abnormal, f.api.IsZero(x.mantissa)),
-			f.api.And(y.is_abnormal, f.api.IsZero(y.mantissa)),
+	b := f.Api.Select(
+		f.Api.Or(
+			f.Api.And(x.IsAbnormal, f.Api.IsZero(x.Mantissa)),
+			f.Api.And(y.IsAbnormal, f.Api.IsZero(y.Mantissa)),
 		),
 		// If either `x` or `y` is NaN, the result is always false.
 		0,
@@ -868,33 +868,33 @@ func (f *Context) less(x, y FloatVar, allow_eq uint) frontend.Variable {
 		 * }
 		 * ```
 		 */
-		f.api.Select(
-			f.gadget.IsEq(x.sign, y.sign),
-			f.api.Select(
-				f.gadget.IsEq(x.exponent, y.exponent),
-				f.api.Select(
-					f.gadget.IsEq(x.mantissa, y.mantissa),
+		f.Api.Select(
+			f.Gadget.IsEq(x.Sign, y.Sign),
+			f.Api.Select(
+				f.Gadget.IsEq(x.Exponent, y.Exponent),
+				f.Api.Select(
+					f.Gadget.IsEq(x.Mantissa, y.Mantissa),
 					allow_eq,
-					f.api.Select(
-						x.sign,
+					f.Api.Select(
+						x.Sign,
 						xm_ge_ym,
-						f.api.Sub(big.NewInt(1), xm_ge_ym),
+						f.Api.Sub(big.NewInt(1), xm_ge_ym),
 					),
 				),
-				f.api.Select(
-					x.sign,
+				f.Api.Select(
+					x.Sign,
 					xe_ge_ye,
-					f.api.Sub(big.NewInt(1), xe_ge_ye),
+					f.Api.Sub(big.NewInt(1), xe_ge_ye),
 				),
 			),
-			f.api.Select(
-				f.api.IsZero(f.api.Add(x.mantissa, y.mantissa)),
+			f.Api.Select(
+				f.Api.IsZero(f.Api.Add(x.Mantissa, y.Mantissa)),
 				allow_eq,
-				x.sign,
+				x.Sign,
 			),
 		),
 	)
-	f.api.Compiler().MarkBoolean(b)
+	f.Api.Compiler().MarkBoolean(b)
 	return b
 }
 
