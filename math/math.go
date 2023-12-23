@@ -22,10 +22,13 @@ func Atan2(f *float.Context, x, y float.FloatVar) float.FloatVar {
 	piE := utils.PiE
 	piM := utils.PiM
 
+	// above constant not suited for 64bit float
+	piM = 2570638125581648
+
 	// TODO: Check if zero, do not divide by 0
 	quotient := f.Div(x, y)
 
-	sign := f.Api.Select(y.Sign, f.Api.Select(x.Sign, 0, 1), f.Api.Select(x.Sign, 1, 0))
+	sign := f.Api.Select(y.Sign, f.Api.Sub(1, x.Sign), x.Sign)
 	result := atanRemez(f, quotient)
 
 	tmp := float.FloatVar{
@@ -35,16 +38,15 @@ func Atan2(f *float.Context, x, y float.FloatVar) float.FloatVar {
 		IsAbnormal: 0,
 	}
 
-	tmpTwo := float.FloatVar{
+	pi := float.FloatVar{
 		Sign:        0,
 		Exponent:    piE,
 		Mantissa:    piM,
 		IsAbnormal: 0,
 	}
 
-	addPi := f.Add(tmp, tmpTwo)
-	tmpTwo.Sign = 1
-	subPi := f.Add(tmp, tmpTwo)
+	addPi := f.Add(tmp, pi)
+	subPi := f.Sub(tmp, pi)
 
 	atan2S := f.Api.Select(x.Sign, f.Api.Select(y.Sign, subPi.Sign, addPi.Sign), sign)
 	atan2E := f.Api.Select(x.Sign, f.Api.Select(y.Sign, subPi.Exponent, addPi.Exponent), result.Exponent)
@@ -66,6 +68,9 @@ func atanRemez(f *float.Context, x float.FloatVar) float.FloatVar {
 	piM := utils.PiM
 	halfPiE := utils.HalfPiE
 
+	// above constant not suited for 64bit float
+        piM = 2570638125581648
+
 	var coefficient = [33]int{
 		0, -6, 11823596,
 		1, -3, 8975490,
@@ -76,24 +81,31 @@ func atanRemez(f *float.Context, x float.FloatVar) float.FloatVar {
 		0, -8, 11760836,
 		1, -2, 11204846,
 		0, -15, 9710032,
-		0, -1, 16777200, 0, -28, 16446218}
+		0, -1, 16777200,
+		0, -28, 16446218,
+	}
 
-	tmp := float.FloatVar{
+	oneConst := float.FloatVar{
 		Sign:        0,
 		Exponent:    0,
-		Mantissa:    utils.BaseM,
+		Mantissa:    int(math.Pow(2, float64(p))), //utils.BaseM,
 		IsAbnormal: 0,
 	}
-	greaterOne := f.IsGt(x, tmp)
 
-	tmp = float.FloatVar{
+	sign := x.Sign
+	x.Sign = 0
+
+	// Approximate atan by atan(x) = pi/2 - atan(1/x) if x>1
+	greaterOne := f.IsGt(x, oneConst)
+
+	/*tmp = float.FloatVar{
 		Sign:        0,
 		Exponent:    0,
 		Mantissa:    int(math.Pow(2, float64(p))),
 		IsAbnormal: 0,
-	}
+	}*/
 
-	recipical := f.Div(tmp, x)
+	recipical := f.Div(oneConst, x)
 
 	x.Exponent = f.Api.Select(greaterOne, recipical.Exponent, x.Exponent)
 	x.Mantissa = f.Api.Select(greaterOne, recipical.Mantissa, x.Mantissa)
@@ -109,7 +121,7 @@ func atanRemez(f *float.Context, x float.FloatVar) float.FloatVar {
 
 		mult := f.Mul(u, x)
 
-		tmp = float.FloatVar{
+		tmp := float.FloatVar{
 			Sign:        coefficient[i],
 			Exponent:    coefficient[i+1],
 			Mantissa:    coefficient[i+2],
@@ -126,26 +138,26 @@ func atanRemez(f *float.Context, x float.FloatVar) float.FloatVar {
 		u = f.Add(tmpTwo, tmp)
 	}
 
-	sign := f.Api.Select(u.Sign, 0, 1)
+	//sign := f.Api.Select(u.Sign, 0, 1)
 
-	tmp = float.FloatVar{
+	piHalf := float.FloatVar{
 		Sign:        0,
 		Exponent:    halfPiE,
 		Mantissa:    piM,
 		IsAbnormal: 0,
 	}
 
-	tmpTwo := float.FloatVar{
+	/*tmpTwo := float.FloatVar{
 		Sign:        sign,
 		Exponent:    u.Exponent,
 		Mantissa:    u.Mantissa,
 		IsAbnormal: 0,
-	}
+	}*/
 
-	sub := f.Add(tmp, tmpTwo)
+	sub := f.Sub(piHalf, u)
 
-	e := f.Api.Select(greaterOne, sub.Exponent, sub.Exponent)
-	m := f.Api.Select(greaterOne, sub.Mantissa, sub.Mantissa)
+	e := f.Api.Select(greaterOne, sub.Exponent, u.Exponent)
+	m := f.Api.Select(greaterOne, sub.Mantissa, u.Mantissa)
 
 	return float.FloatVar{
 		Sign:        sign,
@@ -158,19 +170,20 @@ func atanRemez(f *float.Context, x float.FloatVar) float.FloatVar {
 var Pi = float.FloatVar{
 	Sign:        0,
 	Exponent:    utils.PiE,
-	Mantissa:    utils.PiM,
+	Mantissa:    2570638125581648, //utils.PiM,
 	IsAbnormal: 0,
 }
 
 var HalfPi = float.FloatVar{
 	Sign:        0,
 	Exponent:    utils.HalfPiE,
-	Mantissa:    utils.ThreeHalfPieM,
+	Mantissa:    2570638125581648, //utils.PiM,
 	IsAbnormal: 0,
 }
 
 func FloatSine(f *float.Context, x float.FloatVar) float.FloatVar {
 
+	// TODO: ret needs to be zero
 	var ret = float.FloatVar{
 		Sign:        0,
 		Exponent:    -126,
@@ -182,7 +195,7 @@ func FloatSine(f *float.Context, x float.FloatVar) float.FloatVar {
 	// we mitigate this with the symmetry of the function
 	// Since sin(x) is symmetric at pi/2, we fold across the symmetry axis in case term > pi/2
 	check := f.IsGt(x, HalfPi)
-	folding := f.Add(Pi, x)
+	folding := f.Sub(Pi, x)
 
 	var term = float.FloatVar{
 		Sign:        0,
@@ -194,11 +207,10 @@ func FloatSine(f *float.Context, x float.FloatVar) float.FloatVar {
 	// Calculate term*x^2 / 2i*(2i+1) in each loop iteration
 	xSquare := f.Mul(term, term)
 
-	for i := 1; i < 11; i++ {
+	for i := 1; i < 14; i++ {
 
 		if (i % 2) == 0 {
-			term.Sign = f.Api.IsZero(term.Sign)
-			ret = f.Add(ret, term)
+			ret = f.Sub(ret, term)
 		} else {
 			ret = f.Add(ret, term)
 		}
