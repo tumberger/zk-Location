@@ -20,7 +20,7 @@ type Context struct {
 	E_MIN        *big.Int
 }
 
-// `FloatVar` represents a IEEE-754 floating point number in the constraint system,
+// `FloatVar` represents an IEEE-754 floating point number in the constraint system,
 // where the number is encoded as a 1-bit sign, an E-bit exponent, and an M-bit mantissa.
 // In the circuit, we don't store the encoded form, but directly record all the components,
 // together with a flag indicating whether the number is abnormal (NaN or infinity).
@@ -52,7 +52,7 @@ func NewContext(api frontend.API, E, M uint) Context {
 	E_MIN := new(big.Int).Sub(E_NORMAL_MIN, big.NewInt(int64(M+1)))
 	return Context{
 		Api:          api,
-		Gadget:       gadget.New(api),
+		Gadget:       gadget.New(api, M+5),
 		E:            E,
 		M:            M,
 		E_MAX:        E_MAX,
@@ -93,17 +93,22 @@ func (f *Context) NewFloat(v frontend.Variable) FloatVar {
 
 	// Find how many bits to shift the mantissa to the left to have the `(M - 1)`-th bit equal to 1
 	// and prodive it as a hint to the circuit
-	outputs, err = f.Api.Compiler().NewHint(hint.NormalizeHint, 2, m, f.M)
+	outputs, err = f.Api.Compiler().NewHint(hint.NormalizeHint, 1, m, f.M)
 	if err != nil {
 		panic(err)
 	}
 	shift := outputs[0]
-	two_to_shift := outputs[1]
-	// TODO: enforce `(shift, two_to_shift)` is in lookup table `[0, M]`
+	// Enforce that `shift` is small and `two_to_shift` is equal to `2^shift`.
+	// Theoretically, `shift` should be in the range `[0, M]`, but the circuit can only guarantee
+	// that `shift` is in the range `[0, M + 4]`.
+	// However, we will check the range of `shifted_mantissa` later, which will implicitly provide
+	// tight upper bounds for `shift` and `two_to_shift`, and thus soundness still holds.
+	f.Gadget.AssertBitLength(shift, uint(big.NewInt(int64(f.M)).BitLen()))
+	two_to_shift := f.Gadget.QueryPowerOf2(shift)
 
 	// Compute the shifted mantissa. Multiplication here is safe because we already know that
-	// mantissa is less than `2^M`, and `2^shift` is less than or equal to `2^M`. If `M` is not too large,
-	// overflow should not happen.
+	// mantissa is less than `2^M`, and `2^shift` is less than or equal to `2^(M + 4)`. If `M` is
+	// not too large, overflow should not happen.
 	shifted_mantissa := f.Api.Mul(m, two_to_shift)
 	// Enforce the shifted mantissa, after removing the leading bit, has only `M - 1` bits,
 	// where the leading bit is set to 0 if the mantissa is zero, and set to 1 otherwise.
@@ -177,7 +182,7 @@ func (f *Context) NewConstant(v uint64) FloatVar {
 	}
 
 	shifted_mantissa := new(big.Int).Lsh(new(big.Int).Set(mantissa), shift)
-	
+
 	if exponent_is_min {
 		exponent = new(big.Int).Sub(exponent, big.NewInt(int64(shift)))
 		mantissa = new(big.Int).Lsh(shifted_mantissa, 1)
@@ -229,12 +234,8 @@ func (f *Context) round(
 	shift_max uint,
 	half_flag frontend.Variable,
 ) frontend.Variable {
-	outputs, err := f.Api.Compiler().NewHint(hint.PowerOfTwoHint, 1, shift)
-	if err != nil {
-		panic(err)
-	}
-	two_to_shift := outputs[0]
-	// TODO: enforce `(u, two_to_u)` is in lookup table `[0, u_max]`
+	// Enforce that `two_to_shift` is equal to `2^shift`, where `shift` is known to be small.
+	two_to_shift := f.Gadget.QueryPowerOf2(shift)
 
 	r_idx := shift_max + mantissa_bit_length - f.M - 2
 	q_idx := r_idx + 1
@@ -254,7 +255,7 @@ func (f *Context) round(
 	// is equivalent to checking both `t` and `2^shift - t - 1` have `shift_max` bits.
 	// However, in the second case, we only need to check `s` has `shift_max + mantissa_bit_length - M - 2`
 	// bits, which costs less than the first case.
-	outputs, err = f.Api.Compiler().NewHint(hint.DecomposeMantissaForRoundingHint, 4, mantissa, two_to_shift, shift_max, p_idx, q_idx, r_idx)
+	outputs, err := f.Api.Compiler().NewHint(hint.DecomposeMantissaForRoundingHint, 4, mantissa, two_to_shift, shift_max, p_idx, q_idx, r_idx)
 	if err != nil {
 		panic(err)
 	}
@@ -384,16 +385,8 @@ func (f *Context) Add(x, y FloatVar) FloatVar {
 		big.NewInt(0),
 		f.E,
 	)
-	outputs, err := f.Api.NewHint(
-		hint.PowerOfTwoHint,
-		1,
-		delta,
-	)
-	if err != nil {
-		panic(err)
-	}
-	two_to_delta := outputs[0]
-	// TODO: enforce `(delta, two_to_delta)` is in lookup table `[0, >=M + 3]`
+	// Enforce that `two_to_delta` is equal to `2^delta`, where `delta` is known to be small.
+	two_to_delta := f.Gadget.QueryPowerOf2(delta)
 
 	// Compute the signed mantissas
 	xx := f.Api.Select(
@@ -433,7 +426,7 @@ func (f *Context) Add(x, y FloatVar) FloatVar {
 	// Get the sign of the mantissa and find how many bits to shift the mantissa to the left to have the
 	// `mantissa_bit_length - 1`-th bit equal to 1.
 	// Prodive these values as hints to the circuit
-	outputs, err = f.Api.Compiler().NewHint(hint.AbsHint, 2, s)
+	outputs, err := f.Api.Compiler().NewHint(hint.AbsHint, 2, s)
 	if err != nil {
 		panic(err)
 	}
@@ -442,14 +435,15 @@ func (f *Context) Add(x, y FloatVar) FloatVar {
 	f.Api.AssertIsBoolean(mantissa_ge_0)
 	mantissa_lt_0 := f.Api.Sub(big.NewInt(1), mantissa_ge_0)
 	f.Api.Compiler().MarkBoolean(mantissa_lt_0)
-	outputs, err = f.Api.Compiler().NewHint(hint.NormalizeHint, 2, mantissa_abs, big.NewInt(int64(mantissa_bit_length)))
+	outputs, err = f.Api.Compiler().NewHint(hint.NormalizeHint, 1, mantissa_abs, big.NewInt(int64(mantissa_bit_length)))
 	if err != nil {
 		panic(err)
 	}
 	shift := outputs[0]
-	two_to_shift := outputs[1]
-	// TODO: enforce range of shift `[0, M + 4]`
-	// TODO: enforce `(shift, two_to_shift)` is in lookup table
+	// Enforce that `shift` is small and `two_to_shift` is equal to `2^shift`.
+	// Here `shift` should be in the range `[0, M + 4]`, and the circuit is able to tightly bound it.
+	f.Gadget.AssertBitLength(shift, uint(big.NewInt(int64(mantissa_bit_length)).BitLen()))
+	two_to_shift := f.Gadget.QueryPowerOf2(shift)
 
 	// Compute the shifted absolute value of mantissa
 	mantissa := f.Api.Mul(
@@ -806,14 +800,18 @@ func (f *Context) Sqrt(x FloatVar) FloatVar {
 		panic(err)
 	}
 	n := outputs[0]
-	outputs, err = f.Api.Compiler().NewHint(hint.NormalizeHint, 2, n, mantissa_bit_length)
+	outputs, err = f.Api.Compiler().NewHint(hint.NormalizeHint, 1, n, mantissa_bit_length)
 	if err != nil {
 		panic(err)
 	}
 	shift := outputs[0]
-	two_to_shift := outputs[1]
-	// TODO: enforce range of shift `[0, mantissa_bit_length]`
-	// TODO: enforce `(shift, two_to_shift)` is in lookup table
+	// Enforce that `shift` is small and `two_to_shift` is equal to `2^shift`.
+	// Theoretically, `shift` should be in the range `[0, M + 3]`, but the circuit can only guarantee
+	// that `shift` is in the range `[0, M + 4]`.
+	// However, we will check the range of `n * two_to_shift` later, which will implicitly provide
+	// tight upper bounds for `shift` and `two_to_shift`, and thus soundness still holds.
+	f.Gadget.AssertBitLength(shift, uint(big.NewInt(int64(mantissa_bit_length)).BitLen()))
+	two_to_shift := f.Gadget.QueryPowerOf2(shift)
 
 	// Compute the remainder `r = m - n^2`.
 	r := f.Api.Sub(m, f.Api.Mul(n, n))

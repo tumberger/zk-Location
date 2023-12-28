@@ -2,24 +2,53 @@ package gadget
 
 import (
 	"gnark-float/hint"
+	"gnark-float/logderivarg"
+	"math/big"
 
 	"github.com/consensys/gnark/frontend"
 	"github.com/consensys/gnark/std/rangecheck"
 )
 
+type PowersOfTwo struct {
+	entries [][]frontend.Variable
+	queries [][]frontend.Variable
+}
+
+func NewPowersOfTwoTable(api frontend.API, size uint) *PowersOfTwo {
+	t := &PowersOfTwo{}
+
+	t.entries = make([][]frontend.Variable, size)
+	for i := uint(0); i < size; i++ {
+		// The i-th entry is `i || 2^i`
+		t.entries[i] = []frontend.Variable{new(big.Int).Add(
+			new(big.Int).Lsh(big.NewInt(int64(i)), size),
+			new(big.Int).Lsh(big.NewInt(1), i),
+		)}
+	}
+
+	api.Compiler().Defer(t.commit)
+
+	return t
+}
+
+func (t *PowersOfTwo) commit(api frontend.API) error {
+	return logderivarg.Build(api, t.entries, t.queries)
+}
+
 type IntGadget struct {
 	api          frontend.API
 	rangechecker frontend.Rangechecker
+	pow2         *PowersOfTwo
 }
 
-func New(api frontend.API) IntGadget {
+func New(api frontend.API, pow2_size uint) IntGadget {
 	rangechecker := rangecheck.New(api)
-	return IntGadget{api, rangechecker}
+	pow2 := NewPowersOfTwoTable(api, pow2_size)
+	return IntGadget{api, rangechecker, pow2}
 }
 
 func (f *IntGadget) AssertBitLength(v frontend.Variable, bit_length uint) {
-	// TODO
-	// f.rangechecker.Check(v, int(bit_length))
+	f.rangechecker.Check(v, int(bit_length))
 }
 
 func (f *IntGadget) Abs(v frontend.Variable, length uint) (frontend.Variable, frontend.Variable) {
@@ -61,4 +90,20 @@ func (f *IntGadget) Min(a, b frontend.Variable, diff_length uint) frontend.Varia
 
 func (f *IntGadget) IsEq(a, b frontend.Variable) frontend.Variable {
 	return f.api.IsZero(f.api.Sub(a, b))
+}
+
+func (f *IntGadget) QueryPowerOf2(exponent frontend.Variable) frontend.Variable {
+	outputs, err := f.api.Compiler().NewHint(hint.PowerOfTwoHint, 1, exponent)
+	if err != nil {
+		panic(err)
+	}
+	result := outputs[0]
+	// Make sure the result is small
+	f.rangechecker.Check(result, len(f.pow2.entries))
+	// Compute `exponent || result` and add it to the list of queries
+	f.pow2.queries = append(f.pow2.queries, []frontend.Variable{f.api.Add(
+		f.api.Mul(exponent, new(big.Int).Lsh(big.NewInt(1), uint(len(f.pow2.entries)))),
+		result,
+	)})
+	return result
 }

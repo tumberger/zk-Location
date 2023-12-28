@@ -81,7 +81,6 @@ func NormalizeHint(
 	}
 
 	outputs[0].SetUint64(shift)
-	outputs[1].Lsh(big.NewInt(1), uint(shift))
 
 	return nil
 }
