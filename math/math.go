@@ -5,6 +5,7 @@ import (
 	utils "gnark-float/util"
 
 	"math"
+	"fmt"
 
 	"github.com/consensys/gnark/frontend"
 )
@@ -19,36 +20,17 @@ var p = 52
 // ToDo REFACTOR - Constant values as structs in util
 func Atan2(f *float.Context, x, y float.FloatVar) float.FloatVar {
 
-	piE := utils.PiE
-	piM := utils.PiM
-
-	// above constant not suited for 64bit float
-	piM = 2570638125581648
+	pi := f.NewF64Constant(math.Pi)
 
 	// TODO: Check if zero, do not divide by 0
 	quotient := f.Div(x, y)
+	result := AtanRemez(f, quotient)
 
-	sign := f.Api.Select(y.Sign, f.Api.Sub(1, x.Sign), x.Sign)
-	result := atanRemez(f, quotient)
+	addPi := f.Add(result, pi)
+	subPi := f.Sub(result, pi)
 
-	tmp := float.FloatVar{
-		Sign:        sign,
-		Exponent:    result.Exponent,
-		Mantissa:    result.Mantissa,
-		IsAbnormal: 0,
-	}
-
-	pi := float.FloatVar{
-		Sign:        0,
-		Exponent:    piE,
-		Mantissa:    piM,
-		IsAbnormal: 0,
-	}
-
-	addPi := f.Add(tmp, pi)
-	subPi := f.Sub(tmp, pi)
-
-	atan2S := f.Api.Select(x.Sign, f.Api.Select(y.Sign, subPi.Sign, addPi.Sign), sign)
+	// The result of Atan2 depends on the signs of x and y 
+	atan2S := f.Api.Select(x.Sign, f.Api.Select(y.Sign, subPi.Sign, addPi.Sign), result.Sign)
 	atan2E := f.Api.Select(x.Sign, f.Api.Select(y.Sign, subPi.Exponent, addPi.Exponent), result.Exponent)
 	atan2M := f.Api.Select(x.Sign, f.Api.Select(y.Sign, subPi.Mantissa, addPi.Mantissa), result.Mantissa)
 
@@ -58,156 +40,106 @@ func Atan2(f *float.Context, x, y float.FloatVar) float.FloatVar {
 		Mantissa:    atan2M,
 		IsAbnormal: 0,
 	}
+	
+	// TODO: Zero handling -- see below:
+	// if x=0 AND y>0: atan2 = pi/2
+	// if x=0 AND y<0: atan2 = -pi/2
+	// if x=0 AND y=0: atan2 = undefined
+
+	fmt.Printf("Result of atan2(): {%d, %d, %d}\n", ret.Sign, ret.Exponent, ret.Mantissa)
 
 	return ret
 }
 
 // ToDo REFACTOR - Fix Sign and IsAbnormal
 // ToDo REFACTOR - Constant values as structs in util
-func atanRemez(f *float.Context, x float.FloatVar) float.FloatVar {
-	piM := utils.PiM
-	halfPiE := utils.HalfPiE
+func AtanRemez(f *float.Context, x float.FloatVar) float.FloatVar {
+	
+	halfPi := f.NewF64Constant(math.Pi/2.0)
 
-	// above constant not suited for 64bit float
-        piM = 2570638125581648
-
-	var coefficient = [33]int{
-		0, -6, 11823596,
-		1, -3, 8975490,
-		0, -2, 11055062,
-		1, -2, 12719124,
-		0, -4, 14134724,
-		0, -3, 11396472,
-		0, -8, 11760836,
-		1, -2, 11204846,
-		0, -15, 9710032,
-		0, -1, 16777200,
-		0, -28, 16446218,
+	// We approximate the arctan(x) in the range [0,1] with a polynomial of degree 10,
+	// the Remez algorithm has supplied us with the appropriate constants
+	var coefficient = [11]float.FloatVar{
+		f.NewF64Constant(0.022023164),
+		f.NewF64Constant(-0.13374522),
+		f.NewF64Constant(0.32946652),
+		f.NewF64Constant(-0.37905943),
+		f.NewF64Constant(0.1053119),
+		f.NewF64Constant(0.16982068),
+		f.NewF64Constant(0.005476566),
+		f.NewF64Constant(-0.33393043),
+		f.NewF64Constant(0.000035324891),
+		f.NewF64Constant(0.99999905),
+		f.NewF64Constant(0.0000000073035884),
 	}
 
-	oneConst := float.FloatVar{
-		Sign:        0,
-		Exponent:    0,
-		Mantissa:    int(math.Pow(2, float64(p))), //utils.BaseM,
-		IsAbnormal: 0,
-	}
+	oneConst := f.NewConstant(1)
 
 	sign := x.Sign
 	x.Sign = 0
-
+	// TODO: Proper abnormal handling, check that x isn't 0 and act accordingly if x=0
+	
 	// Approximate atan by atan(x) = pi/2 - atan(1/x) if x>1
 	greaterOne := f.IsGt(x, oneConst)
+	reciprocal := f.Div(oneConst, x)
 
-	/*tmp = float.FloatVar{
-		Sign:        0,
-		Exponent:    0,
-		Mantissa:    int(math.Pow(2, float64(p))),
-		IsAbnormal: 0,
-	}*/
+	x.Exponent = f.Api.Select(greaterOne, reciprocal.Exponent, x.Exponent)
+	x.Mantissa = f.Api.Select(greaterOne, reciprocal.Mantissa, x.Mantissa)
+	u := coefficient[0]
 
-	recipical := f.Div(oneConst, x)
-
-	x.Exponent = f.Api.Select(greaterOne, recipical.Exponent, x.Exponent)
-	x.Mantissa = f.Api.Select(greaterOne, recipical.Mantissa, x.Mantissa)
-
-	u := float.FloatVar{
-		Sign:        coefficient[0],
-		Exponent:    coefficient[1],
-		Mantissa:    coefficient[2],
-		IsAbnormal: 0,
-	}
-
-	for i := 3; i < 33; i += 3 {
+	for i := 1; i < 11; i++ {
 
 		mult := f.Mul(u, x)
-
-		tmp := float.FloatVar{
-			Sign:        coefficient[i],
-			Exponent:    coefficient[i+1],
-			Mantissa:    coefficient[i+2],
-			IsAbnormal: 0,
+		
+		if coefficient[i].Sign == 0 {
+			u = f.Add(mult, coefficient[i])
+		} else {
+			u = f.Sub(mult, coefficient[i])
 		}
-
-		tmpTwo := float.FloatVar{
-			Sign:        u.Sign,
-			Exponent:    mult.Exponent,
-			Mantissa:    mult.Mantissa,
-			IsAbnormal: 0,
-		}
-
-		u = f.Add(tmpTwo, tmp)
 	}
 
-	//sign := f.Api.Select(u.Sign, 0, 1)
-
-	piHalf := float.FloatVar{
-		Sign:        0,
-		Exponent:    halfPiE,
-		Mantissa:    piM,
-		IsAbnormal: 0,
-	}
-
-	/*tmpTwo := float.FloatVar{
+	sub := f.Sub(halfPi, u)
+	
+	resultE := f.Api.Select(greaterOne, sub.Exponent, u.Exponent)
+	resultM := f.Api.Select(greaterOne, sub.Mantissa, u.Mantissa)
+	res := float.FloatVar{
 		Sign:        sign,
-		Exponent:    u.Exponent,
-		Mantissa:    u.Mantissa,
-		IsAbnormal: 0,
-	}*/
-
-	sub := f.Sub(piHalf, u)
-
-	e := f.Api.Select(greaterOne, sub.Exponent, u.Exponent)
-	m := f.Api.Select(greaterOne, sub.Mantissa, u.Mantissa)
-
-	return float.FloatVar{
-		Sign:        sign,
-		Exponent:    e,
-		Mantissa:    m,
+		Exponent:    resultE,
+		Mantissa:    resultM,
 		IsAbnormal: 0,
 	}
-}
 
-var Pi = float.FloatVar{
-	Sign:        0,
-	Exponent:    utils.PiE,
-	Mantissa:    2570638125581648, //utils.PiM,
-	IsAbnormal: 0,
-}
+	fmt.Printf("Result of atan(): {%d, %d, %d}\n", res.Sign, res.Exponent, res.Mantissa)
 
-var HalfPi = float.FloatVar{
-	Sign:        0,
-	Exponent:    utils.HalfPiE,
-	Mantissa:    2570638125581648, //utils.PiM,
-	IsAbnormal: 0,
+	return res
 }
 
 func FloatSine(f *float.Context, x float.FloatVar) float.FloatVar {
-
-	// TODO: ret needs to be zero
-	var ret = float.FloatVar{
-		Sign:        0,
-		Exponent:    -126,
-		Mantissa:    utils.BaseM,
-		IsAbnormal: 0,
-	}
+	ret := f.NewF64Constant(float64(0))
+	pi := f.NewF64Constant(math.Pi)
+	halfPi := f.NewF64Constant(math.Pi/2.0)
+	
+	// TODO: Assert x <= pi
+	
+	// TODO: Zero handling: Return 0 in case x = 0
 
 	// The Taylor Series approximation's inaccuracy increases when the input is close to pi
 	// we mitigate this with the symmetry of the function
 	// Since sin(x) is symmetric at pi/2, we fold across the symmetry axis in case term > pi/2
-	check := f.IsGt(x, HalfPi)
-	folding := f.Sub(Pi, x)
+	greaterHalfPi := f.IsGt(x, halfPi)
+	folding := f.Sub(pi, x)
 
 	var term = float.FloatVar{
 		Sign:        0,
-		Exponent:    f.Api.Select(check, folding.Exponent, x.Exponent),
-		Mantissa:    f.Api.Select(check, folding.Mantissa, x.Mantissa),
+		Exponent:    f.Api.Select(greaterHalfPi, folding.Exponent, x.Exponent),
+		Mantissa:    f.Api.Select(greaterHalfPi, folding.Mantissa, x.Mantissa),
 		IsAbnormal: 0,
 	}
+	//fmt.Printf("Term of sin(): {%d, %d, %d}\n", term.Sign, term.Exponent, term.Mantissa)
 
-	// Calculate term*x^2 / 2i*(2i+1) in each loop iteration
 	xSquare := f.Mul(term, term)
-
-	for i := 1; i < 14; i++ {
+	// Calculate term*x^2 / 2i*(2i+1) in each loop iteration
+	for i := 1; i <= 15; i++ {
 
 		if (i % 2) == 0 {
 			ret = f.Sub(ret, term)
@@ -216,20 +148,15 @@ func FloatSine(f *float.Context, x float.FloatVar) float.FloatVar {
 		}
 
 		nominator := f.Mul(term, xSquare)
+		denominator := f.NewF64Constant(float64(2 * i * (2*i + 1)))
 
-		dnm := f.NewF64Constant(float64(2 * i * (2*i + 1)))
-
-		// ToDo - quick fix because ToFloat does not consider sign bit or un-normal numbers
-		dnm.Sign = 0
-		dnm.IsAbnormal = 0
-
-		tmp := f.Div(nominator, dnm)
-
-		term.Exponent = tmp.Exponent
-		term.Mantissa = tmp.Mantissa
+		term = f.Div(nominator, denominator)
+		//fmt.Printf("Term of sin() in loop: {%d, %d, %d}\n", term.Sign, term.Exponent, term.Mantissa)
 	}
 
 	ret.Sign = x.Sign
+	//fmt.Printf("Result of sin(): {%d, %d, %d}\n", ret.Sign, ret.Exponent, ret.Mantissa)
+	
 	return ret
 }
 
@@ -273,6 +200,7 @@ func SqRootFloatNewton(f *float.Context, term float.FloatVar) float.FloatVar {
 	ret.Exponent = x1.Exponent
 	ret.Mantissa = x1.Mantissa
 	ret.IsAbnormal = 0
+	fmt.Printf("Result of sin(): {%d, %d, %d}\n", ret.Sign, ret.Exponent, ret.Mantissa)
 
 	return ret
 }

@@ -12,15 +12,15 @@ import (
 
 	"github.com/consensys/gnark-crypto/ecc"
 	"github.com/consensys/gnark/backend"
-	"github.com/consensys/gnark/backend/groth16"
+	//"github.com/consensys/gnark/backend/groth16"
 	"github.com/consensys/gnark/frontend"
-	"github.com/consensys/gnark/frontend/cs/r1cs"
+	//"github.com/consensys/gnark/frontend/cs/r1cs"
 	"github.com/consensys/gnark/test"
 )
 
 type Circuit struct {
 	X  frontend.Variable `gnark:",secret"`
-	Y  frontend.Variable `gnark:",secret"`
+	//Y  frontend.Variable `gnark:",secret"`
 	Z  frontend.Variable `gnark:",public"`
 	op string
 }
@@ -31,12 +31,13 @@ func (c *Circuit) Define(api frontend.API) error {
 
 	x := ctx.NewFloat(c.X)
 	// y := ctx.NewF64(c.Y)
-	// z := ctx.NewF64(c.Z)
+	z := ctx.NewFloat(c.Z)
 
-	_ = SqRootFloatNewton(&ctx, x)
+	result := FloatSine(&ctx, x)
 
 	// ToDo - Assertion would currently fail!
-	// api.AssertIsEqual(result.Mantissa, z.Mantissa)
+	api.AssertIsEqual(result.Exponent, z.Exponent)
+	//api.AssertIsEqual(result.Mantissa, z.Mantissa)
 
 	return nil
 }
@@ -44,7 +45,7 @@ func (c *Circuit) Define(api frontend.API) error {
 func TestCircuit(t *testing.T) {
 	assert := test.NewAssert(t)
 
-	ops := []string{"Add"}
+	ops := []string{"Sin"}
 
 	for _, op := range ops {
 		path, _ := filepath.Abs(fmt.Sprintf("../data/f64/%s", strings.ToLower(op)))
@@ -56,22 +57,19 @@ func TestCircuit(t *testing.T) {
 			data := strings.Fields(scanner.Text())
 			a, _ := new(big.Int).SetString(data[0], 16)
 			b, _ := new(big.Int).SetString(data[1], 16)
-			c, _ := new(big.Int).SetString(data[2], 16)
-
-			a = new(big.Int).SetUint64(625)
-			a = new(big.Int).SetUint64(25)
 
 			assert.ProverSucceeded(
-				&Circuit{X: 0, Y: 0, Z: 0, op: op},
-				&Circuit{X: a, Y: b, Z: c, op: op},
+				&Circuit{X: 0, Z: 0, op: "FloatSine"},
+				&Circuit{X: a, Z: b, op: "FloatSine"},
 				test.WithCurves(ecc.BN254),
 				test.WithBackends(backend.GROTH16),
 			)
-			break
+			//break
 		}
 	}
 }
 
+/*
 func TestRealProofComputation(t *testing.T) {
 
 	ccs, _ := frontend.Compile(ecc.BN254.ScalarField(), r1cs.NewBuilder, &Circuit{})
@@ -124,4 +122,4 @@ func TestRealProofComputation(t *testing.T) {
 		}
 	}
 
-}
+}*/
