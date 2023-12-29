@@ -24,7 +24,7 @@ func Atan2(f *float.Context, x, y float.FloatVar) float.FloatVar {
 
 	// TODO: Check if zero, do not divide by 0
 	quotient := f.Div(x, y)
-	result := AtanRemez(f, quotient)
+	result := AtanRemez64(f, quotient)
 
 	addPi := f.Add(result, pi)
 	subPi := f.Sub(result, pi)
@@ -51,29 +51,91 @@ func Atan2(f *float.Context, x, y float.FloatVar) float.FloatVar {
 	return ret
 }
 
-// ToDo REFACTOR - Fix Sign and IsAbnormal
-// ToDo REFACTOR - Constant values as structs in util
-func AtanRemez(f *float.Context, x float.FloatVar) float.FloatVar {
+
+func AtanRemez64(f *float.Context, x float.FloatVar) float.FloatVar {
 	
 	halfPi := f.NewF64Constant(math.Pi/2.0)
+
+	// We approximate the arctan(x) in the range [0,1] with a polynomial of degree 14,
+	// the Remez algorithm has supplied us with the appropriate constants
+	var coefficient = [15]float.FloatVar{
+		f.NewF64Constant(0.0031163176),
+		f.NewF64Constant(-0.012789657),
+		f.NewF64Constant(-0.0043351841),
+		f.NewF64Constant(0.12656057),
+		f.NewF64Constant(-0.32917371),
+		f.NewF64Constant(0.37997845),
+		f.NewF64Constant(-0.14230698),
+		f.NewF64Constant(-0.091497794),
+		f.NewF64Constant(-0.012734762),
+		f.NewF64Constant(0.20213015),
+		f.NewF64Constant(-0.00023027674),
+		f.NewF64Constant(-0.33331844),
+		f.NewF64Constant(-0.00000050309052),
+		f.NewF64Constant(1.0),
+		f.NewF64Constant(-0.000000000014755757),
+	}
+
+	oneConst := f.NewF64Constant(float64(1))
+
+	sign := x.Sign
+	x.Sign = 0
+	// TODO: Proper abnormal handling, check that x isn't 0 and act accordingly if x=0
+	
+	// Approximate atan by atan(x) = pi/2 - atan(1/x) if x>1
+	greaterOne := f.IsGt(x, oneConst)
+	reciprocal := f.Div(oneConst, x)
+
+	x.Exponent = f.Api.Select(greaterOne, reciprocal.Exponent, x.Exponent)
+	x.Mantissa = f.Api.Select(greaterOne, reciprocal.Mantissa, x.Mantissa)
+	u := coefficient[0]
+
+	for i := 1; i < 15; i++ {
+
+		mult := f.Mul(u, x)
+		u = f.Add(mult, coefficient[i])
+	}
+
+	sub := f.Sub(halfPi, u)
+	
+	resultE := f.Api.Select(greaterOne, sub.Exponent, u.Exponent)
+	resultM := f.Api.Select(greaterOne, sub.Mantissa, u.Mantissa)
+	res := float.FloatVar{
+		Sign:        sign,
+		Exponent:    resultE,
+		Mantissa:    resultM,
+		IsAbnormal: 0,
+	}
+
+	//fmt.Printf("Result of atan(): {%d, %d, %d}\n", res.Sign, res.Exponent, res.Mantissa)
+
+	return res
+}
+
+
+// ToDo REFACTOR - Fix Sign and IsAbnormal
+// ToDo REFACTOR - Constant values as structs in util
+func AtanRemez32(f *float.Context, x float.FloatVar) float.FloatVar {
+	
+	halfPi := f.NewF32Constant(math.Pi/2.0)
 
 	// We approximate the arctan(x) in the range [0,1] with a polynomial of degree 10,
 	// the Remez algorithm has supplied us with the appropriate constants
 	var coefficient = [11]float.FloatVar{
-		f.NewF64Constant(0.022023164),
-		f.NewF64Constant(-0.13374522),
-		f.NewF64Constant(0.32946652),
-		f.NewF64Constant(-0.37905943),
-		f.NewF64Constant(0.1053119),
-		f.NewF64Constant(0.16982068),
-		f.NewF64Constant(0.005476566),
-		f.NewF64Constant(-0.33393043),
-		f.NewF64Constant(0.000035324891),
-		f.NewF64Constant(0.99999905),
-		f.NewF64Constant(0.0000000073035884),
+		f.NewF32Constant(0.022023164),
+		f.NewF32Constant(-0.13374522),
+		f.NewF32Constant(0.32946652),
+		f.NewF32Constant(-0.37905943),
+		f.NewF32Constant(0.1053119),
+		f.NewF32Constant(0.16982068),
+		f.NewF32Constant(0.005476566),
+		f.NewF32Constant(-0.33393043),
+		f.NewF32Constant(0.000035324891),
+		f.NewF32Constant(0.99999905),
+		f.NewF32Constant(0.0000000073035884),
 	}
 
-	oneConst := f.NewConstant(1)
+	oneConst := f.NewF32Constant(float32(1))
 
 	sign := x.Sign
 	x.Sign = 0
@@ -90,12 +152,7 @@ func AtanRemez(f *float.Context, x float.FloatVar) float.FloatVar {
 	for i := 1; i < 11; i++ {
 
 		mult := f.Mul(u, x)
-		
-		if coefficient[i].Sign == 0 {
-			u = f.Add(mult, coefficient[i])
-		} else {
-			u = f.Sub(mult, coefficient[i])
-		}
+		u = f.Add(mult, coefficient[i])
 	}
 
 	sub := f.Sub(halfPi, u)
@@ -109,7 +166,7 @@ func AtanRemez(f *float.Context, x float.FloatVar) float.FloatVar {
 		IsAbnormal: 0,
 	}
 
-	fmt.Printf("Result of atan(): {%d, %d, %d}\n", res.Sign, res.Exponent, res.Mantissa)
+	//fmt.Printf("Result of atan(): {%d, %d, %d}\n", res.Sign, res.Exponent, res.Mantissa)
 
 	return res
 }
@@ -133,9 +190,8 @@ func FloatSine(f *float.Context, x float.FloatVar) float.FloatVar {
 		Sign:        0,
 		Exponent:    f.Api.Select(greaterHalfPi, folding.Exponent, x.Exponent),
 		Mantissa:    f.Api.Select(greaterHalfPi, folding.Mantissa, x.Mantissa),
-		IsAbnormal: 0,
+		IsAbnormal:  0,
 	}
-	//fmt.Printf("Term of sin(): {%d, %d, %d}\n", term.Sign, term.Exponent, term.Mantissa)
 
 	xSquare := f.Mul(term, term)
 	// Calculate term*x^2 / 2i*(2i+1) in each loop iteration
@@ -151,7 +207,6 @@ func FloatSine(f *float.Context, x float.FloatVar) float.FloatVar {
 		denominator := f.NewF64Constant(float64(2 * i * (2*i + 1)))
 
 		term = f.Div(nominator, denominator)
-		//fmt.Printf("Term of sin() in loop: {%d, %d, %d}\n", term.Sign, term.Exponent, term.Mantissa)
 	}
 
 	ret.Sign = x.Sign

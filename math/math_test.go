@@ -33,11 +33,11 @@ func (c *Circuit) Define(api frontend.API) error {
 	// y := ctx.NewF64(c.Y)
 	z := ctx.NewFloat(c.Z)
 
-	result := FloatSine(&ctx, x)
+	result := AtanRemez64(&ctx, x)
 
 	// ToDo - Assertion would currently fail!
 	api.AssertIsEqual(result.Exponent, z.Exponent)
-	//api.AssertIsEqual(result.Mantissa, z.Mantissa)
+	api.AssertIsEqual(result.Mantissa, z.Mantissa)
 
 	return nil
 }
@@ -45,7 +45,7 @@ func (c *Circuit) Define(api frontend.API) error {
 func TestCircuit(t *testing.T) {
 	assert := test.NewAssert(t)
 
-	ops := []string{"Sin"}
+	ops := []string{"Atan"}
 
 	for _, op := range ops {
 		path, _ := filepath.Abs(fmt.Sprintf("../data/f64/%s", strings.ToLower(op)))
@@ -59,8 +59,8 @@ func TestCircuit(t *testing.T) {
 			b, _ := new(big.Int).SetString(data[1], 16)
 
 			assert.ProverSucceeded(
-				&Circuit{X: 0, Z: 0, op: "FloatSine"},
-				&Circuit{X: a, Z: b, op: "FloatSine"},
+				&Circuit{X: 0, Z: 0, op: "AtanRemez64"},
+				&Circuit{X: a, Z: b, op: "AtanRemez64"},
 				test.WithCurves(ecc.BN254),
 				test.WithBackends(backend.GROTH16),
 			)
