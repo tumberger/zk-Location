@@ -12,40 +12,82 @@ import (
 
 	"github.com/consensys/gnark-crypto/ecc"
 	"github.com/consensys/gnark/backend"
-	//"github.com/consensys/gnark/backend/groth16"
+
 	"github.com/consensys/gnark/frontend"
-	//"github.com/consensys/gnark/frontend/cs/r1cs"
 	"github.com/consensys/gnark/test"
 )
 
-type Circuit struct {
+type CircuitATanRemez64 struct {
 	X  frontend.Variable `gnark:",secret"`
-	//Y  frontend.Variable `gnark:",secret"`
 	Z  frontend.Variable `gnark:",public"`
 	op string
 }
 
-func (c *Circuit) Define(api frontend.API) error {
-	// var f float32.Float
+func (c *CircuitATanRemez64) Define(api frontend.API) error {
+
 	ctx := float.NewContext(api, 11, 52)
 
 	x := ctx.NewFloat(c.X)
-	// y := ctx.NewF64(c.Y)
 	z := ctx.NewFloat(c.Z)
 
 	result := AtanRemez64(&ctx, x)
 
-	// ToDo - Assertion would currently fail!
+	// Assertion of Mantissa fails, ULP test checks that ULP error <1
 	api.AssertIsEqual(result.Exponent, z.Exponent)
 	api.AssertIsEqual(result.Mantissa, z.Mantissa)
+	return nil
+}
+
+type CircuitATanRemez64ULP struct {
+	X       frontend.Variable `gnark:",secret"`
+	Z       frontend.Variable `gnark:",public"`
+	Z_lower frontend.Variable `gnark:",public"`
+	Z_upper frontend.Variable `gnark:",public"`
+	op      string
+}
+
+func (c *CircuitATanRemez64ULP) Define(api frontend.API) error {
+
+	ctx := float.NewContext(api, 11, 52)
+
+	x := ctx.NewFloat(c.X)
+	z := ctx.NewFloat(c.Z)
+	z_lower := ctx.NewFloat(c.Z_lower)
+	z_upper := ctx.NewFloat(c.Z_upper)
+
+	result := AtanRemez64(&ctx, x)
+
+	api.AssertIsEqual(result.Exponent, z.Exponent)
+	api.AssertIsLessOrEqual(z_lower.Mantissa, result.Mantissa)
+	api.AssertIsLessOrEqual(result.Mantissa, z_upper.Mantissa)
 
 	return nil
 }
 
-func TestCircuit(t *testing.T) {
+type SinCircuit struct {
+	X  frontend.Variable `gnark:",secret"`
+	Z  frontend.Variable `gnark:",public"`
+	op string
+}
+
+func (c *SinCircuit) Define(api frontend.API) error {
+	ctx := float.NewContext(api, 11, 52)
+
+	x := ctx.NewFloat(c.X)
+	z := ctx.NewFloat(c.Z)
+
+	result := FloatSine(&ctx, x)
+
+	// Assertion of Mantissa fails, ULP test checks that ULP error <1
+	api.AssertIsEqual(result.Exponent, z.Exponent)
+	api.AssertIsEqual(result.Mantissa, z.Mantissa)
+	return nil
+}
+
+func TestATanCircuit(t *testing.T) {
 	assert := test.NewAssert(t)
 
-	ops := []string{"Atan"}
+	ops := []string{"atan"}
 
 	for _, op := range ops {
 		path, _ := filepath.Abs(fmt.Sprintf("../data/f64/%s", strings.ToLower(op)))
@@ -59,12 +101,66 @@ func TestCircuit(t *testing.T) {
 			b, _ := new(big.Int).SetString(data[1], 16)
 
 			assert.ProverSucceeded(
-				&Circuit{X: 0, Z: 0, op: "AtanRemez64"},
-				&Circuit{X: a, Z: b, op: "AtanRemez64"},
+				&CircuitATanRemez64{X: 0, Z: 0, op: "AtanRemez64"},
+				&CircuitATanRemez64{X: a, Z: b, op: "AtanRemez64"},
 				test.WithCurves(ecc.BN254),
 				test.WithBackends(backend.GROTH16),
 			)
-			//break
+		}
+	}
+}
+
+func TestCircuitATanULP(t *testing.T) {
+	assert := test.NewAssert(t)
+
+	ops := []string{"atan_ulp"}
+
+	for _, op := range ops {
+		path, _ := filepath.Abs(fmt.Sprintf("../data/f64/%s", strings.ToLower(op)))
+		file, _ := os.Open(path)
+		defer file.Close()
+
+		scanner := bufio.NewScanner(file)
+		for scanner.Scan() {
+			data := strings.Fields(scanner.Text())
+			a, _ := new(big.Int).SetString(data[0], 16)
+			b, _ := new(big.Int).SetString(data[1], 16)
+			c, _ := new(big.Int).SetString(data[2], 16)
+			d, _ := new(big.Int).SetString(data[3], 16)
+
+			assert.ProverSucceeded(
+				&CircuitATanRemez64ULP{X: 0, Z: 0, Z_lower: 0, Z_upper: 0, op: "AtanRemez64"},
+				&CircuitATanRemez64ULP{X: a, Z: b, Z_lower: c, Z_upper: d, op: "AtanRemez64"},
+				test.WithCurves(ecc.BN254),
+				test.WithBackends(backend.GROTH16),
+			)
+		}
+	}
+}
+
+func TestCircuitSin(t *testing.T) {
+	assert := test.NewAssert(t)
+
+	ops := []string{"sin"}
+
+	for _, op := range ops {
+		path, _ := filepath.Abs(fmt.Sprintf("../data/f64/%s", strings.ToLower(op)))
+		file, _ := os.Open(path)
+		defer file.Close()
+
+		scanner := bufio.NewScanner(file)
+		for scanner.Scan() {
+			data := strings.Fields(scanner.Text())
+			a, _ := new(big.Int).SetString(data[0], 16)
+			b, _ := new(big.Int).SetString(data[1], 16)
+
+			assert.ProverSucceeded(
+				&SinCircuit{X: 0, Z: 0, op: "FloatSine"},
+				&SinCircuit{X: a, Z: b, op: "FloatSine"},
+				test.WithCurves(ecc.BN254),
+				test.WithBackends(backend.GROTH16),
+			)
+			break
 		}
 	}
 }
