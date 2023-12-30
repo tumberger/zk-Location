@@ -7,10 +7,16 @@
 import math
 import random
 import struct
+import numpy as np
 
 def find_surrounding_floats(r, float_type='float64'):
-    r_minus = math.nextafter(r, -float('inf'))  # The largest float less than r
-    r_plus = math.nextafter(r, float('inf'))    # The smallest float greater than r
+    if float_type == 'float32':
+        r = np.float32(r)
+        r_minus = np.float32(np.nextafter(r, np.float32(-float('inf'))))  # The largest float less than r
+        r_plus = np.float32(np.nextafter(r, np.float32(float('inf'))))    # The smallest float greater than r
+    else:
+        r_minus = math.nextafter(r, -float('inf'))  # The largest float less than r
+        r_plus = math.nextafter(r, float('inf'))    # The smallest float greater than r
     return r_minus, r_plus
 
 def generate_random_float(iteration, float_type='float64'):
