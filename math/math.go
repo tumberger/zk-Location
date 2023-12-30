@@ -2,12 +2,9 @@ package math
 
 import (
 	float "gnark-float/float"
-	utils "gnark-float/util"
 
 	"fmt"
 	"math"
-
-	"github.com/consensys/gnark/frontend"
 )
 
 // ToDo REFACTOR - Fix Sign and IsAbnormal
@@ -168,7 +165,7 @@ func AtanRemez32(f *float.Context, x float.FloatVar) float.FloatVar {
 	return res
 }
 
-func FloatSine(f *float.Context, x float.FloatVar) float.FloatVar {
+func SinTaylor64(f *float.Context, x float.FloatVar) float.FloatVar {
 	ret := f.NewF64Constant(float64(0))
 	pi := f.NewF64Constant(math.Pi)
 	halfPi := f.NewF64Constant(math.Pi / 2.0)
@@ -207,50 +204,5 @@ func FloatSine(f *float.Context, x float.FloatVar) float.FloatVar {
 	}
 
 	ret.Sign = x.Sign
-	return ret
-}
-
-// ToDo - This currently uses the Newton Rhapson algorithm
-// Shifting nth Root Algorithm for square root calculation can be better
-// as NR algorithm requires one division per recursive approximation
-// Can use lookups for the shifts as in float implementation (?)
-// ToDo REFACTOR - Fix Sign and IsAbnormal
-func SqRootFloatNewton(f *float.Context, term float.FloatVar) float.FloatVar {
-	var ret float.FloatVar
-
-	var x1 = float.FloatVar{
-		Sign:       0,
-		Exponent:   frontend.Variable(1),
-		Mantissa:   frontend.Variable(utils.BaseM),
-		IsAbnormal: 0,
-	}
-
-	var x2 = float.FloatVar{
-		Sign:       0,
-		Exponent:   1,
-		Mantissa:   utils.BaseM,
-		IsAbnormal: 0,
-	}
-
-	//TODO Optimize by bringing small numbers close to 1 and divide again by 10^
-	// Calculate Square root approximation
-	for i := 1; i < 13; i++ {
-
-		summand1 := f.Div(x1, x2) // divide by 2
-		tmp := f.Mul(x1, x2)      // multiply by 2
-		summand2 := f.Div(term, tmp)
-
-		addition := f.Add(summand1, summand2)
-
-		x1.Exponent = addition.Exponent
-		x1.Mantissa = addition.Mantissa
-	}
-
-	ret.Sign = 0
-	ret.Exponent = x1.Exponent
-	ret.Mantissa = x1.Mantissa
-	ret.IsAbnormal = 0
-	fmt.Printf("Result of sin(): {%d, %d, %d}\n", ret.Sign, ret.Exponent, ret.Mantissa)
-
 	return ret
 }
