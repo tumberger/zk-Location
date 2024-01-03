@@ -99,7 +99,7 @@ func (f *IntGadget) QueryPowerOf2(exponent frontend.Variable) frontend.Variable 
 	}
 	result := outputs[0]
 	// Make sure the result is small
-	f.rangechecker.Check(result, len(f.pow2.entries))
+	f.AssertBitLength(result, uint(len(f.pow2.entries)))
 	// Compute `exponent || result` and add it to the list of queries
 	f.pow2.queries = append(f.pow2.queries, []frontend.Variable{f.api.Add(
 		f.api.Mul(exponent, new(big.Int).Lsh(big.NewInt(1), uint(len(f.pow2.entries)))),
