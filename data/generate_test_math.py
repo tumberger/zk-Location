@@ -22,30 +22,31 @@ def find_surrounding_floats(r, float_type='float64'):
 def generate_random_float(iteration, float_type='float64'):
     # Define 10 different ranges for float64
     ranges_float64 = [
-        (1, 1e2),        # Moderate values
-        (1e2, 1e10),     # Slightly larger values
-        (1e10, 1e100),   # Even larger values
-        (-1, -1e2),      # Moderate negative values
-        (-1e2, -1e10),   # Larger negative values
-        (-1e10, -1e100), # Even larger negative values
-        (1e-2, 1),       # Moderate small values
-        (1e-10, 1e-2),   # Smaller values
-        (1e-100, 1e-10), # Even smaller values
-        (1e-200, 1e-100) # Extremely small values
+        (1, 100),            # Moderate values
+        (-1, -100),          # Moderate negative values
+        (1e-2, 1),           # Small positive values
+        (-1e-2, -1),         # Small negative values
+        (100, 1e10),         # Larger positive values
+        (-100, -1e10),       # Larger negative values
+        (1e10, 1e100),       # Even larger positive values
+        (-1e10, -1e100),     # Even larger negative values
+        (1e-100, 1e-10),     # Very small positive values
+        (-1e-100, -1e-10)    # Very small negative values
     ]
+
 
     # Define 10 different ranges for float32
     ranges_float32 = [
-        (1, 100),         # Moderate values
-        (100, 1e10),      # Larger values
-        (1e10, 3.4e38),   # Near max range
-        (-1, -100),       # Moderate negative values
-        (-100, -1e10),    # Larger negative values
-        (-1e10, -3.4e38), # Near min range
-        (1e-2, 1),        # Small values
-        (1e-10, 1e-2),    # Smaller values
-        (1e-38, 1e-10),   # Near min positive range
-        (0, 1e-38)        # Extremely small values
+        (1, 100),            # Moderate values
+        (-1, -100),          # Moderate negative values
+        (1e-2, 1),           # Small positive values
+        (-1e-2, -1),         # Small negative values
+        (100, 1e10),         # Larger positive values
+        (-100, -1e10),       # Larger negative values
+        (1e10, 3.4e38),      # Near max positive range
+        (-1e10, -3.4e38),    # Near min negative range
+        (1e-38, 1e-10),      # Very small positive values close to zero
+        (0, -1e-38)          # Extremely small negative values
     ]
 
     ranges = ranges_float32 if float_type == 'float32' else ranges_float64
