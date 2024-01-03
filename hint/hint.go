@@ -15,6 +15,8 @@ func init() {
 	solver.RegisterHint(AbsHint)
 	solver.RegisterHint(DivHint)
 	solver.RegisterHint(SqrtHint)
+	solver.RegisterHint(TruncHint)
+	solver.RegisterHint(FloorHint)
 }
 
 func DecodeFloatHint(field *big.Int, inputs []*big.Int, outputs []*big.Int) error {
@@ -126,6 +128,36 @@ func SqrtHint(
 	x := new(big.Int).Set(inputs[0])
 
 	outputs[0].Sqrt(x)
+
+	return nil
+}
+
+func TruncHint(
+	field *big.Int,
+	inputs []*big.Int,
+	outputs []*big.Int,
+) error {
+	x := new(big.Int).Set(inputs[0])
+	shift := uint(inputs[1].Uint64())
+
+	outputs[0].Rsh(x, shift)
+
+	return nil
+}
+
+func FloorHint(
+	field *big.Int,
+	inputs []*big.Int,
+	outputs []*big.Int,
+) error {
+	x := new(big.Int).Set(inputs[0])
+	shift := uint(inputs[1].Uint64())
+	sign := uint(inputs[2].Uint64())
+
+	outputs[0].Rsh(x, shift)
+	if sign == 1 && new(big.Int).Lsh(outputs[0], shift).Cmp(x) != 0 {
+		outputs[0].Add(outputs[0], big.NewInt(1))
+	}
 
 	return nil
 }

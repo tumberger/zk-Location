@@ -137,7 +137,7 @@ func (c *F64AllocationCircuit) Define(api frontend.API) error {
 func TestF32UnaryCircuit(t *testing.T) {
 	assert := test.NewAssert(t)
 
-	ops := []string{"Sqrt"}
+	ops := []string{"Sqrt", "Trunc", "Floor", "Ceil"}
 
 	for _, op := range ops {
 		path, _ := filepath.Abs(fmt.Sprintf("../data/f32/%s", strings.ToLower(op)))
@@ -238,7 +238,7 @@ func TestF32ConstantAllocation(t *testing.T) {
 func TestF64UnaryCircuit(t *testing.T) {
 	assert := test.NewAssert(t)
 
-	ops := []string{"Sqrt"}
+	ops := []string{"Sqrt", "Trunc", "Floor", "Ceil"}
 
 	for _, op := range ops {
 		path, _ := filepath.Abs(fmt.Sprintf("../data/f64/%s", strings.ToLower(op)))

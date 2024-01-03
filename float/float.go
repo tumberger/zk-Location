@@ -968,3 +968,94 @@ func (f *Context) IsGt(x, y FloatVar) frontend.Variable {
 func (f *Context) IsGe(x, y FloatVar) frontend.Variable {
 	return f.less(y, x, 1)
 }
+
+func (f *Context) Trunc(x FloatVar) FloatVar {
+	e_ge_0 := f.Gadget.IsPositive(x.Exponent, f.E)
+	e := f.Api.Select(
+		e_ge_0,
+		x.Exponent,
+		big.NewInt(-1),
+	)
+	two_to_e := f.Gadget.QueryPowerOf2(f.Gadget.Max(
+		f.Api.Sub(f.M, e),
+		big.NewInt(0),
+		f.E,
+	))
+	// Instead of computing `x.Mantissa >> e` directly, we compute `(x.Mantissa << (M + 1)) >> e` first and
+	// decompose it later to save constraints.
+	m := f.Api.Mul(f.Api.Mul(x.Mantissa, new(big.Int).Lsh(big.NewInt(1), f.M+1)), f.Api.Inverse(two_to_e))
+	outputs, err := f.Api.Compiler().NewHint(hint.TruncHint, 1, m, f.M+1)
+	if err != nil {
+		panic(err)
+	}
+	q := outputs[0]
+	r := f.Api.Sub(m, f.Api.Mul(q, new(big.Int).Lsh(big.NewInt(1), f.M+1)))
+	// Enforce `q` to be small
+	f.Gadget.AssertBitLength(q, f.M+1)
+	// Enforce that `0 <= r < 2^(M + 1)`, where `2^(M + 1)` is the divisor.
+	f.Gadget.AssertBitLength(r, f.M+1)
+
+	return FloatVar{
+		Sign:       x.Sign,
+		Exponent:   f.Api.Select(e_ge_0, x.Exponent, f.E_MIN),
+		Mantissa:   f.Api.Mul(q, two_to_e),
+		IsAbnormal: x.IsAbnormal,
+	}
+}
+
+func (f *Context) Floor(x FloatVar) FloatVar {
+	e_ge_0 := f.Gadget.IsPositive(x.Exponent, f.E)
+	e := f.Api.Select(
+		e_ge_0,
+		x.Exponent,
+		big.NewInt(-1),
+	)
+	two_to_e := f.Gadget.QueryPowerOf2(f.Gadget.Max(
+		f.Api.Sub(f.M, e),
+		big.NewInt(0),
+		f.E,
+	))
+	// Instead of computing `x.Mantissa >> e` directly, we compute `(x.Mantissa << (M + 1)) >> e` first and
+	// decompose it later to save constraints.
+	m := f.Api.Mul(f.Api.Mul(x.Mantissa, new(big.Int).Lsh(big.NewInt(1), f.M+1)), f.Api.Inverse(two_to_e))
+	outputs, err := f.Api.Compiler().NewHint(hint.FloorHint, 1, m, f.M+1, x.Sign)
+	if err != nil {
+		panic(err)
+	}
+	// If `x` is positive, then `q` is the floor of `m / 2^(M + 1)`, and the remainder `r` is positive.
+	// Otherwise, `q` is the ceiling of `m / 2^(M + 1)`, and the remainder `r` is negative.
+	q := outputs[0]
+	r := f.Api.Sub(m, f.Api.Mul(q, new(big.Int).Lsh(big.NewInt(1), f.M+1)))
+	// Enforce `q` to be small
+	f.Gadget.AssertBitLength(q, f.M+1)
+	// Enforce that `0 <= |r| < 2^(M + 1)`, where `2^(M + 1)` is the divisor.
+	f.Gadget.AssertBitLength(f.Api.Select(x.Sign, f.Api.Neg(r), r), f.M+1)
+
+	mantissa := f.Api.Mul(q, two_to_e)
+	// `mantissa` may overflow when `x` is negative, so we need to fix it.
+	mantissa_overflow := f.Gadget.IsEq(mantissa, new(big.Int).Lsh(big.NewInt(1), f.M+1))
+	mantissa = f.Api.Select(
+		mantissa_overflow,
+		new(big.Int).Lsh(big.NewInt(1), f.M),
+		mantissa,
+	)
+	e = f.Api.Add(e, mantissa_overflow)
+
+	return FloatVar{
+		Sign: x.Sign,
+		Exponent: f.Api.Select(
+			f.Api.And(
+				f.Api.IsZero(mantissa),
+				f.Api.Sub(big.NewInt(1), x.IsAbnormal),
+			),
+			f.E_MIN,
+			e,
+		),
+		Mantissa:   mantissa,
+		IsAbnormal: x.IsAbnormal,
+	}
+}
+
+func (f *Context) Ceil(x FloatVar) FloatVar {
+	return f.Neg(f.Floor(f.Neg(x)))
+}
