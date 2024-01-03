@@ -17,6 +17,158 @@ import (
 	"github.com/consensys/gnark/test"
 )
 
+type PolynomialEvalCircuit struct {
+	X frontend.Variable `gnark:",public"`
+	P frontend.Variable `gnark:",public"`
+}
+
+func (c *PolynomialEvalCircuit) Define(api frontend.API) error {
+	ctx := float.NewContext(api, 11, 52) // F64
+
+	// Create a new float variable from the input
+	x := ctx.NewFloat(c.X)
+	expected := ctx.NewFloat(c.P)
+
+	// Define the coefficients of the polynomial
+	coeffs := []float.FloatVar{
+		ctx.NewF64Constant(5), // Constant term
+		ctx.NewF64Constant(1), // Coefficient of x
+		ctx.NewF64Constant(2), // Coefficient of x^2
+		ctx.NewF64Constant(3), // Coefficient of x^3
+	}
+
+	// Create a Polynomial from the coefficients
+	p := Polynomial(coeffs)
+
+	// Evaluate the polynomial at x
+	result := p.Eval(&ctx, x)
+
+	// Assert that the result is equal to the public input
+	api.AssertIsEqual(result.Exponent, expected.Exponent)
+	api.AssertIsEqual(result.Mantissa, expected.Mantissa)
+	return nil
+}
+
+func TestPolynomialEval(t *testing.T) {
+	assert := test.NewAssert(t)
+
+	// Hardcoded hex values for test input and expected output
+	hexInput := "C0439E19C2746C32"          // Example input in hex
+	hexExpectedOutput := "C105BF38139DAE59" // Example expected output in hex
+
+	// Parse hex strings to big.Int
+	inputBigInt, success := new(big.Int).SetString(hexInput, 16)
+	if !success {
+		t.Fatalf("Failed to parse input hex string")
+	}
+	outputBigInt, success := new(big.Int).SetString(hexExpectedOutput, 16)
+	if !success {
+		t.Fatalf("Failed to parse expected output hex string")
+	}
+
+	// Create a witness with the test input and expected output
+	witness := &PolynomialEvalCircuit{
+		X: 0,
+		P: 0,
+	}
+
+	assignment := &PolynomialEvalCircuit{
+		X: inputBigInt,
+		P: outputBigInt,
+	}
+
+	// Run the test
+	assert.SolvingSucceeded(
+		witness,
+		assignment,
+		test.WithBackends(backend.GROTH16),
+	)
+}
+
+type PolynomialEvalCircuitDegTen struct {
+	X frontend.Variable `gnark:",public"`
+	P frontend.Variable `gnark:",public"`
+}
+
+func (c *PolynomialEvalCircuitDegTen) Define(api frontend.API) error {
+	ctx := float.NewContext(api, 11, 52) // F64
+
+	// Create a new float variable from the input
+	x := ctx.NewFloat(c.X)
+	expected := ctx.NewFloat(c.P)
+
+	// Define the coefficients of the polynomial of degree 10
+	coeffs := []float.FloatVar{
+		ctx.NewF64Constant(1), // Coefficient of x^10
+		ctx.NewF64Constant(9), // Coefficient of x^9
+		ctx.NewF64Constant(8), // Coefficient of x^8
+		ctx.NewF64Constant(7), // Coefficient of x^7
+		ctx.NewF64Constant(6), // Coefficient of x^6
+		ctx.NewF64Constant(5), // Coefficient of x^5
+		ctx.NewF64Constant(4), // Coefficient of x^4
+		ctx.NewF64Constant(3), // Coefficient of x^3
+		ctx.NewF64Constant(2), // Coefficient of x^2
+		ctx.NewF64Constant(1), // Coefficient of x
+		ctx.NewF64Constant(1), // Constant term
+	}
+
+	// Create a Polynomial from the coefficients
+	p := Polynomial(coeffs)
+
+	// Evaluate the polynomial at x
+	result := p.EvalK(&ctx, x, 1)
+	// result := p.Eval(&ctx, x)
+
+	fmt.Printf("%b \n", expected.Exponent)
+	fmt.Printf("%b \n", result.Exponent)
+	fmt.Printf("%b \n", expected.Mantissa)
+	fmt.Printf("%b \n", result.Mantissa)
+
+	// Assert that the result is equal to the public input
+	api.AssertIsEqual(result.Exponent, expected.Exponent)
+	api.AssertIsEqual(result.Mantissa, expected.Mantissa)
+	return nil
+}
+
+func TestPolynomialEvalDegTen(t *testing.T) {
+	assert := test.NewAssert(t)
+
+	// Hardcoded hex values for test input and expected output
+	// Test Values:
+	// C05720C30BA0C839 4401FE9EF8ED27FA
+	// 4052804B7BF6345E 43D332C535AA3D95
+	hexInput := "4052804B7BF6345E"          // Example input in hex
+	hexExpectedOutput := "43D332C535AA3D95" // Example expected output in hex
+
+	// Parse hex strings to big.Int
+	inputBigInt, success := new(big.Int).SetString(hexInput, 16)
+	if !success {
+		t.Fatalf("Failed to parse input hex string")
+	}
+	outputBigInt, success := new(big.Int).SetString(hexExpectedOutput, 16)
+	if !success {
+		t.Fatalf("Failed to parse expected output hex string")
+	}
+
+	// Create a witness with the test input and expected output
+	witness := &PolynomialEvalCircuitDegTen{
+		X: 0,
+		P: 0,
+	}
+
+	assignment := &PolynomialEvalCircuitDegTen{
+		X: inputBigInt,
+		P: outputBigInt,
+	}
+
+	// Run the test
+	assert.ProverSucceeded(
+		witness,
+		assignment,
+		test.WithBackends(backend.GROTH16),
+	)
+}
+
 type CircuitATanRemez64 struct {
 	X  frontend.Variable `gnark:",secret"`
 	Z  frontend.Variable `gnark:",public"`

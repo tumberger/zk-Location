@@ -7,6 +7,55 @@ import (
 	"math"
 )
 
+type Polynomial []float.FloatVar
+
+// Eval evaluates the polynomial at a given point with Horner's Method
+func (p Polynomial) Eval(ctx *float.Context, at float.FloatVar) float.FloatVar {
+
+	result := ctx.NewF64Constant(0)
+
+	// Iterate over the coefficients of the polynomial in reverse order.
+	for i := len(p) - 1; i >= 0; i-- {
+		// Multiply the current result by 'at' (the point of evaluation).
+		result = ctx.Mul(result, at)
+
+		result = ctx.Add(result, p[i])
+	}
+
+	return result
+}
+
+// EvalK evaluates the polynomial at a given point with a k-fold Horner's Method
+// Very accurate for k=1, looses accuracy for k > 1 - should include proper error handling
+// [Cam23] https://hal.science/hal-04030542/document
+func (p Polynomial) EvalK(ctx *float.Context, at float.FloatVar, k int) float.FloatVar {
+
+	parts := make([]float.FloatVar, k)
+	for i := range parts {
+		parts[i] = ctx.NewF64Constant(0)
+	}
+
+	// Iterate over the coefficients of the polynomial in reverse order
+	for _, coeff := range p {
+		for j := range parts {
+			if j == 0 {
+				// For the first part, just multiply and add like normal Horner's method
+				parts[j] = ctx.Add(ctx.Mul(parts[j], at), coeff)
+			} else {
+				parts[j] = ctx.Add(ctx.Mul(parts[j], at), ctx.Mul(parts[j-1], at))
+			}
+		}
+	}
+
+	// Combine the k parts into a single result
+	result := parts[0]
+	for i := 1; i < k; i++ {
+		result = ctx.Add(result, parts[i])
+	}
+
+	return result
+}
+
 // ToDo REFACTOR - Fix Sign and IsAbnormal
 // ToDo REFACTOR - Constant values as structs in util
 func Atan2(f *float.Context, x, y float.FloatVar) float.FloatVar {
@@ -49,7 +98,7 @@ func AtanRemez64(f *float.Context, x float.FloatVar) float.FloatVar {
 	// We approximate the arctan(x) in the range [0,1] with a polynomial of degree 24,
 	// the Remez algorithm has supplied us with the appropriate constants
 	// (The lower the degree, the lower the accuracy, but also the less constraints!)
-	var coefficient = [25]float.FloatVar{
+	var coefficient = []float.FloatVar{
 		f.NewF64Constant(-0.000942885517390737),
 		f.NewF64Constant(0.012831303689781028),
 		f.NewF64Constant(-0.08114401696242823),
@@ -89,18 +138,17 @@ func AtanRemez64(f *float.Context, x float.FloatVar) float.FloatVar {
 
 	x.Exponent = f.Api.Select(greaterOne, reciprocal.Exponent, x.Exponent)
 	x.Mantissa = f.Api.Select(greaterOne, reciprocal.Mantissa, x.Mantissa)
-	u := coefficient[0]
 
-	for i := 1; i < 25; i++ {
+	// Create a Polynomial from the coefficients
+	p := Polynomial(coefficient)
 
-		mult := f.Mul(u, x)
-		u = f.Add(mult, coefficient[i])
-	}
+	// Evaluate the polynomial at x
+	result := p.EvalK(f, x, 1)
 
-	sub := f.Sub(halfPi, u)
+	sub := f.Sub(halfPi, result)
 
-	resultE := f.Api.Select(greaterOne, sub.Exponent, u.Exponent)
-	resultM := f.Api.Select(greaterOne, sub.Mantissa, u.Mantissa)
+	resultE := f.Api.Select(greaterOne, sub.Exponent, result.Exponent)
+	resultM := f.Api.Select(greaterOne, sub.Mantissa, result.Mantissa)
 	res := float.FloatVar{
 		Sign:       sign,
 		Exponent:   resultE,
@@ -118,7 +166,7 @@ func AtanRemez32(f *float.Context, x float.FloatVar) float.FloatVar {
 
 	// We approximate the arctan(x) in the range [0,1] with a polynomial of degree 10,
 	// the Remez algorithm has supplied us with the appropriate constants
-	var coefficient = [11]float.FloatVar{
+	var coefficient = []float.FloatVar{
 		f.NewF32Constant(0.022023164),
 		f.NewF32Constant(-0.13374522),
 		f.NewF32Constant(0.32946652),
@@ -144,18 +192,17 @@ func AtanRemez32(f *float.Context, x float.FloatVar) float.FloatVar {
 
 	x.Exponent = f.Api.Select(greaterOne, reciprocal.Exponent, x.Exponent)
 	x.Mantissa = f.Api.Select(greaterOne, reciprocal.Mantissa, x.Mantissa)
-	u := coefficient[0]
 
-	for i := 1; i < 11; i++ {
+	// Create a Polynomial from the coefficients
+	p := Polynomial(coefficient)
 
-		mult := f.Mul(u, x)
-		u = f.Add(mult, coefficient[i])
-	}
+	// Evaluate the polynomial at x
+	result := p.EvalK(f, x, 1)
 
-	sub := f.Sub(halfPi, u)
+	sub := f.Sub(halfPi, result)
 
-	resultE := f.Api.Select(greaterOne, sub.Exponent, u.Exponent)
-	resultM := f.Api.Select(greaterOne, sub.Mantissa, u.Mantissa)
+	resultE := f.Api.Select(greaterOne, sub.Exponent, result.Exponent)
+	resultM := f.Api.Select(greaterOne, sub.Mantissa, result.Mantissa)
 	res := float.FloatVar{
 		Sign:       sign,
 		Exponent:   resultE,
