@@ -7,6 +7,7 @@ import (
 	"os"
 	"path/filepath"
 	"reflect"
+	"strconv"
 	"strings"
 	"testing"
 
@@ -64,14 +65,28 @@ func (c *F32ComparisonCircuit) Define(api frontend.API) error {
 }
 
 type F32AllocationCircuit struct {
-	X  frontend.Variable `gnark:",secret"`
-	y  uint64
+	X frontend.Variable `gnark:",secret"`
+	y uint64
 }
 
 func (c *F32AllocationCircuit) Define(api frontend.API) error {
 	ctx := NewContext(api, 8, 23)
 	x := ctx.NewFloat(c.X)
 	ctx.AssertIsEqual(x, ctx.NewConstant(c.y))
+	return nil
+}
+
+type F32ConversionCircuit struct {
+	X  frontend.Variable `gnark:",secret"`
+	Y  frontend.Variable `gnark:",public"`
+	op string
+}
+
+func (c *F32ConversionCircuit) Define(api frontend.API) error {
+	ctx := NewContext(api, 8, 23)
+	x := ctx.NewFloat(c.X)
+	x = reflect.ValueOf(&ctx).MethodByName(c.op).Call([]reflect.Value{reflect.ValueOf(x)})[0].Interface().(FloatVar)
+	api.AssertIsEqual(ctx.ToInt(x), c.Y)
 	return nil
 }
 
@@ -123,14 +138,28 @@ func (c *F64ComparisonCircuit) Define(api frontend.API) error {
 }
 
 type F64AllocationCircuit struct {
-	X  frontend.Variable `gnark:",secret"`
-	y  uint64
+	X frontend.Variable `gnark:",secret"`
+	y uint64
 }
 
 func (c *F64AllocationCircuit) Define(api frontend.API) error {
 	ctx := NewContext(api, 11, 52)
 	x := ctx.NewFloat(c.X)
 	ctx.AssertIsEqual(x, ctx.NewConstant(c.y))
+	return nil
+}
+
+type F64ConversionCircuit struct {
+	X  frontend.Variable `gnark:",secret"`
+	Y  frontend.Variable `gnark:",public"`
+	op string
+}
+
+func (c *F64ConversionCircuit) Define(api frontend.API) error {
+	ctx := NewContext(api, 11, 52)
+	x := ctx.NewFloat(c.X)
+	x = reflect.ValueOf(&ctx).MethodByName(c.op).Call([]reflect.Value{reflect.ValueOf(x)})[0].Interface().(FloatVar)
+	api.AssertIsEqual(ctx.ToInt(x), c.Y)
 	return nil
 }
 
@@ -235,6 +264,37 @@ func TestF32ConstantAllocation(t *testing.T) {
 	}
 }
 
+func TestF32ConversionCircuit(t *testing.T) {
+	assert := test.NewAssert(t)
+
+	ops := []string{"Trunc", "Floor", "Ceil"}
+
+	for _, op := range ops {
+		path, _ := filepath.Abs(fmt.Sprintf("../data/f32/to_i32_%s", strings.ToLower(op)))
+		file, _ := os.Open(path)
+		defer file.Close()
+
+		scanner := bufio.NewScanner(file)
+		for scanner.Scan() {
+			data := strings.Fields(scanner.Text())
+
+			if data[2] == "10" {
+				continue
+			}
+
+			a, _ := new(big.Int).SetString(data[0], 16)
+			b, _ := strconv.ParseUint(data[1], 16, 32)
+
+			assert.ProverSucceeded(
+				&F32ConversionCircuit{X: 0, Y: 0, op: op},
+				&F32ConversionCircuit{X: a, Y: int32(b), op: op},
+				test.WithCurves(ecc.BN254),
+				test.WithBackends(backend.GROTH16, backend.PLONK),
+			)
+		}
+	}
+}
+
 func TestF64UnaryCircuit(t *testing.T) {
 	assert := test.NewAssert(t)
 
@@ -333,5 +393,36 @@ func TestF64ConstantAllocation(t *testing.T) {
 			test.WithCurves(ecc.BN254),
 			test.WithBackends(backend.GROTH16, backend.PLONK),
 		)
+	}
+}
+
+func TestF64ConversionCircuit(t *testing.T) {
+	assert := test.NewAssert(t)
+
+	ops := []string{"Trunc", "Floor", "Ceil"}
+
+	for _, op := range ops {
+		path, _ := filepath.Abs(fmt.Sprintf("../data/f64/to_i64_%s", strings.ToLower(op)))
+		file, _ := os.Open(path)
+		defer file.Close()
+
+		scanner := bufio.NewScanner(file)
+		for scanner.Scan() {
+			data := strings.Fields(scanner.Text())
+
+			if data[2] == "10" {
+				continue
+			}
+
+			a, _ := new(big.Int).SetString(data[0], 16)
+			b, _ := strconv.ParseUint(data[1], 16, 64)
+
+			assert.ProverSucceeded(
+				&F64ConversionCircuit{X: 0, Y: 0, op: op},
+				&F64ConversionCircuit{X: a, Y: int64(b), op: op},
+				test.WithCurves(ecc.BN254),
+				test.WithBackends(backend.GROTH16, backend.PLONK),
+			)
+		}
 	}
 }

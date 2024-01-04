@@ -52,7 +52,7 @@ func NewContext(api frontend.API, E, M uint) Context {
 	E_MIN := new(big.Int).Sub(E_NORMAL_MIN, big.NewInt(int64(M+1)))
 	return Context{
 		Api:          api,
-		Gadget:       gadget.New(api, M+5),
+		Gadget:       gadget.New(api, M + E + 1),
 		E:            E,
 		M:            M,
 		E_MAX:        E_MAX,
@@ -100,14 +100,14 @@ func (f *Context) NewFloat(v frontend.Variable) FloatVar {
 	shift := outputs[0]
 	// Enforce that `shift` is small and `two_to_shift` is equal to `2^shift`.
 	// Theoretically, `shift` should be in the range `[0, M]`, but the circuit can only guarantee
-	// that `shift` is in the range `[0, M + 4]`.
+	// that `shift` is in the range `[0, M + E]`.
 	// However, we will check the range of `shifted_mantissa` later, which will implicitly provide
 	// tight upper bounds for `shift` and `two_to_shift`, and thus soundness still holds.
 	f.Gadget.AssertBitLength(shift, uint(big.NewInt(int64(f.M)).BitLen()))
 	two_to_shift := f.Gadget.QueryPowerOf2(shift)
 
 	// Compute the shifted mantissa. Multiplication here is safe because we already know that
-	// mantissa is less than `2^M`, and `2^shift` is less than or equal to `2^(M + 4)`. If `M` is
+	// mantissa is less than `2^M`, and `2^shift` is less than or equal to `2^(M + E)`. If `M` is
 	// not too large, overflow should not happen.
 	shifted_mantissa := f.Api.Mul(m, two_to_shift)
 	// Enforce the shifted mantissa, after removing the leading bit, has only `M - 1` bits,
@@ -441,7 +441,10 @@ func (f *Context) Add(x, y FloatVar) FloatVar {
 	}
 	shift := outputs[0]
 	// Enforce that `shift` is small and `two_to_shift` is equal to `2^shift`.
-	// Here `shift` should be in the range `[0, M + 4]`, and the circuit is able to tightly bound it.
+	// Theoretically, `shift` should be in the range `[0, M + 4]`, but the circuit can only guarantee
+	// that `shift` is in the range `[0, M + E]`.
+	// However, we will check the range of `|s| * two_to_shift` later, which will implicitly provide
+	// tight upper bounds for `shift` and `two_to_shift`, and thus soundness still holds.
 	f.Gadget.AssertBitLength(shift, uint(big.NewInt(int64(mantissa_bit_length)).BitLen()))
 	two_to_shift := f.Gadget.QueryPowerOf2(shift)
 
@@ -807,7 +810,7 @@ func (f *Context) Sqrt(x FloatVar) FloatVar {
 	shift := outputs[0]
 	// Enforce that `shift` is small and `two_to_shift` is equal to `2^shift`.
 	// Theoretically, `shift` should be in the range `[0, M + 3]`, but the circuit can only guarantee
-	// that `shift` is in the range `[0, M + 4]`.
+	// that `shift` is in the range `[0, M + E]`.
 	// However, we will check the range of `n * two_to_shift` later, which will implicitly provide
 	// tight upper bounds for `shift` and `two_to_shift`, and thus soundness still holds.
 	f.Gadget.AssertBitLength(shift, uint(big.NewInt(int64(mantissa_bit_length)).BitLen()))
@@ -1058,4 +1061,24 @@ func (f *Context) Floor(x FloatVar) FloatVar {
 
 func (f *Context) Ceil(x FloatVar) FloatVar {
 	return f.Neg(f.Floor(f.Neg(x)))
+}
+
+// Convert a float to an integer (f64 to i64, f32 to i32).
+// A negative integer will be represented as `r - |x|`, where `r` is the order of the native field.
+// The caller should ensure that `x` is obtained from `Trunc`, `Floor` or `Ceil`.
+// Also, `x`'s exponent should not be too large. Otherwise, the proof verification will fail.
+func (f *Context) ToInt(x FloatVar) frontend.Variable {
+	f.Api.Println(x.Mantissa, x.Exponent)
+	exponent_is_min := f.Gadget.IsEq(x.Exponent, f.E_MIN)
+	two_to_e := f.Gadget.QueryPowerOf2(f.Api.Select(
+		exponent_is_min,
+		big.NewInt(0),
+		x.Exponent,
+	))
+	v := f.Api.Mul(f.Api.Mul(x.Mantissa, two_to_e), f.Api.Inverse(new(big.Int).Lsh(big.NewInt(1), f.M)))
+	return f.Api.Select(
+		x.Sign,
+		f.Api.Neg(v),
+		v,
+	)
 }
