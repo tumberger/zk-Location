@@ -1,0 +1,46 @@
+name: test-macos
+
+on:
+  push:
+    branches: [master, stable-*]
+  pull_request:
+    branches: [master, stable-*]
+
+jobs:
+  tests:
+    name: Test Compile ${{ matrix.build_type }}
+    runs-on: macos-latest
+
+    strategy:
+      matrix:
+        build_type: ["Debug", "Release"]
+
+    steps:
+      - uses: actions/checkout@v2.4.0
+
+      - name: Configure build
+        run: cmake -Bbuild -DCMAKE_BUILD_TYPE=${{ matrix.build_type}} -DWARNINGS_AS_ERRORS=ON .
+
+      - name: Build
+        working-directory: build
+        run: make
+
+      - name: binding-functions
+        working-directory: build
+        run: |
+          make binding-functions
+          test -s binding-functions
+
+      - name: Tests
+        working-directory: build
+        run: |
+          make test
+          sudo make install
+
+      - name: Examples
+        run: |
+          mkdir build/examples
+          cd build/examples
+          cmake -DCMAKE_BUILD_TYPE=${{ matrix.build_type}} ../../examples
+          make
+          make test

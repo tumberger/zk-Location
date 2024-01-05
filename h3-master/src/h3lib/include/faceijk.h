@@ -72,8 +72,8 @@ typedef enum {
 
 // Internal functions
 
-void _geoToFaceIjk(const LatLng *g, int res, FaceIJK *h); // const LatLng removed by Luca
-void _geoToHex2d(const LatLng *g, int res, int *face, Vec2d *v); // const LatLng removed by Luca
+void _geoToFaceIjk(const LatLng *g, int res, FaceIJK *h);
+void _geoToHex2d(const LatLng *g, int res, int *face, Vec2d *v);
 void _faceIjkToGeo(const FaceIJK *h, int res, LatLng *g);
 void _faceIjkToCellBoundary(const FaceIJK *h, int res, int start, int length,
                             CellBoundary *g);

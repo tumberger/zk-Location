@@ -1,0 +1,77 @@
+name: test-windows
+
+on:
+  push:
+    branches: [master, stable-*]
+  pull_request:
+    branches: [master, stable-*]
+
+jobs:
+  tests:
+    name: Test Compile ${{ matrix.config }} ${{ matrix.arch }}
+    runs-on: windows-latest
+    env:
+      CC: cl.exe
+      CXX: cl.exe
+
+    strategy:
+      matrix:
+        config: [Release, Debug]
+        arch: [Win32, x64]
+
+    steps:
+      - uses: actions/checkout@v2.4.0
+
+      - uses: tlylt/install-graphviz@v1.0.0
+
+      - name: Configure build
+        shell: cmd
+        run: cmake -Bbuild -A ${{ matrix.arch }} -DCMAKE_BUILD_TYPE=${{ matrix.build_type}} -DWARNINGS_AS_ERRORS=ON -DBUILD_SHARED_LIBS=OFF -DBUILD_TESTING=ON .
+
+      - name: Build
+        working-directory: build
+        run: cmake --build . --config ${{ matrix.config }}
+
+      - name: binding-functions
+        working-directory: build
+        run: |
+          cmake --build . --config ${{ matrix.config }} --target binding-functions
+          if ((Get-Item "binding-functions").Length -lt 10) { $host.SetShouldExit(1) }
+
+      - name: Tests
+        working-directory: build
+        shell: cmd
+        env:
+          CTEST_OUTPUT_ON_FAILURE: 1
+        run: ctest -C ${{ matrix.config }}
+
+  dllcompile:
+    name: Test DLL Compile ${{ matrix.config }} ${{ matrix.arch }}
+    runs-on: windows-latest
+    env:
+      CC: cl.exe
+      CXX: cl.exe
+
+    strategy:
+      matrix:
+        config: [Release, Debug]
+        arch: [Win32, x64]
+
+    steps:
+      - uses: actions/checkout@v2.4.0
+
+      - uses: tlylt/install-graphviz@v1.0.0
+
+      - name: Configure build
+        shell: cmd
+        run: cmake -Bbuild -A ${{ matrix.arch }} -DWARNINGS_AS_ERRORS=ON -DBUILD_SHARED_LIBS=ON -DBUILD_TESTING=OFF .
+
+      - name: Build
+        working-directory: build
+        run: cmake --build . --config ${{ matrix.config }}
+
+      - name: binding-functions
+        working-directory: build
+        run: |
+          cmake --build . --config ${{ matrix.config }} --target binding-functions
+          if ((Get-Item "binding-functions").Length -lt 10) { $host.SetShouldExit(1) }
