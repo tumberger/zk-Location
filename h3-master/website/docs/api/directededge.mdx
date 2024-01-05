@@ -1,0 +1,440 @@
+---
+id: uniedge
+title: Directed edge functions
+sidebar_label: Directed edges
+slug: /api/uniedge
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Directed edges allow encoding the directed (that is, which cell is the origin and which is the destination can be determined)
+edge from one cell to a neighboring cell.
+
+## areNeighborCells
+
+<Tabs
+  groupId="language"
+  defaultValue="c"
+  values={[
+    {label: 'C', value: 'c'},
+    {label: 'Python', value: 'python'},
+    {label: 'Java', value: 'java'},
+    {label: 'JavaScript (Live)', value: 'javascript'},
+  ]
+}>
+<TabItem value="c">
+
+```c
+H3Error areNeighborCells(H3Index origin, H3Index destination, int *out);
+```
+
+</TabItem>
+<TabItem value="python">
+
+```py
+h3.are_neighbor_cells(origin, destination)
+```
+
+</TabItem>
+<TabItem value="java">
+
+```java
+boolean areNeighborCells(long origin, long destination);
+boolean areNeighborCells(String origin, String destination);
+```
+
+</TabItem>
+<TabItem value="javascript">
+
+```js
+h3.areNeighborCells(origin, destination)
+```
+
+```js live
+function example() {
+  const origin = '85283473fffffff';
+  const destination = '85283477fffffff';
+  return h3.areNeighborCells(origin, destination);
+}
+```
+
+</TabItem>
+</Tabs>
+
+Returns whether or not the provided H3 cell indexes are neighbors.
+
+`out` will be 1 if the indexes are neighbors, 0 otherwise.
+
+## cellsToDirectedEdge
+
+<Tabs
+  groupId="language"
+  defaultValue="c"
+  values={[
+    {label: 'C', value: 'c'},
+    {label: 'Python', value: 'python'},
+    {label: 'Java', value: 'java'},
+    {label: 'JavaScript (Live)', value: 'javascript'},
+  ]
+}>
+<TabItem value="c">
+
+```c
+H3Error cellsToDirectedEdge(H3Index origin, H3Index destination, H3Index *out);
+```
+
+</TabItem>
+<TabItem value="python">
+
+```py
+h3.cells_to_directed_edge(origin, destination)
+```
+
+</TabItem>
+<TabItem value="java">
+
+```java
+long cellsToDirectedEdge(long origin, long destination);
+String cellsToDirectedEdge(String origin, String destination);
+```
+
+</TabItem>
+<TabItem value="javascript">
+
+```js
+h3.cellsToDirectedEdge(h3Index)
+```
+
+```js live
+function example() {
+  const origin = '85283473fffffff';
+  const destination = '85283477fffffff';
+  return h3.cellsToDirectedEdge(origin, destination);
+}
+```
+
+</TabItem>
+</Tabs>
+
+Returns a unidirectional edge H3 index based on the provided origin and
+destination.
+
+Returns 0 on success.
+
+## isValidDirectedEdge
+
+<Tabs
+  groupId="language"
+  defaultValue="c"
+  values={[
+    {label: 'C', value: 'c'},
+    {label: 'Python', value: 'python'},
+    {label: 'Java', value: 'java'},
+    {label: 'JavaScript (Live)', value: 'javascript'},
+  ]
+}>
+<TabItem value="c">
+
+```c
+int isValidDirectedEdge(H3Index edge);
+```
+
+</TabItem>
+<TabItem value="python">
+
+```py
+h3.is_valid_directed_edge(edge)
+```
+
+</TabItem>
+<TabItem value="java">
+
+```java
+boolean isValidDirectedEdge(long edge);
+boolean isValidDirectedEdge(String edgeAddress);
+```
+
+</TabItem>
+<TabItem value="javascript">
+
+```js
+h3.isValidDirectedEdge(edge)
+```
+
+```js live
+function example() {
+  const edge = '115283473fffffff';
+  return h3.isValidDirectedEdge(edge);
+}
+```
+
+</TabItem>
+</Tabs>
+
+Determines if the provided H3Index is a valid unidirectional edge index.
+
+Returns 1 if it is a unidirectional edge H3Index, otherwise 0.
+
+## getDirectedEdgeOrigin
+
+<Tabs
+  groupId="language"
+  defaultValue="c"
+  values={[
+    {label: 'C', value: 'c'},
+    {label: 'Python', value: 'python'},
+    {label: 'Java', value: 'java'},
+    {label: 'JavaScript (Live)', value: 'javascript'},
+  ]
+}>
+<TabItem value="c">
+
+```c
+H3Error getDirectedEdgeOrigin(H3Index edge, H3Index *out);
+```
+
+</TabItem>
+<TabItem value="python">
+
+```py
+h3.get_directed_edge_origin(edge)
+```
+
+</TabItem>
+<TabItem value="java">
+
+```java
+long getDirectedEdgeOrigin(long edge);
+String getDirectedEdgeOrigin(String edgeAddress);
+```
+
+</TabItem>
+<TabItem value="javascript">
+
+```js
+h3.getDirectedEdgeOrigin(h3Index)
+```
+
+```js live
+function example() {
+  const edge = '115283473fffffff';
+  return h3.getDirectedEdgeOrigin(edge);
+}
+```
+
+</TabItem>
+</Tabs>
+
+Returns the origin hexagon from the unidirectional edge H3Index.
+
+## getDirectedEdgeDestination
+
+<Tabs
+  groupId="language"
+  defaultValue="c"
+  values={[
+    {label: 'C', value: 'c'},
+    {label: 'Python', value: 'python'},
+    {label: 'Java', value: 'java'},
+    {label: 'JavaScript (Live)', value: 'javascript'},
+  ]
+}>
+<TabItem value="c">
+
+```c
+H3Error getDirectedEdgeDestination(H3Index edge, H3Index *out);
+```
+
+</TabItem>
+<TabItem value="python">
+
+```py
+h3.get_directed_edge_destination(edge)
+```
+
+</TabItem>
+<TabItem value="java">
+
+```java
+long getDirectedEdgeDestination(long edge);
+String getDirectedEdgeDestination(String edgeAddress);
+```
+
+</TabItem>
+<TabItem value="javascript">
+
+```js
+h3.getDirectedEdgeDestination(edge)
+```
+
+```js live
+function example() {
+  const edge = '115283473fffffff';
+  return h3.getDirectedEdgeDestination(edge);
+}
+```
+
+</TabItem>
+</Tabs>
+
+Returns the destination hexagon from the unidirectional edge H3Index.
+
+## directedEdgeToCells
+
+<Tabs
+  groupId="language"
+  defaultValue="c"
+  values={[
+    {label: 'C', value: 'c'},
+    {label: 'Python', value: 'python'},
+    {label: 'Java', value: 'java'},
+    {label: 'JavaScript (Live)', value: 'javascript'},
+  ]
+}>
+<TabItem value="c">
+
+```c
+H3Error directedEdgeToCells(H3Index edge, H3Index* originDestination);
+```
+
+</TabItem>
+<TabItem value="python">
+
+```py
+h3.directed_edge_to_cells(edge)
+```
+
+</TabItem>
+<TabItem value="java">
+
+```java
+List<Long> directedEdgeToCells(long edge);
+List<String> directedEdgeToCells(String edgeAddress);
+```
+
+</TabItem>
+<TabItem value="javascript">
+
+```js
+h3.directedEdgeToCells(edge)
+```
+
+```js live
+function example() {
+  const edge = '115283473fffffff';
+  return h3.directedEdgeToCells(edge);
+}
+```
+
+</TabItem>
+</Tabs>
+
+Returns the origin, destination pair of hexagon IDs for the given edge ID, which are placed at `originDestination[0]` and
+`originDestination[1]` respectively.
+
+## originToDirectedEdges
+
+<Tabs
+  groupId="language"
+  defaultValue="c"
+  values={[
+    {label: 'C', value: 'c'},
+    {label: 'Python', value: 'python'},
+    {label: 'Java', value: 'java'},
+    {label: 'JavaScript (Live)', value: 'javascript'},
+  ]
+}>
+<TabItem value="c">
+
+```c
+H3Error originToDirectedEdges(H3Index origin, H3Index* edges);
+```
+
+</TabItem>
+<TabItem value="python">
+
+```py
+h3.origin_to_directed_edges(h)
+```
+
+</TabItem>
+<TabItem value="java">
+
+```java
+List<Long> originToDirectedEdges(long h3);
+List<String> originToDirectedEdges(String h3);
+```
+
+</TabItem>
+<TabItem value="javascript">
+
+```js
+h3.originToDirectedEdges(h3Index)
+```
+
+```js live
+function example() {
+  const h = '85283473fffffff';
+  return h3.originToDirectedEdges(h);
+}
+```
+
+</TabItem>
+</Tabs>
+
+Provides all of the directed edges from the current H3Index. `edges` must be of length 6,
+and the number of directed edges placed in the array may be less than 6. If this is the case,
+one of the members of the array will be `0`.
+
+## directedEdgeToBoundary
+
+<Tabs
+  groupId="language"
+  defaultValue="c"
+  values={[
+    {label: 'C', value: 'c'},
+    {label: 'Python', value: 'python'},
+    {label: 'Java', value: 'java'},
+    {label: 'JavaScript (Live)', value: 'javascript'},
+  ]
+}>
+<TabItem value="c">
+
+```c
+H3Error directedEdgeToBoundary(H3Index edge, CellBoundary* gb);
+```
+
+</TabItem>
+<TabItem value="python">
+
+```py
+h3.directed_edge_to_boundary(edge, geo_json=False)
+```
+
+</TabItem>
+<TabItem value="java">
+
+```java
+List<LatLng> directedEdgeToBoundary(long edge);
+List<LatLng> directedEdgeToBoundary(String edgeAddress);
+```
+
+</TabItem>
+<TabItem value="javascript">
+
+```js
+h3.directedEdgeToBoundary(edge, [formatAsGeoJson])
+```
+
+```js live
+function example() {
+  const edge = '115283473fffffff';
+  return h3.directedEdgeToBoundary(edge);
+}
+```
+
+</TabItem>
+</Tabs>
+
+Provides the coordinates defining the unidirectional edge.

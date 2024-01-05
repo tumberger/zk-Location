@@ -3,7 +3,7 @@ package math
 import (
 	float "gnark-float/float"
 
-	"fmt"
+	//"fmt"
 	"math"
 )
 
@@ -58,12 +58,12 @@ func (p Polynomial) EvalK(ctx *float.Context, at float.FloatVar, k int) float.Fl
 
 // ToDo REFACTOR - Fix Sign and IsAbnormal
 // ToDo REFACTOR - Constant values as structs in util
-func Atan2(f *float.Context, x, y float.FloatVar) float.FloatVar {
+func Atan2(f *float.Context, y, x float.FloatVar) float.FloatVar {
 
 	pi := f.NewF64Constant(math.Pi)
 
 	// TODO: Check if zero, do not divide by 0
-	quotient := f.Div(x, y)
+	quotient := f.Div(y, x)
 	result := AtanRemez64(f, quotient)
 
 	addPi := f.Add(result, pi)
@@ -85,8 +85,6 @@ func Atan2(f *float.Context, x, y float.FloatVar) float.FloatVar {
 	// if x=0 AND y>0: atan2 = pi/2
 	// if x=0 AND y<0: atan2 = -pi/2
 	// if x=0 AND y=0: atan2 = undefined
-
-	fmt.Printf("Result of atan2(): {%d, %d, %d}\n", ret.Sign, ret.Exponent, ret.Mantissa)
 
 	return ret
 }

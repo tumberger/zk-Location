@@ -1,0 +1,759 @@
+---
+id: traversal
+title: Grid traversal functions
+sidebar_label: Traversal
+slug: /api/traversal
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Grid traversal allows finding cells in the vicinity of an origin cell, and determining how to traverse the grid from one cell to another.
+
+## gridDisk
+
+<Tabs
+  groupId="language"
+  defaultValue="c"
+  values={[
+    {label: 'C', value: 'c'},
+    {label: 'Python', value: 'python'},
+    {label: 'Java', value: 'java'},
+    {label: 'JavaScript (Live)', value: 'javascript'},
+  ]
+}>
+<TabItem value="c">
+
+```c
+H3Error gridDisk(H3Index origin, int k, H3Index* out);
+```
+
+</TabItem>
+<TabItem value="python">
+
+```py
+h3.grid_disk(origin, k)
+```
+
+</TabItem>
+<TabItem value="java">
+
+```java
+List<Long> gridDisk(long origin, int k);
+List<String> gridDisk(String origin, int k);
+```
+
+</TabItem>
+<TabItem value="javascript">
+
+```js
+h3.gridDisk(origin, k)
+```
+
+```js live
+function example() {
+  const h = '85283473fffffff';
+  const k = 5;
+  return h3.gridDisk(h, k);
+}
+```
+
+</TabItem>
+</Tabs>
+
+gridDisk produces indices within k distance of the origin index.
+
+gridDisk was previously named *k-ring* after the concept of a ring with
+distance k. k-ring 0 is defined as the origin index, k-ring 1 is
+defined as k-ring 0 and all neighboring indices, and so on.
+
+Output is placed in the provided array in no particular order. Elements of
+the output array may be left as zero, which can happen when crossing a pentagon.
+
+## maxGridDiskSize
+
+<Tabs
+  groupId="language"
+  defaultValue="c"
+  values={[
+    {label: 'C', value: 'c'},
+    {label: 'Python', value: 'python'},
+    {label: 'Java', value: 'java'},
+    {label: 'JavaScript (Live)', value: 'javascript'},
+  ]
+}>
+<TabItem value="c">
+
+```c
+H3Error maxGridDiskSize(int k, int64_t *out);
+```
+
+</TabItem>
+<TabItem value="python">
+
+:::note
+
+This function exists for memory management and is not exposed.
+
+:::
+
+</TabItem>
+<TabItem value="java">
+
+:::note
+
+This function exists for memory management and is not exposed.
+
+:::
+
+</TabItem>
+<TabItem value="javascript">
+
+:::note
+
+This function exists for memory management and is not exposed.
+
+:::
+
+</TabItem>
+</Tabs>
+
+Maximum number of indices that result from the `gridDisk` algorithm with the given `k`.
+
+## gridDiskDistances
+
+<Tabs
+  groupId="language"
+  defaultValue="c"
+  values={[
+    {label: 'C', value: 'c'},
+    {label: 'Python', value: 'python'},
+    {label: 'Java', value: 'java'},
+    {label: 'JavaScript (Live)', value: 'javascript'},
+  ]
+}>
+<TabItem value="c">
+
+```c
+H3Error gridDiskDistances(H3Index origin, int k, H3Index* out, int* distances);
+```
+
+</TabItem>
+<TabItem value="python">
+
+```py
+h3.grid_disk_distances(origin, k)
+```
+
+</TabItem>
+<TabItem value="java">
+
+```java
+List<List<Long>> gridDiskDistances(long origin, int k);
+List<List<String>> gridDiskDistances(String origin, int k);
+```
+
+</TabItem>
+<TabItem value="javascript">
+
+```js
+h3.gridDiskDistances(origin, k)
+```
+
+```js live
+function example() {
+  const h = '85283473fffffff';
+  const k = 5;
+  return h3.gridDiskDistances(h, k);
+}
+```
+
+</TabItem>
+</Tabs>
+
+gridDiskDistances produces indices within k distance of the origin index.
+
+k-ring 0 is defined as the origin index, k-ring 1 is defined as k-ring 0 and
+all neighboring indices, and so on.
+
+Output is placed in the provided array in no particular order. Elements of
+the output array may be left as zero, which can happen when crossing a pentagon.
+
+## gridDiskUnsafe
+
+<Tabs
+  groupId="language"
+  defaultValue="c"
+  values={[
+    {label: 'C', value: 'c'},
+    {label: 'Python', value: 'python'},
+    {label: 'Java', value: 'java'},
+    {label: 'JavaScript (Live)', value: 'javascript'},
+  ]
+}>
+<TabItem value="c">
+
+```c
+H3Error gridDiskUnsafe(H3Index origin, int k, H3Index* out);
+```
+
+</TabItem>
+<TabItem value="python">
+
+```py
+h3.grid_disk_unsafe(h, k)
+```
+
+</TabItem>
+<TabItem value="java">
+
+```java
+List<List<Long>> gridDiskUnsafe(Long h3, int k) throws PentagonEncounteredException;
+List<List<String>> gridDiskUnsafe(String h3Address, int k) throws PentagonEncounteredException;
+```
+
+</TabItem>
+<TabItem value="javascript">
+
+:::note
+
+This function is not exposed.
+
+:::
+
+</TabItem>
+</Tabs>
+
+`gridDiskUnsafe` produces indexes within `k` distance of the origin index.
+The function returns an error code when one of the returned by this
+function is a pentagon or is in the pentagon distortion area. In this case,
+the output behavior of the `out` array is undefined.
+
+k-ring 0 is defined as the origin index, k-ring 1 is defined as k-ring 0 and
+all neighboring indexes, and so on.
+
+Output is placed in the provided array in order of increasing distance from
+the origin. The provided array must be of size `maxGridDiskSize(k)`.
+
+Returns 0 (`E_SUCCESS`) if no pentagonal distortion is encountered.
+
+## gridDiskDistancesUnsafe
+
+<Tabs
+  groupId="language"
+  defaultValue="c"
+  values={[
+    {label: 'C', value: 'c'},
+    {label: 'Python', value: 'python'},
+    {label: 'Java', value: 'java'},
+    {label: 'JavaScript (Live)', value: 'javascript'},
+  ]
+}>
+<TabItem value="c">
+
+```c
+H3Error gridDiskDistancesUnsafe(H3Index origin, int k, H3Index* out, int* distances);
+```
+
+</TabItem>
+<TabItem value="python">
+
+```py
+h3.grid_disk_distances_unsafe(h, k)
+```
+
+</TabItem>
+<TabItem value="java">
+
+:::note
+
+This function is not exposed because the same functionality is exposed by `gridDiskUnsafe`
+
+:::
+
+</TabItem>
+<TabItem value="javascript">
+
+:::note
+
+This function is not exposed.
+
+:::
+
+</TabItem>
+</Tabs>
+
+`gridDiskDistancesUnsafe` produces indexes within `k` distance of the origin index.
+Output behavior is undefined when one of the indexes returned by this
+function is a pentagon or is in the pentagon distortion area.
+
+k-ring 0 is defined as the origin index, k-ring 1 is defined as k-ring 0 and
+all neighboring indexes, and so on.
+
+Output is placed in the provided array in order of increasing distance from
+the origin. The distances in hexagons is placed in the distances array at
+the same offset. The provided array must be of size `maxGridDiskSize(k)`.
+
+Returns 0 (`E_SUCCESS`) if no pentagonal distortion is encountered.
+
+## gridDiskDistancesSafe
+
+<Tabs
+  groupId="language"
+  defaultValue="c"
+  values={[
+    {label: 'C', value: 'c'},
+    {label: 'Python', value: 'python'},
+    {label: 'Java', value: 'java'},
+    {label: 'JavaScript (Live)', value: 'javascript'},
+  ]
+}>
+<TabItem value="c">
+
+```c
+H3Error gridDiskDistancesSafe(H3Index origin, int k, H3Index* out, int* distances);
+```
+
+</TabItem>
+<TabItem value="python">
+
+```py
+h3.grid_disk_distances_safe(h, k)
+```
+
+</TabItem>
+<TabItem value="java">
+
+:::note
+
+This function is not exposed because the same functionality is exposed by `gridDiskSafe`
+
+:::
+
+</TabItem>
+<TabItem value="javascript">
+
+:::note
+
+This function is not exposed.
+
+:::
+
+</TabItem>
+</Tabs>
+
+`gridDiskDistancesSafe` produces indexes within `k` distance of the origin index.
+
+k-ring 0 is defined as the origin index, k-ring 1 is defined as k-ring 0 and
+all neighboring indexes, and so on.
+
+Output is placed in the provided array in order of increasing distance from
+the origin. The distances in hexagons is placed in the distances array at
+the same offset. The provided array must be of size `maxGridDiskSize(k)`.
+
+Returns 0 (`E_SUCCESS`) on success.
+
+## gridDisksUnsafe
+
+<Tabs
+  groupId="language"
+  defaultValue="c"
+  values={[
+    {label: 'C', value: 'c'},
+    {label: 'Python', value: 'python'},
+    {label: 'Java', value: 'java'},
+    {label: 'JavaScript (Live)', value: 'javascript'},
+  ]
+}>
+<TabItem value="c">
+
+```c
+H3Error gridDisksUnsafe(H3Index* h3Set, int length, int k, H3Index* out);
+```
+
+</TabItem>
+<TabItem value="python">
+
+```py
+h3.grid_disks_unsafe(h, k)
+```
+
+</TabItem>
+<TabItem value="java">
+
+:::note
+
+This function is not exposed because the same functionality is exposed by `gridDiskUnsafe`
+
+:::
+
+</TabItem>
+<TabItem value="javascript">
+
+:::note
+
+This function is not exposed.
+
+:::
+
+</TabItem>
+</Tabs>
+
+`gridDisksUnsafe` takes an array of input hex IDs and a max k and returns an
+array of hexagon IDs sorted first by the original hex IDs and then by the
+grid k-ring (0 to max), with no guaranteed sorting within each grid k-ring group.
+
+Returns 0 (`E_SUCCESS`) if no pentagonal distortion was encountered. Otherwise, output
+is undefined
+
+## gridRingUnsafe
+
+<Tabs
+  groupId="language"
+  defaultValue="c"
+  values={[
+    {label: 'C', value: 'c'},
+    {label: 'Python', value: 'python'},
+    {label: 'Java', value: 'java'},
+    {label: 'JavaScript (Live)', value: 'javascript'},
+  ]
+}>
+<TabItem value="c">
+
+```c
+H3Error gridRingUnsafe(H3Index origin, int k, H3Index* out);
+```
+
+</TabItem>
+<TabItem value="python">
+
+```py
+h3.grid_ring_unsafe(h, k)
+```
+
+</TabItem>
+<TabItem value="java">
+
+```java
+List<Long> gridRingUnsafe(long h3, int k) throws PentagonEncounteredException;
+List<String> gridRingUnsafe(String h3Address, int k) throws PentagonEncounteredException;
+```
+
+</TabItem>
+<TabItem value="javascript">
+
+```js
+h3.gridRingUnsafe(h3Index, k)
+```
+
+```js live
+function example() {
+  const h = '85283473fffffff';
+  const k = 1;
+  return h3.gridRingUnsafe(h, k);
+}
+```
+
+</TabItem>
+</Tabs>
+
+Produces the hollow hexagonal ring centered at origin with sides of length k.
+
+Returns 0 (`E_SUCCESS`) if no pentagonal distortion was encountered.
+
+## gridPathCells
+
+<Tabs
+  groupId="language"
+  defaultValue="c"
+  values={[
+    {label: 'C', value: 'c'},
+    {label: 'Python', value: 'python'},
+    {label: 'Java', value: 'java'},
+    {label: 'JavaScript (Live)', value: 'javascript'},
+  ]
+}>
+<TabItem value="c">
+
+```c
+H3Error gridPathCells(H3Index start, H3Index end, H3Index* out);
+```
+
+</TabItem>
+<TabItem value="python">
+
+```py
+h3.grid_path_cells(start, end)
+```
+
+</TabItem>
+<TabItem value="java">
+
+```java
+List<Long> gridPathCells(long start, long end) throws LineUndefinedException
+List<String> gridPathCells(String startAddress, String endAddress) throws LineUndefinedException
+```
+
+</TabItem>
+<TabItem value="javascript">
+
+```js
+h3.gridPathCells(start, end)
+```
+
+```js live
+function example() {
+  const start = '85283473fffffff';
+  const end = '8528342bfffffff';
+  return h3.gridPathCells(start, end);
+}
+```
+
+</TabItem>
+</Tabs>
+
+Given two H3 indexes, return the line of indexes between them (inclusive).
+
+This function may fail to find the line between two indexes, for
+example if they are very far apart. It may also fail when finding
+distances for indexes on opposite sides of a pentagon.
+
+*Notes:*
+
+ * The specific output of this function should not be considered stable
+   across library versions. The only guarantees the library provides are
+   that the line length will be `h3Distance(start, end) + 1` and that
+   every index in the line will be a neighbor of the preceding index.
+
+ * Lines are drawn in grid space, and may not correspond exactly to either
+   Cartesian lines or great arcs.
+
+## gridPathCellsSize
+
+<Tabs
+  groupId="language"
+  defaultValue="c"
+  values={[
+    {label: 'C', value: 'c'},
+    {label: 'Python', value: 'python'},
+    {label: 'Java', value: 'java'},
+    {label: 'JavaScript (Live)', value: 'javascript'},
+  ]
+}>
+<TabItem value="c">
+
+```c
+H3Error gridPathCellsSize(H3Index start, H3Index end, int64_t* size);
+```
+
+</TabItem>
+<TabItem value="python">
+
+:::note
+
+This function exists for memory management and is not exposed.
+
+:::
+
+</TabItem>
+<TabItem value="java">
+
+:::note
+
+This function exists for memory management and is not exposed.
+
+:::
+
+</TabItem>
+<TabItem value="javascript">
+
+:::note
+
+This function exists for memory management and is not exposed.
+
+:::
+
+</TabItem>
+</Tabs>
+
+Number of indexes in a line from the start index to the end index,
+to be used for allocating memory.
+
+Returns 0 (`E_SUCCESS`) on success, or an error if the line cannot be computed.
+
+## gridDistance
+
+<Tabs
+  groupId="language"
+  defaultValue="c"
+  values={[
+    {label: 'C', value: 'c'},
+    {label: 'Python', value: 'python'},
+    {label: 'Java', value: 'java'},
+    {label: 'JavaScript (Live)', value: 'javascript'},
+  ]
+}>
+<TabItem value="c">
+
+```c
+H3Error gridDistance(H3Index origin, H3Index h3, int64_t *distance);
+```
+
+</TabItem>
+<TabItem value="python">
+
+```py
+h3.grid_distance(h1, h2)
+```
+
+</TabItem>
+<TabItem value="java">
+
+```java
+long gridDistance(long a, long b) throws DistanceUndefinedException;
+long gridDistance(String a, String b) throws DistanceUndefinedException;
+```
+
+</TabItem>
+<TabItem value="javascript">
+
+```js
+h3.gridDistance(a, b)
+```
+
+```js live
+function example() {
+  const start = '85283473fffffff';
+  const end = '8528342bfffffff';
+  return h3.gridDistance(start, end);
+}
+```
+
+</TabItem>
+</Tabs>
+
+Provides the distance in grid cells between the two indexes.
+
+Returns 0 (`E_SUCCESS`) on success, or an error if finding the distance failed. Finding the distance
+can fail because the two indexes are not comparable (different resolutions), too far apart, or are
+separated by pentagonal distortion. This is the same set of limitations as the local IJ coordinate
+space functions.
+
+## cellToLocalIj
+
+<Tabs
+  groupId="language"
+  defaultValue="c"
+  values={[
+    {label: 'C', value: 'c'},
+    {label: 'Python', value: 'python'},
+    {label: 'Java', value: 'java'},
+    {label: 'JavaScript (Live)', value: 'javascript'},
+  ]
+}>
+<TabItem value="c">
+
+```c
+H3Error cellToLocalIj(H3Index origin, H3Index h3, uint32_t mode, CoordIJ *out);
+```
+
+</TabItem>
+<TabItem value="python">
+
+```py
+h3.cell_to_local_ij(origin, h)
+```
+
+</TabItem>
+<TabItem value="java">
+
+```java
+CoordIJ cellToLocalIj(long origin, long h3) throws PentagonEncounteredException, LocalIjUndefinedException;
+CoordIJ cellToLocalIj(String originAddress, String h3Address) throws PentagonEncounteredException, LocalIjUndefinedException;
+```
+
+</TabItem>
+<TabItem value="javascript">
+
+```js
+h3.cellToLocalIj(origin, h3)
+```
+
+```js live
+function example() {
+  const origin = '85283473fffffff';
+  const h = '8528342bfffffff';
+  const {i, j} = h3.cellToLocalIj(origin, h);
+  return [i, j];
+}
+```
+
+</TabItem>
+</Tabs>
+
+Produces local IJ coordinates for an H3 index anchored by an origin.
+
+`mode` is reserved for future expansion and must be set to `0`.
+
+This function's output is not guaranteed to be compatible across different
+versions of H3.
+
+## localIjToCell
+
+<Tabs
+  groupId="language"
+  defaultValue="c"
+  values={[
+    {label: 'C', value: 'c'},
+    {label: 'Python', value: 'python'},
+    {label: 'Java', value: 'java'},
+    {label: 'JavaScript (Live)', value: 'javascript'},
+  ]
+}>
+<TabItem value="c">
+
+```c
+H3Error localIjToCell(H3Index origin, const CoordIJ *ij, uint32_t mode, H3Index *out);
+```
+
+</TabItem>
+<TabItem value="python">
+
+```py
+h3.local_ij_to_cell(origin, i, j)
+```
+
+</TabItem>
+<TabItem value="java">
+
+```java
+long localIjToCell(long origin, CoordIJ ij) throws LocalIjUndefinedException;
+String localIjToCell(String originAddress, CoordIJ ij) throws LocalIjUndefinedException;
+```
+
+</TabItem>
+<TabItem value="javascript">
+
+```js
+h3.localIjToCell(origin, coords)
+```
+
+```js live
+function example() {
+  const h = '85283473fffffff';
+  const coords = {i: 0, j: 0};
+  return h3.localIjToCell(h, coords);
+}
+```
+
+</TabItem>
+</Tabs>
+
+Produces an H3 index from local IJ coordinates anchored by an origin.
+
+`mode` is reserved for future expansion and must be set to `0`.
+
+This function's output is not guaranteed to be compatible across different
+versions of H3.
+
+
