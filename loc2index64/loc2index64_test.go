@@ -2,9 +2,10 @@ package loc2index64
 
 import (
 	"encoding/json"
-	"testing"
-	"math"
 	"fmt"
+	"math"
+	"testing"
+
 	//"time"
 	//"math/rand"
 
@@ -12,6 +13,7 @@ import (
 
 	"github.com/consensys/gnark-crypto/ecc"
 	"github.com/consensys/gnark/backend"
+
 	//"github.com/consensys/gnark/backend/groth16"
 	//"github.com/consensys/gnark/backend/plonk"
 	//"github.com/consensys/gnark/frontend"
@@ -40,7 +42,7 @@ const loc2Index64 = `{
     "LngS": "0",
 	"LngE": "0",
 	"LngM": "5370059476281135",
-	"LngA": "0"
+	"LngA": "0",
 	"Resolution": "0"
 }`
 
@@ -66,7 +68,7 @@ func setupLoc2IndexWrapper() (loc2Index64Wrapper, loc2Index64Wrapper) {
 	// Longitude: 202,144,034 (in radians ×109×109) ​
 	//var lat float64 = 840096782
 	//var lng float64 = 202144034
-	
+
 	lat := math.Pow(2, float64(data.LatE)) * (float64(data.LatM) / math.Pow(2, float64(52)))
 	if data.LatS == 1 {
 		lat = -lat
@@ -75,7 +77,7 @@ func setupLoc2IndexWrapper() (loc2Index64Wrapper, loc2Index64Wrapper) {
 	if data.LngS == 1 {
 		lng = -lng
 	}
-	
+
 	fmt.Printf("lat, lng: %f, %f\n", lat, lng)
 
 	// Calculate I, J, K using the H3 library in C
@@ -89,11 +91,11 @@ func setupLoc2IndexWrapper() (loc2Index64Wrapper, loc2Index64Wrapper) {
 		LatS:       data.LatS,
 		LatE:       data.LatE,
 		LatM:       data.LatM,
-		LatA:		data.LatA,
+		LatA:       data.LatA,
 		LngS:       data.LngS,
 		LngE:       data.LngE,
 		LngM:       data.LngM,
-		LngA:		data.LngA,
+		LngA:       data.LngA,
 		I:          i,
 		J:          j,
 		K:          k,
@@ -106,11 +108,11 @@ func setupLoc2IndexWrapper() (loc2Index64Wrapper, loc2Index64Wrapper) {
 		LatS:       data.LatS,
 		LatE:       data.LatE,
 		LatM:       data.LatM,
-		LatA:		data.LatA,
+		LatA:       data.LatA,
 		LngS:       data.LngS,
 		LngE:       data.LngE,
 		LngM:       data.LngM,
-		LngA:		data.LngA,
+		LngA:       data.LngA,
 		Resolution: data.Resolution,
 	}
 
@@ -170,7 +172,7 @@ func FuzzLoc2Index(f *testing.F) {
 		if lngS == 1 {
 			lngFloat = -lngFloat
 		}
-		
+
 		fmt.Printf("latFloat: %f, lngFloat: %f, res: %d\n", latFloat, lngFloat, res)
 
 		// Convert radians to degrees and check their ranges
@@ -182,7 +184,7 @@ func FuzzLoc2Index(f *testing.F) {
 		if lngDegrees < -180 || lngDegrees > 180 {
 			t.Skip("Longitude out of valid degree range")
 		}
-		
+
 		fmt.Printf("lat in degrees: %f, lng in degrees: %f\n", latDegrees, lngDegrees)
 
 		// Calculate I, J, K using the H3 library in C
@@ -196,30 +198,30 @@ func FuzzLoc2Index(f *testing.F) {
 
 		// Update witness values with calculated I, J, K
 		assignment := loc2Index64Wrapper{
-			LatS:           latS,
-			LatE:			latE,
-			LatM:			latM,
-			LatA:			latA,
-			LngS:           lngS,
-			LngE: 			lngE,
-			LngM:			lngM,
-			LngA:			lngA,
-			I:             	i,
-			J:             	j,
-			K:             	k,
-			Resolution:    	res,
+			LatS:       latS,
+			LatE:       latE,
+			LatM:       latM,
+			LatA:       latA,
+			LngS:       lngS,
+			LngE:       lngE,
+			LngM:       lngM,
+			LngA:       lngA,
+			I:          i,
+			J:          j,
+			K:          k,
+			Resolution: res,
 		}
 
 		circuit := loc2Index64Wrapper{
 			// The circuit does not need actual values for I, J, K since these are
 			// calculated within the circuit itself when running the proof or solving
-			LatS:           latS,
-			LatE:			latE,
-			LatM:			latM,
-			LngS:           lngS,
-			LngE: 			lngE,
-			LngM:			lngM,
-			Resolution:    	res,
+			LatS:       latS,
+			LatE:       latE,
+			LatM:       latM,
+			LngS:       lngS,
+			LngE:       lngE,
+			LngM:       lngM,
+			Resolution: res,
 		}
 
 		// Perform assertions using the assert object from the 'test' package
