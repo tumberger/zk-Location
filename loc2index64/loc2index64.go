@@ -13,7 +13,7 @@ import (
 )
 
 type loc2Index64Wrapper struct {
-	
+
 	// SECRET INPUTS
 	LatS frontend.Variable
 	LatE frontend.Variable
@@ -33,11 +33,11 @@ type loc2Index64Wrapper struct {
 
 // TODO: Comments
 func (circuit *loc2Index64Wrapper) Define(api frontend.API) error {
-	
+
 	api.AssertIsEqual(circuit.LatA, 0)
 	api.AssertIsEqual(circuit.LngA, 0)
-	
-	f := float.NewContext(api, util.IEEE64ExponentBitwidth, util.IEEE64Precision )
+
+	f := float.NewContext(api, util.IEEE64ExponentBitwidth, util.IEEE64Precision)
 	lat := float.FloatVar{
 		Sign:       circuit.LatS,
 		Exponent:   circuit.LatE,
@@ -54,18 +54,18 @@ func (circuit *loc2Index64Wrapper) Define(api frontend.API) error {
 	pi := f.NewF64Constant(math.Pi)
 	halfPi := f.NewF64Constant(math.Pi / 2.0)
 	doublePi := f.NewF64Constant(math.Pi * 2.0)
-	
-	// Lat can't be more than pi/2, Lng can't be more than pi and max resolution is 15  
+
+	// Lat can't be more than pi/2, Lng can't be more than pi and max resolution is 15
 	api.AssertIsEqual(f.IsGt(lat, halfPi), 0)
 	api.AssertIsEqual(f.IsGt(lng, pi), 0)
 	api.AssertIsLessOrEqual(resolution, util.MaxResolution)
-	
+
 	// We calculate the 3d vector (x,y,z), starting with x
 
 	// Adding half pi to latitude to apply cos() -- lat always in range [-pi/2, pi/2]
 	term := f.Add(lat, halfPi)
 	cosLat := maths.SinTaylor64(&f, term)
-	
+
 	// Adding half pi to longitude to apply cos() -- lng always in range [-pi, pi]
 	tmp := f.Add(lng, halfPi)
 	// TODO: If it makes no big difference in regards to constraints: (input % 2pi) - pi
@@ -75,14 +75,14 @@ func (circuit *loc2Index64Wrapper) Define(api frontend.API) error {
 	term.Sign = api.Select(isGreater, shifted.Sign, tmp.Sign)
 	term.Exponent = api.Select(isGreater, shifted.Exponent, tmp.Exponent)
 	term.Mantissa = api.Select(isGreater, shifted.Mantissa, tmp.Mantissa)
-	term.IsAbnormal  = 0
-	
+	term.IsAbnormal = 0
+
 	cosLng := maths.SinTaylor64(&f, term)
 	x := f.Mul(cosLat, cosLng)
-	
+
 	sinLng := maths.SinTaylor64(&f, lng)
 	y := f.Mul(cosLat, sinLng)
-	
+
 	z := maths.SinTaylor64(&f, lat)
 
 	calc := closestFaceCalculations(&f, x, y, z, lng)
@@ -102,80 +102,30 @@ func (circuit *loc2Index64Wrapper) Define(api frontend.API) error {
 }
 
 func scaleR(f *float.Context, r float.FloatVar, resolution frontend.Variable) float.FloatVar {
-
-	var scales [15]float.FloatVar
-	multiplier := 1.0
-
-	checkr0 := comparator.IsLess(f.Api, resolution, 1)
-	checkr1 := comparator.IsLess(f.Api, resolution, 2)
-	checkr2 := comparator.IsLess(f.Api, resolution, 3)
-	checkr3 := comparator.IsLess(f.Api, resolution, 4)
-	checkr4 := comparator.IsLess(f.Api, resolution, 5)
-	checkr5 := comparator.IsLess(f.Api, resolution, 6)
-	checkr6 := comparator.IsLess(f.Api, resolution, 7)
-	checkr7 := comparator.IsLess(f.Api, resolution, 8)
-	checkr8 := comparator.IsLess(f.Api, resolution, 9)
-	checkr9 := comparator.IsLess(f.Api, resolution, 10)
-	checkr10 := comparator.IsLess(f.Api, resolution, 11)
-	checkr11 := comparator.IsLess(f.Api, resolution, 12)
-	checkr12 := comparator.IsLess(f.Api, resolution, 13)
-	checkr13 := comparator.IsLess(f.Api, resolution, 14)
-	checkr14 := comparator.IsLess(f.Api, resolution, 15)
-
-	for i := 0; i < 15; i++ {
-
-		multiplier *= util.Sqrt7
-		scales[i] = f.Mul(r, f.NewF64Constant(multiplier))
+	multiplier := f.NewF64Constant(1.0)
+	power := util.Sqrt7
+	// `0 <= resolution <= 15` tightly fits into 4 bits
+	bits := f.Api.ToBinary(resolution, 4)
+	// The square and multiply algorithm
+	for _, bit := range bits {
+		t := f.Mul(multiplier, f.NewF64Constant(power))
+		multiplier = float.FloatVar{
+			Sign:       0,
+			Exponent:   f.Api.Select(bit, t.Exponent, multiplier.Exponent),
+			Mantissa:   f.Api.Select(bit, t.Mantissa, multiplier.Mantissa),
+			IsAbnormal: 0,
+		}
+		power *= power
 	}
 
-	// TODO: Check if IsLess() of bounded comparator is more efficient than current IsLess()
-	exp := f.Api.Select(checkr0, r.Exponent,
-		f.Api.Select(checkr1, scales[0].Exponent,
-			f.Api.Select(checkr2, scales[1].Exponent,
-				f.Api.Select(checkr3, scales[2].Exponent,
-					f.Api.Select(checkr4, scales[3].Exponent,
-						f.Api.Select(checkr5, scales[4].Exponent,
-							f.Api.Select(checkr6, scales[5].Exponent,
-								f.Api.Select(checkr7, scales[6].Exponent,
-									f.Api.Select(checkr8, scales[7].Exponent,
-										f.Api.Select(checkr9, scales[8].Exponent,
-											f.Api.Select(checkr10, scales[9].Exponent,
-												f.Api.Select(checkr11, scales[10].Exponent,
-													f.Api.Select(checkr12, scales[11].Exponent,
-														f.Api.Select(checkr13, scales[12].Exponent,
-															f.Api.Select(checkr14, scales[13].Exponent, scales[14].Exponent)))))))))))))))
-
-	mant := f.Api.Select(checkr0, r.Mantissa,
-		f.Api.Select(checkr1, scales[0].Mantissa,
-			f.Api.Select(checkr2, scales[1].Mantissa,
-				f.Api.Select(checkr3, scales[2].Mantissa,
-					f.Api.Select(checkr4, scales[3].Mantissa,
-						f.Api.Select(checkr5, scales[4].Mantissa,
-							f.Api.Select(checkr6, scales[5].Mantissa,
-								f.Api.Select(checkr7, scales[6].Mantissa,
-									f.Api.Select(checkr8, scales[7].Mantissa,
-										f.Api.Select(checkr9, scales[8].Mantissa,
-											f.Api.Select(checkr10, scales[9].Mantissa,
-												f.Api.Select(checkr11, scales[10].Mantissa,
-													f.Api.Select(checkr12, scales[11].Mantissa,
-														f.Api.Select(checkr13, scales[12].Mantissa,
-															f.Api.Select(checkr14, scales[13].Mantissa, scales[14].Mantissa)))))))))))))))
-
-	return float.FloatVar{
-		Sign:       r.Sign,
-		Exponent:   exp,
-		Mantissa:   mant,
-		IsAbnormal: 0,
-	}
+	return f.Mul(r, multiplier)
 }
 
-//
 // Calculating r: In the original code the variable r is calculated from the square distance
 // by a series of computations, with the first step being "r = acos(1 - sqd/2)" and the second
 // step "r = tan(r)". Since acos(x) = atan(sqrt((1-x)^2) / x) the first two steps can be
 // summarized to r = tan( acos(1 - sqd/2) ) = tan( atan( sqrt( (1-(1-sqd/2))^2 ) / (1-sqd/2) ))
 // = sqrt( (1-(1-sqd/2))^2 ) / (1-sqd/2) = sqrt( (-1)*(sqd-4)*sqd ) / (2 - sqd)
-//
 func calculateR(f *float.Context, sqDist float.FloatVar, resolution frontend.Variable) float.FloatVar {
 
 	// Nominator = (4 - sqDist) * sqDist  ---  Divisor = 2 - sqDist
@@ -190,7 +140,7 @@ func calculateR(f *float.Context, sqDist float.FloatVar, resolution frontend.Var
 }
 
 func closestFaceCalculations(f *float.Context, x2, y2, z2, lng float.FloatVar) [5]float.FloatVar {
-	
+
 	var ret [5]float.FloatVar
 
 	// Starting with square distance 5
@@ -206,16 +156,16 @@ func closestFaceCalculations(f *float.Context, x2, y2, z2, lng float.FloatVar) [
 
 		d := f.Sub(f.NewF64Constant(util.FaceCenterPoint[i]), x2)
 		s1 := f.Mul(d, d)
-		
+
 		d = f.Sub(f.NewF64Constant(util.FaceCenterPoint[i+1]), y2)
 		s2 := f.Mul(d, d)
-		
+
 		d = f.Sub(f.NewF64Constant(util.FaceCenterPoint[i+2]), z2)
 		s3 := f.Mul(d, d)
 
 		tmp := f.Add(s1, s2)
 		dist := f.Add(tmp, s3)
-		
+
 		check := f.IsGt(sqDist, dist)
 
 		face := i / 3
@@ -235,19 +185,19 @@ func closestFaceCalculations(f *float.Context, x2, y2, z2, lng float.FloatVar) [
 		sinFaceLat.Mantissa = f.Api.Select(check, currSFL.Mantissa, sinFaceLat.Mantissa)
 		azimuth.Exponent = f.Api.Select(check, currAz.Exponent, azimuth.Exponent)
 		azimuth.Mantissa = f.Api.Select(check, currAz.Mantissa, azimuth.Mantissa)
-		
+
 		tmpDiff := f.Sub(lng, currFaceLng)
 		lngDiff.Sign = f.Api.Select(check, tmpDiff.Sign, lngDiff.Sign)
 		lngDiff.Exponent = f.Api.Select(check, tmpDiff.Exponent, lngDiff.Exponent)
 		lngDiff.Mantissa = f.Api.Select(check, tmpDiff.Mantissa, lngDiff.Mantissa)
 	}
-	
+
 	ret[0] = sqDist
 	ret[1] = cosFaceLat
 	ret[2] = sinFaceLat
 	ret[3] = azimuth
 	ret[4] = lngDiff
-	
+
 	return ret
 }
 
@@ -261,9 +211,9 @@ func calculateInputsToAtan2(f *float.Context, z, cosLat, cosFaceLat, sinFaceLat,
 	// Adjustments for sin() function
 	// TODO: If it makes no big difference in regards to constraints: (input % 2pi) - pi
 	// can be applied on the input at the start of SinTaylor and the next lines can be deleted
-	
+
 	// lngDiff in range [-2pi, 2pi], convert to abs(lngDiff) and adjust for sin() function
-	sign := lngDiff.Sign 
+	sign := lngDiff.Sign
 	lngDiff.Sign = frontend.Variable(0)
 	term := f.Sub(lngDiff, pi)
 	term.Sign = f.Api.Select(sign, term.Sign, f.Neg(term).Sign) // symmetry of sin()
@@ -278,7 +228,7 @@ func calculateInputsToAtan2(f *float.Context, z, cosLat, cosFaceLat, sinFaceLat,
 	term.Exponent = f.Api.Select(isGreater, shifted.Exponent, cosArg.Exponent)
 	term.Mantissa = f.Api.Select(isGreater, shifted.Mantissa, cosArg.Mantissa)
 	cosLngDiff := maths.SinTaylor64(f, term)
-	
+
 	arg1 := f.Mul(sinLngDiff, cosLat)
 	// arg2 is set up of two summands which we determine separately
 	arg2Part1 := f.Mul(z, cosFaceLat)
@@ -330,61 +280,14 @@ func calculateTheta(f *float.Context, z, cosLat, cosFaceLat, sinFaceLat, azimuth
 	// Apply rotation in case of odd resolution
 	tmp := f.Sub(theta, f.NewF64Constant(util.Ap7rot))
 	thetaOdd := posAngleRads(f, tmp)
-	
-	// TODO: Decide if we want odd/even as hint, else check if IsLess() of bounded
-	// comparator is more efficient than current IsLess()
-	checkr0 := comparator.IsLess(f.Api, resolution, 1)
-	checkr1 := comparator.IsLess(f.Api, resolution, 2)
-	checkr2 := comparator.IsLess(f.Api, resolution, 3)
-	checkr3 := comparator.IsLess(f.Api, resolution, 4)
-	checkr4 := comparator.IsLess(f.Api, resolution, 5)
-	checkr5 := comparator.IsLess(f.Api, resolution, 6)
-	checkr6 := comparator.IsLess(f.Api, resolution, 7)
-	checkr7 := comparator.IsLess(f.Api, resolution, 8)
-	checkr8 := comparator.IsLess(f.Api, resolution, 9)
-	checkr9 := comparator.IsLess(f.Api, resolution, 10)
-	checkr10 := comparator.IsLess(f.Api, resolution, 11)
-	checkr11 := comparator.IsLess(f.Api, resolution, 12)
-	checkr12 := comparator.IsLess(f.Api, resolution, 13)
-	checkr13 := comparator.IsLess(f.Api, resolution, 14)
-	checkr14 := comparator.IsLess(f.Api, resolution, 15)
 
-	exp := f.Api.Select(checkr0, theta.Exponent,
-		f.Api.Select(checkr1, thetaOdd.Exponent,
-			f.Api.Select(checkr2, theta.Exponent,
-				f.Api.Select(checkr3, thetaOdd.Exponent,
-					f.Api.Select(checkr4, theta.Exponent,
-						f.Api.Select(checkr5, thetaOdd.Exponent,
-							f.Api.Select(checkr6, theta.Exponent,
-								f.Api.Select(checkr7, thetaOdd.Exponent,
-									f.Api.Select(checkr8, theta.Exponent,
-										f.Api.Select(checkr9, thetaOdd.Exponent,
-											f.Api.Select(checkr10, theta.Exponent,
-												f.Api.Select(checkr11, thetaOdd.Exponent,
-													f.Api.Select(checkr12, theta.Exponent,
-														f.Api.Select(checkr13, thetaOdd.Exponent,
-															f.Api.Select(checkr14, theta.Exponent, thetaOdd.Exponent)))))))))))))))
-															
-	mant := f.Api.Select(checkr0, theta.Mantissa,
-		f.Api.Select(checkr1, thetaOdd.Mantissa,
-			f.Api.Select(checkr2, theta.Mantissa,
-				f.Api.Select(checkr3, thetaOdd.Mantissa,
-					f.Api.Select(checkr4, theta.Mantissa,
-						f.Api.Select(checkr5, thetaOdd.Mantissa,
-							f.Api.Select(checkr6, theta.Mantissa,
-								f.Api.Select(checkr7, thetaOdd.Mantissa,
-									f.Api.Select(checkr8, theta.Mantissa,
-										f.Api.Select(checkr9, thetaOdd.Mantissa,
-											f.Api.Select(checkr10, theta.Mantissa,
-												f.Api.Select(checkr11, thetaOdd.Mantissa,
-													f.Api.Select(checkr12, theta.Mantissa,
-														f.Api.Select(checkr13, thetaOdd.Mantissa,
-															f.Api.Select(checkr14, theta.Mantissa, thetaOdd.Mantissa)))))))))))))))
-	
+	// `0 <= resolution <= 15` tightly fits into 4 bits
+	lsb := f.Api.ToBinary(resolution, 4)[0]
+
 	return float.FloatVar{
 		Sign:       0,
-		Exponent:   exp,
-		Mantissa:   mant,
+		Exponent:   f.Api.Select(lsb, thetaOdd.Exponent, theta.Exponent),
+		Mantissa:   f.Api.Select(lsb, thetaOdd.Mantissa, theta.Mantissa),
 		IsAbnormal: 0,
 	}
 }
@@ -393,9 +296,9 @@ func calculateHex2d(f *float.Context, theta, r float.FloatVar) [2]float.FloatVar
 
 	var ret [2]float.FloatVar
 	pi := f.NewF64Constant(math.Pi)
-	halfPi := f.NewF64Constant(math.Pi / 2.0)	
+	halfPi := f.NewF64Constant(math.Pi / 2.0)
 	oneAndHalfPi := f.NewF64Constant(math.Pi * 1.5)
-	doublePi := f.NewF64Constant(math.Pi * 2.0) 
+	doublePi := f.NewF64Constant(math.Pi * 2.0)
 
 	// Adjustments for sin() function -- theta is in range [0, 2pi]
 	// shift and flip sign because of symmetry of sin()
@@ -421,9 +324,10 @@ func calculateHex2d(f *float.Context, theta, r float.FloatVar) [2]float.FloatVar
 
 	return ret
 }
+
 // TODO: Comments
 func hex2dToCoordIJK(f *float.Context, x, y float.FloatVar) [3]frontend.Variable {
-	
+
 	// Take absolute values of x and y, then put them back to original
 	a1 := x
 	a1.Sign = frontend.Variable(0)
@@ -432,7 +336,7 @@ func hex2dToCoordIJK(f *float.Context, x, y float.FloatVar) [3]frontend.Variable
 	x2 := f.Div(a2, f.NewF64Constant(util.Sin60))
 	tmp := f.Div(x2, f.NewF64Constant(2.0))
 	x1 := f.Add(a1, tmp)
-	
+
 	m1 := f.Floor(x1)
 	m2 := f.Floor(x2)
 	m1int := f.ToInt(m1)
@@ -444,13 +348,13 @@ func hex2dToCoordIJK(f *float.Context, x, y float.FloatVar) [3]frontend.Variable
 	doubleR1 := f.Add(r1, r1)
 	m1PlusOne := f.Api.Add(m1int, 1)
 	m2PlusOne := f.Api.Add(m2int, 1)
-	
+
 	// Check if r1 < 1/2?
 	r1CaseA := f.IsLt(r1, f.NewF64Constant(0.5))
 	// Check if r1 < 1/3?
-	r1CaseA1 := f.IsLt(r1, f.NewF64Constant( (1.0 / 3.0) ))
+	r1CaseA1 := f.IsLt(r1, f.NewF64Constant((1.0 / 3.0)))
 	// Check if r1 < 2/3?
-	r1CaseB1 := f.IsLt(r1, f.NewF64Constant( (2.0 / 3.0) ))
+	r1CaseB1 := f.IsLt(r1, f.NewF64Constant((2.0 / 3.0)))
 	// Check if 1-r1 <= r2?
 	oneMinus := f.Sub(f.NewF64Constant(1.0), r1)
 	iCaseA2First := f.IsLe(oneMinus, r2)
@@ -483,7 +387,7 @@ func hex2dToCoordIJK(f *float.Context, x, y float.FloatVar) [3]frontend.Variable
 	caseBjCoord := f.Api.Select(r1CaseB1, f.Api.Select(check2, m2int, m2PlusOne),
 		f.Api.Select(check3, m2int, m2PlusOne))
 	jCoord := f.Api.Select(r1CaseA, caseAjCoord, caseBjCoord)
-	
+
 	iGreater := comparator.IsLess(f.Api, jCoord, iCoord)
 	// In case only x is negative: i = -i + j
 	// in case only y is negative: i = i - j
