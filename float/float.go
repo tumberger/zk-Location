@@ -1082,3 +1082,12 @@ func (f *Context) ToInt(x FloatVar) frontend.Variable {
 		v,
 	)
 }
+
+func (f *Context) Select(c frontend.Variable, x, y FloatVar) FloatVar {
+	return FloatVar{
+		Sign:       f.Api.Select(c, x.Sign, y.Sign),
+		Exponent:   f.Api.Select(c, x.Exponent, y.Exponent),
+		Mantissa:   f.Api.Select(c, x.Mantissa, y.Mantissa),
+		IsAbnormal: f.Api.Select(c, x.IsAbnormal, y.IsAbnormal),
+	}
+}

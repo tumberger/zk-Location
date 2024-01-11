@@ -86,11 +86,9 @@ func (circuit *loc2Index64Wrapper) Define(api frontend.API) error {
 	z := maths.SinTaylor64(&f, lat)
 
 	calc := closestFaceCalculations(&f, x, y, z, lng)
-	sqDistance := calc[0]
 
-	theta := calculateTheta(&f, z, cosLat, calc[1], calc[2], calc[3], calc[4], resolution)
-	r := calculateR(&f, sqDistance, resolution)
-	hex2d := calculateHex2d(&f, theta, r)
+	r := calculateR(&f, calc[0], resolution)
+	hex2d := calculateHex2d(&f, z, cosLat, sinLng, cosLng, calc[1], calc[2], calc[3], calc[4], calc[5], calc[6], calc[7], calc[8], r, resolution)
 
 	ijk := hex2dToCoordIJK(&f, hex2d[0], hex2d[1])
 
@@ -139,16 +137,17 @@ func calculateR(f *float.Context, sqDist float.FloatVar, resolution frontend.Var
 	return scaleR(f, r, resolution)
 }
 
-func closestFaceCalculations(f *float.Context, x2, y2, z2, lng float.FloatVar) [5]float.FloatVar {
-
-	var ret [5]float.FloatVar
-
+func closestFaceCalculations(f *float.Context, x2, y2, z2, lng float.FloatVar) [9]float.FloatVar {
 	// Starting with square distance 5
 	sqDist := f.NewF64Constant(5.0)
-	cosFaceLat := f.NewF64Constant(0)
 	sinFaceLat := f.NewF64Constant(0)
-	azimuth := f.NewF64Constant(0)
-	lngDiff := f.NewF64Constant(0)
+	cosFaceLat := f.NewF64Constant(0)
+	sinFaceLng := f.NewF64Constant(0)
+	cosFaceLng := f.NewF64Constant(0)
+	sinAzimuth := f.NewF64Constant(0)
+	cosAzimuth := f.NewF64Constant(0)
+	sinAzimuthRot := f.NewF64Constant(0)
+	cosAzimuthRot := f.NewF64Constant(0)
 
 	// We determine the face which has the smallest square distance from its center point to
 	// our lat,lng coordinates and set all variables which depend on the face for later use
@@ -169,160 +168,58 @@ func closestFaceCalculations(f *float.Context, x2, y2, z2, lng float.FloatVar) [
 		check := f.IsGt(sqDist, dist)
 
 		face := i / 3
-		currCFL := f.NewF64Constant(util.CosFaceLat[face])
-		currSFL := f.NewF64Constant(util.SinFaceLat[face])
-		currAz := f.NewF64Constant(util.Azimuth[face])
-		currFaceLng := f.NewF64Constant(util.FaceCenterGeoLng[face])
 
 		// Set values accordingly if square distance is new lowest value
-		// variables sqDist, cosFaceLat and azimuth are always positive
-		sqDist.Exponent = f.Api.Select(check, dist.Exponent, sqDist.Exponent)
-		sqDist.Mantissa = f.Api.Select(check, dist.Mantissa, sqDist.Mantissa)
-		cosFaceLat.Exponent = f.Api.Select(check, currCFL.Exponent, cosFaceLat.Exponent)
-		cosFaceLat.Mantissa = f.Api.Select(check, currCFL.Mantissa, cosFaceLat.Mantissa)
-		sinFaceLat.Sign = f.Api.Select(check, currSFL.Sign, sinFaceLat.Sign)
-		sinFaceLat.Exponent = f.Api.Select(check, currSFL.Exponent, sinFaceLat.Exponent)
-		sinFaceLat.Mantissa = f.Api.Select(check, currSFL.Mantissa, sinFaceLat.Mantissa)
-		azimuth.Exponent = f.Api.Select(check, currAz.Exponent, azimuth.Exponent)
-		azimuth.Mantissa = f.Api.Select(check, currAz.Mantissa, azimuth.Mantissa)
-
-		tmpDiff := f.Sub(lng, currFaceLng)
-		lngDiff.Sign = f.Api.Select(check, tmpDiff.Sign, lngDiff.Sign)
-		lngDiff.Exponent = f.Api.Select(check, tmpDiff.Exponent, lngDiff.Exponent)
-		lngDiff.Mantissa = f.Api.Select(check, tmpDiff.Mantissa, lngDiff.Mantissa)
+		sqDist = f.Select(check, dist, sqDist)
+		sinFaceLat = f.Select(check, f.NewF64Constant(util.SinFaceLat[face]), sinFaceLat)
+		cosFaceLat = f.Select(check, f.NewF64Constant(util.CosFaceLat[face]), cosFaceLat)
+		sinFaceLng = f.Select(check, f.NewF64Constant(math.Sin(util.FaceCenterGeoLng[face])), sinFaceLng)
+		cosFaceLng = f.Select(check, f.NewF64Constant(math.Cos(util.FaceCenterGeoLng[face])), cosFaceLng)
+		sinAzimuth = f.Select(check, f.NewF64Constant(math.Sin(util.Azimuth[face])), sinAzimuth)
+		cosAzimuth = f.Select(check, f.NewF64Constant(math.Cos(util.Azimuth[face])), cosAzimuth)
+		sinAzimuthRot = f.Select(check, f.NewF64Constant(math.Sin(util.Azimuth[face]-util.Ap7rot)), sinAzimuthRot)
+		cosAzimuthRot = f.Select(check, f.NewF64Constant(math.Cos(util.Azimuth[face]-util.Ap7rot)), cosAzimuthRot)
 	}
 
-	ret[0] = sqDist
-	ret[1] = cosFaceLat
-	ret[2] = sinFaceLat
-	ret[3] = azimuth
-	ret[4] = lngDiff
-
-	return ret
-}
-
-func calculateInputsToAtan2(f *float.Context, z, cosLat, cosFaceLat, sinFaceLat, lngDiff float.FloatVar) [2]float.FloatVar {
-
-	var ret [2]float.FloatVar
-	pi := f.NewF64Constant(math.Pi)
-	halfPi := f.NewF64Constant(math.Pi / 2.0)
-	doublePi := f.NewF64Constant(math.Pi * 2.0)
-
-	// Adjustments for sin() function
-	// TODO: If it makes no big difference in regards to constraints: (input % 2pi) - pi
-	// can be applied on the input at the start of SinTaylor and the next lines can be deleted
-
-	// lngDiff in range [-2pi, 2pi], convert to abs(lngDiff) and adjust for sin() function
-	sign := lngDiff.Sign
-	lngDiff.Sign = frontend.Variable(0)
-	term := f.Sub(lngDiff, pi)
-	term.Sign = f.Api.Select(sign, term.Sign, f.Neg(term).Sign) // symmetry of sin()
-	sinLngDiff := maths.SinTaylor64(f, term)
-
-	// Adjustments to abs(lngDiff) for cos() function
-	// First we add pi/2 for cos adjustment and then subtract 2pi if we're out of range
-	cosArg := f.Add(lngDiff, halfPi)
-	isGreater := f.IsGt(cosArg, pi)
-	shifted := f.Sub(cosArg, doublePi)
-	term.Sign = f.Api.Select(isGreater, shifted.Sign, cosArg.Sign)
-	term.Exponent = f.Api.Select(isGreater, shifted.Exponent, cosArg.Exponent)
-	term.Mantissa = f.Api.Select(isGreater, shifted.Mantissa, cosArg.Mantissa)
-	cosLngDiff := maths.SinTaylor64(f, term)
-
-	arg1 := f.Mul(sinLngDiff, cosLat)
-	// arg2 is set up of two summands which we determine separately
-	arg2Part1 := f.Mul(z, cosFaceLat)
-	tmp := f.Mul(sinFaceLat, cosLat)
-	arg2Part2 := f.Mul(tmp, cosLngDiff)
-	arg2 := f.Sub(arg2Part1, arg2Part2)
-
-	ret[0] = arg1
-	ret[1] = arg2
-
-	return ret
-}
-
-// This function brings input into the range [0,2pi] if input is outside
-// by adding or subtracting 2pi depending on which "side" of the range the input is
-func posAngleRads(f *float.Context, rads float.FloatVar) float.FloatVar {
-
-	doublePi := f.NewF64Constant(math.Pi * 2.0)
-
-	increase := f.Add(rads, doublePi)
-	tmp := float.FloatVar{
-		Sign:       0,
-		Exponent:   f.Api.Select(rads.Sign, increase.Exponent, rads.Exponent),
-		Mantissa:   f.Api.Select(rads.Sign, increase.Mantissa, rads.Mantissa),
-		IsAbnormal: 0,
-	}
-	check := f.IsGt(tmp, doublePi)
-	decrease := f.Sub(tmp, doublePi)
-
-	return float.FloatVar{
-		Sign:       0,
-		Exponent:   f.Api.Select(check, decrease.Exponent, tmp.Exponent),
-		Mantissa:   f.Api.Select(check, decrease.Mantissa, tmp.Mantissa),
-		IsAbnormal: 0,
+	return [9]float.FloatVar{
+		sqDist,
+		sinFaceLat, cosFaceLat, sinFaceLng, cosFaceLng,
+		sinAzimuth, cosAzimuth, sinAzimuthRot, cosAzimuthRot,
 	}
 }
 
-func calculateTheta(f *float.Context, z, cosLat, cosFaceLat, sinFaceLat, azimuth, lngDiff float.FloatVar, resolution frontend.Variable) float.FloatVar {
-
-	// Calculate atan2
-	args := calculateInputsToAtan2(f, z, cosLat, cosFaceLat, sinFaceLat, lngDiff)
-	atan2 := maths.Atan2(f, args[0], args[1])
-
-	// Applying posAngleRads to bring in range [0,2pi] and then subtracting from azimuth value
-	sub := posAngleRads(f, atan2)
-	diff := f.Sub(azimuth, sub)
-	theta := posAngleRads(f, diff)
-
-	// Apply rotation in case of odd resolution
-	tmp := f.Sub(theta, f.NewF64Constant(util.Ap7rot))
-	thetaOdd := posAngleRads(f, tmp)
-
+func calculateHex2d(
+	f *float.Context,
+	sinLat, cosLat, sinLng, cosLng,
+	sinFaceLat, cosFaceLat, sinFaceLng, cosFaceLng,
+	sinAzimuth, cosAzimuth, sinAzimuthRot, cosAzimuthRot,
+	r float.FloatVar,
+	resolution frontend.Variable,
+) [2]float.FloatVar {
 	// `0 <= resolution <= 15` tightly fits into 4 bits
-	lsb := f.Api.ToBinary(resolution, 4)[0]
+	isClassIII := f.Api.ToBinary(resolution, 4)[0]
 
-	return float.FloatVar{
-		Sign:       0,
-		Exponent:   f.Api.Select(lsb, thetaOdd.Exponent, theta.Exponent),
-		Mantissa:   f.Api.Select(lsb, thetaOdd.Mantissa, theta.Mantissa),
-		IsAbnormal: 0,
-	}
-}
+	y := f.Mul(cosLat, f.Sub(f.Mul(sinLng, cosFaceLng), f.Mul(cosLng, sinFaceLng)))
+	x := f.Sub(
+		f.Mul(cosFaceLat, sinLat),
+		f.Mul(
+			f.Mul(sinFaceLat, cosLat),
+			f.Add(f.Mul(cosLng, cosFaceLng), f.Mul(sinLng, sinFaceLng)),
+		),
+	)
 
-func calculateHex2d(f *float.Context, theta, r float.FloatVar) [2]float.FloatVar {
+	sinAz := f.Select(isClassIII, sinAzimuthRot, sinAzimuth)
+	cosAz := f.Select(isClassIII, cosAzimuthRot, cosAzimuth)
 
-	var ret [2]float.FloatVar
-	pi := f.NewF64Constant(math.Pi)
-	halfPi := f.NewF64Constant(math.Pi / 2.0)
-	oneAndHalfPi := f.NewF64Constant(math.Pi * 1.5)
-	doublePi := f.NewF64Constant(math.Pi * 2.0)
+	z := f.Sqrt(f.Add(f.Mul(x, x), f.Mul(y, y)))
 
-	// Adjustments for sin() function -- theta is in range [0, 2pi]
-	// shift and flip sign because of symmetry of sin()
-	term := f.Neg(f.Sub(theta, pi))
-	sinTheta := maths.SinTaylor64(f, term)
+	sinP := f.Div(y, z)
+	cosP := f.Div(x, z)
 
-	// Adjustments for cos() function
-	// shift to left by 1.5 * pi
-	// if in range [0, 0.5 * pi] before shift, shift first quarter to the right by 2 * pi
-	isLessHalfPi := f.IsLt(theta, halfPi)
-	shifted1 := f.Sub(theta, oneAndHalfPi)
-	shifted2 := f.Add(shifted1, doublePi)
-	term = float.FloatVar{
-		Sign:       f.Api.Select(isLessHalfPi, shifted2.Sign, shifted1.Sign),
-		Exponent:   f.Api.Select(isLessHalfPi, shifted2.Exponent, shifted1.Exponent),
-		Mantissa:   f.Api.Select(isLessHalfPi, shifted2.Mantissa, shifted1.Mantissa),
-		IsAbnormal: 0,
-	}
-	cosTheta := maths.SinTaylor64(f, term)
+	sin := f.Sub(f.Mul(sinAz, cosP), f.Mul(cosAz, sinP))
+	cos := f.Add(f.Mul(cosAz, cosP), f.Mul(sinAz, sinP))
 
-	ret[0] = f.Mul(cosTheta, r) // x
-	ret[1] = f.Mul(sinTheta, r) // y
-
-	return ret
+	return [2]float.FloatVar{f.Mul(cos, r), f.Mul(sin, r)}
 }
 
 // TODO: Comments
