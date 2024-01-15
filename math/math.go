@@ -251,3 +251,45 @@ func SinTaylor64(f *float.Context, x float.FloatVar) float.FloatVar {
 	ret.Sign = x.Sign
 	return ret
 }
+
+func SinTaylor32(f *float.Context, x float.FloatVar) float.FloatVar {
+	ret := f.NewF32Constant(float32(0))
+	pi := f.NewF32Constant(math.Pi)
+	halfPi := f.NewF32Constant(math.Pi / 2.0)
+
+	// TODO: Assert x <= pi
+
+	// TODO: Zero handling: Return 0 in case x = 0
+
+	// The Taylor Series approximation's inaccuracy increases when the input is close to pi
+	// we mitigate this with the symmetry of the function
+	// Since sin(x) is symmetric at pi/2, we fold across the symmetry axis in case term > pi/2
+	greaterHalfPi := f.IsGt(x, halfPi)
+	folding := f.Sub(pi, x)
+
+	var term = float.FloatVar{
+		Sign:       0,
+		Exponent:   f.Api.Select(greaterHalfPi, folding.Exponent, x.Exponent),
+		Mantissa:   f.Api.Select(greaterHalfPi, folding.Mantissa, x.Mantissa),
+		IsAbnormal: 0,
+	}
+
+	xSquare := f.Mul(term, term)
+	// Calculate term*x^2 / 2i*(2i+1) in each loop iteration
+	for i := 1; i <= 15; i++ {
+
+		if (i % 2) == 0 {
+			ret = f.Sub(ret, term)
+		} else {
+			ret = f.Add(ret, term)
+		}
+
+		nominator := f.Mul(term, xSquare)
+		denominator := f.NewF32Constant(float32(2 * i * (2*i + 1)))
+
+		term = f.Div(nominator, denominator)
+	}
+
+	ret.Sign = x.Sign
+	return ret
+}

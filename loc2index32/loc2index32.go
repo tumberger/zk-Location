@@ -12,13 +12,13 @@ import (
 )
 
 func scaleR(f *float.Context, r float.FloatVar, resolution frontend.Variable) float.FloatVar {
-	multiplier := f.NewF64Constant(1.0)
-	power := util.Sqrt7_64
+	multiplier := f.NewF32Constant(1.0)
+	power := util.Sqrt7_32
 	// `0 <= resolution <= 15` tightly fits into 4 bits
 	bits := f.Api.ToBinary(resolution, 4)
 	// The square and multiply algorithm
 	for _, bit := range bits {
-		t := f.Mul(multiplier, f.NewF64Constant(power))
+		t := f.Mul(multiplier, f.NewF32Constant(power))
 		multiplier = float.FloatVar{
 			Sign:       0,
 			Exponent:   f.Api.Select(bit, t.Exponent, multiplier.Exponent),
@@ -39,39 +39,39 @@ func scaleR(f *float.Context, r float.FloatVar, resolution frontend.Variable) fl
 func calculateR(f *float.Context, sqDist float.FloatVar, resolution frontend.Variable) float.FloatVar {
 
 	// Nominator = (4 - sqDist) * sqDist  ---  Divisor = 2 - sqDist
-	nominator := f.Mul(f.Sub(f.NewF64Constant(4.0), sqDist), sqDist)
-	divisor := f.Sub(f.NewF64Constant(2.0), sqDist)
+	nominator := f.Mul(f.Sub(f.NewF32Constant(4.0), sqDist), sqDist)
+	divisor := f.Sub(f.NewF32Constant(2.0), sqDist)
 	sqrNom := f.Sqrt(nominator)
 	quotient := f.Div(sqrNom, divisor)
 
-	r := f.Div(quotient, f.NewF64Constant(util.ResConst_64))
+	r := f.Div(quotient, f.NewF32Constant(util.ResConst_32))
 
 	return scaleR(f, r, resolution)
 }
 
 func closestFaceCalculations(f *float.Context, x2, y2, z2, lng float.FloatVar) [9]float.FloatVar {
 	// Starting with square distance 5
-	sqDist := f.NewF64Constant(5.0)
-	sinFaceLat := f.NewF64Constant(0)
-	cosFaceLat := f.NewF64Constant(0)
-	sinFaceLng := f.NewF64Constant(0)
-	cosFaceLng := f.NewF64Constant(0)
-	sinAzimuth := f.NewF64Constant(0)
-	cosAzimuth := f.NewF64Constant(0)
-	sinAzimuthRot := f.NewF64Constant(0)
-	cosAzimuthRot := f.NewF64Constant(0)
+	sqDist := f.NewF32Constant(5.0)
+	sinFaceLat := f.NewF32Constant(0)
+	cosFaceLat := f.NewF32Constant(0)
+	sinFaceLng := f.NewF32Constant(0)
+	cosFaceLng := f.NewF32Constant(0)
+	sinAzimuth := f.NewF32Constant(0)
+	cosAzimuth := f.NewF32Constant(0)
+	sinAzimuthRot := f.NewF32Constant(0)
+	cosAzimuthRot := f.NewF32Constant(0)
 
 	// We determine the face which has the smallest square distance from its center point to
 	// our lat,lng coordinates and set all variables which depend on the face for later use
 	for i := 0; i < 60; i += 3 {
 
-		d := f.Sub(f.NewF64Constant(util.FaceCenterPoint_64[i]), x2)
+		d := f.Sub(f.NewF32Constant(util.FaceCenterPoint_32[i]), x2)
 		s1 := f.Mul(d, d)
 
-		d = f.Sub(f.NewF64Constant(util.FaceCenterPoint_64[i+1]), y2)
+		d = f.Sub(f.NewF32Constant(util.FaceCenterPoint_32[i+1]), y2)
 		s2 := f.Mul(d, d)
 
-		d = f.Sub(f.NewF64Constant(util.FaceCenterPoint_64[i+2]), z2)
+		d = f.Sub(f.NewF32Constant(util.FaceCenterPoint_32[i+2]), z2)
 		s3 := f.Mul(d, d)
 
 		tmp := f.Add(s1, s2)
@@ -83,14 +83,14 @@ func closestFaceCalculations(f *float.Context, x2, y2, z2, lng float.FloatVar) [
 
 		// Set values accordingly if square distance is new lowest value
 		sqDist = f.Select(check, dist, sqDist)
-		sinFaceLat = f.Select(check, f.NewF64Constant(util.SinFaceLat[face]), sinFaceLat)
-		cosFaceLat = f.Select(check, f.NewF64Constant(util.CosFaceLat_64[face]), cosFaceLat)
-		sinFaceLng = f.Select(check, f.NewF64Constant(math.Sin(util.FaceCenterGeoLng_64[face])), sinFaceLng)
-		cosFaceLng = f.Select(check, f.NewF64Constant(math.Cos(util.FaceCenterGeoLng_64[face])), cosFaceLng)
-		sinAzimuth = f.Select(check, f.NewF64Constant(math.Sin(util.Azimuth[face])), sinAzimuth)
-		cosAzimuth = f.Select(check, f.NewF64Constant(math.Cos(util.Azimuth[face])), cosAzimuth)
-		sinAzimuthRot = f.Select(check, f.NewF64Constant(math.Sin(util.Azimuth[face]-util.Ap7rot_64)), sinAzimuthRot)
-		cosAzimuthRot = f.Select(check, f.NewF64Constant(math.Cos(util.Azimuth[face]-util.Ap7rot_64)), cosAzimuthRot)
+		sinFaceLat = f.Select(check, f.NewF32Constant(util.SinFaceLat_32[face]), sinFaceLat)
+		cosFaceLat = f.Select(check, f.NewF32Constant(util.CosFaceLat_32[face]), cosFaceLat)
+		sinFaceLng = f.Select(check, f.NewF32Constant(float32(math.Sin(util.FaceCenterGeoLng_64[face]))), sinFaceLng)
+		cosFaceLng = f.Select(check, f.NewF32Constant(float32(math.Cos(util.FaceCenterGeoLng_64[face]))), cosFaceLng)
+		sinAzimuth = f.Select(check, f.NewF32Constant(float32(math.Sin(util.Azimuth[face]))), sinAzimuth)
+		cosAzimuth = f.Select(check, f.NewF32Constant(float32(math.Cos(util.Azimuth[face]))), cosAzimuth)
+		sinAzimuthRot = f.Select(check, f.NewF32Constant(float32(math.Sin(util.Azimuth[face]-util.Ap7rot_64))), sinAzimuthRot)
+		cosAzimuthRot = f.Select(check, f.NewF32Constant(float32(math.Cos(util.Azimuth[face]-util.Ap7rot_64))), cosAzimuthRot)
 	}
 
 	return [9]float.FloatVar{
@@ -142,8 +142,8 @@ func hex2dToCoordIJK(f *float.Context, x, y float.FloatVar) [3]frontend.Variable
 	a1.Sign = frontend.Variable(0)
 	a2 := y
 	a2.Sign = frontend.Variable(0)
-	x2 := f.Div(a2, f.NewF64Constant(util.Sin60_64))
-	tmp := f.Div(x2, f.NewF64Constant(2.0))
+	x2 := f.Div(a2, f.NewF32Constant(util.Sin60_32))
+	tmp := f.Div(x2, f.NewF32Constant(2.0))
 	x1 := f.Add(a1, tmp)
 
 	m1 := f.Floor(x1)
@@ -159,18 +159,18 @@ func hex2dToCoordIJK(f *float.Context, x, y float.FloatVar) [3]frontend.Variable
 	m2PlusOne := f.Api.Add(m2int, 1)
 
 	// Check if r1 < 1/2?
-	r1CaseA := f.IsLt(r1, f.NewF64Constant(0.5))
+	r1CaseA := f.IsLt(r1, f.NewF32Constant(0.5))
 	// Check if r1 < 1/3?
-	r1CaseA1 := f.IsLt(r1, f.NewF64Constant((1.0 / 3.0)))
+	r1CaseA1 := f.IsLt(r1, f.NewF32Constant((1.0 / 3.0)))
 	// Check if r1 < 2/3?
-	r1CaseB1 := f.IsLt(r1, f.NewF64Constant((2.0 / 3.0)))
+	r1CaseB1 := f.IsLt(r1, f.NewF32Constant((2.0 / 3.0)))
 	// Check if 1-r1 <= r2?
-	oneMinus := f.Sub(f.NewF64Constant(1.0), r1)
+	oneMinus := f.Sub(f.NewF32Constant(1.0), r1)
 	iCaseA2First := f.IsLe(oneMinus, r2)
 	// Check if 2*r1 > r2?
 	iCaseA2Second := f.IsGt(doubleR1, r2)
 	// Check if r2 > 2*r1-1?
-	doubleOneMinus := f.Sub(doubleR1, f.NewF64Constant(1.0))
+	doubleOneMinus := f.Sub(doubleR1, f.NewF32Constant(1.0))
 	iCaseB1First := f.IsGt(r2, doubleOneMinus)
 	// Check if 1-r1 > r2?
 	iCaseB1Second := f.IsGt(oneMinus, r2)
@@ -184,9 +184,9 @@ func hex2dToCoordIJK(f *float.Context, x, y float.FloatVar) [3]frontend.Variable
 				f.Api.Select(iCaseB1Second, m1int, m1PlusOne), m1PlusOne), m1PlusOne))
 
 	// Next is J
-	onePlus := f.Add(r1, f.NewF64Constant(1.0))
-	valueR2PathA := f.Div(onePlus, f.NewF64Constant(2.0))
-	valueR2PathB := f.Div(r1, f.NewF64Constant(2.0))
+	onePlus := f.Add(r1, f.NewF32Constant(1.0))
+	valueR2PathA := f.Div(onePlus, f.NewF32Constant(2.0))
+	valueR2PathB := f.Div(r1, f.NewF32Constant(2.0))
 	check1 := f.IsGt(valueR2PathA, r2)
 	check2 := f.IsGt(oneMinus, r2)
 	check3 := f.IsGt(valueR2PathB, r2)
