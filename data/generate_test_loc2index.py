@@ -107,12 +107,17 @@ def generate_points(resolution):
             gen_h3_index = execute_lat_lng_to_ijk(res, gen_lat, gen_lng)
             points.append((gen_lat_rad, gen_lng_rad, res, gen_h3_index[0], gen_h3_index[1], gen_h3_index[2]))
 
-            # Calculate and print the distance between generated point and boundary point
+            # Calculate and print the distance between generated point and boundary point            
             distance = haversine(gen_lat, gen_lng, target_lat, target_lng)
             print(f"Generated Point", gen_lat, gen_lng)
             print(f"Boundary Point", target_lat, target_lng)
             print(f"Distance between generated point and boundary point: {distance:.2f} meters")
     return points
+
+def float32_to_hex(f):
+    # Convert a float32 number to hexadecimal
+    packed = struct.pack('>f', f)
+    return struct.unpack('>I', packed)[0]
 
 def float64_to_hex(f):
     # Convert a float32 number to hexadecimal
@@ -122,22 +127,36 @@ def float64_to_hex(f):
 def int_to_hex(i):
     # Convert an integer to hexadecimal
     return i
+def write_to_file(data, use_float32=False):
+    if use_float32:
+        file_path = './f32/loc2index32.txt'
+        to_hex = float32_to_hex  # Use the float32_to_hex function
+        hex_format = '{:08X}'  # Format for 32-bit hex
+    else:
+        file_path = './f64/loc2index64.txt'
+        to_hex = float64_to_hex  # Use the float64_to_hex function
+        hex_format = '{:016X}'  # Format for 64-bit hex
 
-def write_to_file(data):
-    with open('./f64/loc2index64.txt', 'w') as file:
+    with open(file_path, 'w') as file:
         for lat, lng, res, i, j, k in data:
-            lat_hex = float64_to_hex(np.float64(lat))
-            lng_hex = float64_to_hex(np.float64(lng))
+            lat_hex = to_hex(np.float32(lat) if use_float32 else np.float64(lat))
+            lng_hex = to_hex(np.float32(lng) if use_float32 else np.float64(lng))
             res_hex = int_to_hex(res)
             i_hex = int_to_hex(i)
             j_hex = int_to_hex(j)
             k_hex = int_to_hex(k)
-            file.write(f"{lat_hex:016X} {lng_hex:016X} {res_hex:X} {i_hex:X} {j_hex:X} {k_hex:X}\n")
+            file.write(f"{hex_format.format(lat_hex)} {hex_format.format(lng_hex)} {res_hex:X} {i_hex:X} {j_hex:X} {k_hex:X}\n")
 
 # Generate points for resolutions 1-15
 try:
     generated_points = generate_points(15)
-    write_to_file(generated_points)
-    print("Data generation complete. Data saved to .txt.")
+
+    # Choose whether to use float32 or float64 precision
+    # Set use_float32 to True for float32 precision, False for float64
+    use_float32 = True  # or False
+
+    write_to_file(generated_points, use_float32)
+    precision_type = '32' if use_float32 else '64'
+    print(f"Data generation complete. Data saved to loc2index{precision_type}.txt.")
 except Exception as e:
     print(f"Error: {e}")
