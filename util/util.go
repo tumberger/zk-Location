@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"math"
 	"math/rand"
+	"os"
 	"os/exec"
 	"regexp"
 	"strconv"
@@ -312,8 +313,6 @@ func ExecuteLatLngToIJK(resolution int, latitude float64, longitude float64) (in
 	// Define the command and arguments using the correct path
 	cmd := exec.Command(executablePath, "--resolution", resStr, "--latitude", latStr, "--longitude", lngStr)
 
-	fmt.Printf("Command: %s", cmd)
-
 	// Run the command and capture the output
 	output, err := cmd.CombinedOutput()
 	if err != nil {
@@ -393,7 +392,7 @@ func BenchProof(b *testing.B, circuit, assignment frontend.Circuit) {
 	require.NoError(b, err)
 	//publicWitness := fullWitness.Public()
 	fmt.Println("setting up...")
-	pk, _, err := groth16.Setup(cs)
+	pk, vk, err := groth16.Setup(cs)
 	require.NoError(b, err)
 
 	fmt.Println("solving and proving...")
@@ -405,10 +404,86 @@ func BenchProof(b *testing.B, circuit, assignment frontend.Circuit) {
 		id := rand.Uint32() % 256 //#nosec G404 -- This is a false positive
 		start = time.Now().UnixMicro()
 		fmt.Println("groth16 proving", id)
-		_, err = groth16.Prove(cs, pk, fullWitness)
+		proof, err := groth16.Prove(cs, pk, fullWitness)
 		require.NoError(b, err)
 		fmt.Println("groth16 proved", id, "in", time.Now().UnixMicro()-start, "μs")
 
-		// fmt.Println("mimc total calls: fr=", mimcFrTotalCalls, ", snark=", mimcSnarkTotalCalls)
+		publicWitness, _ := fullWitness.Public()
+
+		groth16.Verify(proof, vk, publicWitness)
+	}
+}
+
+func BenchProofToFile(b *testing.B, circuit, assignment frontend.Circuit, resolution int64, index int64) {
+	// Open a file to save benchmark results
+	file, err := os.OpenFile("../benchmarks/bench_ZKLP32.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		b.Fatalf("Failed to open file: %v", err)
+	}
+	defer file.Close()
+
+	info, err := file.Stat()
+	if err != nil {
+		b.Fatalf("Failed to get file stats: %v", err)
+	}
+	if info.Size() == 0 {
+		_, err = fmt.Fprintln(file, "Resolution, Index, NbConstraints, CompilationTime, SetupTime, ProverTime, VerifierTime")
+		if err != nil {
+			b.Fatalf("Failed to write headers to file: %v", err)
+		}
+	}
+
+	// Variables for measuring times
+	var compilationTime, setupTime, proverTime, verifierTime int64
+
+	// Benchmarking loop
+	b.ResetTimer()
+	b.N = 5
+	for i := 0; i < b.N; i++ {
+
+		// Compilation step with time measurement
+		start := time.Now().UnixMicro()
+		cs, err := frontend.Compile(ecc.BN254.ScalarField(), r1cs.NewBuilder, circuit, frontend.WithCompressThreshold(compressThreshold))
+		if err != nil {
+			b.Fatalf("Failed to compile: %v", err)
+		}
+		compilationTime = time.Now().UnixMicro() - start
+
+		// Print the number of constraints
+		fmt.Println("Number of constraints:", cs.GetNbConstraints())
+
+		fullWitness, err := frontend.NewWitness(assignment, ecc.BN254.ScalarField())
+
+		// Setup step with time measurement
+		start = time.Now().UnixMicro()
+		pk, vk, err := groth16.Setup(cs)
+		if err != nil {
+			b.Fatalf("Failed in setup: %v", err)
+		}
+		setupTime = time.Now().UnixMicro() - start
+
+		// Proving step with time measurement
+		id := rand.Uint32() % 256 // #nosec G404 -- This is a false positive
+		start = time.Now().UnixMicro()
+		fmt.Println("groth16 proving", id)
+		proof, err := groth16.Prove(cs, pk, fullWitness)
+		if err != nil {
+			b.Fatalf("Failed in proving: %v", err)
+		}
+		proverTime = time.Now().UnixMicro() - start
+
+		// Verifier step with time measurement
+		start = time.Now().UnixMicro()
+		publicWitness, _ := fullWitness.Public()
+		groth16.Verify(proof, vk, publicWitness)
+		verifierTime = time.Now().UnixMicro() - start
+
+		// Writing the captured data to the file
+		_, err = fmt.Fprintf(file, "%d, %d, %d, %d, %d, %d, %d\n",
+			resolution, index, cs.GetNbConstraints(),
+			compilationTime, setupTime, proverTime, verifierTime)
+		if err != nil {
+			b.Fatalf("Failed to write data to file: %v", err)
+		}
 	}
 }
