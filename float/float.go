@@ -159,51 +159,13 @@ func (f *Context) NewFloat(v frontend.Variable) FloatVar {
 
 // Allocate a constant in the constraint system.
 func (f *Context) NewConstant(v uint64) FloatVar {
-	s := v >> (f.E + f.M)
-	e := (v >> f.M) - (s << f.E)
-	m := v - (s << (f.E + f.M)) - (e << f.M)
-
-	exponent_min := new(big.Int).Sub(f.E_NORMAL_MIN, big.NewInt(1))
-	exponent_max := f.E_MAX
-
-	exponent := new(big.Int).Add(big.NewInt(int64(e)), exponent_min)
-
-	mantissa_is_not_zero := m != 0
-	exponent_is_min := exponent.Cmp(exponent_min) == 0
-	exponent_is_max := exponent.Cmp(exponent_max) == 0
-
-	mantissa := big.NewInt(int64(m))
-	shift := uint(0)
-	for i := int(f.M - 1); i >= 0; i-- {
-		if mantissa.Bit(i) != 0 {
-			break
-		}
-		shift++
-	}
-
-	shifted_mantissa := new(big.Int).Lsh(new(big.Int).Set(mantissa), shift)
-
-	if exponent_is_min {
-		exponent = new(big.Int).Sub(exponent, big.NewInt(int64(shift)))
-		mantissa = new(big.Int).Lsh(shifted_mantissa, 1)
-	} else {
-		if exponent_is_max && mantissa_is_not_zero {
-			mantissa.SetUint64(0)
-		} else {
-			mantissa = new(big.Int).Add(mantissa, new(big.Int).Lsh(big.NewInt(1), f.M))
-		}
-	}
-
-	is_abnormal := big.NewInt(0)
-	if exponent_is_max {
-		is_abnormal.SetUint64(1)
-	}
+	components := ComponentsOf(v, uint64(f.E), uint64(f.M))
 
 	return FloatVar{
-		Sign:       s,
-		Exponent:   exponent,
-		Mantissa:   mantissa,
-		IsAbnormal: is_abnormal,
+		Sign:       components[0],
+		Exponent:   components[1],
+		Mantissa:   components[2],
+		IsAbnormal: components[3],
 	}
 }
 
