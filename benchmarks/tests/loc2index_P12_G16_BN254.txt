@@ -1,0 +1,875 @@
+=== RUN   TestLoc2IndexFromFile
+[6/6]0xc00007c6c0=== RUN   TestLoc2IndexFromFile/bn254
+    assert.go:200: 
+        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:200
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert_checkcircuit.go:50
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:66
+        	Error:      	[assertIsEqual] 0 == 1
+        	            	loc2index.(*loc2IndexWrapper).Define
+        	            		loc2index.go:1395
+        	            	
+        	            	witness:{"Lat":691885936016,"Lng":771675529348,"LatIsNegative":0,"LngIsNegative":0,"I":1,"J":0,"K":1,"Resolution":0}
+        	Test:       	TestLoc2IndexFromFile/bn254
+[6/6]0xc000552300=== RUN   TestLoc2IndexFromFile/bn254#01
+=== RUN   TestLoc2IndexFromFile/bn254#01/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#01/groth16/valid_witness
+[6/6]0xc001a5c0c0=== RUN   TestLoc2IndexFromFile/bn254#02
+=== RUN   TestLoc2IndexFromFile/bn254#02/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#02/groth16/valid_witness
+[6/6]0xc001f5a120=== RUN   TestLoc2IndexFromFile/bn254#03
+=== RUN   TestLoc2IndexFromFile/bn254#03/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#03/groth16/valid_witness
+[6/6]0xc0005291a0=== RUN   TestLoc2IndexFromFile/bn254#04
+=== RUN   TestLoc2IndexFromFile/bn254#04/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#04/groth16/valid_witness
+[6/6]0xc000553b60=== RUN   TestLoc2IndexFromFile/bn254#05
+=== RUN   TestLoc2IndexFromFile/bn254#05/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#05/groth16/valid_witness
+[6/6]0xc00007db00=== RUN   TestLoc2IndexFromFile/bn254#06
+=== RUN   TestLoc2IndexFromFile/bn254#06/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#06/groth16/valid_witness
+[6/6]0xc00e796a20=== RUN   TestLoc2IndexFromFile/bn254#07
+=== RUN   TestLoc2IndexFromFile/bn254#07/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#07/groth16/valid_witness
+[6/6]0xc00e796c00=== RUN   TestLoc2IndexFromFile/bn254#08
+=== RUN   TestLoc2IndexFromFile/bn254#08/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#08/groth16/valid_witness
+[6/6]0xc00e796f60=== RUN   TestLoc2IndexFromFile/bn254#09
+=== RUN   TestLoc2IndexFromFile/bn254#09/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#09/groth16/valid_witness
+[6/6]0xc00007d860=== RUN   TestLoc2IndexFromFile/bn254#10
+=== RUN   TestLoc2IndexFromFile/bn254#10/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#10/groth16/valid_witness
+[6/6]0xc000552f60=== RUN   TestLoc2IndexFromFile/bn254#11
+=== RUN   TestLoc2IndexFromFile/bn254#11/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#11/groth16/valid_witness
+[6/6]0xc000f84b40=== RUN   TestLoc2IndexFromFile/bn254#12
+=== RUN   TestLoc2IndexFromFile/bn254#12/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#12/groth16/valid_witness
+[6/6]0xc0005292c0=== RUN   TestLoc2IndexFromFile/bn254#13
+=== RUN   TestLoc2IndexFromFile/bn254#13/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#13/groth16/valid_witness
+[6/6]0xc00007d860=== RUN   TestLoc2IndexFromFile/bn254#14
+=== RUN   TestLoc2IndexFromFile/bn254#14/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#14/groth16/valid_witness
+[6/6]0xc000529080=== RUN   TestLoc2IndexFromFile/bn254#15
+=== RUN   TestLoc2IndexFromFile/bn254#15/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#15/groth16/valid_witness
+[6/6]0xc00e7969c0=== RUN   TestLoc2IndexFromFile/bn254#16
+=== RUN   TestLoc2IndexFromFile/bn254#16/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#16/groth16/valid_witness
+[6/6]0xc0005294a0=== RUN   TestLoc2IndexFromFile/bn254#17
+=== RUN   TestLoc2IndexFromFile/bn254#17/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#17/groth16/valid_witness
+[6/6]0xc00ac10ea0=== RUN   TestLoc2IndexFromFile/bn254#18
+=== RUN   TestLoc2IndexFromFile/bn254#18/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#18/groth16/valid_witness
+[6/6]0xc0047a8120=== RUN   TestLoc2IndexFromFile/bn254#19
+=== RUN   TestLoc2IndexFromFile/bn254#19/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#19/groth16/valid_witness
+[6/6]0xc000f859e0=== RUN   TestLoc2IndexFromFile/bn254#20
+=== RUN   TestLoc2IndexFromFile/bn254#20/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#20/groth16/valid_witness
+[6/6]0xc000f84f00=== RUN   TestLoc2IndexFromFile/bn254#21
+=== RUN   TestLoc2IndexFromFile/bn254#21/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#21/groth16/valid_witness
+[6/6]0xc0005536e0=== RUN   TestLoc2IndexFromFile/bn254#22
+=== RUN   TestLoc2IndexFromFile/bn254#22/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#22/groth16/valid_witness
+[6/6]0xc00007d5c0=== RUN   TestLoc2IndexFromFile/bn254#23
+=== RUN   TestLoc2IndexFromFile/bn254#23/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#23/groth16/valid_witness
+[6/6]0xc00007db60=== RUN   TestLoc2IndexFromFile/bn254#24
+=== RUN   TestLoc2IndexFromFile/bn254#24/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#24/groth16/valid_witness
+[6/6]0xc00ac11020=== RUN   TestLoc2IndexFromFile/bn254#25
+=== RUN   TestLoc2IndexFromFile/bn254#25/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#25/groth16/valid_witness
+[6/6]0xc00ac10660=== RUN   TestLoc2IndexFromFile/bn254#26
+=== RUN   TestLoc2IndexFromFile/bn254#26/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#26/groth16/valid_witness
+[6/6]0xc000f84f60=== RUN   TestLoc2IndexFromFile/bn254#27
+=== RUN   TestLoc2IndexFromFile/bn254#27/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#27/groth16/valid_witness
+[6/6]0xc00ac10d80=== RUN   TestLoc2IndexFromFile/bn254#28
+=== RUN   TestLoc2IndexFromFile/bn254#28/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#28/groth16/valid_witness
+[6/6]0xc000f844e0=== RUN   TestLoc2IndexFromFile/bn254#29
+=== RUN   TestLoc2IndexFromFile/bn254#29/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#29/groth16/valid_witness
+[6/6]0xc0005537a0=== RUN   TestLoc2IndexFromFile/bn254#30
+=== RUN   TestLoc2IndexFromFile/bn254#30/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#30/groth16/valid_witness
+[6/6]0xc000553e60=== RUN   TestLoc2IndexFromFile/bn254#31
+=== RUN   TestLoc2IndexFromFile/bn254#31/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#31/groth16/valid_witness
+[6/6]0xc000553bc0=== RUN   TestLoc2IndexFromFile/bn254#32
+=== RUN   TestLoc2IndexFromFile/bn254#32/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#32/groth16/valid_witness
+[6/6]0xc00ac10300=== RUN   TestLoc2IndexFromFile/bn254#33
+=== RUN   TestLoc2IndexFromFile/bn254#33/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#33/groth16/valid_witness
+[6/6]0xc00ac10540=== RUN   TestLoc2IndexFromFile/bn254#34
+=== RUN   TestLoc2IndexFromFile/bn254#34/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#34/groth16/valid_witness
+[6/6]0xc00007d620=== RUN   TestLoc2IndexFromFile/bn254#35
+=== RUN   TestLoc2IndexFromFile/bn254#35/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#35/groth16/valid_witness
+[6/6]0xc000553140=== RUN   TestLoc2IndexFromFile/bn254#36
+=== RUN   TestLoc2IndexFromFile/bn254#36/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#36/groth16/valid_witness
+[6/6]0xc00007d9e0=== RUN   TestLoc2IndexFromFile/bn254#37
+=== RUN   TestLoc2IndexFromFile/bn254#37/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#37/groth16/valid_witness
+[6/6]0xc004700480=== RUN   TestLoc2IndexFromFile/bn254#38
+=== RUN   TestLoc2IndexFromFile/bn254#38/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#38/groth16/valid_witness
+[6/6]0xc000f84960=== RUN   TestLoc2IndexFromFile/bn254#39
+=== RUN   TestLoc2IndexFromFile/bn254#39/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#39/groth16/valid_witness
+[6/6]0xc00ac10600=== RUN   TestLoc2IndexFromFile/bn254#40
+=== RUN   TestLoc2IndexFromFile/bn254#40/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#40/groth16/valid_witness
+[6/6]0xc00ac112c0=== RUN   TestLoc2IndexFromFile/bn254#41
+=== RUN   TestLoc2IndexFromFile/bn254#41/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#41/groth16/valid_witness
+[6/6]0xc004700900=== RUN   TestLoc2IndexFromFile/bn254#42
+=== RUN   TestLoc2IndexFromFile/bn254#42/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#42/groth16/valid_witness
+[6/6]0xc00ac10300=== RUN   TestLoc2IndexFromFile/bn254#43
+=== RUN   TestLoc2IndexFromFile/bn254#43/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#43/groth16/valid_witness
+[6/6]0xc0005531a0=== RUN   TestLoc2IndexFromFile/bn254#44
+=== RUN   TestLoc2IndexFromFile/bn254#44/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#44/groth16/valid_witness
+[6/6]0xc000553680=== RUN   TestLoc2IndexFromFile/bn254#45
+=== RUN   TestLoc2IndexFromFile/bn254#45/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#45/groth16/valid_witness
+[6/6]0xc000529320=== RUN   TestLoc2IndexFromFile/bn254#46
+=== RUN   TestLoc2IndexFromFile/bn254#46/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#46/groth16/valid_witness
+[6/6]0xc000f849c0=== RUN   TestLoc2IndexFromFile/bn254#47
+=== RUN   TestLoc2IndexFromFile/bn254#47/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#47/groth16/valid_witness
+[6/6]0xc000f84d80=== RUN   TestLoc2IndexFromFile/bn254#48
+=== RUN   TestLoc2IndexFromFile/bn254#48/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#48/groth16/valid_witness
+[6/6]0xc00007d440=== RUN   TestLoc2IndexFromFile/bn254#49
+=== RUN   TestLoc2IndexFromFile/bn254#49/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#49/groth16/valid_witness
+[6/6]0xc000553500=== RUN   TestLoc2IndexFromFile/bn254#50
+=== RUN   TestLoc2IndexFromFile/bn254#50/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#50/groth16/valid_witness
+[6/6]0xc004700780=== RUN   TestLoc2IndexFromFile/bn254#51
+=== RUN   TestLoc2IndexFromFile/bn254#51/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#51/groth16/valid_witness
+[6/6]0xc00007db00=== RUN   TestLoc2IndexFromFile/bn254#52
+=== RUN   TestLoc2IndexFromFile/bn254#52/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#52/groth16/valid_witness
+[6/6]0xc0047004e0=== RUN   TestLoc2IndexFromFile/bn254#53
+=== RUN   TestLoc2IndexFromFile/bn254#53/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#53/groth16/valid_witness
+[6/6]0xc0005292c0=== RUN   TestLoc2IndexFromFile/bn254#54
+=== RUN   TestLoc2IndexFromFile/bn254#54/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#54/groth16/valid_witness
+[6/6]0xc000f84cc0=== RUN   TestLoc2IndexFromFile/bn254#55
+=== RUN   TestLoc2IndexFromFile/bn254#55/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#55/groth16/valid_witness
+[6/6]0xc000f847e0=== RUN   TestLoc2IndexFromFile/bn254#56
+=== RUN   TestLoc2IndexFromFile/bn254#56/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#56/groth16/valid_witness
+[6/6]0xc00ac10ea0=== RUN   TestLoc2IndexFromFile/bn254#57
+=== RUN   TestLoc2IndexFromFile/bn254#57/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#57/groth16/valid_witness
+[6/6]0xc000528d20=== RUN   TestLoc2IndexFromFile/bn254#58
+=== RUN   TestLoc2IndexFromFile/bn254#58/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#58/groth16/valid_witness
+[6/6]0xc000f84960=== RUN   TestLoc2IndexFromFile/bn254#59
+=== RUN   TestLoc2IndexFromFile/bn254#59/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#59/groth16/valid_witness
+[6/6]0xc000f84840=== RUN   TestLoc2IndexFromFile/bn254#60
+=== RUN   TestLoc2IndexFromFile/bn254#60/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#60/groth16/valid_witness
+[6/6]0xc000528de0=== RUN   TestLoc2IndexFromFile/bn254#61
+=== RUN   TestLoc2IndexFromFile/bn254#61/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#61/groth16/valid_witness
+[6/6]0xc000528d20=== RUN   TestLoc2IndexFromFile/bn254#62
+=== RUN   TestLoc2IndexFromFile/bn254#62/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#62/groth16/valid_witness
+[6/6]0xc000528fc0=== RUN   TestLoc2IndexFromFile/bn254#63
+=== RUN   TestLoc2IndexFromFile/bn254#63/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#63/groth16/valid_witness
+[6/6]0xc00007d980=== RUN   TestLoc2IndexFromFile/bn254#64
+=== RUN   TestLoc2IndexFromFile/bn254#64/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#64/groth16/valid_witness
+[6/6]0xc0005536e0=== RUN   TestLoc2IndexFromFile/bn254#65
+=== RUN   TestLoc2IndexFromFile/bn254#65/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#65/groth16/valid_witness
+[6/6]0xc003c96120=== RUN   TestLoc2IndexFromFile/bn254#66
+=== RUN   TestLoc2IndexFromFile/bn254#66/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#66/groth16/valid_witness
+[6/6]0xc000553c20=== RUN   TestLoc2IndexFromFile/bn254#67
+=== RUN   TestLoc2IndexFromFile/bn254#67/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#67/groth16/valid_witness
+[6/6]0xc00172e120=== RUN   TestLoc2IndexFromFile/bn254#68
+=== RUN   TestLoc2IndexFromFile/bn254#68/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#68/groth16/valid_witness
+[6/6]0xc000529200=== RUN   TestLoc2IndexFromFile/bn254#69
+=== RUN   TestLoc2IndexFromFile/bn254#69/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#69/groth16/valid_witness
+[6/6]0xc000552cc0=== RUN   TestLoc2IndexFromFile/bn254#70
+=== RUN   TestLoc2IndexFromFile/bn254#70/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#70/groth16/valid_witness
+[6/6]0xc000529140=== RUN   TestLoc2IndexFromFile/bn254#71
+=== RUN   TestLoc2IndexFromFile/bn254#71/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#71/groth16/valid_witness
+[6/6]0xc000553800=== RUN   TestLoc2IndexFromFile/bn254#72
+=== RUN   TestLoc2IndexFromFile/bn254#72/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#72/groth16/valid_witness
+[6/6]0xc00ac10f60=== RUN   TestLoc2IndexFromFile/bn254#73
+=== RUN   TestLoc2IndexFromFile/bn254#73/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#73/groth16/valid_witness
+[6/6]0xc000f84e40=== RUN   TestLoc2IndexFromFile/bn254#74
+=== RUN   TestLoc2IndexFromFile/bn254#74/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#74/groth16/valid_witness
+[6/6]0xc00007de00=== RUN   TestLoc2IndexFromFile/bn254#75
+=== RUN   TestLoc2IndexFromFile/bn254#75/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#75/groth16/valid_witness
+[6/6]0xc000f848a0=== RUN   TestLoc2IndexFromFile/bn254#76
+=== RUN   TestLoc2IndexFromFile/bn254#76/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#76/groth16/valid_witness
+[6/6]0xc00ac10f60=== RUN   TestLoc2IndexFromFile/bn254#77
+=== RUN   TestLoc2IndexFromFile/bn254#77/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#77/groth16/valid_witness
+[6/6]0xc000553980=== RUN   TestLoc2IndexFromFile/bn254#78
+=== RUN   TestLoc2IndexFromFile/bn254#78/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#78/groth16/valid_witness
+[6/6]0xc000553bc0=== RUN   TestLoc2IndexFromFile/bn254#79
+=== RUN   TestLoc2IndexFromFile/bn254#79/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#79/groth16/valid_witness
+[6/6]0xc000553860=== RUN   TestLoc2IndexFromFile/bn254#80
+=== RUN   TestLoc2IndexFromFile/bn254#80/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#80/groth16/valid_witness
+[6/6]0xc00007db00=== RUN   TestLoc2IndexFromFile/bn254#81
+=== RUN   TestLoc2IndexFromFile/bn254#81/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#81/groth16/valid_witness
+[6/6]0xc00ac10d80=== RUN   TestLoc2IndexFromFile/bn254#82
+=== RUN   TestLoc2IndexFromFile/bn254#82/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#82/groth16/valid_witness
+[6/6]0xc000528f60=== RUN   TestLoc2IndexFromFile/bn254#83
+=== RUN   TestLoc2IndexFromFile/bn254#83/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#83/groth16/valid_witness
+[6/6]0xc00007d8c0=== RUN   TestLoc2IndexFromFile/bn254#84
+=== RUN   TestLoc2IndexFromFile/bn254#84/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#84/groth16/valid_witness
+[6/6]0xc00007da40=== RUN   TestLoc2IndexFromFile/bn254#85
+=== RUN   TestLoc2IndexFromFile/bn254#85/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#85/groth16/valid_witness
+[6/6]0xc00ac10780=== RUN   TestLoc2IndexFromFile/bn254#86
+=== RUN   TestLoc2IndexFromFile/bn254#86/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#86/groth16/valid_witness
+[6/6]0xc00ac10cc0=== RUN   TestLoc2IndexFromFile/bn254#87
+=== RUN   TestLoc2IndexFromFile/bn254#87/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#87/groth16/valid_witness
+[6/6]0xc000f844e0=== RUN   TestLoc2IndexFromFile/bn254#88
+=== RUN   TestLoc2IndexFromFile/bn254#88/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#88/groth16/valid_witness
+[6/6]0xc00ac118c0=== RUN   TestLoc2IndexFromFile/bn254#89
+=== RUN   TestLoc2IndexFromFile/bn254#89/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#89/groth16/valid_witness
+[6/6]0xc0005292c0=== RUN   TestLoc2IndexFromFile/bn254#90
+=== RUN   TestLoc2IndexFromFile/bn254#90/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#90/groth16/valid_witness
+[6/6]0xc00ac102a0=== RUN   TestLoc2IndexFromFile/bn254#91
+=== RUN   TestLoc2IndexFromFile/bn254#91/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#91/groth16/valid_witness
+[6/6]0xc000553500=== RUN   TestLoc2IndexFromFile/bn254#92
+=== RUN   TestLoc2IndexFromFile/bn254#92/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#92/groth16/valid_witness
+[6/6]0xc00007d560=== RUN   TestLoc2IndexFromFile/bn254#93
+=== RUN   TestLoc2IndexFromFile/bn254#93/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#93/groth16/valid_witness
+[6/6]0xc00007dc20=== RUN   TestLoc2IndexFromFile/bn254#94
+=== RUN   TestLoc2IndexFromFile/bn254#94/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#94/groth16/valid_witness
+[6/6]0xc001954ba0=== RUN   TestLoc2IndexFromFile/bn254#95
+=== RUN   TestLoc2IndexFromFile/bn254#95/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#95/groth16/valid_witness
+[6/6]0xc000f84c60=== RUN   TestLoc2IndexFromFile/bn254#96
+=== RUN   TestLoc2IndexFromFile/bn254#96/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#96/groth16/valid_witness
+[6/6]0xc001954360=== RUN   TestLoc2IndexFromFile/bn254#97
+=== RUN   TestLoc2IndexFromFile/bn254#97/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#97/groth16/valid_witness
+[6/6]0xc00007df20=== RUN   TestLoc2IndexFromFile/bn254#98
+=== RUN   TestLoc2IndexFromFile/bn254#98/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#98/groth16/valid_witness
+[6/6]0xc0005290e0=== RUN   TestLoc2IndexFromFile/bn254#99
+=== RUN   TestLoc2IndexFromFile/bn254#99/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#99/groth16/valid_witness
+[6/6]0xc00ac10d20=== RUN   TestLoc2IndexFromFile/bn254#100
+=== RUN   TestLoc2IndexFromFile/bn254#100/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#100/groth16/valid_witness
+[6/6]0xc00ac10660=== RUN   TestLoc2IndexFromFile/bn254#101
+=== RUN   TestLoc2IndexFromFile/bn254#101/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#101/groth16/valid_witness
+[6/6]0xc000f84c60=== RUN   TestLoc2IndexFromFile/bn254#102
+=== RUN   TestLoc2IndexFromFile/bn254#102/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#102/groth16/valid_witness
+[6/6]0xc00007da40=== RUN   TestLoc2IndexFromFile/bn254#103
+=== RUN   TestLoc2IndexFromFile/bn254#103/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#103/groth16/valid_witness
+[6/6]0xc001954a20=== RUN   TestLoc2IndexFromFile/bn254#104
+=== RUN   TestLoc2IndexFromFile/bn254#104/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#104/groth16/valid_witness
+[6/6]0xc000528ea0=== RUN   TestLoc2IndexFromFile/bn254#105
+=== RUN   TestLoc2IndexFromFile/bn254#105/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#105/groth16/valid_witness
+[6/6]0xc00007d920=== RUN   TestLoc2IndexFromFile/bn254#106
+=== RUN   TestLoc2IndexFromFile/bn254#106/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#106/groth16/valid_witness
+[6/6]0xc000529500=== RUN   TestLoc2IndexFromFile/bn254#107
+=== RUN   TestLoc2IndexFromFile/bn254#107/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#107/groth16/valid_witness
+[6/6]0xc00ac10840=== RUN   TestLoc2IndexFromFile/bn254#108
+=== RUN   TestLoc2IndexFromFile/bn254#108/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#108/groth16/valid_witness
+[6/6]0xc0005535c0=== RUN   TestLoc2IndexFromFile/bn254#109
+=== RUN   TestLoc2IndexFromFile/bn254#109/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#109/groth16/valid_witness
+[6/6]0xc00ac10480=== RUN   TestLoc2IndexFromFile/bn254#110
+=== RUN   TestLoc2IndexFromFile/bn254#110/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#110/groth16/valid_witness
+[6/6]0xc0019546c0=== RUN   TestLoc2IndexFromFile/bn254#111
+=== RUN   TestLoc2IndexFromFile/bn254#111/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#111/groth16/valid_witness
+[6/6]0xc001954240=== RUN   TestLoc2IndexFromFile/bn254#112
+=== RUN   TestLoc2IndexFromFile/bn254#112/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#112/groth16/valid_witness
+[6/6]0xc00007d860=== RUN   TestLoc2IndexFromFile/bn254#113
+=== RUN   TestLoc2IndexFromFile/bn254#113/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#113/groth16/valid_witness
+[6/6]0xc0005537a0=== RUN   TestLoc2IndexFromFile/bn254#114
+=== RUN   TestLoc2IndexFromFile/bn254#114/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#114/groth16/valid_witness
+[6/6]0xc00007da40=== RUN   TestLoc2IndexFromFile/bn254#115
+=== RUN   TestLoc2IndexFromFile/bn254#115/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#115/groth16/valid_witness
+[6/6]0xc000f85020=== RUN   TestLoc2IndexFromFile/bn254#116
+=== RUN   TestLoc2IndexFromFile/bn254#116/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#116/groth16/valid_witness
+[6/6]0xc00ac10ea0=== RUN   TestLoc2IndexFromFile/bn254#117
+=== RUN   TestLoc2IndexFromFile/bn254#117/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#117/groth16/valid_witness
+[6/6]0xc00007d6e0=== RUN   TestLoc2IndexFromFile/bn254#118
+=== RUN   TestLoc2IndexFromFile/bn254#118/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#118/groth16/valid_witness
+[6/6]0xc000f847e0=== RUN   TestLoc2IndexFromFile/bn254#119
+=== RUN   TestLoc2IndexFromFile/bn254#119/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#119/groth16/valid_witness
+[6/6]0xc000553c80=== RUN   TestLoc2IndexFromFile/bn254#120
+=== RUN   TestLoc2IndexFromFile/bn254#120/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#120/groth16/valid_witness
+[6/6]0xc000552cc0=== RUN   TestLoc2IndexFromFile/bn254#121
+=== RUN   TestLoc2IndexFromFile/bn254#121/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#121/groth16/valid_witness
+[6/6]0xc000f846c0=== RUN   TestLoc2IndexFromFile/bn254#122
+=== RUN   TestLoc2IndexFromFile/bn254#122/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#122/groth16/valid_witness
+[6/6]0xc00ac10ba0=== RUN   TestLoc2IndexFromFile/bn254#123
+=== RUN   TestLoc2IndexFromFile/bn254#123/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#123/groth16/valid_witness
+[6/6]0xc0005293e0=== RUN   TestLoc2IndexFromFile/bn254#124
+=== RUN   TestLoc2IndexFromFile/bn254#124/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#124/groth16/valid_witness
+[6/6]0xc00d680c00=== RUN   TestLoc2IndexFromFile/bn254#125
+=== RUN   TestLoc2IndexFromFile/bn254#125/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#125/groth16/valid_witness
+[6/6]0xc00007db60=== RUN   TestLoc2IndexFromFile/bn254#126
+=== RUN   TestLoc2IndexFromFile/bn254#126/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#126/groth16/valid_witness
+[6/6]0xc0005531a0=== RUN   TestLoc2IndexFromFile/bn254#127
+=== RUN   TestLoc2IndexFromFile/bn254#127/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#127/groth16/valid_witness
+[6/6]0xc00007d680=== RUN   TestLoc2IndexFromFile/bn254#128
+=== RUN   TestLoc2IndexFromFile/bn254#128/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#128/groth16/valid_witness
+[6/6]0xc000529020=== RUN   TestLoc2IndexFromFile/bn254#129
+=== RUN   TestLoc2IndexFromFile/bn254#129/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#129/groth16/valid_witness
+[6/6]0xc000529200=== RUN   TestLoc2IndexFromFile/bn254#130
+=== RUN   TestLoc2IndexFromFile/bn254#130/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#130/groth16/valid_witness
+[6/6]0xc00d680ba0=== RUN   TestLoc2IndexFromFile/bn254#131
+=== RUN   TestLoc2IndexFromFile/bn254#131/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#131/groth16/valid_witness
+[6/6]0xc00d680840=== RUN   TestLoc2IndexFromFile/bn254#132
+=== RUN   TestLoc2IndexFromFile/bn254#132/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#132/groth16/valid_witness
+[6/6]0xc00d680780=== RUN   TestLoc2IndexFromFile/bn254#133
+=== RUN   TestLoc2IndexFromFile/bn254#133/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#133/groth16/valid_witness
+[6/6]0xc00d680420=== RUN   TestLoc2IndexFromFile/bn254#134
+=== RUN   TestLoc2IndexFromFile/bn254#134/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#134/groth16/valid_witness
+[6/6]0xc000f848a0=== RUN   TestLoc2IndexFromFile/bn254#135
+=== RUN   TestLoc2IndexFromFile/bn254#135/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#135/groth16/valid_witness
+[6/6]0xc00ac10fc0=== RUN   TestLoc2IndexFromFile/bn254#136
+=== RUN   TestLoc2IndexFromFile/bn254#136/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#136/groth16/valid_witness
+[6/6]0xc000553920=== RUN   TestLoc2IndexFromFile/bn254#137
+=== RUN   TestLoc2IndexFromFile/bn254#137/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#137/groth16/valid_witness
+[6/6]0xc00d6802a0=== RUN   TestLoc2IndexFromFile/bn254#138
+=== RUN   TestLoc2IndexFromFile/bn254#138/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#138/groth16/valid_witness
+[6/6]0xc00d6803c0=== RUN   TestLoc2IndexFromFile/bn254#139
+=== RUN   TestLoc2IndexFromFile/bn254#139/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#139/groth16/valid_witness
+[6/6]0xc00007d680=== RUN   TestLoc2IndexFromFile/bn254#140
+=== RUN   TestLoc2IndexFromFile/bn254#140/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#140/groth16/valid_witness
+[6/6]0xc00007d5c0=== RUN   TestLoc2IndexFromFile/bn254#141
+=== RUN   TestLoc2IndexFromFile/bn254#141/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#141/groth16/valid_witness
+[6/6]0xc00ac10660=== RUN   TestLoc2IndexFromFile/bn254#142
+=== RUN   TestLoc2IndexFromFile/bn254#142/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#142/groth16/valid_witness
+[6/6]0xc00d680e40=== RUN   TestLoc2IndexFromFile/bn254#143
+=== RUN   TestLoc2IndexFromFile/bn254#143/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#143/groth16/valid_witness
+--- FAIL: TestLoc2IndexFromFile (389.03s)
+    --- FAIL: TestLoc2IndexFromFile/bn254 (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#01 (2.79s)
+        --- PASS: TestLoc2IndexFromFile/bn254#01/groth16 (2.73s)
+            --- PASS: TestLoc2IndexFromFile/bn254#01/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#02 (2.70s)
+        --- PASS: TestLoc2IndexFromFile/bn254#02/groth16 (2.65s)
+            --- PASS: TestLoc2IndexFromFile/bn254#02/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#03 (2.70s)
+        --- PASS: TestLoc2IndexFromFile/bn254#03/groth16 (2.65s)
+            --- PASS: TestLoc2IndexFromFile/bn254#03/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#04 (2.76s)
+        --- PASS: TestLoc2IndexFromFile/bn254#04/groth16 (2.71s)
+            --- PASS: TestLoc2IndexFromFile/bn254#04/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#05 (2.69s)
+        --- PASS: TestLoc2IndexFromFile/bn254#05/groth16 (2.64s)
+            --- PASS: TestLoc2IndexFromFile/bn254#05/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#06 (2.69s)
+        --- PASS: TestLoc2IndexFromFile/bn254#06/groth16 (2.64s)
+            --- PASS: TestLoc2IndexFromFile/bn254#06/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#07 (2.72s)
+        --- PASS: TestLoc2IndexFromFile/bn254#07/groth16 (2.67s)
+            --- PASS: TestLoc2IndexFromFile/bn254#07/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#08 (2.68s)
+        --- PASS: TestLoc2IndexFromFile/bn254#08/groth16 (2.63s)
+            --- PASS: TestLoc2IndexFromFile/bn254#08/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#09 (2.68s)
+        --- PASS: TestLoc2IndexFromFile/bn254#09/groth16 (2.63s)
+            --- PASS: TestLoc2IndexFromFile/bn254#09/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#10 (2.70s)
+        --- PASS: TestLoc2IndexFromFile/bn254#10/groth16 (2.65s)
+            --- PASS: TestLoc2IndexFromFile/bn254#10/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#11 (2.73s)
+        --- PASS: TestLoc2IndexFromFile/bn254#11/groth16 (2.68s)
+            --- PASS: TestLoc2IndexFromFile/bn254#11/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#12 (2.68s)
+        --- PASS: TestLoc2IndexFromFile/bn254#12/groth16 (2.63s)
+            --- PASS: TestLoc2IndexFromFile/bn254#12/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#13 (2.69s)
+        --- PASS: TestLoc2IndexFromFile/bn254#13/groth16 (2.64s)
+            --- PASS: TestLoc2IndexFromFile/bn254#13/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#14 (2.65s)
+        --- PASS: TestLoc2IndexFromFile/bn254#14/groth16 (2.60s)
+            --- PASS: TestLoc2IndexFromFile/bn254#14/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#15 (2.69s)
+        --- PASS: TestLoc2IndexFromFile/bn254#15/groth16 (2.64s)
+            --- PASS: TestLoc2IndexFromFile/bn254#15/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#16 (2.66s)
+        --- PASS: TestLoc2IndexFromFile/bn254#16/groth16 (2.61s)
+            --- PASS: TestLoc2IndexFromFile/bn254#16/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#17 (2.67s)
+        --- PASS: TestLoc2IndexFromFile/bn254#17/groth16 (2.62s)
+            --- PASS: TestLoc2IndexFromFile/bn254#17/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#18 (2.68s)
+        --- PASS: TestLoc2IndexFromFile/bn254#18/groth16 (2.63s)
+            --- PASS: TestLoc2IndexFromFile/bn254#18/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#19 (2.70s)
+        --- PASS: TestLoc2IndexFromFile/bn254#19/groth16 (2.65s)
+            --- PASS: TestLoc2IndexFromFile/bn254#19/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#20 (2.68s)
+        --- PASS: TestLoc2IndexFromFile/bn254#20/groth16 (2.63s)
+            --- PASS: TestLoc2IndexFromFile/bn254#20/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#21 (2.68s)
+        --- PASS: TestLoc2IndexFromFile/bn254#21/groth16 (2.62s)
+            --- PASS: TestLoc2IndexFromFile/bn254#21/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#22 (2.69s)
+        --- PASS: TestLoc2IndexFromFile/bn254#22/groth16 (2.64s)
+            --- PASS: TestLoc2IndexFromFile/bn254#22/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#23 (2.71s)
+        --- PASS: TestLoc2IndexFromFile/bn254#23/groth16 (2.66s)
+            --- PASS: TestLoc2IndexFromFile/bn254#23/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#24 (2.72s)
+        --- PASS: TestLoc2IndexFromFile/bn254#24/groth16 (2.66s)
+            --- PASS: TestLoc2IndexFromFile/bn254#24/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#25 (2.71s)
+        --- PASS: TestLoc2IndexFromFile/bn254#25/groth16 (2.66s)
+            --- PASS: TestLoc2IndexFromFile/bn254#25/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#26 (2.68s)
+        --- PASS: TestLoc2IndexFromFile/bn254#26/groth16 (2.63s)
+            --- PASS: TestLoc2IndexFromFile/bn254#26/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#27 (2.71s)
+        --- PASS: TestLoc2IndexFromFile/bn254#27/groth16 (2.66s)
+            --- PASS: TestLoc2IndexFromFile/bn254#27/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#28 (2.72s)
+        --- PASS: TestLoc2IndexFromFile/bn254#28/groth16 (2.66s)
+            --- PASS: TestLoc2IndexFromFile/bn254#28/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#29 (2.67s)
+        --- PASS: TestLoc2IndexFromFile/bn254#29/groth16 (2.62s)
+            --- PASS: TestLoc2IndexFromFile/bn254#29/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#30 (2.77s)
+        --- PASS: TestLoc2IndexFromFile/bn254#30/groth16 (2.72s)
+            --- PASS: TestLoc2IndexFromFile/bn254#30/groth16/valid_witness (0.10s)
+    --- PASS: TestLoc2IndexFromFile/bn254#31 (2.71s)
+        --- PASS: TestLoc2IndexFromFile/bn254#31/groth16 (2.65s)
+            --- PASS: TestLoc2IndexFromFile/bn254#31/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#32 (2.76s)
+        --- PASS: TestLoc2IndexFromFile/bn254#32/groth16 (2.71s)
+            --- PASS: TestLoc2IndexFromFile/bn254#32/groth16/valid_witness (0.10s)
+    --- PASS: TestLoc2IndexFromFile/bn254#33 (2.75s)
+        --- PASS: TestLoc2IndexFromFile/bn254#33/groth16 (2.69s)
+            --- PASS: TestLoc2IndexFromFile/bn254#33/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#34 (2.80s)
+        --- PASS: TestLoc2IndexFromFile/bn254#34/groth16 (2.75s)
+            --- PASS: TestLoc2IndexFromFile/bn254#34/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#35 (2.73s)
+        --- PASS: TestLoc2IndexFromFile/bn254#35/groth16 (2.68s)
+            --- PASS: TestLoc2IndexFromFile/bn254#35/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#36 (2.69s)
+        --- PASS: TestLoc2IndexFromFile/bn254#36/groth16 (2.64s)
+            --- PASS: TestLoc2IndexFromFile/bn254#36/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#37 (2.69s)
+        --- PASS: TestLoc2IndexFromFile/bn254#37/groth16 (2.63s)
+            --- PASS: TestLoc2IndexFromFile/bn254#37/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#38 (2.72s)
+        --- PASS: TestLoc2IndexFromFile/bn254#38/groth16 (2.67s)
+            --- PASS: TestLoc2IndexFromFile/bn254#38/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#39 (2.71s)
+        --- PASS: TestLoc2IndexFromFile/bn254#39/groth16 (2.66s)
+            --- PASS: TestLoc2IndexFromFile/bn254#39/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#40 (2.74s)
+        --- PASS: TestLoc2IndexFromFile/bn254#40/groth16 (2.68s)
+            --- PASS: TestLoc2IndexFromFile/bn254#40/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#41 (2.72s)
+        --- PASS: TestLoc2IndexFromFile/bn254#41/groth16 (2.66s)
+            --- PASS: TestLoc2IndexFromFile/bn254#41/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#42 (2.72s)
+        --- PASS: TestLoc2IndexFromFile/bn254#42/groth16 (2.67s)
+            --- PASS: TestLoc2IndexFromFile/bn254#42/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#43 (2.74s)
+        --- PASS: TestLoc2IndexFromFile/bn254#43/groth16 (2.69s)
+            --- PASS: TestLoc2IndexFromFile/bn254#43/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#44 (2.77s)
+        --- PASS: TestLoc2IndexFromFile/bn254#44/groth16 (2.71s)
+            --- PASS: TestLoc2IndexFromFile/bn254#44/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#45 (2.74s)
+        --- PASS: TestLoc2IndexFromFile/bn254#45/groth16 (2.70s)
+            --- PASS: TestLoc2IndexFromFile/bn254#45/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#46 (2.71s)
+        --- PASS: TestLoc2IndexFromFile/bn254#46/groth16 (2.66s)
+            --- PASS: TestLoc2IndexFromFile/bn254#46/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#47 (2.72s)
+        --- PASS: TestLoc2IndexFromFile/bn254#47/groth16 (2.66s)
+            --- PASS: TestLoc2IndexFromFile/bn254#47/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#48 (2.70s)
+        --- PASS: TestLoc2IndexFromFile/bn254#48/groth16 (2.65s)
+            --- PASS: TestLoc2IndexFromFile/bn254#48/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#49 (2.70s)
+        --- PASS: TestLoc2IndexFromFile/bn254#49/groth16 (2.65s)
+            --- PASS: TestLoc2IndexFromFile/bn254#49/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#50 (2.68s)
+        --- PASS: TestLoc2IndexFromFile/bn254#50/groth16 (2.63s)
+            --- PASS: TestLoc2IndexFromFile/bn254#50/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#51 (2.66s)
+        --- PASS: TestLoc2IndexFromFile/bn254#51/groth16 (2.61s)
+            --- PASS: TestLoc2IndexFromFile/bn254#51/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#52 (2.70s)
+        --- PASS: TestLoc2IndexFromFile/bn254#52/groth16 (2.65s)
+            --- PASS: TestLoc2IndexFromFile/bn254#52/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#53 (2.70s)
+        --- PASS: TestLoc2IndexFromFile/bn254#53/groth16 (2.65s)
+            --- PASS: TestLoc2IndexFromFile/bn254#53/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#54 (2.71s)
+        --- PASS: TestLoc2IndexFromFile/bn254#54/groth16 (2.66s)
+            --- PASS: TestLoc2IndexFromFile/bn254#54/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#55 (2.69s)
+        --- PASS: TestLoc2IndexFromFile/bn254#55/groth16 (2.63s)
+            --- PASS: TestLoc2IndexFromFile/bn254#55/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#56 (2.69s)
+        --- PASS: TestLoc2IndexFromFile/bn254#56/groth16 (2.63s)
+            --- PASS: TestLoc2IndexFromFile/bn254#56/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#57 (2.69s)
+        --- PASS: TestLoc2IndexFromFile/bn254#57/groth16 (2.64s)
+            --- PASS: TestLoc2IndexFromFile/bn254#57/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#58 (2.70s)
+        --- PASS: TestLoc2IndexFromFile/bn254#58/groth16 (2.64s)
+            --- PASS: TestLoc2IndexFromFile/bn254#58/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#59 (2.69s)
+        --- PASS: TestLoc2IndexFromFile/bn254#59/groth16 (2.64s)
+            --- PASS: TestLoc2IndexFromFile/bn254#59/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#60 (2.69s)
+        --- PASS: TestLoc2IndexFromFile/bn254#60/groth16 (2.63s)
+            --- PASS: TestLoc2IndexFromFile/bn254#60/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#61 (2.72s)
+        --- PASS: TestLoc2IndexFromFile/bn254#61/groth16 (2.67s)
+            --- PASS: TestLoc2IndexFromFile/bn254#61/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#62 (2.71s)
+        --- PASS: TestLoc2IndexFromFile/bn254#62/groth16 (2.65s)
+            --- PASS: TestLoc2IndexFromFile/bn254#62/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#63 (2.68s)
+        --- PASS: TestLoc2IndexFromFile/bn254#63/groth16 (2.62s)
+            --- PASS: TestLoc2IndexFromFile/bn254#63/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#64 (2.68s)
+        --- PASS: TestLoc2IndexFromFile/bn254#64/groth16 (2.62s)
+            --- PASS: TestLoc2IndexFromFile/bn254#64/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#65 (2.68s)
+        --- PASS: TestLoc2IndexFromFile/bn254#65/groth16 (2.63s)
+            --- PASS: TestLoc2IndexFromFile/bn254#65/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#66 (2.70s)
+        --- PASS: TestLoc2IndexFromFile/bn254#66/groth16 (2.65s)
+            --- PASS: TestLoc2IndexFromFile/bn254#66/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#67 (2.67s)
+        --- PASS: TestLoc2IndexFromFile/bn254#67/groth16 (2.62s)
+            --- PASS: TestLoc2IndexFromFile/bn254#67/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#68 (2.76s)
+        --- PASS: TestLoc2IndexFromFile/bn254#68/groth16 (2.71s)
+            --- PASS: TestLoc2IndexFromFile/bn254#68/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#69 (2.71s)
+        --- PASS: TestLoc2IndexFromFile/bn254#69/groth16 (2.66s)
+            --- PASS: TestLoc2IndexFromFile/bn254#69/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#70 (2.69s)
+        --- PASS: TestLoc2IndexFromFile/bn254#70/groth16 (2.63s)
+            --- PASS: TestLoc2IndexFromFile/bn254#70/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#71 (2.70s)
+        --- PASS: TestLoc2IndexFromFile/bn254#71/groth16 (2.65s)
+            --- PASS: TestLoc2IndexFromFile/bn254#71/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#72 (2.76s)
+        --- PASS: TestLoc2IndexFromFile/bn254#72/groth16 (2.71s)
+            --- PASS: TestLoc2IndexFromFile/bn254#72/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#73 (2.75s)
+        --- PASS: TestLoc2IndexFromFile/bn254#73/groth16 (2.70s)
+            --- PASS: TestLoc2IndexFromFile/bn254#73/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#74 (2.81s)
+        --- PASS: TestLoc2IndexFromFile/bn254#74/groth16 (2.76s)
+            --- PASS: TestLoc2IndexFromFile/bn254#74/groth16/valid_witness (0.07s)
+    --- PASS: TestLoc2IndexFromFile/bn254#75 (2.77s)
+        --- PASS: TestLoc2IndexFromFile/bn254#75/groth16 (2.71s)
+            --- PASS: TestLoc2IndexFromFile/bn254#75/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#76 (2.70s)
+        --- PASS: TestLoc2IndexFromFile/bn254#76/groth16 (2.65s)
+            --- PASS: TestLoc2IndexFromFile/bn254#76/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#77 (2.71s)
+        --- PASS: TestLoc2IndexFromFile/bn254#77/groth16 (2.66s)
+            --- PASS: TestLoc2IndexFromFile/bn254#77/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#78 (2.68s)
+        --- PASS: TestLoc2IndexFromFile/bn254#78/groth16 (2.63s)
+            --- PASS: TestLoc2IndexFromFile/bn254#78/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#79 (2.67s)
+        --- PASS: TestLoc2IndexFromFile/bn254#79/groth16 (2.62s)
+            --- PASS: TestLoc2IndexFromFile/bn254#79/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#80 (2.69s)
+        --- PASS: TestLoc2IndexFromFile/bn254#80/groth16 (2.64s)
+            --- PASS: TestLoc2IndexFromFile/bn254#80/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#81 (2.76s)
+        --- PASS: TestLoc2IndexFromFile/bn254#81/groth16 (2.71s)
+            --- PASS: TestLoc2IndexFromFile/bn254#81/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#82 (2.71s)
+        --- PASS: TestLoc2IndexFromFile/bn254#82/groth16 (2.66s)
+            --- PASS: TestLoc2IndexFromFile/bn254#82/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#83 (2.74s)
+        --- PASS: TestLoc2IndexFromFile/bn254#83/groth16 (2.68s)
+            --- PASS: TestLoc2IndexFromFile/bn254#83/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#84 (2.69s)
+        --- PASS: TestLoc2IndexFromFile/bn254#84/groth16 (2.64s)
+            --- PASS: TestLoc2IndexFromFile/bn254#84/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#85 (2.75s)
+        --- PASS: TestLoc2IndexFromFile/bn254#85/groth16 (2.70s)
+            --- PASS: TestLoc2IndexFromFile/bn254#85/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#86 (2.71s)
+        --- PASS: TestLoc2IndexFromFile/bn254#86/groth16 (2.65s)
+            --- PASS: TestLoc2IndexFromFile/bn254#86/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#87 (2.68s)
+        --- PASS: TestLoc2IndexFromFile/bn254#87/groth16 (2.63s)
+            --- PASS: TestLoc2IndexFromFile/bn254#87/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#88 (2.72s)
+        --- PASS: TestLoc2IndexFromFile/bn254#88/groth16 (2.66s)
+            --- PASS: TestLoc2IndexFromFile/bn254#88/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#89 (2.71s)
+        --- PASS: TestLoc2IndexFromFile/bn254#89/groth16 (2.65s)
+            --- PASS: TestLoc2IndexFromFile/bn254#89/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#90 (2.71s)
+        --- PASS: TestLoc2IndexFromFile/bn254#90/groth16 (2.66s)
+            --- PASS: TestLoc2IndexFromFile/bn254#90/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#91 (2.83s)
+        --- PASS: TestLoc2IndexFromFile/bn254#91/groth16 (2.78s)
+            --- PASS: TestLoc2IndexFromFile/bn254#91/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#92 (2.69s)
+        --- PASS: TestLoc2IndexFromFile/bn254#92/groth16 (2.64s)
+            --- PASS: TestLoc2IndexFromFile/bn254#92/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#93 (2.68s)
+        --- PASS: TestLoc2IndexFromFile/bn254#93/groth16 (2.63s)
+            --- PASS: TestLoc2IndexFromFile/bn254#93/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#94 (2.70s)
+        --- PASS: TestLoc2IndexFromFile/bn254#94/groth16 (2.64s)
+            --- PASS: TestLoc2IndexFromFile/bn254#94/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#95 (2.70s)
+        --- PASS: TestLoc2IndexFromFile/bn254#95/groth16 (2.65s)
+            --- PASS: TestLoc2IndexFromFile/bn254#95/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#96 (2.73s)
+        --- PASS: TestLoc2IndexFromFile/bn254#96/groth16 (2.67s)
+            --- PASS: TestLoc2IndexFromFile/bn254#96/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#97 (2.73s)
+        --- PASS: TestLoc2IndexFromFile/bn254#97/groth16 (2.68s)
+            --- PASS: TestLoc2IndexFromFile/bn254#97/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#98 (2.70s)
+        --- PASS: TestLoc2IndexFromFile/bn254#98/groth16 (2.65s)
+            --- PASS: TestLoc2IndexFromFile/bn254#98/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#99 (2.72s)
+        --- PASS: TestLoc2IndexFromFile/bn254#99/groth16 (2.66s)
+            --- PASS: TestLoc2IndexFromFile/bn254#99/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#100 (2.72s)
+        --- PASS: TestLoc2IndexFromFile/bn254#100/groth16 (2.67s)
+            --- PASS: TestLoc2IndexFromFile/bn254#100/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#101 (2.70s)
+        --- PASS: TestLoc2IndexFromFile/bn254#101/groth16 (2.65s)
+            --- PASS: TestLoc2IndexFromFile/bn254#101/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#102 (2.70s)
+        --- PASS: TestLoc2IndexFromFile/bn254#102/groth16 (2.64s)
+            --- PASS: TestLoc2IndexFromFile/bn254#102/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#103 (2.81s)
+        --- PASS: TestLoc2IndexFromFile/bn254#103/groth16 (2.76s)
+            --- PASS: TestLoc2IndexFromFile/bn254#103/groth16/valid_witness (0.07s)
+    --- PASS: TestLoc2IndexFromFile/bn254#104 (2.78s)
+        --- PASS: TestLoc2IndexFromFile/bn254#104/groth16 (2.73s)
+            --- PASS: TestLoc2IndexFromFile/bn254#104/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#105 (2.81s)
+        --- PASS: TestLoc2IndexFromFile/bn254#105/groth16 (2.76s)
+            --- PASS: TestLoc2IndexFromFile/bn254#105/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#106 (2.73s)
+        --- PASS: TestLoc2IndexFromFile/bn254#106/groth16 (2.67s)
+            --- PASS: TestLoc2IndexFromFile/bn254#106/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#107 (2.76s)
+        --- PASS: TestLoc2IndexFromFile/bn254#107/groth16 (2.71s)
+            --- PASS: TestLoc2IndexFromFile/bn254#107/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#108 (2.82s)
+        --- PASS: TestLoc2IndexFromFile/bn254#108/groth16 (2.77s)
+            --- PASS: TestLoc2IndexFromFile/bn254#108/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#109 (2.88s)
+        --- PASS: TestLoc2IndexFromFile/bn254#109/groth16 (2.83s)
+            --- PASS: TestLoc2IndexFromFile/bn254#109/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#110 (2.78s)
+        --- PASS: TestLoc2IndexFromFile/bn254#110/groth16 (2.72s)
+            --- PASS: TestLoc2IndexFromFile/bn254#110/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#111 (2.70s)
+        --- PASS: TestLoc2IndexFromFile/bn254#111/groth16 (2.65s)
+            --- PASS: TestLoc2IndexFromFile/bn254#111/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#112 (2.71s)
+        --- PASS: TestLoc2IndexFromFile/bn254#112/groth16 (2.66s)
+            --- PASS: TestLoc2IndexFromFile/bn254#112/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#113 (2.72s)
+        --- PASS: TestLoc2IndexFromFile/bn254#113/groth16 (2.67s)
+            --- PASS: TestLoc2IndexFromFile/bn254#113/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#114 (2.71s)
+        --- PASS: TestLoc2IndexFromFile/bn254#114/groth16 (2.66s)
+            --- PASS: TestLoc2IndexFromFile/bn254#114/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#115 (2.71s)
+        --- PASS: TestLoc2IndexFromFile/bn254#115/groth16 (2.65s)
+            --- PASS: TestLoc2IndexFromFile/bn254#115/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#116 (2.69s)
+        --- PASS: TestLoc2IndexFromFile/bn254#116/groth16 (2.64s)
+            --- PASS: TestLoc2IndexFromFile/bn254#116/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#117 (2.77s)
+        --- PASS: TestLoc2IndexFromFile/bn254#117/groth16 (2.72s)
+            --- PASS: TestLoc2IndexFromFile/bn254#117/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#118 (2.73s)
+        --- PASS: TestLoc2IndexFromFile/bn254#118/groth16 (2.68s)
+            --- PASS: TestLoc2IndexFromFile/bn254#118/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#119 (2.74s)
+        --- PASS: TestLoc2IndexFromFile/bn254#119/groth16 (2.69s)
+            --- PASS: TestLoc2IndexFromFile/bn254#119/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#120 (2.75s)
+        --- PASS: TestLoc2IndexFromFile/bn254#120/groth16 (2.69s)
+            --- PASS: TestLoc2IndexFromFile/bn254#120/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#121 (2.74s)
+        --- PASS: TestLoc2IndexFromFile/bn254#121/groth16 (2.68s)
+            --- PASS: TestLoc2IndexFromFile/bn254#121/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#122 (2.73s)
+        --- PASS: TestLoc2IndexFromFile/bn254#122/groth16 (2.67s)
+            --- PASS: TestLoc2IndexFromFile/bn254#122/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#123 (2.76s)
+        --- PASS: TestLoc2IndexFromFile/bn254#123/groth16 (2.70s)
+            --- PASS: TestLoc2IndexFromFile/bn254#123/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#124 (2.80s)
+        --- PASS: TestLoc2IndexFromFile/bn254#124/groth16 (2.74s)
+            --- PASS: TestLoc2IndexFromFile/bn254#124/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#125 (2.78s)
+        --- PASS: TestLoc2IndexFromFile/bn254#125/groth16 (2.72s)
+            --- PASS: TestLoc2IndexFromFile/bn254#125/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#126 (2.78s)
+        --- PASS: TestLoc2IndexFromFile/bn254#126/groth16 (2.73s)
+            --- PASS: TestLoc2IndexFromFile/bn254#126/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#127 (2.74s)
+        --- PASS: TestLoc2IndexFromFile/bn254#127/groth16 (2.68s)
+            --- PASS: TestLoc2IndexFromFile/bn254#127/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#128 (2.70s)
+        --- PASS: TestLoc2IndexFromFile/bn254#128/groth16 (2.65s)
+            --- PASS: TestLoc2IndexFromFile/bn254#128/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#129 (2.71s)
+        --- PASS: TestLoc2IndexFromFile/bn254#129/groth16 (2.66s)
+            --- PASS: TestLoc2IndexFromFile/bn254#129/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#130 (2.69s)
+        --- PASS: TestLoc2IndexFromFile/bn254#130/groth16 (2.64s)
+            --- PASS: TestLoc2IndexFromFile/bn254#130/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#131 (2.80s)
+        --- PASS: TestLoc2IndexFromFile/bn254#131/groth16 (2.75s)
+            --- PASS: TestLoc2IndexFromFile/bn254#131/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#132 (2.70s)
+        --- PASS: TestLoc2IndexFromFile/bn254#132/groth16 (2.65s)
+            --- PASS: TestLoc2IndexFromFile/bn254#132/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#133 (2.70s)
+        --- PASS: TestLoc2IndexFromFile/bn254#133/groth16 (2.64s)
+            --- PASS: TestLoc2IndexFromFile/bn254#133/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#134 (2.70s)
+        --- PASS: TestLoc2IndexFromFile/bn254#134/groth16 (2.64s)
+            --- PASS: TestLoc2IndexFromFile/bn254#134/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#135 (2.72s)
+        --- PASS: TestLoc2IndexFromFile/bn254#135/groth16 (2.67s)
+            --- PASS: TestLoc2IndexFromFile/bn254#135/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#136 (2.81s)
+        --- PASS: TestLoc2IndexFromFile/bn254#136/groth16 (2.76s)
+            --- PASS: TestLoc2IndexFromFile/bn254#136/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#137 (2.75s)
+        --- PASS: TestLoc2IndexFromFile/bn254#137/groth16 (2.69s)
+            --- PASS: TestLoc2IndexFromFile/bn254#137/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#138 (2.68s)
+        --- PASS: TestLoc2IndexFromFile/bn254#138/groth16 (2.63s)
+            --- PASS: TestLoc2IndexFromFile/bn254#138/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#139 (2.73s)
+        --- PASS: TestLoc2IndexFromFile/bn254#139/groth16 (2.67s)
+            --- PASS: TestLoc2IndexFromFile/bn254#139/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#140 (2.75s)
+        --- PASS: TestLoc2IndexFromFile/bn254#140/groth16 (2.70s)
+            --- PASS: TestLoc2IndexFromFile/bn254#140/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#141 (2.70s)
+        --- PASS: TestLoc2IndexFromFile/bn254#141/groth16 (2.64s)
+            --- PASS: TestLoc2IndexFromFile/bn254#141/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#142 (2.71s)
+        --- PASS: TestLoc2IndexFromFile/bn254#142/groth16 (2.66s)
+            --- PASS: TestLoc2IndexFromFile/bn254#142/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#143 (2.77s)
+        --- PASS: TestLoc2IndexFromFile/bn254#143/groth16 (2.72s)
+            --- PASS: TestLoc2IndexFromFile/bn254#143/groth16/valid_witness (0.07s)
+FAIL
+exit status 1
+FAIL	zkLocation/circuits/loc2index	390.032s

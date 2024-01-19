@@ -1,0 +1,1194 @@
+=== RUN   TestLoc2Index64
+=== RUN   TestLoc2Index64/bn254
+(test.engine) float.go:1071 4503599627370496 0 
+(test.engine) float.go:1071 0 -1075 
+=== RUN   TestLoc2Index64/bn254/groth16
+=== RUN   TestLoc2Index64/bn254/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#01
+(test.engine) float.go:1071 0 -1075 
+(test.engine) float.go:1071 0 -1075 
+=== RUN   TestLoc2Index64/bn254#01/groth16
+=== RUN   TestLoc2Index64/bn254#01/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#02
+(test.engine) float.go:1071 0 -1075 
+(test.engine) float.go:1071 0 -1075 
+=== RUN   TestLoc2Index64/bn254#02/groth16
+=== RUN   TestLoc2Index64/bn254#02/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#03
+(test.engine) float.go:1071 0 -1075 
+(test.engine) float.go:1071 0 -1075 
+=== RUN   TestLoc2Index64/bn254#03/groth16
+=== RUN   TestLoc2Index64/bn254#03/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#04
+(test.engine) float.go:1071 0 -1075 
+(test.engine) float.go:1071 0 -1075 
+=== RUN   TestLoc2Index64/bn254#04/groth16
+=== RUN   TestLoc2Index64/bn254#04/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#05
+(test.engine) float.go:1071 0 -1075 
+(test.engine) float.go:1071 0 -1075 
+=== RUN   TestLoc2Index64/bn254#05/groth16
+=== RUN   TestLoc2Index64/bn254#05/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#06
+(test.engine) float.go:1071 0 -1075 
+(test.engine) float.go:1071 0 -1075 
+=== RUN   TestLoc2Index64/bn254#06/groth16
+=== RUN   TestLoc2Index64/bn254#06/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#07
+(test.engine) float.go:1071 0 -1075 
+(test.engine) float.go:1071 0 -1075 
+=== RUN   TestLoc2Index64/bn254#07/groth16
+=== RUN   TestLoc2Index64/bn254#07/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#08
+(test.engine) float.go:1071 0 -1075 
+(test.engine) float.go:1071 0 -1075 
+=== RUN   TestLoc2Index64/bn254#08/groth16
+=== RUN   TestLoc2Index64/bn254#08/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#09
+(test.engine) float.go:1071 4503599627370496 0 
+(test.engine) float.go:1071 4503599627370496 0 
+=== RUN   TestLoc2Index64/bn254#09/groth16
+=== RUN   TestLoc2Index64/bn254#09/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#10
+(test.engine) float.go:1071 4503599627370496 1 
+(test.engine) float.go:1071 4503599627370496 0 
+=== RUN   TestLoc2Index64/bn254#10/groth16
+=== RUN   TestLoc2Index64/bn254#10/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#11
+(test.engine) float.go:1071 4503599627370496 1 
+(test.engine) float.go:1071 4503599627370496 0 
+=== RUN   TestLoc2Index64/bn254#11/groth16
+=== RUN   TestLoc2Index64/bn254#11/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#12
+(test.engine) float.go:1071 4503599627370496 1 
+(test.engine) float.go:1071 4503599627370496 0 
+=== RUN   TestLoc2Index64/bn254#12/groth16
+=== RUN   TestLoc2Index64/bn254#12/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#13
+(test.engine) float.go:1071 4503599627370496 1 
+(test.engine) float.go:1071 4503599627370496 0 
+=== RUN   TestLoc2Index64/bn254#13/groth16
+=== RUN   TestLoc2Index64/bn254#13/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#14
+(test.engine) float.go:1071 4503599627370496 1 
+(test.engine) float.go:1071 4503599627370496 0 
+=== RUN   TestLoc2Index64/bn254#14/groth16
+=== RUN   TestLoc2Index64/bn254#14/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#15
+(test.engine) float.go:1071 4503599627370496 1 
+(test.engine) float.go:1071 4503599627370496 0 
+=== RUN   TestLoc2Index64/bn254#15/groth16
+=== RUN   TestLoc2Index64/bn254#15/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#16
+(test.engine) float.go:1071 4503599627370496 1 
+(test.engine) float.go:1071 4503599627370496 0 
+=== RUN   TestLoc2Index64/bn254#16/groth16
+=== RUN   TestLoc2Index64/bn254#16/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#17
+(test.engine) float.go:1071 4503599627370496 1 
+(test.engine) float.go:1071 4503599627370496 0 
+=== RUN   TestLoc2Index64/bn254#17/groth16
+=== RUN   TestLoc2Index64/bn254#17/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#18
+(test.engine) float.go:1071 5629499534213120 2 
+(test.engine) float.go:1071 6755399441055744 1 
+=== RUN   TestLoc2Index64/bn254#18/groth16
+=== RUN   TestLoc2Index64/bn254#18/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#19
+(test.engine) float.go:1071 6755399441055744 2 
+(test.engine) float.go:1071 6755399441055744 1 
+=== RUN   TestLoc2Index64/bn254#19/groth16
+=== RUN   TestLoc2Index64/bn254#19/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#20
+(test.engine) float.go:1071 6755399441055744 2 
+(test.engine) float.go:1071 6755399441055744 1 
+=== RUN   TestLoc2Index64/bn254#20/groth16
+=== RUN   TestLoc2Index64/bn254#20/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#21
+(test.engine) float.go:1071 6755399441055744 2 
+(test.engine) float.go:1071 6755399441055744 1 
+=== RUN   TestLoc2Index64/bn254#21/groth16
+=== RUN   TestLoc2Index64/bn254#21/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#22
+(test.engine) float.go:1071 6755399441055744 2 
+(test.engine) float.go:1071 6755399441055744 1 
+=== RUN   TestLoc2Index64/bn254#22/groth16
+=== RUN   TestLoc2Index64/bn254#22/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#23
+(test.engine) float.go:1071 6755399441055744 2 
+(test.engine) float.go:1071 6755399441055744 1 
+=== RUN   TestLoc2Index64/bn254#23/groth16
+=== RUN   TestLoc2Index64/bn254#23/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#24
+(test.engine) float.go:1071 6755399441055744 2 
+(test.engine) float.go:1071 6755399441055744 1 
+=== RUN   TestLoc2Index64/bn254#24/groth16
+=== RUN   TestLoc2Index64/bn254#24/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#25
+(test.engine) float.go:1071 6755399441055744 2 
+(test.engine) float.go:1071 6755399441055744 1 
+=== RUN   TestLoc2Index64/bn254#25/groth16
+=== RUN   TestLoc2Index64/bn254#25/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#26
+(test.engine) float.go:1071 6755399441055744 2 
+(test.engine) float.go:1071 6755399441055744 1 
+=== RUN   TestLoc2Index64/bn254#26/groth16
+=== RUN   TestLoc2Index64/bn254#26/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#27
+(test.engine) float.go:1071 6755399441055744 3 
+(test.engine) float.go:1071 7318349394477056 3 
+=== RUN   TestLoc2Index64/bn254#27/groth16
+=== RUN   TestLoc2Index64/bn254#27/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#28
+(test.engine) float.go:1071 7318349394477056 3 
+(test.engine) float.go:1071 6755399441055744 3 
+=== RUN   TestLoc2Index64/bn254#28/groth16
+=== RUN   TestLoc2Index64/bn254#28/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#29
+(test.engine) float.go:1071 7318349394477056 3 
+(test.engine) float.go:1071 6755399441055744 3 
+=== RUN   TestLoc2Index64/bn254#29/groth16
+=== RUN   TestLoc2Index64/bn254#29/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#30
+(test.engine) float.go:1071 7318349394477056 3 
+(test.engine) float.go:1071 6755399441055744 3 
+=== RUN   TestLoc2Index64/bn254#30/groth16
+=== RUN   TestLoc2Index64/bn254#30/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#31
+(test.engine) float.go:1071 7318349394477056 3 
+(test.engine) float.go:1071 6755399441055744 3 
+=== RUN   TestLoc2Index64/bn254#31/groth16
+=== RUN   TestLoc2Index64/bn254#31/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#32
+(test.engine) float.go:1071 7318349394477056 3 
+(test.engine) float.go:1071 6755399441055744 3 
+=== RUN   TestLoc2Index64/bn254#32/groth16
+=== RUN   TestLoc2Index64/bn254#32/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#33
+(test.engine) float.go:1071 7318349394477056 3 
+(test.engine) float.go:1071 6755399441055744 3 
+=== RUN   TestLoc2Index64/bn254#33/groth16
+=== RUN   TestLoc2Index64/bn254#33/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#34
+(test.engine) float.go:1071 7318349394477056 3 
+(test.engine) float.go:1071 6755399441055744 3 
+=== RUN   TestLoc2Index64/bn254#34/groth16
+=== RUN   TestLoc2Index64/bn254#34/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#35
+(test.engine) float.go:1071 7318349394477056 3 
+(test.engine) float.go:1071 6755399441055744 3 
+=== RUN   TestLoc2Index64/bn254#35/groth16
+=== RUN   TestLoc2Index64/bn254#35/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#36
+(test.engine) float.go:1071 5348024557502464 5 
+(test.engine) float.go:1071 6755399441055744 4 
+=== RUN   TestLoc2Index64/bn254#36/groth16
+=== RUN   TestLoc2Index64/bn254#36/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#37
+(test.engine) float.go:1071 5488762045857792 5 
+(test.engine) float.go:1071 6755399441055744 4 
+=== RUN   TestLoc2Index64/bn254#37/groth16
+=== RUN   TestLoc2Index64/bn254#37/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#38
+(test.engine) float.go:1071 5488762045857792 5 
+(test.engine) float.go:1071 6755399441055744 4 
+=== RUN   TestLoc2Index64/bn254#38/groth16
+=== RUN   TestLoc2Index64/bn254#38/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#39
+(test.engine) float.go:1071 5488762045857792 5 
+(test.engine) float.go:1071 6755399441055744 4 
+=== RUN   TestLoc2Index64/bn254#39/groth16
+=== RUN   TestLoc2Index64/bn254#39/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#40
+(test.engine) float.go:1071 5488762045857792 5 
+(test.engine) float.go:1071 6755399441055744 4 
+=== RUN   TestLoc2Index64/bn254#40/groth16
+=== RUN   TestLoc2Index64/bn254#40/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#41
+(test.engine) float.go:1071 5488762045857792 5 
+(test.engine) float.go:1071 6755399441055744 4 
+=== RUN   TestLoc2Index64/bn254#41/groth16
+=== RUN   TestLoc2Index64/bn254#41/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#42
+(test.engine) float.go:1071 5488762045857792 5 
+(test.engine) float.go:1071 6755399441055744 4 
+=== RUN   TestLoc2Index64/bn254#42/groth16
+=== RUN   TestLoc2Index64/bn254#42/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#43
+(test.engine) float.go:1071 5488762045857792 5 
+(test.engine) float.go:1071 6755399441055744 4 
+=== RUN   TestLoc2Index64/bn254#43/groth16
+=== RUN   TestLoc2Index64/bn254#43/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#44
+(test.engine) float.go:1071 5488762045857792 5 
+(test.engine) float.go:1071 6755399441055744 4 
+=== RUN   TestLoc2Index64/bn254#44/groth16
+=== RUN   TestLoc2Index64/bn254#44/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#45
+(test.engine) float.go:1071 6403555720167424 6 
+(test.engine) float.go:1071 6192449487634432 6 
+=== RUN   TestLoc2Index64/bn254#45/groth16
+=== RUN   TestLoc2Index64/bn254#45/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#46
+(test.engine) float.go:1071 6473924464345088 6 
+(test.engine) float.go:1071 6192449487634432 6 
+=== RUN   TestLoc2Index64/bn254#46/groth16
+=== RUN   TestLoc2Index64/bn254#46/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#47
+(test.engine) float.go:1071 6473924464345088 6 
+(test.engine) float.go:1071 6192449487634432 6 
+=== RUN   TestLoc2Index64/bn254#47/groth16
+=== RUN   TestLoc2Index64/bn254#47/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#48
+(test.engine) float.go:1071 6473924464345088 6 
+(test.engine) float.go:1071 6192449487634432 6 
+=== RUN   TestLoc2Index64/bn254#48/groth16
+=== RUN   TestLoc2Index64/bn254#48/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#49
+(test.engine) float.go:1071 6473924464345088 6 
+(test.engine) float.go:1071 6192449487634432 6 
+=== RUN   TestLoc2Index64/bn254#49/groth16
+=== RUN   TestLoc2Index64/bn254#49/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#50
+(test.engine) float.go:1071 6473924464345088 6 
+(test.engine) float.go:1071 6192449487634432 6 
+=== RUN   TestLoc2Index64/bn254#50/groth16
+=== RUN   TestLoc2Index64/bn254#50/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#51
+(test.engine) float.go:1071 6473924464345088 6 
+(test.engine) float.go:1071 6192449487634432 6 
+=== RUN   TestLoc2Index64/bn254#51/groth16
+=== RUN   TestLoc2Index64/bn254#51/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#52
+(test.engine) float.go:1071 6473924464345088 6 
+(test.engine) float.go:1071 6192449487634432 6 
+=== RUN   TestLoc2Index64/bn254#52/groth16
+=== RUN   TestLoc2Index64/bn254#52/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#53
+(test.engine) float.go:1071 6473924464345088 6 
+(test.engine) float.go:1071 6192449487634432 6 
+=== RUN   TestLoc2Index64/bn254#53/groth16
+=== RUN   TestLoc2Index64/bn254#53/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#54
+(test.engine) float.go:1071 4802666790125568 8 
+(test.engine) float.go:1071 6192449487634432 7 
+=== RUN   TestLoc2Index64/bn254#54/groth16
+=== RUN   TestLoc2Index64/bn254#54/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#55
+(test.engine) float.go:1071 4802666790125568 8 
+(test.engine) float.go:1071 6157265115545600 7 
+=== RUN   TestLoc2Index64/bn254#55/groth16
+=== RUN   TestLoc2Index64/bn254#55/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#56
+(test.engine) float.go:1071 4802666790125568 8 
+(test.engine) float.go:1071 6157265115545600 7 
+=== RUN   TestLoc2Index64/bn254#56/groth16
+=== RUN   TestLoc2Index64/bn254#56/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#57
+(test.engine) float.go:1071 4802666790125568 8 
+(test.engine) float.go:1071 6157265115545600 7 
+=== RUN   TestLoc2Index64/bn254#57/groth16
+=== RUN   TestLoc2Index64/bn254#57/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#58
+(test.engine) float.go:1071 4802666790125568 8 
+(test.engine) float.go:1071 6157265115545600 7 
+=== RUN   TestLoc2Index64/bn254#58/groth16
+=== RUN   TestLoc2Index64/bn254#58/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#59
+(test.engine) float.go:1071 4802666790125568 8 
+(test.engine) float.go:1071 6157265115545600 7 
+=== RUN   TestLoc2Index64/bn254#59/groth16
+=== RUN   TestLoc2Index64/bn254#59/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#60
+(test.engine) float.go:1071 4802666790125568 8 
+(test.engine) float.go:1071 6157265115545600 7 
+=== RUN   TestLoc2Index64/bn254#60/groth16
+=== RUN   TestLoc2Index64/bn254#60/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#61
+(test.engine) float.go:1071 4802666790125568 8 
+(test.engine) float.go:1071 6157265115545600 7 
+=== RUN   TestLoc2Index64/bn254#61/groth16
+=== RUN   TestLoc2Index64/bn254#61/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#62
+(test.engine) float.go:1071 4802666790125568 8 
+(test.engine) float.go:1071 6157265115545600 7 
+=== RUN   TestLoc2Index64/bn254#62/groth16
+=== RUN   TestLoc2Index64/bn254#62/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#63
+(test.engine) float.go:1071 5655887813279744 9 
+(test.engine) float.go:1071 5497558138880000 9 
+=== RUN   TestLoc2Index64/bn254#63/groth16
+=== RUN   TestLoc2Index64/bn254#63/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#64
+(test.engine) float.go:1071 5664683906301952 9 
+(test.engine) float.go:1071 5497558138880000 9 
+=== RUN   TestLoc2Index64/bn254#64/groth16
+=== RUN   TestLoc2Index64/bn254#64/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#65
+(test.engine) float.go:1071 5664683906301952 9 
+(test.engine) float.go:1071 5497558138880000 9 
+=== RUN   TestLoc2Index64/bn254#65/groth16
+=== RUN   TestLoc2Index64/bn254#65/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#66
+(test.engine) float.go:1071 5664683906301952 9 
+(test.engine) float.go:1071 5497558138880000 9 
+=== RUN   TestLoc2Index64/bn254#66/groth16
+=== RUN   TestLoc2Index64/bn254#66/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#67
+(test.engine) float.go:1071 5664683906301952 9 
+(test.engine) float.go:1071 5497558138880000 9 
+=== RUN   TestLoc2Index64/bn254#67/groth16
+=== RUN   TestLoc2Index64/bn254#67/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#68
+(test.engine) float.go:1071 5664683906301952 9 
+(test.engine) float.go:1071 5497558138880000 9 
+=== RUN   TestLoc2Index64/bn254#68/groth16
+=== RUN   TestLoc2Index64/bn254#68/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#69
+(test.engine) float.go:1071 5664683906301952 9 
+(test.engine) float.go:1071 5497558138880000 9 
+=== RUN   TestLoc2Index64/bn254#69/groth16
+=== RUN   TestLoc2Index64/bn254#69/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#70
+(test.engine) float.go:1071 5664683906301952 9 
+(test.engine) float.go:1071 5497558138880000 9 
+=== RUN   TestLoc2Index64/bn254#70/groth16
+=== RUN   TestLoc2Index64/bn254#70/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#71
+(test.engine) float.go:1071 5664683906301952 9 
+(test.engine) float.go:1071 5497558138880000 9 
+=== RUN   TestLoc2Index64/bn254#71/groth16
+=== RUN   TestLoc2Index64/bn254#71/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#72
+(test.engine) float.go:1071 8422259068764160 10 
+(test.engine) float.go:1071 5418393301680128 10 
+=== RUN   TestLoc2Index64/bn254#72/groth16
+=== RUN   TestLoc2Index64/bn254#72/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#73
+(test.engine) float.go:1071 8422259068764160 10 
+(test.engine) float.go:1071 5418393301680128 10 
+=== RUN   TestLoc2Index64/bn254#73/groth16
+=== RUN   TestLoc2Index64/bn254#73/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#74
+(test.engine) float.go:1071 8422259068764160 10 
+(test.engine) float.go:1071 5418393301680128 10 
+=== RUN   TestLoc2Index64/bn254#74/groth16
+=== RUN   TestLoc2Index64/bn254#74/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#75
+(test.engine) float.go:1071 8422259068764160 10 
+(test.engine) float.go:1071 5418393301680128 10 
+=== RUN   TestLoc2Index64/bn254#75/groth16
+=== RUN   TestLoc2Index64/bn254#75/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#76
+(test.engine) float.go:1071 8422259068764160 10 
+(test.engine) float.go:1071 5418393301680128 10 
+=== RUN   TestLoc2Index64/bn254#76/groth16
+=== RUN   TestLoc2Index64/bn254#76/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#77
+(test.engine) float.go:1071 8422259068764160 10 
+(test.engine) float.go:1071 5418393301680128 10 
+=== RUN   TestLoc2Index64/bn254#77/groth16
+=== RUN   TestLoc2Index64/bn254#77/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#78
+(test.engine) float.go:1071 8422259068764160 10 
+(test.engine) float.go:1071 5418393301680128 10 
+=== RUN   TestLoc2Index64/bn254#78/groth16
+=== RUN   TestLoc2Index64/bn254#78/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#79
+(test.engine) float.go:1071 8422259068764160 10 
+(test.engine) float.go:1071 5418393301680128 10 
+=== RUN   TestLoc2Index64/bn254#79/groth16
+=== RUN   TestLoc2Index64/bn254#79/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#80
+(test.engine) float.go:1071 8422259068764160 10 
+(test.engine) float.go:1071 5418393301680128 10 
+=== RUN   TestLoc2Index64/bn254#80/groth16
+=== RUN   TestLoc2Index64/bn254#80/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#81
+(test.engine) float.go:1071 4958797441269760 12 
+(test.engine) float.go:1071 4816960441286656 12 
+=== RUN   TestLoc2Index64/bn254#81/groth16
+=== RUN   TestLoc2Index64/bn254#81/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#82
+(test.engine) float.go:1071 4959896952897536 12 
+(test.engine) float.go:1071 4815860929658880 12 
+=== RUN   TestLoc2Index64/bn254#82/groth16
+=== RUN   TestLoc2Index64/bn254#82/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#83
+(test.engine) float.go:1071 4959896952897536 12 
+(test.engine) float.go:1071 4815860929658880 12 
+=== RUN   TestLoc2Index64/bn254#83/groth16
+=== RUN   TestLoc2Index64/bn254#83/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#84
+(test.engine) float.go:1071 4959896952897536 12 
+(test.engine) float.go:1071 4815860929658880 12 
+=== RUN   TestLoc2Index64/bn254#84/groth16
+=== RUN   TestLoc2Index64/bn254#84/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#85
+(test.engine) float.go:1071 4959896952897536 12 
+(test.engine) float.go:1071 4815860929658880 12 
+=== RUN   TestLoc2Index64/bn254#85/groth16
+=== RUN   TestLoc2Index64/bn254#85/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#86
+(test.engine) float.go:1071 4959896952897536 12 
+(test.engine) float.go:1071 4815860929658880 12 
+=== RUN   TestLoc2Index64/bn254#86/groth16
+=== RUN   TestLoc2Index64/bn254#86/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#87
+(test.engine) float.go:1071 4959896952897536 12 
+(test.engine) float.go:1071 4815860929658880 12 
+=== RUN   TestLoc2Index64/bn254#87/groth16
+=== RUN   TestLoc2Index64/bn254#87/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#88
+(test.engine) float.go:1071 4959896952897536 12 
+(test.engine) float.go:1071 4815860929658880 12 
+=== RUN   TestLoc2Index64/bn254#88/groth16
+=== RUN   TestLoc2Index64/bn254#88/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#89
+(test.engine) float.go:1071 4959896952897536 12 
+(test.engine) float.go:1071 4815860929658880 12 
+=== RUN   TestLoc2Index64/bn254#89/groth16
+=== RUN   TestLoc2Index64/bn254#89/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#90
+(test.engine) float.go:1071 7367827417726976 13 
+(test.engine) float.go:1071 4745492185481216 13 
+=== RUN   TestLoc2Index64/bn254#90/groth16
+=== RUN   TestLoc2Index64/bn254#90/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#91
+(test.engine) float.go:1071 7367827417726976 13 
+(test.engine) float.go:1071 4744942429667328 13 
+=== RUN   TestLoc2Index64/bn254#91/groth16
+=== RUN   TestLoc2Index64/bn254#91/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#92
+(test.engine) float.go:1071 7367827417726976 13 
+(test.engine) float.go:1071 4744942429667328 13 
+=== RUN   TestLoc2Index64/bn254#92/groth16
+=== RUN   TestLoc2Index64/bn254#92/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#93
+(test.engine) float.go:1071 7367827417726976 13 
+(test.engine) float.go:1071 4744942429667328 13 
+=== RUN   TestLoc2Index64/bn254#93/groth16
+=== RUN   TestLoc2Index64/bn254#93/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#94
+(test.engine) float.go:1071 7367827417726976 13 
+(test.engine) float.go:1071 4744942429667328 13 
+=== RUN   TestLoc2Index64/bn254#94/groth16
+=== RUN   TestLoc2Index64/bn254#94/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#95
+(test.engine) float.go:1071 7367827417726976 13 
+(test.engine) float.go:1071 4744942429667328 13 
+=== RUN   TestLoc2Index64/bn254#95/groth16
+=== RUN   TestLoc2Index64/bn254#95/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#96
+(test.engine) float.go:1071 7367827417726976 13 
+(test.engine) float.go:1071 4744942429667328 13 
+=== RUN   TestLoc2Index64/bn254#96/groth16
+=== RUN   TestLoc2Index64/bn254#96/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#97
+(test.engine) float.go:1071 7367827417726976 13 
+(test.engine) float.go:1071 4744942429667328 13 
+=== RUN   TestLoc2Index64/bn254#97/groth16
+=== RUN   TestLoc2Index64/bn254#97/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#98
+(test.engine) float.go:1071 7367827417726976 13 
+(test.engine) float.go:1071 4744942429667328 13 
+=== RUN   TestLoc2Index64/bn254#98/groth16
+=== RUN   TestLoc2Index64/bn254#98/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#99
+(test.engine) float.go:1071 8678995033849856 14 
+(test.engine) float.go:1071 8429680772251648 14 
+=== RUN   TestLoc2Index64/bn254#99/groth16
+=== RUN   TestLoc2Index64/bn254#99/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#100
+(test.engine) float.go:1071 8679269911756800 14 
+(test.engine) float.go:1071 8429405894344704 14 
+=== RUN   TestLoc2Index64/bn254#100/groth16
+=== RUN   TestLoc2Index64/bn254#100/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#101
+(test.engine) float.go:1071 8679269911756800 14 
+(test.engine) float.go:1071 8429405894344704 14 
+=== RUN   TestLoc2Index64/bn254#101/groth16
+=== RUN   TestLoc2Index64/bn254#101/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#102
+(test.engine) float.go:1071 8679269911756800 14 
+(test.engine) float.go:1071 8429405894344704 14 
+=== RUN   TestLoc2Index64/bn254#102/groth16
+=== RUN   TestLoc2Index64/bn254#102/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#103
+(test.engine) float.go:1071 8679269911756800 14 
+(test.engine) float.go:1071 8429405894344704 14 
+=== RUN   TestLoc2Index64/bn254#103/groth16
+=== RUN   TestLoc2Index64/bn254#103/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#104
+(test.engine) float.go:1071 8679269911756800 14 
+(test.engine) float.go:1071 8429405894344704 14 
+=== RUN   TestLoc2Index64/bn254#104/groth16
+=== RUN   TestLoc2Index64/bn254#104/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#105
+(test.engine) float.go:1071 8679269911756800 14 
+(test.engine) float.go:1071 8429405894344704 14 
+=== RUN   TestLoc2Index64/bn254#105/groth16
+=== RUN   TestLoc2Index64/bn254#105/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#106
+(test.engine) float.go:1071 8679269911756800 14 
+(test.engine) float.go:1071 8429405894344704 14 
+=== RUN   TestLoc2Index64/bn254#106/groth16
+=== RUN   TestLoc2Index64/bn254#106/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#107
+(test.engine) float.go:1071 8679269911756800 14 
+(test.engine) float.go:1071 8429405894344704 14 
+=== RUN   TestLoc2Index64/bn254#107/groth16
+=== RUN   TestLoc2Index64/bn254#107/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#108
+(test.engine) float.go:1071 6446986429464576 16 
+(test.engine) float.go:1071 8304886202499072 15 
+=== RUN   TestLoc2Index64/bn254#108/groth16
+=== RUN   TestLoc2Index64/bn254#108/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#109
+(test.engine) float.go:1071 6447055148941312 16 
+(test.engine) float.go:1071 8304748763545600 15 
+=== RUN   TestLoc2Index64/bn254#109/groth16
+=== RUN   TestLoc2Index64/bn254#109/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#110
+(test.engine) float.go:1071 6447055148941312 16 
+(test.engine) float.go:1071 8304748763545600 15 
+=== RUN   TestLoc2Index64/bn254#110/groth16
+=== RUN   TestLoc2Index64/bn254#110/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#111
+(test.engine) float.go:1071 6447055148941312 16 
+(test.engine) float.go:1071 8304748763545600 15 
+=== RUN   TestLoc2Index64/bn254#111/groth16
+=== RUN   TestLoc2Index64/bn254#111/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#112
+(test.engine) float.go:1071 6447055148941312 16 
+(test.engine) float.go:1071 8304748763545600 15 
+=== RUN   TestLoc2Index64/bn254#112/groth16
+=== RUN   TestLoc2Index64/bn254#112/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#113
+(test.engine) float.go:1071 6447055148941312 16 
+(test.engine) float.go:1071 8304748763545600 15 
+=== RUN   TestLoc2Index64/bn254#113/groth16
+=== RUN   TestLoc2Index64/bn254#113/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#114
+(test.engine) float.go:1071 6447055148941312 16 
+(test.engine) float.go:1071 8304748763545600 15 
+=== RUN   TestLoc2Index64/bn254#114/groth16
+=== RUN   TestLoc2Index64/bn254#114/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#115
+(test.engine) float.go:1071 6447055148941312 16 
+(test.engine) float.go:1071 8304748763545600 15 
+=== RUN   TestLoc2Index64/bn254#115/groth16
+=== RUN   TestLoc2Index64/bn254#115/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#116
+(test.engine) float.go:1071 6447055148941312 16 
+(test.engine) float.go:1071 8304748763545600 15 
+=== RUN   TestLoc2Index64/bn254#116/groth16
+=== RUN   TestLoc2Index64/bn254#116/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#117
+(test.engine) float.go:1071 7594326813048832 17 
+(test.engine) float.go:1071 7375901956243456 17 
+=== RUN   TestLoc2Index64/bn254#117/groth16
+=== RUN   TestLoc2Index64/bn254#117/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#118
+(test.engine) float.go:1071 7594361172787200 17 
+(test.engine) float.go:1071 7375901956243456 17 
+=== RUN   TestLoc2Index64/bn254#118/groth16
+=== RUN   TestLoc2Index64/bn254#118/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#119
+(test.engine) float.go:1071 7594361172787200 17 
+(test.engine) float.go:1071 7375901956243456 17 
+=== RUN   TestLoc2Index64/bn254#119/groth16
+=== RUN   TestLoc2Index64/bn254#119/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#120
+(test.engine) float.go:1071 7594361172787200 17 
+(test.engine) float.go:1071 7375901956243456 17 
+=== RUN   TestLoc2Index64/bn254#120/groth16
+=== RUN   TestLoc2Index64/bn254#120/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#121
+(test.engine) float.go:1071 7594361172787200 17 
+(test.engine) float.go:1071 7375901956243456 17 
+=== RUN   TestLoc2Index64/bn254#121/groth16
+=== RUN   TestLoc2Index64/bn254#121/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#122
+(test.engine) float.go:1071 7594361172787200 17 
+(test.engine) float.go:1071 7375901956243456 17 
+=== RUN   TestLoc2Index64/bn254#122/groth16
+=== RUN   TestLoc2Index64/bn254#122/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#123
+(test.engine) float.go:1071 7594361172787200 17 
+(test.engine) float.go:1071 7375901956243456 17 
+=== RUN   TestLoc2Index64/bn254#123/groth16
+=== RUN   TestLoc2Index64/bn254#123/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#124
+(test.engine) float.go:1071 7594361172787200 17 
+(test.engine) float.go:1071 7375901956243456 17 
+=== RUN   TestLoc2Index64/bn254#124/groth16
+=== RUN   TestLoc2Index64/bn254#124/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#125
+(test.engine) float.go:1071 7594361172787200 17 
+(test.engine) float.go:1071 7375901956243456 17 
+=== RUN   TestLoc2Index64/bn254#125/groth16
+=== RUN   TestLoc2Index64/bn254#125/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#126
+(test.engine) float.go:1071 5641147485519872 19 
+(test.engine) float.go:1071 7266723887579136 18 
+=== RUN   TestLoc2Index64/bn254#126/groth16
+=== RUN   TestLoc2Index64/bn254#126/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#127
+(test.engine) float.go:1071 5641156075454464 19 
+(test.engine) float.go:1071 7266723887579136 18 
+=== RUN   TestLoc2Index64/bn254#127/groth16
+=== RUN   TestLoc2Index64/bn254#127/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#128
+(test.engine) float.go:1071 5641156075454464 19 
+(test.engine) float.go:1071 7266723887579136 18 
+=== RUN   TestLoc2Index64/bn254#128/groth16
+=== RUN   TestLoc2Index64/bn254#128/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#129
+(test.engine) float.go:1071 5641156075454464 19 
+(test.engine) float.go:1071 7266723887579136 18 
+=== RUN   TestLoc2Index64/bn254#129/groth16
+=== RUN   TestLoc2Index64/bn254#129/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#130
+(test.engine) float.go:1071 5641156075454464 19 
+(test.engine) float.go:1071 7266723887579136 18 
+=== RUN   TestLoc2Index64/bn254#130/groth16
+=== RUN   TestLoc2Index64/bn254#130/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#131
+(test.engine) float.go:1071 5641156075454464 19 
+(test.engine) float.go:1071 7266723887579136 18 
+=== RUN   TestLoc2Index64/bn254#131/groth16
+=== RUN   TestLoc2Index64/bn254#131/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#132
+(test.engine) float.go:1071 5641156075454464 19 
+(test.engine) float.go:1071 7266723887579136 18 
+=== RUN   TestLoc2Index64/bn254#132/groth16
+=== RUN   TestLoc2Index64/bn254#132/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#133
+(test.engine) float.go:1071 5641156075454464 19 
+(test.engine) float.go:1071 7266723887579136 18 
+=== RUN   TestLoc2Index64/bn254#133/groth16
+=== RUN   TestLoc2Index64/bn254#133/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#134
+(test.engine) float.go:1071 5641156075454464 19 
+(test.engine) float.go:1071 7266723887579136 18 
+=== RUN   TestLoc2Index64/bn254#134/groth16
+=== RUN   TestLoc2Index64/bn254#134/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#135
+(test.engine) float.go:1071 6645048846319616 20 
+(test.engine) float.go:1071 6453948571451392 20 
+=== RUN   TestLoc2Index64/bn254#135/groth16
+=== RUN   TestLoc2Index64/bn254#135/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#136
+(test.engine) float.go:1071 6645053141286912 20 
+(test.engine) float.go:1071 6453944276484096 20 
+=== RUN   TestLoc2Index64/bn254#136/groth16
+=== RUN   TestLoc2Index64/bn254#136/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#137
+(test.engine) float.go:1071 6645053141286912 20 
+(test.engine) float.go:1071 6453944276484096 20 
+=== RUN   TestLoc2Index64/bn254#137/groth16
+=== RUN   TestLoc2Index64/bn254#137/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#138
+(test.engine) float.go:1071 6645053141286912 20 
+(test.engine) float.go:1071 6453944276484096 20 
+=== RUN   TestLoc2Index64/bn254#138/groth16
+=== RUN   TestLoc2Index64/bn254#138/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#139
+(test.engine) float.go:1071 6645053141286912 20 
+(test.engine) float.go:1071 6453944276484096 20 
+=== RUN   TestLoc2Index64/bn254#139/groth16
+=== RUN   TestLoc2Index64/bn254#139/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#140
+(test.engine) float.go:1071 6645053141286912 20 
+(test.engine) float.go:1071 6453944276484096 20 
+=== RUN   TestLoc2Index64/bn254#140/groth16
+=== RUN   TestLoc2Index64/bn254#140/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#141
+(test.engine) float.go:1071 6645053141286912 20 
+(test.engine) float.go:1071 6453944276484096 20 
+=== RUN   TestLoc2Index64/bn254#141/groth16
+=== RUN   TestLoc2Index64/bn254#141/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#142
+(test.engine) float.go:1071 6645053141286912 20 
+(test.engine) float.go:1071 6453944276484096 20 
+=== RUN   TestLoc2Index64/bn254#142/groth16
+=== RUN   TestLoc2Index64/bn254#142/groth16/valid_witness
+=== RUN   TestLoc2Index64/bn254#143
+(test.engine) float.go:1071 6645053141286912 20 
+(test.engine) float.go:1071 6453944276484096 20 
+=== RUN   TestLoc2Index64/bn254#143/groth16
+=== RUN   TestLoc2Index64/bn254#143/groth16/valid_witness
+--- PASS: TestLoc2Index64 (70.58s)
+    --- PASS: TestLoc2Index64/bn254 (0.53s)
+        --- PASS: TestLoc2Index64/bn254/groth16 (0.47s)
+            --- PASS: TestLoc2Index64/bn254/groth16/valid_witness (0.04s)
+    --- PASS: TestLoc2Index64/bn254#01 (0.50s)
+        --- PASS: TestLoc2Index64/bn254#01/groth16 (0.44s)
+            --- PASS: TestLoc2Index64/bn254#01/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#02 (0.50s)
+        --- PASS: TestLoc2Index64/bn254#02/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#02/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#03 (0.49s)
+        --- PASS: TestLoc2Index64/bn254#03/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#03/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#04 (0.50s)
+        --- PASS: TestLoc2Index64/bn254#04/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#04/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#05 (0.50s)
+        --- PASS: TestLoc2Index64/bn254#05/groth16 (0.44s)
+            --- PASS: TestLoc2Index64/bn254#05/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#06 (0.50s)
+        --- PASS: TestLoc2Index64/bn254#06/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#06/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#07 (0.49s)
+        --- PASS: TestLoc2Index64/bn254#07/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#07/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#08 (0.50s)
+        --- PASS: TestLoc2Index64/bn254#08/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#08/groth16/valid_witness (0.04s)
+    --- PASS: TestLoc2Index64/bn254#09 (0.55s)
+        --- PASS: TestLoc2Index64/bn254#09/groth16 (0.48s)
+            --- PASS: TestLoc2Index64/bn254#09/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#10 (0.49s)
+        --- PASS: TestLoc2Index64/bn254#10/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#10/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#11 (0.49s)
+        --- PASS: TestLoc2Index64/bn254#11/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#11/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#12 (0.49s)
+        --- PASS: TestLoc2Index64/bn254#12/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#12/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#13 (0.49s)
+        --- PASS: TestLoc2Index64/bn254#13/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#13/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#14 (0.49s)
+        --- PASS: TestLoc2Index64/bn254#14/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#14/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#15 (0.50s)
+        --- PASS: TestLoc2Index64/bn254#15/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#15/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#16 (0.49s)
+        --- PASS: TestLoc2Index64/bn254#16/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#16/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#17 (0.50s)
+        --- PASS: TestLoc2Index64/bn254#17/groth16 (0.44s)
+            --- PASS: TestLoc2Index64/bn254#17/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#18 (0.49s)
+        --- PASS: TestLoc2Index64/bn254#18/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#18/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#19 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#19/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#19/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#20 (0.49s)
+        --- PASS: TestLoc2Index64/bn254#20/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#20/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#21 (0.49s)
+        --- PASS: TestLoc2Index64/bn254#21/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#21/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#22 (0.49s)
+        --- PASS: TestLoc2Index64/bn254#22/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#22/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#23 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#23/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#23/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#24 (0.49s)
+        --- PASS: TestLoc2Index64/bn254#24/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#24/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#25 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#25/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#25/groth16/valid_witness (0.04s)
+    --- PASS: TestLoc2Index64/bn254#26 (0.49s)
+        --- PASS: TestLoc2Index64/bn254#26/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#26/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#27 (0.49s)
+        --- PASS: TestLoc2Index64/bn254#27/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#27/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#28 (0.50s)
+        --- PASS: TestLoc2Index64/bn254#28/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#28/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#29 (0.49s)
+        --- PASS: TestLoc2Index64/bn254#29/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#29/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#30 (0.49s)
+        --- PASS: TestLoc2Index64/bn254#30/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#30/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#31 (0.50s)
+        --- PASS: TestLoc2Index64/bn254#31/groth16 (0.44s)
+            --- PASS: TestLoc2Index64/bn254#31/groth16/valid_witness (0.04s)
+    --- PASS: TestLoc2Index64/bn254#32 (0.49s)
+        --- PASS: TestLoc2Index64/bn254#32/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#32/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#33 (0.49s)
+        --- PASS: TestLoc2Index64/bn254#33/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#33/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#34 (0.51s)
+        --- PASS: TestLoc2Index64/bn254#34/groth16 (0.45s)
+            --- PASS: TestLoc2Index64/bn254#34/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#35 (0.53s)
+        --- PASS: TestLoc2Index64/bn254#35/groth16 (0.47s)
+            --- PASS: TestLoc2Index64/bn254#35/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#36 (0.49s)
+        --- PASS: TestLoc2Index64/bn254#36/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#36/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#37 (0.49s)
+        --- PASS: TestLoc2Index64/bn254#37/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#37/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#38 (0.49s)
+        --- PASS: TestLoc2Index64/bn254#38/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#38/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#39 (0.49s)
+        --- PASS: TestLoc2Index64/bn254#39/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#39/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#40 (0.49s)
+        --- PASS: TestLoc2Index64/bn254#40/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#40/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#41 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#41/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#41/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#42 (0.49s)
+        --- PASS: TestLoc2Index64/bn254#42/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#42/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#43 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#43/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#43/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#44 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#44/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#44/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#45 (0.49s)
+        --- PASS: TestLoc2Index64/bn254#45/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#45/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#46 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#46/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#46/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#47 (0.49s)
+        --- PASS: TestLoc2Index64/bn254#47/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#47/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#48 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#48/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#48/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#49 (0.49s)
+        --- PASS: TestLoc2Index64/bn254#49/groth16 (0.44s)
+            --- PASS: TestLoc2Index64/bn254#49/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#50 (0.50s)
+        --- PASS: TestLoc2Index64/bn254#50/groth16 (0.44s)
+            --- PASS: TestLoc2Index64/bn254#50/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#51 (0.50s)
+        --- PASS: TestLoc2Index64/bn254#51/groth16 (0.44s)
+            --- PASS: TestLoc2Index64/bn254#51/groth16/valid_witness (0.04s)
+    --- PASS: TestLoc2Index64/bn254#52 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#52/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#52/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#53 (0.49s)
+        --- PASS: TestLoc2Index64/bn254#53/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#53/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#54 (0.50s)
+        --- PASS: TestLoc2Index64/bn254#54/groth16 (0.44s)
+            --- PASS: TestLoc2Index64/bn254#54/groth16/valid_witness (0.04s)
+    --- PASS: TestLoc2Index64/bn254#55 (0.51s)
+        --- PASS: TestLoc2Index64/bn254#55/groth16 (0.45s)
+            --- PASS: TestLoc2Index64/bn254#55/groth16/valid_witness (0.04s)
+    --- PASS: TestLoc2Index64/bn254#56 (0.53s)
+        --- PASS: TestLoc2Index64/bn254#56/groth16 (0.44s)
+            --- PASS: TestLoc2Index64/bn254#56/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#57 (0.49s)
+        --- PASS: TestLoc2Index64/bn254#57/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#57/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#58 (0.50s)
+        --- PASS: TestLoc2Index64/bn254#58/groth16 (0.44s)
+            --- PASS: TestLoc2Index64/bn254#58/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#59 (0.50s)
+        --- PASS: TestLoc2Index64/bn254#59/groth16 (0.44s)
+            --- PASS: TestLoc2Index64/bn254#59/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#60 (0.50s)
+        --- PASS: TestLoc2Index64/bn254#60/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#60/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#61 (0.49s)
+        --- PASS: TestLoc2Index64/bn254#61/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#61/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#62 (0.52s)
+        --- PASS: TestLoc2Index64/bn254#62/groth16 (0.46s)
+            --- PASS: TestLoc2Index64/bn254#62/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#63 (0.51s)
+        --- PASS: TestLoc2Index64/bn254#63/groth16 (0.45s)
+            --- PASS: TestLoc2Index64/bn254#63/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#64 (0.55s)
+        --- PASS: TestLoc2Index64/bn254#64/groth16 (0.48s)
+            --- PASS: TestLoc2Index64/bn254#64/groth16/valid_witness (0.04s)
+    --- PASS: TestLoc2Index64/bn254#65 (0.52s)
+        --- PASS: TestLoc2Index64/bn254#65/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#65/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#66 (0.49s)
+        --- PASS: TestLoc2Index64/bn254#66/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#66/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#67 (0.49s)
+        --- PASS: TestLoc2Index64/bn254#67/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#67/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#68 (0.49s)
+        --- PASS: TestLoc2Index64/bn254#68/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#68/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#69 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#69/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#69/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#70 (0.47s)
+        --- PASS: TestLoc2Index64/bn254#70/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#70/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#71 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#71/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#71/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#72 (0.49s)
+        --- PASS: TestLoc2Index64/bn254#72/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#72/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#73 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#73/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#73/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#74 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#74/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#74/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#75 (0.49s)
+        --- PASS: TestLoc2Index64/bn254#75/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#75/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#76 (0.50s)
+        --- PASS: TestLoc2Index64/bn254#76/groth16 (0.44s)
+            --- PASS: TestLoc2Index64/bn254#76/groth16/valid_witness (0.04s)
+    --- PASS: TestLoc2Index64/bn254#77 (0.50s)
+        --- PASS: TestLoc2Index64/bn254#77/groth16 (0.44s)
+            --- PASS: TestLoc2Index64/bn254#77/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#78 (0.49s)
+        --- PASS: TestLoc2Index64/bn254#78/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#78/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#79 (0.49s)
+        --- PASS: TestLoc2Index64/bn254#79/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#79/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#80 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#80/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#80/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#81 (0.49s)
+        --- PASS: TestLoc2Index64/bn254#81/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#81/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#82 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#82/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#82/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#83 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#83/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#83/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#84 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#84/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#84/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#85 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#85/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#85/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#86 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#86/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#86/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#87 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#87/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#87/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#88 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#88/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#88/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#89 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#89/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#89/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#90 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#90/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#90/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#91 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#91/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#91/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#92 (0.49s)
+        --- PASS: TestLoc2Index64/bn254#92/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#92/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#93 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#93/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#93/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#94 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#94/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#94/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#95 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#95/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#95/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#96 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#96/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#96/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#97 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#97/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#97/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#98 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#98/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#98/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#99 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#99/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#99/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#100 (0.49s)
+        --- PASS: TestLoc2Index64/bn254#100/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#100/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#101 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#101/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#101/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#102 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#102/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#102/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#103 (0.49s)
+        --- PASS: TestLoc2Index64/bn254#103/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#103/groth16/valid_witness (0.04s)
+    --- PASS: TestLoc2Index64/bn254#104 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#104/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#104/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#105 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#105/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#105/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#106 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#106/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#106/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#107 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#107/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#107/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#108 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#108/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#108/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#109 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#109/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#109/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#110 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#110/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#110/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#111 (0.47s)
+        --- PASS: TestLoc2Index64/bn254#111/groth16 (0.41s)
+            --- PASS: TestLoc2Index64/bn254#111/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#112 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#112/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#112/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#113 (0.53s)
+        --- PASS: TestLoc2Index64/bn254#113/groth16 (0.47s)
+            --- PASS: TestLoc2Index64/bn254#113/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2Index64/bn254#114 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#114/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#114/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#115 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#115/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#115/groth16/valid_witness (0.04s)
+    --- PASS: TestLoc2Index64/bn254#116 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#116/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#116/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#117 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#117/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#117/groth16/valid_witness (0.04s)
+    --- PASS: TestLoc2Index64/bn254#118 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#118/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#118/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#119 (0.49s)
+        --- PASS: TestLoc2Index64/bn254#119/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#119/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#120 (0.50s)
+        --- PASS: TestLoc2Index64/bn254#120/groth16 (0.44s)
+            --- PASS: TestLoc2Index64/bn254#120/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#121 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#121/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#121/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#122 (0.47s)
+        --- PASS: TestLoc2Index64/bn254#122/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#122/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#123 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#123/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#123/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#124 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#124/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#124/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#125 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#125/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#125/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#126 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#126/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#126/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#127 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#127/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#127/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#128 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#128/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#128/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#129 (0.49s)
+        --- PASS: TestLoc2Index64/bn254#129/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#129/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#130 (0.50s)
+        --- PASS: TestLoc2Index64/bn254#130/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#130/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#131 (0.50s)
+        --- PASS: TestLoc2Index64/bn254#131/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#131/groth16/valid_witness (0.04s)
+    --- PASS: TestLoc2Index64/bn254#132 (0.49s)
+        --- PASS: TestLoc2Index64/bn254#132/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#132/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#133 (0.49s)
+        --- PASS: TestLoc2Index64/bn254#133/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#133/groth16/valid_witness (0.04s)
+    --- PASS: TestLoc2Index64/bn254#134 (0.49s)
+        --- PASS: TestLoc2Index64/bn254#134/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#134/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#135 (0.52s)
+        --- PASS: TestLoc2Index64/bn254#135/groth16 (0.46s)
+            --- PASS: TestLoc2Index64/bn254#135/groth16/valid_witness (0.04s)
+    --- PASS: TestLoc2Index64/bn254#136 (0.49s)
+        --- PASS: TestLoc2Index64/bn254#136/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#136/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#137 (0.50s)
+        --- PASS: TestLoc2Index64/bn254#137/groth16 (0.44s)
+            --- PASS: TestLoc2Index64/bn254#137/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#138 (0.50s)
+        --- PASS: TestLoc2Index64/bn254#138/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#138/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#139 (0.49s)
+        --- PASS: TestLoc2Index64/bn254#139/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#139/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#140 (0.49s)
+        --- PASS: TestLoc2Index64/bn254#140/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#140/groth16/valid_witness (0.04s)
+    --- PASS: TestLoc2Index64/bn254#141 (0.49s)
+        --- PASS: TestLoc2Index64/bn254#141/groth16 (0.43s)
+            --- PASS: TestLoc2Index64/bn254#141/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#142 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#142/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#142/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64/bn254#143 (0.48s)
+        --- PASS: TestLoc2Index64/bn254#143/groth16 (0.42s)
+            --- PASS: TestLoc2Index64/bn254#143/groth16/valid_witness (0.03s)
+=== RUN   TestLoc2Index64Solving
+lat, lng: -1.005327, 1.192393
+=== RUN   TestLoc2Index64Solving/bn254
+(test.engine) float.go:1071 0 -1075 
+(test.engine) float.go:1071 0 -1075 
+=== RUN   TestLoc2Index64Solving/bn254/groth16
+=== RUN   TestLoc2Index64Solving/bn254/groth16/valid_witness
+=== RUN   TestLoc2Index64Solving/bls12_381
+(test.engine) float.go:1071 0 -1075 
+(test.engine) float.go:1071 0 -1075 
+=== RUN   TestLoc2Index64Solving/bls12_381/groth16
+=== RUN   TestLoc2Index64Solving/bls12_381/groth16/valid_witness
+--- PASS: TestLoc2Index64Solving (1.00s)
+    --- PASS: TestLoc2Index64Solving/bn254 (0.50s)
+        --- PASS: TestLoc2Index64Solving/bn254/groth16 (0.43s)
+            --- PASS: TestLoc2Index64Solving/bn254/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64Solving/bls12_381 (0.49s)
+        --- PASS: TestLoc2Index64Solving/bls12_381/groth16 (0.43s)
+            --- PASS: TestLoc2Index64Solving/bls12_381/groth16/valid_witness (0.04s)
+=== RUN   TestLoc2Index64Proving
+lat, lng: -1.005327, 1.192393
+=== RUN   TestLoc2Index64Proving/bn254
+(test.engine) float.go:1071 0 -1075 
+(test.engine) float.go:1071 0 -1075 
+=== RUN   TestLoc2Index64Proving/bn254/groth16
+=== RUN   TestLoc2Index64Proving/bn254/groth16/valid_witness
+=== RUN   TestLoc2Index64Proving/bls12_381
+(test.engine) float.go:1071 0 -1075 
+(test.engine) float.go:1071 0 -1075 
+=== RUN   TestLoc2Index64Proving/bls12_381/groth16
+=== RUN   TestLoc2Index64Proving/bls12_381/groth16/valid_witness
+--- PASS: TestLoc2Index64Proving (1.03s)
+    --- PASS: TestLoc2Index64Proving/bn254 (0.53s)
+        --- PASS: TestLoc2Index64Proving/bn254/groth16 (0.46s)
+            --- PASS: TestLoc2Index64Proving/bn254/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index64Proving/bls12_381 (0.49s)
+        --- PASS: TestLoc2Index64Proving/bls12_381/groth16 (0.43s)
+            --- PASS: TestLoc2Index64Proving/bls12_381/groth16/valid_witness (0.03s)
+PASS
+ok  	gnark-float/loc2index64	73.943s

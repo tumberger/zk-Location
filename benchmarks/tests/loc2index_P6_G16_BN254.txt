@@ -1,0 +1,1115 @@
+=== RUN   TestLoc2IndexFromFile
+[6/6]0xc000116660=== RUN   TestLoc2IndexFromFile/bn254
+=== RUN   TestLoc2IndexFromFile/bn254/groth16
+=== RUN   TestLoc2IndexFromFile/bn254/groth16/valid_witness
+[6/6]0xc00207c960=== RUN   TestLoc2IndexFromFile/bn254#01
+=== RUN   TestLoc2IndexFromFile/bn254#01/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#01/groth16/valid_witness
+[6/6]0xc00207c840=== RUN   TestLoc2IndexFromFile/bn254#02
+=== RUN   TestLoc2IndexFromFile/bn254#02/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#02/groth16/valid_witness
+[6/6]0xc00207c960=== RUN   TestLoc2IndexFromFile/bn254#03
+=== RUN   TestLoc2IndexFromFile/bn254#03/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#03/groth16/valid_witness
+[6/6]0xc000898a20=== RUN   TestLoc2IndexFromFile/bn254#04
+=== RUN   TestLoc2IndexFromFile/bn254#04/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#04/groth16/valid_witness
+[6/6]0xc007d80240=== RUN   TestLoc2IndexFromFile/bn254#05
+=== RUN   TestLoc2IndexFromFile/bn254#05/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#05/groth16/valid_witness
+[6/6]0xc007d80420=== RUN   TestLoc2IndexFromFile/bn254#06
+=== RUN   TestLoc2IndexFromFile/bn254#06/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#06/groth16/valid_witness
+[6/6]0xc0000a3140=== RUN   TestLoc2IndexFromFile/bn254#07
+=== RUN   TestLoc2IndexFromFile/bn254#07/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#07/groth16/valid_witness
+[6/6]0xc007d008a0=== RUN   TestLoc2IndexFromFile/bn254#08
+=== RUN   TestLoc2IndexFromFile/bn254#08/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#08/groth16/valid_witness
+[6/6]0xc00207cde0=== RUN   TestLoc2IndexFromFile/bn254#09
+=== RUN   TestLoc2IndexFromFile/bn254#09/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#09/groth16/valid_witness
+[6/6]0xc00207c720=== RUN   TestLoc2IndexFromFile/bn254#10
+=== RUN   TestLoc2IndexFromFile/bn254#10/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#10/groth16/valid_witness
+[6/6]0xc0000a3500=== RUN   TestLoc2IndexFromFile/bn254#11
+=== RUN   TestLoc2IndexFromFile/bn254#11/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#11/groth16/valid_witness
+[6/6]0xc0000a3860=== RUN   TestLoc2IndexFromFile/bn254#12
+=== RUN   TestLoc2IndexFromFile/bn254#12/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#12/groth16/valid_witness
+[6/6]0xc000898840=== RUN   TestLoc2IndexFromFile/bn254#13
+=== RUN   TestLoc2IndexFromFile/bn254#13/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#13/groth16/valid_witness
+[6/6]0xc00207c960=== RUN   TestLoc2IndexFromFile/bn254#14
+=== RUN   TestLoc2IndexFromFile/bn254#14/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#14/groth16/valid_witness
+[6/6]0xc000898cc0=== RUN   TestLoc2IndexFromFile/bn254#15
+=== RUN   TestLoc2IndexFromFile/bn254#15/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#15/groth16/valid_witness
+[6/6]0xc0008984e0=== RUN   TestLoc2IndexFromFile/bn254#16
+=== RUN   TestLoc2IndexFromFile/bn254#16/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#16/groth16/valid_witness
+[6/6]0xc000117f80=== RUN   TestLoc2IndexFromFile/bn254#17
+=== RUN   TestLoc2IndexFromFile/bn254#17/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#17/groth16/valid_witness
+[6/6]0xc0000a32c0=== RUN   TestLoc2IndexFromFile/bn254#18
+=== RUN   TestLoc2IndexFromFile/bn254#18/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#18/groth16/valid_witness
+[6/6]0xc000117680=== RUN   TestLoc2IndexFromFile/bn254#19
+=== RUN   TestLoc2IndexFromFile/bn254#19/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#19/groth16/valid_witness
+[6/6]0xc000117980=== RUN   TestLoc2IndexFromFile/bn254#20
+=== RUN   TestLoc2IndexFromFile/bn254#20/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#20/groth16/valid_witness
+[6/6]0xc0008990e0=== RUN   TestLoc2IndexFromFile/bn254#21
+=== RUN   TestLoc2IndexFromFile/bn254#21/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#21/groth16/valid_witness
+[6/6]0xc0000a3500=== RUN   TestLoc2IndexFromFile/bn254#22
+=== RUN   TestLoc2IndexFromFile/bn254#22/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#22/groth16/valid_witness
+[6/6]0xc007d006c0=== RUN   TestLoc2IndexFromFile/bn254#23
+=== RUN   TestLoc2IndexFromFile/bn254#23/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#23/groth16/valid_witness
+[6/6]0xc00207cfc0=== RUN   TestLoc2IndexFromFile/bn254#24
+=== RUN   TestLoc2IndexFromFile/bn254#24/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#24/groth16/valid_witness
+[6/6]0xc007d805a0=== RUN   TestLoc2IndexFromFile/bn254#25
+=== RUN   TestLoc2IndexFromFile/bn254#25/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#25/groth16/valid_witness
+[6/6]0xc007d00a20=== RUN   TestLoc2IndexFromFile/bn254#26
+=== RUN   TestLoc2IndexFromFile/bn254#26/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#26/groth16/valid_witness
+[6/6]0xc00207d140=== RUN   TestLoc2IndexFromFile/bn254#27
+=== RUN   TestLoc2IndexFromFile/bn254#27/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#27/groth16/valid_witness
+[6/6]0xc00207ca80=== RUN   TestLoc2IndexFromFile/bn254#28
+=== RUN   TestLoc2IndexFromFile/bn254#28/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#28/groth16/valid_witness
+[6/6]0xc00207ca80=== RUN   TestLoc2IndexFromFile/bn254#29
+=== RUN   TestLoc2IndexFromFile/bn254#29/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#29/groth16/valid_witness
+[6/6]0xc000898de0=== RUN   TestLoc2IndexFromFile/bn254#30
+=== RUN   TestLoc2IndexFromFile/bn254#30/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#30/groth16/valid_witness
+[6/6]0xc007d00d80=== RUN   TestLoc2IndexFromFile/bn254#31
+=== RUN   TestLoc2IndexFromFile/bn254#31/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#31/groth16/valid_witness
+[6/6]0xc000898840=== RUN   TestLoc2IndexFromFile/bn254#32
+=== RUN   TestLoc2IndexFromFile/bn254#32/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#32/groth16/valid_witness
+[6/6]0xc00207cb40=== RUN   TestLoc2IndexFromFile/bn254#33
+=== RUN   TestLoc2IndexFromFile/bn254#33/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#33/groth16/valid_witness
+[6/6]0xc00207cba0=== RUN   TestLoc2IndexFromFile/bn254#34
+=== RUN   TestLoc2IndexFromFile/bn254#34/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#34/groth16/valid_witness
+[6/6]0xc00225a3c0=== RUN   TestLoc2IndexFromFile/bn254#35
+=== RUN   TestLoc2IndexFromFile/bn254#35/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#35/groth16/valid_witness
+[6/6]0xc000117f80=== RUN   TestLoc2IndexFromFile/bn254#36
+=== RUN   TestLoc2IndexFromFile/bn254#36/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#36/groth16/valid_witness
+[6/6]0xc000117620=== RUN   TestLoc2IndexFromFile/bn254#37
+=== RUN   TestLoc2IndexFromFile/bn254#37/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#37/groth16/valid_witness
+[6/6]0xc00207c600=== RUN   TestLoc2IndexFromFile/bn254#38
+=== RUN   TestLoc2IndexFromFile/bn254#38/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#38/groth16/valid_witness
+[6/6]0xc007d004e0=== RUN   TestLoc2IndexFromFile/bn254#39
+=== RUN   TestLoc2IndexFromFile/bn254#39/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#39/groth16/valid_witness
+[6/6]0xc007d00480=== RUN   TestLoc2IndexFromFile/bn254#40
+=== RUN   TestLoc2IndexFromFile/bn254#40/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#40/groth16/valid_witness
+[6/6]0xc0000a34a0=== RUN   TestLoc2IndexFromFile/bn254#41
+=== RUN   TestLoc2IndexFromFile/bn254#41/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#41/groth16/valid_witness
+[6/6]0xc000117b00=== RUN   TestLoc2IndexFromFile/bn254#42
+=== RUN   TestLoc2IndexFromFile/bn254#42/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#42/groth16/valid_witness
+[6/6]0xc000898f00=== RUN   TestLoc2IndexFromFile/bn254#43
+=== RUN   TestLoc2IndexFromFile/bn254#43/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#43/groth16/valid_witness
+[6/6]0xc000117d40=== RUN   TestLoc2IndexFromFile/bn254#44
+=== RUN   TestLoc2IndexFromFile/bn254#44/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#44/groth16/valid_witness
+[6/6]0xc000117aa0=== RUN   TestLoc2IndexFromFile/bn254#45
+=== RUN   TestLoc2IndexFromFile/bn254#45/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#45/groth16/valid_witness
+[6/6]0xc0000a37a0=== RUN   TestLoc2IndexFromFile/bn254#46
+=== RUN   TestLoc2IndexFromFile/bn254#46/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#46/groth16/valid_witness
+[6/6]0xc007d80780=== RUN   TestLoc2IndexFromFile/bn254#47
+=== RUN   TestLoc2IndexFromFile/bn254#47/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#47/groth16/valid_witness
+[6/6]0xc000117440=== RUN   TestLoc2IndexFromFile/bn254#48
+=== RUN   TestLoc2IndexFromFile/bn254#48/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#48/groth16/valid_witness
+[6/6]0xc007d80300=== RUN   TestLoc2IndexFromFile/bn254#49
+=== RUN   TestLoc2IndexFromFile/bn254#49/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#49/groth16/valid_witness
+[6/6]0xc007d00660=== RUN   TestLoc2IndexFromFile/bn254#50
+=== RUN   TestLoc2IndexFromFile/bn254#50/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#50/groth16/valid_witness
+[6/6]0xc007d803c0=== RUN   TestLoc2IndexFromFile/bn254#51
+=== RUN   TestLoc2IndexFromFile/bn254#51/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#51/groth16/valid_witness
+[6/6]0xc0000a2fc0=== RUN   TestLoc2IndexFromFile/bn254#52
+=== RUN   TestLoc2IndexFromFile/bn254#52/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#52/groth16/valid_witness
+[6/6]0xc0008987e0=== RUN   TestLoc2IndexFromFile/bn254#53
+=== RUN   TestLoc2IndexFromFile/bn254#53/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#53/groth16/valid_witness
+[6/6]0xc0000a33e0=== RUN   TestLoc2IndexFromFile/bn254#54
+=== RUN   TestLoc2IndexFromFile/bn254#54/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#54/groth16/valid_witness
+[6/6]0xc0000a3380=== RUN   TestLoc2IndexFromFile/bn254#55
+=== RUN   TestLoc2IndexFromFile/bn254#55/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#55/groth16/valid_witness
+[6/6]0xc007d80360=== RUN   TestLoc2IndexFromFile/bn254#56
+=== RUN   TestLoc2IndexFromFile/bn254#56/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#56/groth16/valid_witness
+[6/6]0xc0000a3440=== RUN   TestLoc2IndexFromFile/bn254#57
+=== RUN   TestLoc2IndexFromFile/bn254#57/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#57/groth16/valid_witness
+[6/6]0xc000117920=== RUN   TestLoc2IndexFromFile/bn254#58
+=== RUN   TestLoc2IndexFromFile/bn254#58/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#58/groth16/valid_witness
+[6/6]0xc0000a3c20=== RUN   TestLoc2IndexFromFile/bn254#59
+=== RUN   TestLoc2IndexFromFile/bn254#59/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#59/groth16/valid_witness
+[6/6]0xc000898fc0=== RUN   TestLoc2IndexFromFile/bn254#60
+=== RUN   TestLoc2IndexFromFile/bn254#60/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#60/groth16/valid_witness
+[6/6]0xc0000a33e0=== RUN   TestLoc2IndexFromFile/bn254#61
+=== RUN   TestLoc2IndexFromFile/bn254#61/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#61/groth16/valid_witness
+[6/6]0xc00207ccc0=== RUN   TestLoc2IndexFromFile/bn254#62
+=== RUN   TestLoc2IndexFromFile/bn254#62/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#62/groth16/valid_witness
+[6/6]0xc007d81380=== RUN   TestLoc2IndexFromFile/bn254#63
+=== RUN   TestLoc2IndexFromFile/bn254#63/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#63/groth16/valid_witness
+[6/6]0xc007d009c0=== RUN   TestLoc2IndexFromFile/bn254#64
+=== RUN   TestLoc2IndexFromFile/bn254#64/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#64/groth16/valid_witness
+[6/6]0xc007d80b40=== RUN   TestLoc2IndexFromFile/bn254#65
+=== RUN   TestLoc2IndexFromFile/bn254#65/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#65/groth16/valid_witness
+[6/6]0xc007d815c0=== RUN   TestLoc2IndexFromFile/bn254#66
+=== RUN   TestLoc2IndexFromFile/bn254#66/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#66/groth16/valid_witness
+[6/6]0xc007d01020=== RUN   TestLoc2IndexFromFile/bn254#67
+=== RUN   TestLoc2IndexFromFile/bn254#67/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#67/groth16/valid_witness
+[6/6]0xc007d00a80=== RUN   TestLoc2IndexFromFile/bn254#68
+=== RUN   TestLoc2IndexFromFile/bn254#68/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#68/groth16/valid_witness
+[6/6]0xc007d00fc0=== RUN   TestLoc2IndexFromFile/bn254#69
+=== RUN   TestLoc2IndexFromFile/bn254#69/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#69/groth16/valid_witness
+[6/6]0xc007d00fc0=== RUN   TestLoc2IndexFromFile/bn254#70
+=== RUN   TestLoc2IndexFromFile/bn254#70/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#70/groth16/valid_witness
+[6/6]0xc0001177a0=== RUN   TestLoc2IndexFromFile/bn254#71
+=== RUN   TestLoc2IndexFromFile/bn254#71/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#71/groth16/valid_witness
+[6/6]0xc007d80f60=== RUN   TestLoc2IndexFromFile/bn254#72
+=== RUN   TestLoc2IndexFromFile/bn254#72/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#72/groth16/valid_witness
+[6/6]0xc007d005a0=== RUN   TestLoc2IndexFromFile/bn254#73
+=== RUN   TestLoc2IndexFromFile/bn254#73/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#73/groth16/valid_witness
+[6/6]0xc0001177a0=== RUN   TestLoc2IndexFromFile/bn254#74
+=== RUN   TestLoc2IndexFromFile/bn254#74/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#74/groth16/valid_witness
+[6/6]0xc0000a30e0=== RUN   TestLoc2IndexFromFile/bn254#75
+=== RUN   TestLoc2IndexFromFile/bn254#75/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#75/groth16/valid_witness
+[6/6]0xc000898720=== RUN   TestLoc2IndexFromFile/bn254#76
+=== RUN   TestLoc2IndexFromFile/bn254#76/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#76/groth16/valid_witness
+[6/6]0xc000898a20=== RUN   TestLoc2IndexFromFile/bn254#77
+=== RUN   TestLoc2IndexFromFile/bn254#77/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#77/groth16/valid_witness
+[6/6]0xc007d00240=== RUN   TestLoc2IndexFromFile/bn254#78
+=== RUN   TestLoc2IndexFromFile/bn254#78/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#78/groth16/valid_witness
+[6/6]0xc007d808a0=== RUN   TestLoc2IndexFromFile/bn254#79
+=== RUN   TestLoc2IndexFromFile/bn254#79/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#79/groth16/valid_witness
+[6/6]0xc007d00360=== RUN   TestLoc2IndexFromFile/bn254#80
+=== RUN   TestLoc2IndexFromFile/bn254#80/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#80/groth16/valid_witness
+[6/6]0xc0000a3440=== RUN   TestLoc2IndexFromFile/bn254#81
+=== RUN   TestLoc2IndexFromFile/bn254#81/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#81/groth16/valid_witness
+[6/6]0xc00207cae0=== RUN   TestLoc2IndexFromFile/bn254#82
+=== RUN   TestLoc2IndexFromFile/bn254#82/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#82/groth16/valid_witness
+[6/6]0xc007d80360=== RUN   TestLoc2IndexFromFile/bn254#83
+=== RUN   TestLoc2IndexFromFile/bn254#83/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#83/groth16/valid_witness
+[6/6]0xc007d80420=== RUN   TestLoc2IndexFromFile/bn254#84
+=== RUN   TestLoc2IndexFromFile/bn254#84/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#84/groth16/valid_witness
+[6/6]0xc00207ca80=== RUN   TestLoc2IndexFromFile/bn254#85
+=== RUN   TestLoc2IndexFromFile/bn254#85/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#85/groth16/valid_witness
+[6/6]0xc00207c8a0=== RUN   TestLoc2IndexFromFile/bn254#86
+=== RUN   TestLoc2IndexFromFile/bn254#86/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#86/groth16/valid_witness
+[6/6]0xc0000a3320=== RUN   TestLoc2IndexFromFile/bn254#87
+=== RUN   TestLoc2IndexFromFile/bn254#87/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#87/groth16/valid_witness
+[6/6]0xc00207ccc0=== RUN   TestLoc2IndexFromFile/bn254#88
+=== RUN   TestLoc2IndexFromFile/bn254#88/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#88/groth16/valid_witness
+[6/6]0xc0000a3380=== RUN   TestLoc2IndexFromFile/bn254#89
+=== RUN   TestLoc2IndexFromFile/bn254#89/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#89/groth16/valid_witness
+[6/6]0xc007d00720=== RUN   TestLoc2IndexFromFile/bn254#90
+=== RUN   TestLoc2IndexFromFile/bn254#90/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#90/groth16/valid_witness
+[6/6]0xc000899620=== RUN   TestLoc2IndexFromFile/bn254#91
+=== RUN   TestLoc2IndexFromFile/bn254#91/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#91/groth16/valid_witness
+[6/6]0xc000117a40=== RUN   TestLoc2IndexFromFile/bn254#92
+=== RUN   TestLoc2IndexFromFile/bn254#92/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#92/groth16/valid_witness
+[6/6]0xc000898a20=== RUN   TestLoc2IndexFromFile/bn254#93
+=== RUN   TestLoc2IndexFromFile/bn254#93/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#93/groth16/valid_witness
+[6/6]0xc00207c780=== RUN   TestLoc2IndexFromFile/bn254#94
+=== RUN   TestLoc2IndexFromFile/bn254#94/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#94/groth16/valid_witness
+[6/6]0xc007d80660=== RUN   TestLoc2IndexFromFile/bn254#95
+=== RUN   TestLoc2IndexFromFile/bn254#95/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#95/groth16/valid_witness
+[6/6]0xc0000a3140=== RUN   TestLoc2IndexFromFile/bn254#96
+=== RUN   TestLoc2IndexFromFile/bn254#96/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#96/groth16/valid_witness
+[6/6]0xc000898a20=== RUN   TestLoc2IndexFromFile/bn254#97
+=== RUN   TestLoc2IndexFromFile/bn254#97/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#97/groth16/valid_witness
+[6/6]0xc0000a3380=== RUN   TestLoc2IndexFromFile/bn254#98
+=== RUN   TestLoc2IndexFromFile/bn254#98/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#98/groth16/valid_witness
+[6/6]0xc007d812c0=== RUN   TestLoc2IndexFromFile/bn254#99
+=== RUN   TestLoc2IndexFromFile/bn254#99/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#99/groth16/valid_witness
+[6/6]0xc000117b60=== RUN   TestLoc2IndexFromFile/bn254#100
+=== RUN   TestLoc2IndexFromFile/bn254#100/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#100/groth16/valid_witness
+[6/6]0xc0000a3380=== RUN   TestLoc2IndexFromFile/bn254#101
+=== RUN   TestLoc2IndexFromFile/bn254#101/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#101/groth16/valid_witness
+[6/6]0xc0000a3140=== RUN   TestLoc2IndexFromFile/bn254#102
+=== RUN   TestLoc2IndexFromFile/bn254#102/groth16
+=== RUN   TestLoc2IndexFromFile/bn254#102/groth16/valid_witness
+[6/6]0xc000898840=== RUN   TestLoc2IndexFromFile/bn254#103
+    assert.go:200: 
+        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:200
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert_checkcircuit.go:50
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:66
+        	Error:      	[assertIsEqual] 30667 == 30666
+        	            	loc2index.(*loc2IndexWrapper).Define
+        	            		loc2index.go:1396
+        	            	
+        	            	witness:{"Lat":710161,"Lng":576732,"LatIsNegative":0,"LngIsNegative":0,"I":31575,"J":0,"K":30667,"Resolution":11}
+        	Test:       	TestLoc2IndexFromFile/bn254#103
+[6/6]0xc000898840=== RUN   TestLoc2IndexFromFile/bn254#104
+    assert.go:200: 
+        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:200
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert_checkcircuit.go:50
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:66
+        	Error:      	[assertIsEqual] 30667 == 30666
+        	            	loc2index.(*loc2IndexWrapper).Define
+        	            		loc2index.go:1396
+        	            	
+        	            	witness:{"Lat":710161,"Lng":576732,"LatIsNegative":0,"LngIsNegative":0,"I":31575,"J":0,"K":30667,"Resolution":11}
+        	Test:       	TestLoc2IndexFromFile/bn254#104
+[6/6]0xc0000a3380=== RUN   TestLoc2IndexFromFile/bn254#105
+    assert.go:200: 
+        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:200
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert_checkcircuit.go:50
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:66
+        	Error:      	[assertIsEqual] 30667 == 30666
+        	            	loc2index.(*loc2IndexWrapper).Define
+        	            		loc2index.go:1396
+        	            	
+        	            	witness:{"Lat":710162,"Lng":576732,"LatIsNegative":0,"LngIsNegative":0,"I":31575,"J":0,"K":30667,"Resolution":11}
+        	Test:       	TestLoc2IndexFromFile/bn254#105
+[6/6]0xc00207cd80=== RUN   TestLoc2IndexFromFile/bn254#106
+    assert.go:200: 
+        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:200
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert_checkcircuit.go:50
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:66
+        	Error:      	[assertIsEqual] 30667 == 30666
+        	            	loc2index.(*loc2IndexWrapper).Define
+        	            		loc2index.go:1396
+        	            	
+        	            	witness:{"Lat":710162,"Lng":576732,"LatIsNegative":0,"LngIsNegative":0,"I":31575,"J":0,"K":30667,"Resolution":11}
+        	Test:       	TestLoc2IndexFromFile/bn254#106
+[6/6]0xc007d802a0=== RUN   TestLoc2IndexFromFile/bn254#107
+    assert.go:200: 
+        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:200
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert_checkcircuit.go:50
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:66
+        	Error:      	[assertIsEqual] 30667 == 30666
+        	            	loc2index.(*loc2IndexWrapper).Define
+        	            		loc2index.go:1396
+        	            	
+        	            	witness:{"Lat":710162,"Lng":576731,"LatIsNegative":0,"LngIsNegative":0,"I":31575,"J":0,"K":30667,"Resolution":11}
+        	Test:       	TestLoc2IndexFromFile/bn254#107
+[6/6]0xc00207c660=== RUN   TestLoc2IndexFromFile/bn254#108
+    assert.go:200: 
+        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:200
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert_checkcircuit.go:50
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:66
+        	Error:      	[assertIsEqual] 93817 == 93816
+        	            	loc2index.(*loc2IndexWrapper).Define
+        	            		loc2index.go:1394
+        	            	
+        	            	witness:{"Lat":710160,"Lng":576735,"LatIsNegative":0,"LngIsNegative":0,"I":93817,"J":0,"K":60426,"Resolution":12}
+        	Test:       	TestLoc2IndexFromFile/bn254#108
+[6/6]0xc000117380=== RUN   TestLoc2IndexFromFile/bn254#109
+    assert.go:200: 
+        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:200
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert_checkcircuit.go:50
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:66
+        	Error:      	[assertIsEqual] 93817 == 93816
+        	            	loc2index.(*loc2IndexWrapper).Define
+        	            		loc2index.go:1394
+        	            	
+        	            	witness:{"Lat":710160,"Lng":576735,"LatIsNegative":0,"LngIsNegative":0,"I":93817,"J":0,"K":60426,"Resolution":12}
+        	Test:       	TestLoc2IndexFromFile/bn254#109
+[6/6]0xc0000a3080=== RUN   TestLoc2IndexFromFile/bn254#110
+    assert.go:200: 
+        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:200
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert_checkcircuit.go:50
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:66
+        	Error:      	[assertIsEqual] 93817 == 93816
+        	            	loc2index.(*loc2IndexWrapper).Define
+        	            		loc2index.go:1394
+        	            	
+        	            	witness:{"Lat":710160,"Lng":576735,"LatIsNegative":0,"LngIsNegative":0,"I":93817,"J":0,"K":60426,"Resolution":12}
+        	Test:       	TestLoc2IndexFromFile/bn254#110
+[6/6]0xc0000a3380=== RUN   TestLoc2IndexFromFile/bn254#111
+    assert.go:200: 
+        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:200
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert_checkcircuit.go:50
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:66
+        	Error:      	[assertIsEqual] 93817 == 93816
+        	            	loc2index.(*loc2IndexWrapper).Define
+        	            		loc2index.go:1394
+        	            	
+        	            	witness:{"Lat":710160,"Lng":576734,"LatIsNegative":0,"LngIsNegative":0,"I":93817,"J":0,"K":60426,"Resolution":12}
+        	Test:       	TestLoc2IndexFromFile/bn254#111
+[6/6]0xc000898b40=== RUN   TestLoc2IndexFromFile/bn254#112
+    assert.go:200: 
+        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:200
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert_checkcircuit.go:50
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:66
+        	Error:      	[assertIsEqual] 60426 == 60425
+        	            	loc2index.(*loc2IndexWrapper).Define
+        	            		loc2index.go:1396
+        	            	
+        	            	witness:{"Lat":710161,"Lng":576734,"LatIsNegative":0,"LngIsNegative":0,"I":93817,"J":0,"K":60426,"Resolution":12}
+        	Test:       	TestLoc2IndexFromFile/bn254#112
+[6/6]0xc000117aa0=== RUN   TestLoc2IndexFromFile/bn254#113
+    assert.go:200: 
+        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:200
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert_checkcircuit.go:50
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:66
+        	Error:      	[assertIsEqual] 60426 == 60425
+        	            	loc2index.(*loc2IndexWrapper).Define
+        	            		loc2index.go:1396
+        	            	
+        	            	witness:{"Lat":710161,"Lng":576734,"LatIsNegative":0,"LngIsNegative":0,"I":93817,"J":0,"K":60426,"Resolution":12}
+        	Test:       	TestLoc2IndexFromFile/bn254#113
+[6/6]0xc0000a3500=== RUN   TestLoc2IndexFromFile/bn254#114
+    assert.go:200: 
+        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:200
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert_checkcircuit.go:50
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:66
+        	Error:      	[assertIsEqual] 60426 == 60425
+        	            	loc2index.(*loc2IndexWrapper).Define
+        	            		loc2index.go:1396
+        	            	
+        	            	witness:{"Lat":710161,"Lng":576734,"LatIsNegative":0,"LngIsNegative":0,"I":93817,"J":0,"K":60426,"Resolution":12}
+        	Test:       	TestLoc2IndexFromFile/bn254#114
+[6/6]0xc000117bc0=== RUN   TestLoc2IndexFromFile/bn254#115
+    assert.go:200: 
+        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:200
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert_checkcircuit.go:50
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:66
+        	Error:      	[assertIsEqual] 60426 == 60425
+        	            	loc2index.(*loc2IndexWrapper).Define
+        	            		loc2index.go:1396
+        	            	
+        	            	witness:{"Lat":710161,"Lng":576734,"LatIsNegative":0,"LngIsNegative":0,"I":93817,"J":0,"K":60426,"Resolution":12}
+        	Test:       	TestLoc2IndexFromFile/bn254#115
+[6/6]0xc0000a3560=== RUN   TestLoc2IndexFromFile/bn254#116
+    assert.go:200: 
+        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:200
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert_checkcircuit.go:50
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:66
+        	Error:      	[assertIsEqual] 60426 == 60425
+        	            	loc2index.(*loc2IndexWrapper).Define
+        	            		loc2index.go:1396
+        	            	
+        	            	witness:{"Lat":710161,"Lng":576734,"LatIsNegative":0,"LngIsNegative":0,"I":93817,"J":0,"K":60426,"Resolution":12}
+        	Test:       	TestLoc2IndexFromFile/bn254#116
+[6/6]0xc000117c80=== RUN   TestLoc2IndexFromFile/bn254#117
+    assert.go:200: 
+        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:200
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert_checkcircuit.go:50
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:66
+        	Error:      	[assertIsEqual] 221025 == 221023
+        	            	loc2index.(*loc2IndexWrapper).Define
+        	            		loc2index.go:1394
+        	            	
+        	            	witness:{"Lat":710160,"Lng":576733,"LatIsNegative":0,"LngIsNegative":0,"I":221025,"J":0,"K":214668,"Resolution":13}
+        	Test:       	TestLoc2IndexFromFile/bn254#117
+[6/6]0xc007d005a0=== RUN   TestLoc2IndexFromFile/bn254#118
+    assert.go:200: 
+        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:200
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert_checkcircuit.go:50
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:66
+        	Error:      	[assertIsEqual] 221025 == 221023
+        	            	loc2index.(*loc2IndexWrapper).Define
+        	            		loc2index.go:1394
+        	            	
+        	            	witness:{"Lat":710160,"Lng":576733,"LatIsNegative":0,"LngIsNegative":0,"I":221025,"J":0,"K":214668,"Resolution":13}
+        	Test:       	TestLoc2IndexFromFile/bn254#118
+[6/6]0xc0000a3620=== RUN   TestLoc2IndexFromFile/bn254#119
+    assert.go:200: 
+        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:200
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert_checkcircuit.go:50
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:66
+        	Error:      	[assertIsEqual] 221025 == 221023
+        	            	loc2index.(*loc2IndexWrapper).Define
+        	            		loc2index.go:1394
+        	            	
+        	            	witness:{"Lat":710160,"Lng":576733,"LatIsNegative":0,"LngIsNegative":0,"I":221025,"J":0,"K":214668,"Resolution":13}
+        	Test:       	TestLoc2IndexFromFile/bn254#119
+[6/6]0xc00207cf00=== RUN   TestLoc2IndexFromFile/bn254#120
+    assert.go:200: 
+        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:200
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert_checkcircuit.go:50
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:66
+        	Error:      	[assertIsEqual] 221025 == 221023
+        	            	loc2index.(*loc2IndexWrapper).Define
+        	            		loc2index.go:1394
+        	            	
+        	            	witness:{"Lat":710160,"Lng":576733,"LatIsNegative":0,"LngIsNegative":0,"I":221025,"J":0,"K":214668,"Resolution":13}
+        	Test:       	TestLoc2IndexFromFile/bn254#120
+[6/6]0xc007d80840=== RUN   TestLoc2IndexFromFile/bn254#121
+    assert.go:200: 
+        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:200
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert_checkcircuit.go:50
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:66
+        	Error:      	[assertIsEqual] 221025 == 221023
+        	            	loc2index.(*loc2IndexWrapper).Define
+        	            		loc2index.go:1394
+        	            	
+        	            	witness:{"Lat":710160,"Lng":576733,"LatIsNegative":0,"LngIsNegative":0,"I":221025,"J":0,"K":214668,"Resolution":13}
+        	Test:       	TestLoc2IndexFromFile/bn254#121
+[6/6]0xc007d006c0=== RUN   TestLoc2IndexFromFile/bn254#122
+    assert.go:200: 
+        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:200
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert_checkcircuit.go:50
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:66
+        	Error:      	[assertIsEqual] 221025 == 221023
+        	            	loc2index.(*loc2IndexWrapper).Define
+        	            		loc2index.go:1394
+        	            	
+        	            	witness:{"Lat":710160,"Lng":576733,"LatIsNegative":0,"LngIsNegative":0,"I":221025,"J":0,"K":214668,"Resolution":13}
+        	Test:       	TestLoc2IndexFromFile/bn254#122
+[6/6]0xc00207cfc0=== RUN   TestLoc2IndexFromFile/bn254#123
+    assert.go:200: 
+        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:200
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert_checkcircuit.go:50
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:66
+        	Error:      	[assertIsEqual] 221025 == 221023
+        	            	loc2index.(*loc2IndexWrapper).Define
+        	            		loc2index.go:1394
+        	            	
+        	            	witness:{"Lat":710160,"Lng":576733,"LatIsNegative":0,"LngIsNegative":0,"I":221025,"J":0,"K":214668,"Resolution":13}
+        	Test:       	TestLoc2IndexFromFile/bn254#123
+[6/6]0xc007d80900=== RUN   TestLoc2IndexFromFile/bn254#124
+    assert.go:200: 
+        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:200
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert_checkcircuit.go:50
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:66
+        	Error:      	[assertIsEqual] 221025 == 221023
+        	            	loc2index.(*loc2IndexWrapper).Define
+        	            		loc2index.go:1394
+        	            	
+        	            	witness:{"Lat":710160,"Lng":576733,"LatIsNegative":0,"LngIsNegative":0,"I":221025,"J":0,"K":214668,"Resolution":13}
+        	Test:       	TestLoc2IndexFromFile/bn254#124
+[6/6]0xc000898f60=== RUN   TestLoc2IndexFromFile/bn254#125
+    assert.go:200: 
+        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:200
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert_checkcircuit.go:50
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:66
+        	Error:      	[assertIsEqual] 221025 == 221023
+        	            	loc2index.(*loc2IndexWrapper).Define
+        	            		loc2index.go:1394
+        	            	
+        	            	witness:{"Lat":710160,"Lng":576733,"LatIsNegative":0,"LngIsNegative":0,"I":221025,"J":0,"K":214668,"Resolution":13}
+        	Test:       	TestLoc2IndexFromFile/bn254#125
+[6/6]0xc00207d080=== RUN   TestLoc2IndexFromFile/bn254#126
+    assert.go:200: 
+        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:200
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert_checkcircuit.go:50
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:66
+        	Error:      	[assertIsEqual] 656717 == 656711
+        	            	loc2index.(*loc2IndexWrapper).Define
+        	            		loc2index.go:1394
+        	            	
+        	            	witness:{"Lat":710159,"Lng":576734,"LatIsNegative":0,"LngIsNegative":0,"I":656717,"J":0,"K":422980,"Resolution":14}
+        	Test:       	TestLoc2IndexFromFile/bn254#126
+[6/6]0xc000898fc0=== RUN   TestLoc2IndexFromFile/bn254#127
+    assert.go:200: 
+        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:200
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert_checkcircuit.go:50
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:66
+        	Error:      	[assertIsEqual] 656717 == 656711
+        	            	loc2index.(*loc2IndexWrapper).Define
+        	            		loc2index.go:1394
+        	            	
+        	            	witness:{"Lat":710159,"Lng":576734,"LatIsNegative":0,"LngIsNegative":0,"I":656717,"J":0,"K":422980,"Resolution":14}
+        	Test:       	TestLoc2IndexFromFile/bn254#127
+[6/6]0xc000117620=== RUN   TestLoc2IndexFromFile/bn254#128
+    assert.go:200: 
+        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:200
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert_checkcircuit.go:50
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:66
+        	Error:      	[assertIsEqual] 656717 == 656711
+        	            	loc2index.(*loc2IndexWrapper).Define
+        	            		loc2index.go:1394
+        	            	
+        	            	witness:{"Lat":710159,"Lng":576734,"LatIsNegative":0,"LngIsNegative":0,"I":656717,"J":0,"K":422980,"Resolution":14}
+        	Test:       	TestLoc2IndexFromFile/bn254#128
+[6/6]0xc007d00120=== RUN   TestLoc2IndexFromFile/bn254#129
+    assert.go:200: 
+        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:200
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert_checkcircuit.go:50
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:66
+        	Error:      	[assertIsEqual] 656717 == 656711
+        	            	loc2index.(*loc2IndexWrapper).Define
+        	            		loc2index.go:1394
+        	            	
+        	            	witness:{"Lat":710159,"Lng":576734,"LatIsNegative":0,"LngIsNegative":0,"I":656717,"J":0,"K":422980,"Resolution":14}
+        	Test:       	TestLoc2IndexFromFile/bn254#129
+[6/6]0xc00207cc60=== RUN   TestLoc2IndexFromFile/bn254#130
+    assert.go:200: 
+        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:200
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert_checkcircuit.go:50
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:66
+        	Error:      	[assertIsEqual] 656717 == 656711
+        	            	loc2index.(*loc2IndexWrapper).Define
+        	            		loc2index.go:1394
+        	            	
+        	            	witness:{"Lat":710159,"Lng":576734,"LatIsNegative":0,"LngIsNegative":0,"I":656717,"J":0,"K":422980,"Resolution":14}
+        	Test:       	TestLoc2IndexFromFile/bn254#130
+[6/6]0xc000898c00=== RUN   TestLoc2IndexFromFile/bn254#131
+    assert.go:200: 
+        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:200
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert_checkcircuit.go:50
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:66
+        	Error:      	[assertIsEqual] 656717 == 656711
+        	            	loc2index.(*loc2IndexWrapper).Define
+        	            		loc2index.go:1394
+        	            	
+        	            	witness:{"Lat":710159,"Lng":576734,"LatIsNegative":0,"LngIsNegative":0,"I":656717,"J":0,"K":422980,"Resolution":14}
+        	Test:       	TestLoc2IndexFromFile/bn254#131
+[6/6]0xc00207ccc0=== RUN   TestLoc2IndexFromFile/bn254#132
+    assert.go:200: 
+        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:200
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert_checkcircuit.go:50
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:66
+        	Error:      	[assertIsEqual] 656717 == 656711
+        	            	loc2index.(*loc2IndexWrapper).Define
+        	            		loc2index.go:1394
+        	            	
+        	            	witness:{"Lat":710159,"Lng":576734,"LatIsNegative":0,"LngIsNegative":0,"I":656717,"J":0,"K":422980,"Resolution":14}
+        	Test:       	TestLoc2IndexFromFile/bn254#132
+[6/6]0xc007d809c0=== RUN   TestLoc2IndexFromFile/bn254#133
+    assert.go:200: 
+        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:200
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert_checkcircuit.go:50
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:66
+        	Error:      	[assertIsEqual] 656717 == 656711
+        	            	loc2index.(*loc2IndexWrapper).Define
+        	            		loc2index.go:1394
+        	            	
+        	            	witness:{"Lat":710159,"Lng":576734,"LatIsNegative":0,"LngIsNegative":0,"I":656717,"J":0,"K":422980,"Resolution":14}
+        	Test:       	TestLoc2IndexFromFile/bn254#133
+[6/6]0xc000898cc0=== RUN   TestLoc2IndexFromFile/bn254#134
+    assert.go:200: 
+        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:200
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert_checkcircuit.go:50
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:66
+        	Error:      	[assertIsEqual] 656717 == 656711
+        	            	loc2index.(*loc2IndexWrapper).Define
+        	            		loc2index.go:1394
+        	            	
+        	            	witness:{"Lat":710159,"Lng":576734,"LatIsNegative":0,"LngIsNegative":0,"I":656717,"J":0,"K":422980,"Resolution":14}
+        	Test:       	TestLoc2IndexFromFile/bn254#134
+[6/6]0xc00207cd80=== RUN   TestLoc2IndexFromFile/bn254#135
+    assert.go:200: 
+        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:200
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert_checkcircuit.go:50
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:66
+        	Error:      	[assertIsEqual] 1547172 == 1547161
+        	            	loc2index.(*loc2IndexWrapper).Define
+        	            		loc2index.go:1394
+        	            	
+        	            	witness:{"Lat":710159,"Lng":576734,"LatIsNegative":0,"LngIsNegative":0,"I":1547172,"J":0,"K":1502677,"Resolution":15}
+        	Test:       	TestLoc2IndexFromFile/bn254#135
+[6/6]0xc007d007e0=== RUN   TestLoc2IndexFromFile/bn254#136
+    assert.go:200: 
+        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:200
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert_checkcircuit.go:50
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:66
+        	Error:      	[assertIsEqual] 1547172 == 1547161
+        	            	loc2index.(*loc2IndexWrapper).Define
+        	            		loc2index.go:1394
+        	            	
+        	            	witness:{"Lat":710159,"Lng":576734,"LatIsNegative":0,"LngIsNegative":0,"I":1547172,"J":0,"K":1502677,"Resolution":15}
+        	Test:       	TestLoc2IndexFromFile/bn254#136
+[6/6]0xc00207cd80=== RUN   TestLoc2IndexFromFile/bn254#137
+    assert.go:200: 
+        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:200
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert_checkcircuit.go:50
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:66
+        	Error:      	[assertIsEqual] 1547172 == 1547161
+        	            	loc2index.(*loc2IndexWrapper).Define
+        	            		loc2index.go:1394
+        	            	
+        	            	witness:{"Lat":710159,"Lng":576734,"LatIsNegative":0,"LngIsNegative":0,"I":1547172,"J":0,"K":1502677,"Resolution":15}
+        	Test:       	TestLoc2IndexFromFile/bn254#137
+[6/6]0xc000898ea0=== RUN   TestLoc2IndexFromFile/bn254#138
+    assert.go:200: 
+        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:200
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert_checkcircuit.go:50
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:66
+        	Error:      	[assertIsEqual] 1547172 == 1547161
+        	            	loc2index.(*loc2IndexWrapper).Define
+        	            		loc2index.go:1394
+        	            	
+        	            	witness:{"Lat":710159,"Lng":576734,"LatIsNegative":0,"LngIsNegative":0,"I":1547172,"J":0,"K":1502677,"Resolution":15}
+        	Test:       	TestLoc2IndexFromFile/bn254#138
+[6/6]0xc00207cfc0=== RUN   TestLoc2IndexFromFile/bn254#139
+    assert.go:200: 
+        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:200
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert_checkcircuit.go:50
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:66
+        	Error:      	[assertIsEqual] 1547172 == 1547161
+        	            	loc2index.(*loc2IndexWrapper).Define
+        	            		loc2index.go:1394
+        	            	
+        	            	witness:{"Lat":710159,"Lng":576734,"LatIsNegative":0,"LngIsNegative":0,"I":1547172,"J":0,"K":1502677,"Resolution":15}
+        	Test:       	TestLoc2IndexFromFile/bn254#139
+[6/6]0xc000117da0=== RUN   TestLoc2IndexFromFile/bn254#140
+    assert.go:200: 
+        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:200
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert_checkcircuit.go:50
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:66
+        	Error:      	[assertIsEqual] 1547172 == 1547161
+        	            	loc2index.(*loc2IndexWrapper).Define
+        	            		loc2index.go:1394
+        	            	
+        	            	witness:{"Lat":710159,"Lng":576734,"LatIsNegative":0,"LngIsNegative":0,"I":1547172,"J":0,"K":1502677,"Resolution":15}
+        	Test:       	TestLoc2IndexFromFile/bn254#140
+[6/6]0xc007d008a0=== RUN   TestLoc2IndexFromFile/bn254#141
+    assert.go:200: 
+        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:200
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert_checkcircuit.go:50
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:66
+        	Error:      	[assertIsEqual] 1547172 == 1547161
+        	            	loc2index.(*loc2IndexWrapper).Define
+        	            		loc2index.go:1394
+        	            	
+        	            	witness:{"Lat":710159,"Lng":576734,"LatIsNegative":0,"LngIsNegative":0,"I":1547172,"J":0,"K":1502677,"Resolution":15}
+        	Test:       	TestLoc2IndexFromFile/bn254#141
+[6/6]0xc0000a35c0=== RUN   TestLoc2IndexFromFile/bn254#142
+    assert.go:200: 
+        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:200
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert_checkcircuit.go:50
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:66
+        	Error:      	[assertIsEqual] 1547172 == 1547161
+        	            	loc2index.(*loc2IndexWrapper).Define
+        	            		loc2index.go:1394
+        	            	
+        	            	witness:{"Lat":710159,"Lng":576734,"LatIsNegative":0,"LngIsNegative":0,"I":1547172,"J":0,"K":1502677,"Resolution":15}
+        	Test:       	TestLoc2IndexFromFile/bn254#142
+[6/6]0xc00207c660=== RUN   TestLoc2IndexFromFile/bn254#143
+    assert.go:200: 
+        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:200
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert_checkcircuit.go:50
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.0/test/assert.go:66
+        	Error:      	[assertIsEqual] 1547172 == 1547161
+        	            	loc2index.(*loc2IndexWrapper).Define
+        	            		loc2index.go:1394
+        	            	
+        	            	witness:{"Lat":710159,"Lng":576734,"LatIsNegative":0,"LngIsNegative":0,"I":1547172,"J":0,"K":1502677,"Resolution":15}
+        	Test:       	TestLoc2IndexFromFile/bn254#143
+--- FAIL: TestLoc2IndexFromFile (280.19s)
+    --- PASS: TestLoc2IndexFromFile/bn254 (2.81s)
+        --- PASS: TestLoc2IndexFromFile/bn254/groth16 (2.75s)
+            --- PASS: TestLoc2IndexFromFile/bn254/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#01 (2.71s)
+        --- PASS: TestLoc2IndexFromFile/bn254#01/groth16 (2.66s)
+            --- PASS: TestLoc2IndexFromFile/bn254#01/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#02 (2.67s)
+        --- PASS: TestLoc2IndexFromFile/bn254#02/groth16 (2.62s)
+            --- PASS: TestLoc2IndexFromFile/bn254#02/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#03 (2.66s)
+        --- PASS: TestLoc2IndexFromFile/bn254#03/groth16 (2.62s)
+            --- PASS: TestLoc2IndexFromFile/bn254#03/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#04 (2.65s)
+        --- PASS: TestLoc2IndexFromFile/bn254#04/groth16 (2.60s)
+            --- PASS: TestLoc2IndexFromFile/bn254#04/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#05 (2.68s)
+        --- PASS: TestLoc2IndexFromFile/bn254#05/groth16 (2.63s)
+            --- PASS: TestLoc2IndexFromFile/bn254#05/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#06 (2.66s)
+        --- PASS: TestLoc2IndexFromFile/bn254#06/groth16 (2.61s)
+            --- PASS: TestLoc2IndexFromFile/bn254#06/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#07 (2.66s)
+        --- PASS: TestLoc2IndexFromFile/bn254#07/groth16 (2.61s)
+            --- PASS: TestLoc2IndexFromFile/bn254#07/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#08 (2.66s)
+        --- PASS: TestLoc2IndexFromFile/bn254#08/groth16 (2.61s)
+            --- PASS: TestLoc2IndexFromFile/bn254#08/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#09 (2.67s)
+        --- PASS: TestLoc2IndexFromFile/bn254#09/groth16 (2.61s)
+            --- PASS: TestLoc2IndexFromFile/bn254#09/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#10 (2.67s)
+        --- PASS: TestLoc2IndexFromFile/bn254#10/groth16 (2.62s)
+            --- PASS: TestLoc2IndexFromFile/bn254#10/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#11 (2.68s)
+        --- PASS: TestLoc2IndexFromFile/bn254#11/groth16 (2.61s)
+            --- PASS: TestLoc2IndexFromFile/bn254#11/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#12 (2.66s)
+        --- PASS: TestLoc2IndexFromFile/bn254#12/groth16 (2.61s)
+            --- PASS: TestLoc2IndexFromFile/bn254#12/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#13 (2.70s)
+        --- PASS: TestLoc2IndexFromFile/bn254#13/groth16 (2.65s)
+            --- PASS: TestLoc2IndexFromFile/bn254#13/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#14 (2.79s)
+        --- PASS: TestLoc2IndexFromFile/bn254#14/groth16 (2.74s)
+            --- PASS: TestLoc2IndexFromFile/bn254#14/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#15 (2.67s)
+        --- PASS: TestLoc2IndexFromFile/bn254#15/groth16 (2.63s)
+            --- PASS: TestLoc2IndexFromFile/bn254#15/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#16 (2.68s)
+        --- PASS: TestLoc2IndexFromFile/bn254#16/groth16 (2.63s)
+            --- PASS: TestLoc2IndexFromFile/bn254#16/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#17 (2.67s)
+        --- PASS: TestLoc2IndexFromFile/bn254#17/groth16 (2.62s)
+            --- PASS: TestLoc2IndexFromFile/bn254#17/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#18 (2.68s)
+        --- PASS: TestLoc2IndexFromFile/bn254#18/groth16 (2.63s)
+            --- PASS: TestLoc2IndexFromFile/bn254#18/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#19 (2.66s)
+        --- PASS: TestLoc2IndexFromFile/bn254#19/groth16 (2.61s)
+            --- PASS: TestLoc2IndexFromFile/bn254#19/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#20 (2.69s)
+        --- PASS: TestLoc2IndexFromFile/bn254#20/groth16 (2.64s)
+            --- PASS: TestLoc2IndexFromFile/bn254#20/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#21 (2.68s)
+        --- PASS: TestLoc2IndexFromFile/bn254#21/groth16 (2.63s)
+            --- PASS: TestLoc2IndexFromFile/bn254#21/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#22 (2.70s)
+        --- PASS: TestLoc2IndexFromFile/bn254#22/groth16 (2.66s)
+            --- PASS: TestLoc2IndexFromFile/bn254#22/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#23 (2.66s)
+        --- PASS: TestLoc2IndexFromFile/bn254#23/groth16 (2.61s)
+            --- PASS: TestLoc2IndexFromFile/bn254#23/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#24 (2.69s)
+        --- PASS: TestLoc2IndexFromFile/bn254#24/groth16 (2.63s)
+            --- PASS: TestLoc2IndexFromFile/bn254#24/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#25 (2.67s)
+        --- PASS: TestLoc2IndexFromFile/bn254#25/groth16 (2.62s)
+            --- PASS: TestLoc2IndexFromFile/bn254#25/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#26 (2.67s)
+        --- PASS: TestLoc2IndexFromFile/bn254#26/groth16 (2.62s)
+            --- PASS: TestLoc2IndexFromFile/bn254#26/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#27 (2.69s)
+        --- PASS: TestLoc2IndexFromFile/bn254#27/groth16 (2.64s)
+            --- PASS: TestLoc2IndexFromFile/bn254#27/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#28 (2.68s)
+        --- PASS: TestLoc2IndexFromFile/bn254#28/groth16 (2.62s)
+            --- PASS: TestLoc2IndexFromFile/bn254#28/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#29 (2.71s)
+        --- PASS: TestLoc2IndexFromFile/bn254#29/groth16 (2.66s)
+            --- PASS: TestLoc2IndexFromFile/bn254#29/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#30 (2.68s)
+        --- PASS: TestLoc2IndexFromFile/bn254#30/groth16 (2.63s)
+            --- PASS: TestLoc2IndexFromFile/bn254#30/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#31 (2.69s)
+        --- PASS: TestLoc2IndexFromFile/bn254#31/groth16 (2.64s)
+            --- PASS: TestLoc2IndexFromFile/bn254#31/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#32 (2.72s)
+        --- PASS: TestLoc2IndexFromFile/bn254#32/groth16 (2.66s)
+            --- PASS: TestLoc2IndexFromFile/bn254#32/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#33 (2.67s)
+        --- PASS: TestLoc2IndexFromFile/bn254#33/groth16 (2.62s)
+            --- PASS: TestLoc2IndexFromFile/bn254#33/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#34 (2.70s)
+        --- PASS: TestLoc2IndexFromFile/bn254#34/groth16 (2.65s)
+            --- PASS: TestLoc2IndexFromFile/bn254#34/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#35 (2.70s)
+        --- PASS: TestLoc2IndexFromFile/bn254#35/groth16 (2.65s)
+            --- PASS: TestLoc2IndexFromFile/bn254#35/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#36 (2.67s)
+        --- PASS: TestLoc2IndexFromFile/bn254#36/groth16 (2.62s)
+            --- PASS: TestLoc2IndexFromFile/bn254#36/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#37 (2.70s)
+        --- PASS: TestLoc2IndexFromFile/bn254#37/groth16 (2.65s)
+            --- PASS: TestLoc2IndexFromFile/bn254#37/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#38 (2.69s)
+        --- PASS: TestLoc2IndexFromFile/bn254#38/groth16 (2.64s)
+            --- PASS: TestLoc2IndexFromFile/bn254#38/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#39 (2.77s)
+        --- PASS: TestLoc2IndexFromFile/bn254#39/groth16 (2.72s)
+            --- PASS: TestLoc2IndexFromFile/bn254#39/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#40 (2.77s)
+        --- PASS: TestLoc2IndexFromFile/bn254#40/groth16 (2.71s)
+            --- PASS: TestLoc2IndexFromFile/bn254#40/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#41 (2.76s)
+        --- PASS: TestLoc2IndexFromFile/bn254#41/groth16 (2.71s)
+            --- PASS: TestLoc2IndexFromFile/bn254#41/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#42 (2.79s)
+        --- PASS: TestLoc2IndexFromFile/bn254#42/groth16 (2.74s)
+            --- PASS: TestLoc2IndexFromFile/bn254#42/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#43 (2.67s)
+        --- PASS: TestLoc2IndexFromFile/bn254#43/groth16 (2.62s)
+            --- PASS: TestLoc2IndexFromFile/bn254#43/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#44 (2.67s)
+        --- PASS: TestLoc2IndexFromFile/bn254#44/groth16 (2.62s)
+            --- PASS: TestLoc2IndexFromFile/bn254#44/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#45 (2.72s)
+        --- PASS: TestLoc2IndexFromFile/bn254#45/groth16 (2.67s)
+            --- PASS: TestLoc2IndexFromFile/bn254#45/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#46 (2.69s)
+        --- PASS: TestLoc2IndexFromFile/bn254#46/groth16 (2.64s)
+            --- PASS: TestLoc2IndexFromFile/bn254#46/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#47 (2.68s)
+        --- PASS: TestLoc2IndexFromFile/bn254#47/groth16 (2.63s)
+            --- PASS: TestLoc2IndexFromFile/bn254#47/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#48 (2.69s)
+        --- PASS: TestLoc2IndexFromFile/bn254#48/groth16 (2.64s)
+            --- PASS: TestLoc2IndexFromFile/bn254#48/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#49 (2.67s)
+        --- PASS: TestLoc2IndexFromFile/bn254#49/groth16 (2.63s)
+            --- PASS: TestLoc2IndexFromFile/bn254#49/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#50 (2.69s)
+        --- PASS: TestLoc2IndexFromFile/bn254#50/groth16 (2.63s)
+            --- PASS: TestLoc2IndexFromFile/bn254#50/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#51 (2.70s)
+        --- PASS: TestLoc2IndexFromFile/bn254#51/groth16 (2.65s)
+            --- PASS: TestLoc2IndexFromFile/bn254#51/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#52 (2.69s)
+        --- PASS: TestLoc2IndexFromFile/bn254#52/groth16 (2.64s)
+            --- PASS: TestLoc2IndexFromFile/bn254#52/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#53 (2.70s)
+        --- PASS: TestLoc2IndexFromFile/bn254#53/groth16 (2.64s)
+            --- PASS: TestLoc2IndexFromFile/bn254#53/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#54 (2.70s)
+        --- PASS: TestLoc2IndexFromFile/bn254#54/groth16 (2.64s)
+            --- PASS: TestLoc2IndexFromFile/bn254#54/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#55 (2.67s)
+        --- PASS: TestLoc2IndexFromFile/bn254#55/groth16 (2.62s)
+            --- PASS: TestLoc2IndexFromFile/bn254#55/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#56 (2.69s)
+        --- PASS: TestLoc2IndexFromFile/bn254#56/groth16 (2.64s)
+            --- PASS: TestLoc2IndexFromFile/bn254#56/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#57 (2.70s)
+        --- PASS: TestLoc2IndexFromFile/bn254#57/groth16 (2.64s)
+            --- PASS: TestLoc2IndexFromFile/bn254#57/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#58 (2.73s)
+        --- PASS: TestLoc2IndexFromFile/bn254#58/groth16 (2.67s)
+            --- PASS: TestLoc2IndexFromFile/bn254#58/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#59 (2.69s)
+        --- PASS: TestLoc2IndexFromFile/bn254#59/groth16 (2.64s)
+            --- PASS: TestLoc2IndexFromFile/bn254#59/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#60 (2.70s)
+        --- PASS: TestLoc2IndexFromFile/bn254#60/groth16 (2.64s)
+            --- PASS: TestLoc2IndexFromFile/bn254#60/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#61 (2.67s)
+        --- PASS: TestLoc2IndexFromFile/bn254#61/groth16 (2.62s)
+            --- PASS: TestLoc2IndexFromFile/bn254#61/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#62 (2.69s)
+        --- PASS: TestLoc2IndexFromFile/bn254#62/groth16 (2.64s)
+            --- PASS: TestLoc2IndexFromFile/bn254#62/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#63 (2.69s)
+        --- PASS: TestLoc2IndexFromFile/bn254#63/groth16 (2.64s)
+            --- PASS: TestLoc2IndexFromFile/bn254#63/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#64 (2.74s)
+        --- PASS: TestLoc2IndexFromFile/bn254#64/groth16 (2.69s)
+            --- PASS: TestLoc2IndexFromFile/bn254#64/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#65 (2.69s)
+        --- PASS: TestLoc2IndexFromFile/bn254#65/groth16 (2.64s)
+            --- PASS: TestLoc2IndexFromFile/bn254#65/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#66 (2.69s)
+        --- PASS: TestLoc2IndexFromFile/bn254#66/groth16 (2.63s)
+            --- PASS: TestLoc2IndexFromFile/bn254#66/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#67 (2.68s)
+        --- PASS: TestLoc2IndexFromFile/bn254#67/groth16 (2.64s)
+            --- PASS: TestLoc2IndexFromFile/bn254#67/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#68 (2.70s)
+        --- PASS: TestLoc2IndexFromFile/bn254#68/groth16 (2.65s)
+            --- PASS: TestLoc2IndexFromFile/bn254#68/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#69 (2.79s)
+        --- PASS: TestLoc2IndexFromFile/bn254#69/groth16 (2.73s)
+            --- PASS: TestLoc2IndexFromFile/bn254#69/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#70 (2.76s)
+        --- PASS: TestLoc2IndexFromFile/bn254#70/groth16 (2.70s)
+            --- PASS: TestLoc2IndexFromFile/bn254#70/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#71 (2.69s)
+        --- PASS: TestLoc2IndexFromFile/bn254#71/groth16 (2.64s)
+            --- PASS: TestLoc2IndexFromFile/bn254#71/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#72 (2.72s)
+        --- PASS: TestLoc2IndexFromFile/bn254#72/groth16 (2.67s)
+            --- PASS: TestLoc2IndexFromFile/bn254#72/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#73 (2.69s)
+        --- PASS: TestLoc2IndexFromFile/bn254#73/groth16 (2.64s)
+            --- PASS: TestLoc2IndexFromFile/bn254#73/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#74 (2.69s)
+        --- PASS: TestLoc2IndexFromFile/bn254#74/groth16 (2.64s)
+            --- PASS: TestLoc2IndexFromFile/bn254#74/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#75 (2.69s)
+        --- PASS: TestLoc2IndexFromFile/bn254#75/groth16 (2.64s)
+            --- PASS: TestLoc2IndexFromFile/bn254#75/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#76 (2.72s)
+        --- PASS: TestLoc2IndexFromFile/bn254#76/groth16 (2.67s)
+            --- PASS: TestLoc2IndexFromFile/bn254#76/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#77 (2.70s)
+        --- PASS: TestLoc2IndexFromFile/bn254#77/groth16 (2.64s)
+            --- PASS: TestLoc2IndexFromFile/bn254#77/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#78 (2.72s)
+        --- PASS: TestLoc2IndexFromFile/bn254#78/groth16 (2.66s)
+            --- PASS: TestLoc2IndexFromFile/bn254#78/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#79 (2.69s)
+        --- PASS: TestLoc2IndexFromFile/bn254#79/groth16 (2.64s)
+            --- PASS: TestLoc2IndexFromFile/bn254#79/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#80 (2.85s)
+        --- PASS: TestLoc2IndexFromFile/bn254#80/groth16 (2.80s)
+            --- PASS: TestLoc2IndexFromFile/bn254#80/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#81 (2.71s)
+        --- PASS: TestLoc2IndexFromFile/bn254#81/groth16 (2.66s)
+            --- PASS: TestLoc2IndexFromFile/bn254#81/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#82 (2.68s)
+        --- PASS: TestLoc2IndexFromFile/bn254#82/groth16 (2.63s)
+            --- PASS: TestLoc2IndexFromFile/bn254#82/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#83 (2.70s)
+        --- PASS: TestLoc2IndexFromFile/bn254#83/groth16 (2.65s)
+            --- PASS: TestLoc2IndexFromFile/bn254#83/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#84 (2.70s)
+        --- PASS: TestLoc2IndexFromFile/bn254#84/groth16 (2.65s)
+            --- PASS: TestLoc2IndexFromFile/bn254#84/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#85 (2.71s)
+        --- PASS: TestLoc2IndexFromFile/bn254#85/groth16 (2.66s)
+            --- PASS: TestLoc2IndexFromFile/bn254#85/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#86 (2.67s)
+        --- PASS: TestLoc2IndexFromFile/bn254#86/groth16 (2.62s)
+            --- PASS: TestLoc2IndexFromFile/bn254#86/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#87 (2.71s)
+        --- PASS: TestLoc2IndexFromFile/bn254#87/groth16 (2.65s)
+            --- PASS: TestLoc2IndexFromFile/bn254#87/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#88 (2.73s)
+        --- PASS: TestLoc2IndexFromFile/bn254#88/groth16 (2.67s)
+            --- PASS: TestLoc2IndexFromFile/bn254#88/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#89 (2.70s)
+        --- PASS: TestLoc2IndexFromFile/bn254#89/groth16 (2.65s)
+            --- PASS: TestLoc2IndexFromFile/bn254#89/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#90 (2.71s)
+        --- PASS: TestLoc2IndexFromFile/bn254#90/groth16 (2.66s)
+            --- PASS: TestLoc2IndexFromFile/bn254#90/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#91 (2.73s)
+        --- PASS: TestLoc2IndexFromFile/bn254#91/groth16 (2.68s)
+            --- PASS: TestLoc2IndexFromFile/bn254#91/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#92 (2.72s)
+        --- PASS: TestLoc2IndexFromFile/bn254#92/groth16 (2.68s)
+            --- PASS: TestLoc2IndexFromFile/bn254#92/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#93 (2.69s)
+        --- PASS: TestLoc2IndexFromFile/bn254#93/groth16 (2.64s)
+            --- PASS: TestLoc2IndexFromFile/bn254#93/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#94 (2.64s)
+        --- PASS: TestLoc2IndexFromFile/bn254#94/groth16 (2.58s)
+            --- PASS: TestLoc2IndexFromFile/bn254#94/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#95 (2.69s)
+        --- PASS: TestLoc2IndexFromFile/bn254#95/groth16 (2.64s)
+            --- PASS: TestLoc2IndexFromFile/bn254#95/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#96 (2.74s)
+        --- PASS: TestLoc2IndexFromFile/bn254#96/groth16 (2.69s)
+            --- PASS: TestLoc2IndexFromFile/bn254#96/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#97 (2.69s)
+        --- PASS: TestLoc2IndexFromFile/bn254#97/groth16 (2.64s)
+            --- PASS: TestLoc2IndexFromFile/bn254#97/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#98 (2.69s)
+        --- PASS: TestLoc2IndexFromFile/bn254#98/groth16 (2.64s)
+            --- PASS: TestLoc2IndexFromFile/bn254#98/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#99 (2.70s)
+        --- PASS: TestLoc2IndexFromFile/bn254#99/groth16 (2.64s)
+            --- PASS: TestLoc2IndexFromFile/bn254#99/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#100 (2.70s)
+        --- PASS: TestLoc2IndexFromFile/bn254#100/groth16 (2.65s)
+            --- PASS: TestLoc2IndexFromFile/bn254#100/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#101 (2.69s)
+        --- PASS: TestLoc2IndexFromFile/bn254#101/groth16 (2.64s)
+            --- PASS: TestLoc2IndexFromFile/bn254#101/groth16/valid_witness (0.06s)
+    --- PASS: TestLoc2IndexFromFile/bn254#102 (2.70s)
+        --- PASS: TestLoc2IndexFromFile/bn254#102/groth16 (2.66s)
+            --- PASS: TestLoc2IndexFromFile/bn254#102/groth16/valid_witness (0.06s)
+    --- FAIL: TestLoc2IndexFromFile/bn254#103 (0.06s)
+    --- FAIL: TestLoc2IndexFromFile/bn254#104 (0.05s)
+    --- FAIL: TestLoc2IndexFromFile/bn254#105 (0.05s)
+    --- FAIL: TestLoc2IndexFromFile/bn254#106 (0.05s)
+    --- FAIL: TestLoc2IndexFromFile/bn254#107 (0.05s)
+    --- FAIL: TestLoc2IndexFromFile/bn254#108 (0.05s)
+    --- FAIL: TestLoc2IndexFromFile/bn254#109 (0.05s)
+    --- FAIL: TestLoc2IndexFromFile/bn254#110 (0.05s)
+    --- FAIL: TestLoc2IndexFromFile/bn254#111 (0.05s)
+    --- FAIL: TestLoc2IndexFromFile/bn254#112 (0.06s)
+    --- FAIL: TestLoc2IndexFromFile/bn254#113 (0.05s)
+    --- FAIL: TestLoc2IndexFromFile/bn254#114 (0.05s)
+    --- FAIL: TestLoc2IndexFromFile/bn254#115 (0.05s)
+    --- FAIL: TestLoc2IndexFromFile/bn254#116 (0.06s)
+    --- FAIL: TestLoc2IndexFromFile/bn254#117 (0.05s)
+    --- FAIL: TestLoc2IndexFromFile/bn254#118 (0.05s)
+    --- FAIL: TestLoc2IndexFromFile/bn254#119 (0.05s)
+    --- FAIL: TestLoc2IndexFromFile/bn254#120 (0.05s)
+    --- FAIL: TestLoc2IndexFromFile/bn254#121 (0.05s)
+    --- FAIL: TestLoc2IndexFromFile/bn254#122 (0.05s)
+    --- FAIL: TestLoc2IndexFromFile/bn254#123 (0.05s)
+    --- FAIL: TestLoc2IndexFromFile/bn254#124 (0.05s)
+    --- FAIL: TestLoc2IndexFromFile/bn254#125 (0.05s)
+    --- FAIL: TestLoc2IndexFromFile/bn254#126 (0.05s)
+    --- FAIL: TestLoc2IndexFromFile/bn254#127 (0.05s)
+    --- FAIL: TestLoc2IndexFromFile/bn254#128 (0.05s)
+    --- FAIL: TestLoc2IndexFromFile/bn254#129 (0.05s)
+    --- FAIL: TestLoc2IndexFromFile/bn254#130 (0.05s)
+    --- FAIL: TestLoc2IndexFromFile/bn254#131 (0.05s)
+    --- FAIL: TestLoc2IndexFromFile/bn254#132 (0.05s)
+    --- FAIL: TestLoc2IndexFromFile/bn254#133 (0.05s)
+    --- FAIL: TestLoc2IndexFromFile/bn254#134 (0.05s)
+    --- FAIL: TestLoc2IndexFromFile/bn254#135 (0.05s)
+    --- FAIL: TestLoc2IndexFromFile/bn254#136 (0.05s)
+    --- FAIL: TestLoc2IndexFromFile/bn254#137 (0.05s)
+    --- FAIL: TestLoc2IndexFromFile/bn254#138 (0.05s)
+    --- FAIL: TestLoc2IndexFromFile/bn254#139 (0.05s)
+    --- FAIL: TestLoc2IndexFromFile/bn254#140 (0.05s)
+    --- FAIL: TestLoc2IndexFromFile/bn254#141 (0.05s)
+    --- FAIL: TestLoc2IndexFromFile/bn254#142 (0.05s)
+    --- FAIL: TestLoc2IndexFromFile/bn254#143 (0.05s)
+FAIL
+exit status 1
+FAIL	zkLocation/circuits/loc2index	281.163s

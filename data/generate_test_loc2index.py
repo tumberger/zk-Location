@@ -95,7 +95,7 @@ def generate_points(resolution):
         target_lat_rad = np.radians(target_lat)
         target_lng_rad = np.radians(target_lng)
 
-        for i in range(1, 20):
+        for i in range(1, 10):
             factor = np.log(i) / np.log(20)
             gen_lat_rad = center_lat_rad + (target_lat_rad - center_lat_rad) * factor
             gen_lng_rad = center_lng_rad + (target_lng_rad - center_lng_rad) * factor
@@ -153,7 +153,7 @@ try:
 
     # Choose whether to use float32 or float64 precision
     # Set use_float32 to True for float32 precision, False for float64
-    use_float32 = True  # or False
+    use_float32 = False  # or False
 
     write_to_file(generated_points, use_float32)
     precision_type = '32' if use_float32 else '64'
