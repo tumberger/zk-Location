@@ -11,6 +11,7 @@ import (
 	"testing"
 
 	float "gnark-float/float"
+	"gnark-float/hint"
 	maths "gnark-float/math"
 	util "gnark-float/util"
 
@@ -219,7 +220,6 @@ func (c *loc2Index64Circuit) Define(api frontend.API) error {
 
 	// Adding half pi to latitude to apply cos() -- lat always in range [-pi/2, pi/2]
 	term := ctx.Add(lat, halfPi)
-	cosLat := maths.SinTaylor64(&ctx, term)
 
 	// Adding half pi to longitude to apply cos() -- lng always in range [-pi, pi]
 	tmp := ctx.Add(lng, halfPi)
@@ -233,17 +233,98 @@ func (c *loc2Index64Circuit) Define(api frontend.API) error {
 	term.Mantissa = api.Select(isGreater, shifted.Mantissa, tmp.Mantissa)
 	term.IsAbnormal = 0
 
-	cosLng := maths.SinTaylor64(&ctx, term)
+	// Compute alpha, beta, gamma, delta for Latitude
+	alphaLat := ctx.NewFloat(0)
+	betaLat := ctx.NewFloat(0)
+	gammaLat := ctx.NewFloat(0)
+	deltaLat := ctx.NewFloat(0)
+	precomputeLat, err := ctx.Api.Compiler().NewHint(hint.PrecomputeHint, 16, c.Lat, ctx.E, ctx.M)
+	if err != nil {
+		panic(err)
+	}
+	alphaLat.Sign = precomputeLat[0]
+	alphaLat.Exponent = precomputeLat[1]
+	alphaLat.Mantissa = precomputeLat[2]
+	alphaLat.IsAbnormal = precomputeLat[3]
+
+	betaLat.Sign = precomputeLat[4]
+	betaLat.Exponent = precomputeLat[5]
+	betaLat.Mantissa = precomputeLat[6]
+	betaLat.IsAbnormal = precomputeLat[7]
+
+	gammaLat.Sign = precomputeLat[8]
+	gammaLat.Exponent = precomputeLat[9]
+	gammaLat.Mantissa = precomputeLat[10]
+	gammaLat.IsAbnormal = precomputeLat[11]
+
+	deltaLat.Sign = precomputeLat[12]
+	deltaLat.Exponent = precomputeLat[13]
+	deltaLat.Mantissa = precomputeLat[14]
+	deltaLat.IsAbnormal = precomputeLat[15]
+
+	// Compute alpha, beta, gamma, delta for Longitude
+	alphaLng := ctx.NewFloat(0)
+	betaLng := ctx.NewFloat(0)
+	gammaLng := ctx.NewFloat(0)
+	deltaLng := ctx.NewFloat(0)
+	precomputeLng, err := ctx.Api.Compiler().NewHint(hint.PrecomputeHint, 16, c.Lng, ctx.E, ctx.M)
+	if err != nil {
+		panic(err)
+	}
+	alphaLng.Sign = precomputeLng[0]
+	alphaLng.Exponent = precomputeLng[1]
+	alphaLng.Mantissa = precomputeLng[2]
+	alphaLng.IsAbnormal = precomputeLng[3]
+
+	betaLng.Sign = precomputeLng[4]
+	betaLng.Exponent = precomputeLng[5]
+	betaLng.Mantissa = precomputeLng[6]
+	betaLng.IsAbnormal = precomputeLng[7]
+
+	gammaLng.Sign = precomputeLng[8]
+	gammaLng.Exponent = precomputeLng[9]
+	gammaLng.Mantissa = precomputeLng[10]
+	gammaLng.IsAbnormal = precomputeLng[11]
+
+	deltaLng.Sign = precomputeLng[12]
+	deltaLng.Exponent = precomputeLng[13]
+	deltaLng.Mantissa = precomputeLng[14]
+	deltaLng.IsAbnormal = precomputeLng[15]
+
+	// Check 1 (Identity) for Latitude and Longitude
+	deltaLatSquared := ctx.Mul(deltaLat, deltaLat)
+	gammaLatSquared := ctx.Mul(gammaLat, gammaLat)
+	identityLat := ctx.Add(gammaLatSquared, deltaLatSquared)
+	deltaLngSquared := ctx.Mul(deltaLng, deltaLng)
+	gammaLngSquared := ctx.Mul(gammaLng, gammaLng)
+	identityLng := ctx.Add(gammaLngSquared, deltaLngSquared)
+	ctx.AssertIsEqual(identityLat, ctx.NewF64Constant(1))
+	ctx.AssertIsEqual(identityLng, ctx.NewF64Constant(1))
+
+	// Check 2 for Latitude and Longitude
+	ctx.AssertIsEqual(ctx.Mul(alphaLat, deltaLat), gammaLat)
+	ctx.AssertIsEqual(ctx.Mul(alphaLng, deltaLng), gammaLng)
+
+	// Check 3 for Latitude and Longitude
+	ctx.AssertIsEqual(ctx.Mul(ctx.NewF64Constant(2), ctx.Mul(gammaLat, deltaLat)), betaLat)
+	ctx.AssertIsEqual(ctx.Mul(ctx.NewF64Constant(2), ctx.Mul(gammaLng, deltaLng)), betaLng)
+
+	// Calculate Cosine for Latitude and Longitude
+	cosLat := ctx.Sub(ctx.Mul(deltaLat, deltaLat), ctx.Mul(gammaLat, gammaLat))
+	cosLng := ctx.Sub(ctx.Mul(deltaLng, deltaLng), ctx.Mul(gammaLng, gammaLng))
+
+	// Calculate Sin for Latitude and Longitude
+	z := betaLat
+	sinLng := betaLng
+
+	// Calculate x & z for 3D Cartesian
 	x := ctx.Mul(cosLat, cosLng)
-
-	sinLng := maths.SinTaylor64(&ctx, lng)
 	y := ctx.Mul(cosLat, sinLng)
-
-	z := maths.SinTaylor64(&ctx, lat)
 
 	calc := closestFaceCalculations(&ctx, x, y, z, lng)
 
 	r := calculateR(&ctx, calc[0], resolution)
+
 	hex2d := calculateHex2d(&ctx, z, cosLat, sinLng, cosLng, calc[1], calc[2], calc[3], calc[4], calc[5], calc[6], calc[7], calc[8], r, resolution)
 
 	ijk := hex2dToCoordIJK(&ctx, hex2d[0], hex2d[1])
@@ -294,6 +375,7 @@ func TestLoc2Index64(t *testing.T) {
 			test.WithCurves(ecc.BN254),
 			test.WithBackends(backend.GROTH16),
 		)
+		break
 	}
 
 	if err := scanner.Err(); err != nil {

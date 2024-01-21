@@ -72,6 +72,7 @@ func closestFaceCalculations(f *float.Context, x2, y2, z2, lng float.FloatVar) [
 		s2 := f.Mul(d, d)
 
 		d = f.Sub(f.NewF64Constant(util.FaceCenterPoint_64[i+2]), z2)
+
 		s3 := f.Mul(d, d)
 
 		tmp := f.Add(s1, s2)
