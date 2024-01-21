@@ -8,6 +8,7 @@ import (
 
 	"gnark-float/gadget"
 	"gnark-float/hint"
+	"gnark-float/util"
 )
 
 type Context struct {
@@ -52,7 +53,7 @@ func NewContext(api frontend.API, E, M uint) Context {
 	E_MIN := new(big.Int).Sub(E_NORMAL_MIN, big.NewInt(int64(M+1)))
 	return Context{
 		Api:          api,
-		Gadget:       gadget.New(api, M + E + 1),
+		Gadget:       gadget.New(api, M+E+1),
 		E:            E,
 		M:            M,
 		E_MAX:        E_MAX,
@@ -159,7 +160,7 @@ func (f *Context) NewFloat(v frontend.Variable) FloatVar {
 
 // Allocate a constant in the constraint system.
 func (f *Context) NewConstant(v uint64) FloatVar {
-	components := ComponentsOf(v, uint64(f.E), uint64(f.M))
+	components := util.ComponentsOf(v, uint64(f.E), uint64(f.M))
 
 	return FloatVar{
 		Sign:       components[0],
@@ -1030,7 +1031,6 @@ func (f *Context) Ceil(x FloatVar) FloatVar {
 // The caller should ensure that `x` is obtained from `Trunc`, `Floor` or `Ceil`.
 // Also, `x`'s exponent should not be too large. Otherwise, the proof verification will fail.
 func (f *Context) ToInt(x FloatVar) frontend.Variable {
-	f.Api.Println(x.Mantissa, x.Exponent)
 	exponent_is_min := f.Gadget.IsEq(x.Exponent, f.E_MIN)
 	two_to_e := f.Gadget.QueryPowerOf2(f.Api.Select(
 		exponent_is_min,
