@@ -160,15 +160,18 @@ func NormalizeHint(
 	mantissa := new(big.Int).Set(inputs[0])
 	mantissa_bit_length := uint64(inputs[1].Uint64())
 
-	shift := uint64(0)
-	for i := int(mantissa_bit_length - 1); i >= 0; i-- {
-		if mantissa.Bit(i) != 0 {
-			break
+	if mantissa.Cmp(big.NewInt(0)) == 0 {
+		outputs[0].SetUint64(0)
+	} else {
+		shift := uint64(0)
+		for i := int(mantissa_bit_length - 1); i >= 0; i-- {
+			if mantissa.Bit(i) != 0 {
+				break
+			}
+			shift++
 		}
-		shift++
+		outputs[0].SetUint64(shift)
 	}
-
-	outputs[0].SetUint64(shift)
 
 	return nil
 }
