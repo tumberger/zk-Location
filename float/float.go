@@ -515,6 +515,16 @@ func (f *Context) Add(x, y FloatVar) FloatVar {
 	}
 }
 
+// Compute the absolute value of the number.
+func (f *Context) Abs(x FloatVar) FloatVar {
+	return FloatVar{
+		Sign:       0,
+		Exponent:   x.Exponent,
+		Mantissa:   x.Mantissa,
+		IsAbnormal: x.IsAbnormal,
+	}
+}
+
 // Negate the number by flipping the sign.
 func (f *Context) Neg(x FloatVar) FloatVar {
 	neg_sign := f.Api.Sub(big.NewInt(1), x.Sign)

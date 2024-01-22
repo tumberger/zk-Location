@@ -8,7 +8,6 @@ import (
 	//"fmt"
 
 	"github.com/consensys/gnark/frontend"
-	comparator "github.com/consensys/gnark/std/math/cmp"
 )
 
 func scaleR(f *float.Context, r float.FloatVar, resolution frontend.Variable) float.FloatVar {
@@ -138,10 +137,8 @@ func calculateHex2d(
 func hex2dToCoordIJK(f *float.Context, x, y float.FloatVar) [3]frontend.Variable {
 
 	// Take absolute values of x and y, then put them back to original
-	a1 := x
-	a1.Sign = frontend.Variable(0)
-	a2 := y
-	a2.Sign = frontend.Variable(0)
+	a1 := f.Abs(x)
+	a2 := f.Abs(y)
 	x2 := f.Div(a2, f.NewF32Constant(util.Sin60_32))
 	tmp := f.Div(x2, f.NewF32Constant(2.0))
 	x1 := f.Add(a1, tmp)
@@ -197,7 +194,7 @@ func hex2dToCoordIJK(f *float.Context, x, y float.FloatVar) [3]frontend.Variable
 		f.Api.Select(check3, m2int, m2PlusOne))
 	jCoord := f.Api.Select(r1CaseA, caseAjCoord, caseBjCoord)
 
-	iGreater := comparator.IsLess(f.Api, jCoord, iCoord)
+	iGreater := f.Gadget.IsPositive(f.Api.Sub(iCoord, jCoord), 32)
 	// In case only x is negative: i = -i + j
 	// in case only y is negative: i = i - j
 	// in case x AND y negative: i = -i
@@ -209,19 +206,19 @@ func hex2dToCoordIJK(f *float.Context, x, y float.FloatVar) [3]frontend.Variable
 		f.Api.Select(y.Sign,
 			f.Api.Select(iGreater, f.Api.Sub(iCoord, jCoord), f.Api.Sub(jCoord, iCoord)), iCoord))
 
-	return NormalizeIJK(f.Api, iCoordNegative, iCoord, y.Sign, jCoord, 0, 0)
-
+	return NormalizeIJK(f, iCoordNegative, iCoord, y.Sign, jCoord, 0, 0)
 }
 
 // TODO: Comments
-func NormalizeIJK(api frontend.API, iCoordNegative frontend.Variable, iCoord frontend.Variable, jCoordNegative frontend.Variable, jCoord frontend.Variable, kCoordNegative frontend.Variable, kCoord frontend.Variable) [3]frontend.Variable {
+func NormalizeIJK(f *float.Context, iCoordNegative frontend.Variable, iCoord frontend.Variable, jCoordNegative frontend.Variable, jCoord frontend.Variable, kCoordNegative frontend.Variable, kCoord frontend.Variable) [3]frontend.Variable {
+	api := f.Api
 
-	iGreaterj := comparator.IsLess(api, jCoord, iCoord)
+	iGreaterj := f.Gadget.IsPositive(api.Sub(iCoord, jCoord), 32)
 	jTmp := api.Select(jCoordNegative,
 		api.Select(iGreaterj, api.Sub(iCoord, jCoord), api.Sub(jCoord, iCoord)),
 		api.Add(iCoord, jCoord))
 	jTmpNegative := api.Select(jCoordNegative, api.Sub(1, iGreaterj), 0)
-	iGreaterk := comparator.IsLess(api, kCoord, iCoord)
+	iGreaterk := f.Gadget.IsPositive(api.Sub(iCoord, kCoord), 32)
 	kTmp := api.Select(kCoordNegative,
 		api.Select(iGreaterk, api.Sub(iCoord, kCoord), api.Sub(kCoord, iCoord)),
 		api.Add(iCoord, kCoord))
@@ -234,7 +231,7 @@ func NormalizeIJK(api frontend.API, iCoordNegative frontend.Variable, iCoord fro
 	kCoord = api.Select(iCoordNegative, kTmp, kCoord)
 	kCoordNegative = api.Select(iCoordNegative, kTmpNegative, kCoordNegative)
 
-	jGreaterk := comparator.IsLess(api, kCoord, jCoord)
+	jGreaterk := f.Gadget.IsPositive(api.Sub(jCoord, kCoord), 32)
 	kTmp = api.Select(kCoordNegative,
 		api.Select(jGreaterk, api.Sub(jCoord, kCoord), api.Sub(kCoord, jCoord)),
 		api.Add(jCoord, kCoord))
@@ -251,9 +248,9 @@ func NormalizeIJK(api frontend.API, iCoordNegative frontend.Variable, iCoord fro
 	jCoord = api.Select(kCoordNegative, api.Add(jCoord, kCoord), jCoord)
 	kCoord = api.Select(kCoordNegative, 0, kCoord)
 
-	iGreaterj = comparator.IsLess(api, jCoord, iCoord)
+	iGreaterj = f.Gadget.IsPositive(api.Sub(iCoord, jCoord), 32)
 	min := api.Select(iGreaterj, jCoord, iCoord)
-	min = api.Select(comparator.IsLess(api, kCoord, min), kCoord, min)
+	min = api.Select(f.Gadget.IsPositive(api.Sub(min, kCoord), 32), kCoord, min)
 
 	i := api.Sub(iCoord, min)
 	j := api.Sub(jCoord, min)

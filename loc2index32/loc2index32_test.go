@@ -173,7 +173,7 @@ func TestLoc2Index32(t *testing.T) {
 		j, _ := new(big.Int).SetString(data[4], 16)
 		k, _ := new(big.Int).SetString(data[5], 16)
 
-		fmt.Printf("lat: %f, lng: %f\n", lat, lng)
+		fmt.Printf("lat: %f, lng: %f\n", math.Float32frombits(uint32(lat.Uint64())), math.Float32frombits(uint32(lng.Uint64())))
 		fmt.Printf("i: %d, j: %d, k: %d\n", i, j, k)
 
 		// Calculate I, J, K using the H3 library in C - just for comparison and debugging
