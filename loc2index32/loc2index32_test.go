@@ -108,24 +108,22 @@ func (c *loc2Index32Circuit) Define(api frontend.API) error {
 	deltaLng.Mantissa = precomputeLng[14]
 	deltaLng.IsAbnormal = precomputeLng[15]
 
-	// FOLLOWING CHECKS SHOULD BE ENABLED FOR SOUNDNESS, BUT FAIL DUE TO INACCURACY
-	// // Check 1 (Identity) for Latitude and Longitude
-	// deltaLatSquared := ctx.Mul(deltaLat, deltaLat)
-	// gammaLatSquared := ctx.Mul(gammaLat, gammaLat)
-	// identityLat := ctx.Add(gammaLatSquared, deltaLatSquared)
-	// deltaLngSquared := ctx.Mul(deltaLng, deltaLng)
-	// gammaLngSquared := ctx.Mul(gammaLng, gammaLng)
-	// identityLng := ctx.Add(gammaLngSquared, deltaLngSquared)
-	// ctx.AssertIsEqual(identityLat, ctx.NewF32Constant(1))
-	// ctx.AssertIsEqual(identityLng, ctx.NewF32Constant(1))
+	// Check 1 (Identity) for Latitude and Longitude
+	deltaLatSquared := ctx.Mul(deltaLat, deltaLat)
+	gammaLatSquared := ctx.Mul(gammaLat, gammaLat)
+	identityLat := ctx.Add(gammaLatSquared, deltaLatSquared)
+	deltaLngSquared := ctx.Mul(deltaLng, deltaLng)
+	gammaLngSquared := ctx.Mul(gammaLng, gammaLng)
+	identityLng := ctx.Add(gammaLngSquared, deltaLngSquared)
+	ctx.AssertIsEqualOrULP(identityLat, identityLng)
 
-	// // Check 2 for Latitude and Longitude
-	// ctx.AssertIsEqual(ctx.Mul(alphaLat, deltaLat), gammaLat)
-	// ctx.AssertIsEqual(ctx.Mul(alphaLng, deltaLng), gammaLng)
+	// Check 2 for Latitude and Longitude
+	ctx.AssertIsEqualOrULP(ctx.Mul(alphaLat, deltaLat), gammaLat)
+	ctx.AssertIsEqualOrULP(ctx.Mul(alphaLng, deltaLng), gammaLng)
 
-	// // Check 3 for Latitude and Longitude
-	// ctx.AssertIsEqual(ctx.Mul(ctx.NewF32Constant(2), ctx.Mul(gammaLat, deltaLat)), betaLat)
-	// ctx.AssertIsEqual(ctx.Mul(ctx.NewF32Constant(2), ctx.Mul(gammaLng, deltaLng)), betaLng)
+	// Check 3 for Latitude and Longitude
+	ctx.AssertIsEqualOrULP(ctx.Mul(ctx.NewF32Constant(2), ctx.Mul(gammaLat, deltaLat)), betaLat)
+	ctx.AssertIsEqualOrULP(ctx.Mul(ctx.NewF32Constant(2), ctx.Mul(gammaLng, deltaLng)), betaLng)
 
 	// Calculate Cosine for Latitude and Longitude
 	cosLat := ctx.Sub(ctx.Mul(deltaLat, deltaLat), ctx.Mul(gammaLat, gammaLat))

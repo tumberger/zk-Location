@@ -319,6 +319,62 @@ func (f *Context) AssertIsEqual(x, y FloatVar) {
 	f.Api.AssertIsEqual(x.IsAbnormal, y.IsAbnormal)
 }
 
+// Enforce the equality between two numbers, relaxed to checking ULP <1
+func (f *Context) AssertIsEqualOrULP(x, y FloatVar) {
+	is_nan := f.Api.Or(
+		f.Api.And(x.IsAbnormal, f.Api.IsZero(x.Mantissa)),
+		f.Api.And(y.IsAbnormal, f.Api.IsZero(y.Mantissa)),
+	)
+	f.Api.AssertIsEqual(f.Api.Select(
+		is_nan,
+		0,
+		x.Sign,
+	), f.Api.Select(
+		is_nan,
+		0,
+		y.Sign,
+	))
+
+	// x.e == y.e && (x.m == y.m + 1 || y.m == x.m + 1) ,
+	cmpOne := f.Api.And(
+		f.Gadget.IsEq(x.Exponent, y.Exponent),
+		f.Api.Or(
+			f.Gadget.IsEq(x.Mantissa, f.Api.Add(y.Mantissa, big.NewInt(1))),
+			f.Gadget.IsEq(y.Mantissa, f.Api.Add(x.Mantissa, big.NewInt(1))),
+		),
+	)
+
+	// x.e == y.e + 1 && x.m == 2^M && y.m == 2^(M + 1) - 1 ,
+	cmpTwo := f.Api.And(
+		f.Gadget.IsEq(x.Exponent, f.Api.Add(y.Exponent, big.NewInt(1))),
+		f.Api.And(
+			f.Gadget.IsEq(x.Mantissa, new(big.Int).Lsh(big.NewInt(1), f.M)),
+			f.Gadget.IsEq(y.Mantissa, f.Api.Sub(new(big.Int).Lsh(big.NewInt(1), f.M+1), big.NewInt(1))),
+		),
+	)
+
+	// y.e == x.e + 1 && y.m == 2^M && x.m == 2^(M + 1) - 1
+	cmpThree := f.Api.And(
+		f.Gadget.IsEq(y.Exponent, f.Api.Add(x.Exponent, big.NewInt(1))),
+		f.Api.And(
+			f.Gadget.IsEq(y.Mantissa, new(big.Int).Lsh(big.NewInt(1), f.M)),
+			f.Gadget.IsEq(x.Mantissa, f.Api.Sub(new(big.Int).Lsh(big.NewInt(1), f.M+1), big.NewInt(1))),
+		),
+	)
+
+	cmp := f.Api.Or(cmpOne, f.Api.Or(cmpTwo, cmpThree))
+
+	condOne := f.Gadget.IsEq(cmp, 1)
+
+	equalityOne := f.Gadget.IsEq(f.Api.Sub(x.Exponent, y.Exponent), 0)
+	equalityTwo := f.Gadget.IsEq(x.Mantissa, y.Mantissa)
+	equalityThree := f.Gadget.IsEq(x.IsAbnormal, y.IsAbnormal)
+
+	condTwo := f.Api.And(equalityOne, f.Api.And(equalityTwo, equalityThree))
+
+	f.Api.AssertIsEqual(f.Api.Or(condOne, condTwo), 1)
+}
+
 // Add two numbers.
 func (f *Context) Add(x, y FloatVar) FloatVar {
 	// Compute `y.exponent - x.exponent`'s absolute value and sign.
