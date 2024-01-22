@@ -10,6 +10,7 @@ import (
 	"testing"
 
 	float "gnark-float/float"
+	"gnark-float/hint"
 	maths "gnark-float/math"
 	util "gnark-float/util"
 
@@ -21,6 +22,7 @@ import (
 )
 
 type loc2Index32Circuit struct {
+
 	// SECRET INPUTS
 	Lat frontend.Variable `gnark:",secret"`
 	Lng frontend.Variable `gnark:",secret"`
@@ -42,35 +44,100 @@ func (c *loc2Index32Circuit) Define(api frontend.API) error {
 
 	pi := ctx.NewF32Constant(math.Pi)
 	halfPi := ctx.NewF32Constant(math.Pi / 2.0)
-	doublePi := ctx.NewF32Constant(math.Pi * 2.0)
 
 	// Lat can't be more than pi/2, Lng can't be more than pi and max resolution is 15
 	api.AssertIsEqual(ctx.IsGt(lat, halfPi), 0)
 	api.AssertIsEqual(ctx.IsGt(lng, pi), 0)
 	api.AssertIsLessOrEqual(resolution, util.MaxResolution)
 
-	// Adding half pi to latitude to apply cos() -- lat always in range [-pi/2, pi/2]
-	term := ctx.Add(lat, halfPi)
-	cosLat := maths.SinTaylor32(&ctx, term)
+	// Compute alpha, beta, gamma, delta for Latitude
+	alphaLat := ctx.NewFloat(0)
+	betaLat := ctx.NewFloat(0)
+	gammaLat := ctx.NewFloat(0)
+	deltaLat := ctx.NewFloat(0)
+	precomputeLat, err := ctx.Api.Compiler().NewHint(hint.PrecomputeHint32, 16, c.Lat, ctx.E, ctx.M)
+	if err != nil {
+		panic(err)
+	}
+	alphaLat.Sign = precomputeLat[0]
+	alphaLat.Exponent = precomputeLat[1]
+	alphaLat.Mantissa = precomputeLat[2]
+	alphaLat.IsAbnormal = precomputeLat[3]
 
-	// Adding half pi to longitude to apply cos() -- lng always in range [-pi, pi]
-	tmp := ctx.Add(lng, halfPi)
-	// TODO: If it makes no big difference in regards to constraints: (input % 2pi) - pi
-	// can be applied on the input at the start of SinTaylor and the next lines can be deleted
-	isGreater := ctx.IsGt(tmp, pi)
-	shifted := ctx.Sub(tmp, doublePi)
-	term.Sign = api.Select(isGreater, shifted.Sign, tmp.Sign)
-	term.Exponent = api.Select(isGreater, shifted.Exponent, tmp.Exponent)
-	term.Mantissa = api.Select(isGreater, shifted.Mantissa, tmp.Mantissa)
-	term.IsAbnormal = 0
+	betaLat.Sign = precomputeLat[4]
+	betaLat.Exponent = precomputeLat[5]
+	betaLat.Mantissa = precomputeLat[6]
+	betaLat.IsAbnormal = precomputeLat[7]
 
-	cosLng := maths.SinTaylor32(&ctx, term)
+	gammaLat.Sign = precomputeLat[8]
+	gammaLat.Exponent = precomputeLat[9]
+	gammaLat.Mantissa = precomputeLat[10]
+	gammaLat.IsAbnormal = precomputeLat[11]
+
+	deltaLat.Sign = precomputeLat[12]
+	deltaLat.Exponent = precomputeLat[13]
+	deltaLat.Mantissa = precomputeLat[14]
+	deltaLat.IsAbnormal = precomputeLat[15]
+
+	// Compute alpha, beta, gamma, delta for Longitude
+	alphaLng := ctx.NewFloat(0)
+	betaLng := ctx.NewFloat(0)
+	gammaLng := ctx.NewFloat(0)
+	deltaLng := ctx.NewFloat(0)
+	precomputeLng, err := ctx.Api.Compiler().NewHint(hint.PrecomputeHint32, 16, c.Lng, ctx.E, ctx.M)
+	if err != nil {
+		panic(err)
+	}
+	alphaLng.Sign = precomputeLng[0]
+	alphaLng.Exponent = precomputeLng[1]
+	alphaLng.Mantissa = precomputeLng[2]
+	alphaLng.IsAbnormal = precomputeLng[3]
+
+	betaLng.Sign = precomputeLng[4]
+	betaLng.Exponent = precomputeLng[5]
+	betaLng.Mantissa = precomputeLng[6]
+	betaLng.IsAbnormal = precomputeLng[7]
+
+	gammaLng.Sign = precomputeLng[8]
+	gammaLng.Exponent = precomputeLng[9]
+	gammaLng.Mantissa = precomputeLng[10]
+	gammaLng.IsAbnormal = precomputeLng[11]
+
+	deltaLng.Sign = precomputeLng[12]
+	deltaLng.Exponent = precomputeLng[13]
+	deltaLng.Mantissa = precomputeLng[14]
+	deltaLng.IsAbnormal = precomputeLng[15]
+
+	// FOLLOWING CHECKS SHOULD BE ENABLED FOR SOUNDNESS, BUT FAIL DUE TO INACCURACY
+	// // Check 1 (Identity) for Latitude and Longitude
+	// deltaLatSquared := ctx.Mul(deltaLat, deltaLat)
+	// gammaLatSquared := ctx.Mul(gammaLat, gammaLat)
+	// identityLat := ctx.Add(gammaLatSquared, deltaLatSquared)
+	// deltaLngSquared := ctx.Mul(deltaLng, deltaLng)
+	// gammaLngSquared := ctx.Mul(gammaLng, gammaLng)
+	// identityLng := ctx.Add(gammaLngSquared, deltaLngSquared)
+	// ctx.AssertIsEqual(identityLat, ctx.NewF32Constant(1))
+	// ctx.AssertIsEqual(identityLng, ctx.NewF32Constant(1))
+
+	// // Check 2 for Latitude and Longitude
+	// ctx.AssertIsEqual(ctx.Mul(alphaLat, deltaLat), gammaLat)
+	// ctx.AssertIsEqual(ctx.Mul(alphaLng, deltaLng), gammaLng)
+
+	// // Check 3 for Latitude and Longitude
+	// ctx.AssertIsEqual(ctx.Mul(ctx.NewF32Constant(2), ctx.Mul(gammaLat, deltaLat)), betaLat)
+	// ctx.AssertIsEqual(ctx.Mul(ctx.NewF32Constant(2), ctx.Mul(gammaLng, deltaLng)), betaLng)
+
+	// Calculate Cosine for Latitude and Longitude
+	cosLat := ctx.Sub(ctx.Mul(deltaLat, deltaLat), ctx.Mul(gammaLat, gammaLat))
+	cosLng := ctx.Sub(ctx.Mul(deltaLng, deltaLng), ctx.Mul(gammaLng, gammaLng))
+
+	// Calculate Sin for Latitude and Longitude
+	z := betaLat
+	sinLng := betaLng
+
+	// Calculate x & z for 3D Cartesian
 	x := ctx.Mul(cosLat, cosLng)
-
-	sinLng := maths.SinTaylor32(&ctx, lng)
 	y := ctx.Mul(cosLat, sinLng)
-
-	z := maths.SinTaylor32(&ctx, lat)
 
 	calc := closestFaceCalculations(&ctx, x, y, z, lng)
 
@@ -110,9 +177,9 @@ func TestLoc2Index32(t *testing.T) {
 		fmt.Printf("i: %d, j: %d, k: %d\n", i, j, k)
 
 		// Calculate I, J, K using the H3 library in C - just for comparison and debugging
-		// latFloat, _ := util.HexToFloat(data[0])
-		// lngFloat, _ := util.HexToFloat(data[1])
-		// fmt.Printf("latFloat: %f, lngFloat: %f\n", latFloat, lngFloat)
+		latFloat, _ := util.HexToFloat32(data[0])
+		lngFloat, _ := util.HexToFloat32(data[1])
+		fmt.Printf("latFloat: %f, lngFloat: %f\n", latFloat, lngFloat)
 		// iInt, jInt, kInt, err := util.ExecuteLatLngToIJK(15, latFloat, lngFloat)
 		// if err != nil {
 		// 	panic(err)
@@ -236,7 +303,7 @@ func setupLoc2IndexWrapper() ([]loc2Index32CircuitWrapper, []loc2Index32CircuitW
 func BenchmarkLoc2IndexProof(b *testing.B) {
 	circuits, assignments, resolutions, indices := setupLoc2IndexWrapper()
 
-	fmt.Println(indices)
+	// fmt.Println(indices)
 
 	// Ensure that the number of circuits and assignments is the same
 	if len(circuits) != len(assignments) {

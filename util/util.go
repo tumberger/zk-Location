@@ -393,6 +393,18 @@ func HexToFloat(hexStr string) (float64, error) {
 	return f, nil
 }
 
+func HexToFloat32(hexStr string) (float32, error) {
+	// Parse the hex string as uint32
+	n, err := strconv.ParseUint(hexStr, 16, 32)
+	if err != nil {
+		return 0, err
+	}
+
+	// Convert the uint32 to float32
+	f := math.Float32frombits(uint32(n))
+	return f, nil
+}
+
 func ExecuteLatLngToIJK(resolution int, latitude float64, longitude float64) (int, int, int, error) {
 	// Convert float64 latitude and longitude to string
 	latStr := fmt.Sprintf("%.30f", latitude)
@@ -530,7 +542,7 @@ func BenchProofToFile(b *testing.B, circuit, assignment frontend.Circuit, resolu
 
 	// Benchmarking loop
 	b.ResetTimer()
-	b.N = 5
+	b.N = 20
 	for i := 0; i < b.N; i++ {
 
 		// Compilation step with time measurement

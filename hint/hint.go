@@ -19,10 +19,11 @@ func init() {
 	solver.RegisterHint(SqrtHint)
 	solver.RegisterHint(TruncHint)
 	solver.RegisterHint(FloorHint)
-	solver.RegisterHint(PrecomputeHint)
+	solver.RegisterHint(PrecomputeHint64)
+	solver.RegisterHint(PrecomputeHint32)
 }
 
-func PrecomputeHint(field *big.Int, inputs []*big.Int, outputs []*big.Int) error {
+func PrecomputeHint64(field *big.Int, inputs []*big.Int, outputs []*big.Int) error {
 	v := inputs[0].Uint64()
 	E := inputs[1].Uint64()
 	M := inputs[2].Uint64()
@@ -40,6 +41,47 @@ func PrecomputeHint(field *big.Int, inputs []*big.Int, outputs []*big.Int) error
 	beta_components := util.F64ToComponents(beta)
 	gamma_components := util.F64ToComponents(gamma)
 	delta_components := util.F64ToComponents(delta)
+
+	outputs[0].Set(alpha_components[0])
+	outputs[1].Set(alpha_components[1])
+	outputs[2].Set(alpha_components[2])
+	outputs[3].Set(alpha_components[3])
+
+	outputs[4].Set(beta_components[0])
+	outputs[5].Set(beta_components[1])
+	outputs[6].Set(beta_components[2])
+	outputs[7].Set(beta_components[3])
+
+	outputs[8].Set(gamma_components[0])
+	outputs[9].Set(gamma_components[1])
+	outputs[10].Set(gamma_components[2])
+	outputs[11].Set(gamma_components[3])
+
+	outputs[12].Set(delta_components[0])
+	outputs[13].Set(delta_components[1])
+	outputs[14].Set(delta_components[2])
+	outputs[15].Set(delta_components[3])
+	return nil
+}
+
+func PrecomputeHint32(field *big.Int, inputs []*big.Int, outputs []*big.Int) error {
+	v := inputs[0].Uint64()
+	E := inputs[1].Uint64()
+	M := inputs[2].Uint64()
+
+	// Extract Components
+	components := util.ComponentsOf(v, uint64(E), uint64(M))
+	value32 := util.ComponentsToF32(components)
+
+	alpha := math.Tan(float64(value32) * 0.5)
+	gamma := math.Sin(float64(value32) * 0.5)
+	delta := math.Cos(float64(value32) * 0.5)
+	beta := 2 * gamma * delta
+
+	alpha_components := util.F32ToComponents(float32(alpha))
+	beta_components := util.F32ToComponents(float32(beta))
+	gamma_components := util.F32ToComponents(float32(gamma))
+	delta_components := util.F32ToComponents(float32(delta))
 
 	outputs[0].Set(alpha_components[0])
 	outputs[1].Set(alpha_components[1])

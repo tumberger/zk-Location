@@ -85,12 +85,12 @@ func closestFaceCalculations(f *float.Context, x2, y2, z2, lng float.FloatVar) [
 		sqDist = f.Select(check, dist, sqDist)
 		sinFaceLat = f.Select(check, f.NewF32Constant(util.SinFaceLat_32[face]), sinFaceLat)
 		cosFaceLat = f.Select(check, f.NewF32Constant(util.CosFaceLat_32[face]), cosFaceLat)
-		sinFaceLng = f.Select(check, f.NewF32Constant(float32(math.Sin(util.FaceCenterGeoLng_64[face]))), sinFaceLng)
-		cosFaceLng = f.Select(check, f.NewF32Constant(float32(math.Cos(util.FaceCenterGeoLng_64[face]))), cosFaceLng)
-		sinAzimuth = f.Select(check, f.NewF32Constant(float32(math.Sin(util.Azimuth[face]))), sinAzimuth)
-		cosAzimuth = f.Select(check, f.NewF32Constant(float32(math.Cos(util.Azimuth[face]))), cosAzimuth)
-		sinAzimuthRot = f.Select(check, f.NewF32Constant(float32(math.Sin(util.Azimuth[face]-util.Ap7rot_64))), sinAzimuthRot)
-		cosAzimuthRot = f.Select(check, f.NewF32Constant(float32(math.Cos(util.Azimuth[face]-util.Ap7rot_64))), cosAzimuthRot)
+		sinFaceLng = f.Select(check, f.NewF32Constant(float32(math.Sin(float64(util.FaceCenterGeoLng_32[face])))), sinFaceLng)
+		cosFaceLng = f.Select(check, f.NewF32Constant(float32(math.Cos(float64(util.FaceCenterGeoLng_32[face])))), cosFaceLng)
+		sinAzimuth = f.Select(check, f.NewF32Constant(float32(math.Sin(float64(util.Azimuth_32[face])))), sinAzimuth)
+		cosAzimuth = f.Select(check, f.NewF32Constant(float32(math.Cos(float64(util.Azimuth_32[face])))), cosAzimuth)
+		sinAzimuthRot = f.Select(check, f.NewF32Constant(float32(math.Sin(float64(util.Azimuth_32[face])-float64(util.Ap7rot_32)))), sinAzimuthRot)
+		cosAzimuthRot = f.Select(check, f.NewF32Constant(float32(math.Cos(float64(util.Azimuth_32[face])-float64(util.Ap7rot_32)))), cosAzimuthRot)
 	}
 
 	return [9]float.FloatVar{
