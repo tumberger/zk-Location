@@ -130,10 +130,16 @@ func (f *Context) NewFloat(v frontend.Variable) FloatVar {
 		f.M-1,
 	)
 
-	exponent = f.Api.Select(
+	exponent =
+		f.Api.Select(
 		exponent_is_min,
+			f.Api.Select(
+				mantissa_is_zero,
+				// If zero, set the exponent to 0's exponent
+				f.Api.Sub(exponent_min, f.M),
 		// If subnormal, decrement the exponent by `shift`
 		f.Api.Sub(exponent, shift),
+			),
 		// Otherwise, keep the exponent unchanged
 		exponent,
 	)
