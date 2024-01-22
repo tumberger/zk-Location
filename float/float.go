@@ -132,17 +132,17 @@ func (f *Context) NewFloat(v frontend.Variable) FloatVar {
 
 	exponent =
 		f.Api.Select(
-		exponent_is_min,
+			exponent_is_min,
 			f.Api.Select(
 				mantissa_is_zero,
 				// If zero, set the exponent to 0's exponent
 				f.Api.Sub(exponent_min, f.M),
-		// If subnormal, decrement the exponent by `shift`
-		f.Api.Sub(exponent, shift),
+				// If subnormal, decrement the exponent by `shift`
+				f.Api.Sub(exponent, shift),
 			),
-		// Otherwise, keep the exponent unchanged
-		exponent,
-	)
+			// Otherwise, keep the exponent unchanged
+			exponent,
+		)
 	mantissa := f.Api.Select(
 		exponent_is_min,
 		// If subnormal, shift the mantissa to the left by 1 to make its `M`-th bit 1
@@ -838,18 +838,6 @@ func (f *Context) Sqrt(x FloatVar) FloatVar {
 		panic(err)
 	}
 	n := outputs[0]
-	outputs, err = f.Api.Compiler().NewHint(hint.NormalizeHint, 1, n, mantissa_bit_length)
-	if err != nil {
-		panic(err)
-	}
-	shift := outputs[0]
-	// Enforce that `shift` is small and `two_to_shift` is equal to `2^shift`.
-	// Theoretically, `shift` should be in the range `[0, M + 3]`, but the circuit can only guarantee
-	// that `shift` is in the range `[0, M + E]`.
-	// However, we will check the range of `n * two_to_shift` later, which will implicitly provide
-	// tight upper bounds for `shift` and `two_to_shift`, and thus soundness still holds.
-	f.Gadget.AssertBitLength(shift, uint(big.NewInt(int64(mantissa_bit_length)).BitLen()))
-	two_to_shift := f.Gadget.QueryPowerOf2(shift)
 
 	// Compute the remainder `r = m - n^2`.
 	r := f.Api.Sub(m, f.Api.Mul(n, n))
@@ -860,22 +848,6 @@ func (f *Context) Sqrt(x FloatVar) FloatVar {
 	n_is_zero := f.Api.IsZero(n)
 	n_is_not_zero := f.Api.Sub(big.NewInt(1), n_is_zero)
 	f.Api.Compiler().MarkBoolean(n_is_not_zero)
-	// Compute the shifted value of `n`
-	n = f.Api.Mul(n, two_to_shift)
-	// Enforce that the MSB of the shifted `n` is 1 unless `n` is zero.
-	// Soundness holds because
-	// * `n` has at most `mantissa_bit_length` bits. Otherwise,
-	// `n - !n_is_zero << (mantissa_bit_length - 1)` will be greater than or equal to
-	// `2^(mantissa_bit_length - 1)` and cannot fit in `mantissa_bit_length - 1` bits.
-	// * `n`'s MSB is 1 unless `n_is_zero`. Otherwise, `n - 1 << (mantissa_bit_length - 1)`
-	// will be negative and cannot fit in `mantissa_bit_length - 1` bits.
-	f.Gadget.AssertBitLength(
-		f.Api.Sub(n, f.Api.Mul(f.Api.Sub(big.NewInt(1), n_is_zero), new(big.Int).Lsh(big.NewInt(1), mantissa_bit_length-1))),
-		mantissa_bit_length-1,
-	)
-
-	// Decrement the exponent by `shift`.
-	exponent = f.Api.Sub(exponent, shift)
 
 	mantissa := f.round(
 		n,
