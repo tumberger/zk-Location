@@ -1,605 +1,577 @@
 === RUN   TestLoc2Index32
-lat: 0.691886, lng: 0.771676
-i: 1, j: 0, k: 1
-latFloat: 0.691886, lngFloat: 0.771676
-=== RUN   TestLoc2Index32/bn254
-    assert.go:200: 
-        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.1/test/assert.go:200
-        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.1/test/assert_checkcircuit.go:50
-        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.1/test/assert.go:66
-        	Error:      	[assertIsEqual] 0 == 1
-        	            	loc2index32.(*loc2Index32Circuit).Define
-        	            		loc2index32_test.go:148
-        	            	
-        	            	witness:{"Lat":1060183920,"Lng":1061522567,"Resolution":0,"I":1,"J":0,"K":1}
-        	Test:       	TestLoc2Index32/bn254
 lat: 0.691891, lng: 0.709619
 i: 1, j: 0, k: 1
 latFloat: 0.691891, lngFloat: 0.709619
-=== RUN   TestLoc2Index32/bn254#01
-=== RUN   TestLoc2Index32/bn254#01/groth16
-=== RUN   TestLoc2Index32/bn254#01/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254
+=== RUN   TestLoc2Index32/bn254/groth16
+=== RUN   TestLoc2Index32/bn254/groth16/valid_witness
 lat: 0.691893, lng: 0.673319
 i: 1, j: 0, k: 1
 latFloat: 0.691893, lngFloat: 0.673319
-=== RUN   TestLoc2Index32/bn254#02
-=== RUN   TestLoc2Index32/bn254#02/groth16
-=== RUN   TestLoc2Index32/bn254#02/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#01
+=== RUN   TestLoc2Index32/bn254#01/groth16
+=== RUN   TestLoc2Index32/bn254#01/groth16/valid_witness
 lat: 0.691895, lng: 0.647563
 i: 1, j: 0, k: 1
 latFloat: 0.691895, lngFloat: 0.647563
-=== RUN   TestLoc2Index32/bn254#03
-=== RUN   TestLoc2Index32/bn254#03/groth16
-=== RUN   TestLoc2Index32/bn254#03/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#02
+=== RUN   TestLoc2Index32/bn254#02/groth16
+=== RUN   TestLoc2Index32/bn254#02/groth16/valid_witness
 lat: 0.691897, lng: 0.627585
 i: 1, j: 0, k: 1
 latFloat: 0.691897, lngFloat: 0.627585
-=== RUN   TestLoc2Index32/bn254#04
-=== RUN   TestLoc2Index32/bn254#04/groth16
-=== RUN   TestLoc2Index32/bn254#04/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#03
+=== RUN   TestLoc2Index32/bn254#03/groth16
+=== RUN   TestLoc2Index32/bn254#03/groth16/valid_witness
 lat: 0.691898, lng: 0.611262
 i: 1, j: 0, k: 1
 latFloat: 0.691898, lngFloat: 0.611262
-=== RUN   TestLoc2Index32/bn254#05
-=== RUN   TestLoc2Index32/bn254#05/groth16
-=== RUN   TestLoc2Index32/bn254#05/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#04
+=== RUN   TestLoc2Index32/bn254#04/groth16
+=== RUN   TestLoc2Index32/bn254#04/groth16/valid_witness
 lat: 0.691899, lng: 0.597462
 i: 1, j: 0, k: 1
 latFloat: 0.691899, lngFloat: 0.597462
-=== RUN   TestLoc2Index32/bn254#06
-=== RUN   TestLoc2Index32/bn254#06/groth16
-=== RUN   TestLoc2Index32/bn254#06/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#05
+=== RUN   TestLoc2Index32/bn254#05/groth16
+=== RUN   TestLoc2Index32/bn254#05/groth16/valid_witness
 lat: 0.691900, lng: 0.585507
 i: 1, j: 0, k: 1
 latFloat: 0.691900, lngFloat: 0.585507
-=== RUN   TestLoc2Index32/bn254#07
-=== RUN   TestLoc2Index32/bn254#07/groth16
-=== RUN   TestLoc2Index32/bn254#07/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#06
+=== RUN   TestLoc2Index32/bn254#06/groth16
+=== RUN   TestLoc2Index32/bn254#06/groth16/valid_witness
 lat: 0.691901, lng: 0.574962
 i: 1, j: 0, k: 1
 latFloat: 0.691901, lngFloat: 0.574962
+=== RUN   TestLoc2Index32/bn254#07
+=== RUN   TestLoc2Index32/bn254#07/groth16
+=== RUN   TestLoc2Index32/bn254#07/groth16/valid_witness
+lat: 0.721740, lng: 0.599830
+i: 2, j: 0, k: 2
+latFloat: 0.721740, lngFloat: 0.599830
 === RUN   TestLoc2Index32/bn254#08
 === RUN   TestLoc2Index32/bn254#08/groth16
 === RUN   TestLoc2Index32/bn254#08/groth16/valid_witness
-lat: 0.721740, lng: 0.599830
-i: 2, j: 0, k: 2
-latFloat: 0.721740, lngFloat: 0.599830
-=== RUN   TestLoc2Index32/bn254#09
-=== RUN   TestLoc2Index32/bn254#09/groth16
-=== RUN   TestLoc2Index32/bn254#09/groth16/valid_witness
 lat: 0.732866, lng: 0.579717
 i: 2, j: 0, k: 2
 latFloat: 0.732866, lngFloat: 0.579717
-=== RUN   TestLoc2Index32/bn254#10
-=== RUN   TestLoc2Index32/bn254#10/groth16
-=== RUN   TestLoc2Index32/bn254#10/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#09
+=== RUN   TestLoc2Index32/bn254#09/groth16
+=== RUN   TestLoc2Index32/bn254#09/groth16/valid_witness
 lat: 0.739374, lng: 0.567951
 i: 2, j: 0, k: 2
 latFloat: 0.739374, lngFloat: 0.567951
-=== RUN   TestLoc2Index32/bn254#11
-=== RUN   TestLoc2Index32/bn254#11/groth16
-=== RUN   TestLoc2Index32/bn254#11/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#10
+=== RUN   TestLoc2Index32/bn254#10/groth16
+=== RUN   TestLoc2Index32/bn254#10/groth16/valid_witness
 lat: 0.743992, lng: 0.559603
 i: 2, j: 0, k: 2
 latFloat: 0.743992, lngFloat: 0.559603
-=== RUN   TestLoc2Index32/bn254#12
-=== RUN   TestLoc2Index32/bn254#12/groth16
-=== RUN   TestLoc2Index32/bn254#12/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#11
+=== RUN   TestLoc2Index32/bn254#11/groth16
+=== RUN   TestLoc2Index32/bn254#11/groth16/valid_witness
 lat: 0.747574, lng: 0.553128
 i: 2, j: 0, k: 2
 latFloat: 0.747574, lngFloat: 0.553128
-=== RUN   TestLoc2Index32/bn254#13
-=== RUN   TestLoc2Index32/bn254#13/groth16
-=== RUN   TestLoc2Index32/bn254#13/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#12
+=== RUN   TestLoc2Index32/bn254#12/groth16
+=== RUN   TestLoc2Index32/bn254#12/groth16/valid_witness
 lat: 0.750500, lng: 0.547838
 i: 2, j: 0, k: 2
 latFloat: 0.750500, lngFloat: 0.547838
-=== RUN   TestLoc2Index32/bn254#14
-=== RUN   TestLoc2Index32/bn254#14/groth16
-=== RUN   TestLoc2Index32/bn254#14/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#13
+=== RUN   TestLoc2Index32/bn254#13/groth16
+=== RUN   TestLoc2Index32/bn254#13/groth16/valid_witness
 lat: 0.752975, lng: 0.543365
 i: 2, j: 0, k: 2
 latFloat: 0.752975, lngFloat: 0.543365
-=== RUN   TestLoc2Index32/bn254#15
-=== RUN   TestLoc2Index32/bn254#15/groth16
-=== RUN   TestLoc2Index32/bn254#15/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#14
+=== RUN   TestLoc2Index32/bn254#14/groth16
+=== RUN   TestLoc2Index32/bn254#14/groth16/valid_witness
 lat: 0.755118, lng: 0.539490
 i: 2, j: 0, k: 2
 latFloat: 0.755118, lngFloat: 0.539490
-=== RUN   TestLoc2Index32/bn254#16
-=== RUN   TestLoc2Index32/bn254#16/groth16
-=== RUN   TestLoc2Index32/bn254#16/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#15
+=== RUN   TestLoc2Index32/bn254#15/groth16
+=== RUN   TestLoc2Index32/bn254#15/groth16/valid_witness
 lat: 0.757009, lng: 0.536072
 i: 2, j: 0, k: 2
 latFloat: 0.757009, lngFloat: 0.536072
-=== RUN   TestLoc2Index32/bn254#17
-=== RUN   TestLoc2Index32/bn254#17/groth16
-=== RUN   TestLoc2Index32/bn254#17/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#16
+=== RUN   TestLoc2Index32/bn254#16/groth16
+=== RUN   TestLoc2Index32/bn254#16/groth16/valid_witness
 lat: 0.721740, lng: 0.599830
 i: 6, j: 0, k: 4
 latFloat: 0.721740, lngFloat: 0.599830
-=== RUN   TestLoc2Index32/bn254#18
-=== RUN   TestLoc2Index32/bn254#18/groth16
-=== RUN   TestLoc2Index32/bn254#18/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#17
+=== RUN   TestLoc2Index32/bn254#17/groth16
+=== RUN   TestLoc2Index32/bn254#17/groth16/valid_witness
 lat: 0.727548, lng: 0.594679
 i: 6, j: 0, k: 4
 latFloat: 0.727548, lngFloat: 0.594679
-=== RUN   TestLoc2Index32/bn254#19
-=== RUN   TestLoc2Index32/bn254#19/groth16
-=== RUN   TestLoc2Index32/bn254#19/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#18
+=== RUN   TestLoc2Index32/bn254#18/groth16
+=== RUN   TestLoc2Index32/bn254#18/groth16/valid_witness
 lat: 0.730945, lng: 0.591665
 i: 6, j: 0, k: 4
 latFloat: 0.730945, lngFloat: 0.591665
-=== RUN   TestLoc2Index32/bn254#20
-=== RUN   TestLoc2Index32/bn254#20/groth16
-=== RUN   TestLoc2Index32/bn254#20/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#19
+=== RUN   TestLoc2Index32/bn254#19/groth16
+=== RUN   TestLoc2Index32/bn254#19/groth16/valid_witness
 lat: 0.733355, lng: 0.589527
 i: 6, j: 0, k: 4
 latFloat: 0.733355, lngFloat: 0.589527
-=== RUN   TestLoc2Index32/bn254#21
-=== RUN   TestLoc2Index32/bn254#21/groth16
-=== RUN   TestLoc2Index32/bn254#21/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#20
+=== RUN   TestLoc2Index32/bn254#20/groth16
+=== RUN   TestLoc2Index32/bn254#20/groth16/valid_witness
 lat: 0.735224, lng: 0.587868
 i: 6, j: 0, k: 4
 latFloat: 0.735224, lngFloat: 0.587868
-=== RUN   TestLoc2Index32/bn254#22
-=== RUN   TestLoc2Index32/bn254#22/groth16
-=== RUN   TestLoc2Index32/bn254#22/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#21
+=== RUN   TestLoc2Index32/bn254#21/groth16
+=== RUN   TestLoc2Index32/bn254#21/groth16/valid_witness
 lat: 0.736752, lng: 0.586513
 i: 6, j: 0, k: 4
 latFloat: 0.736752, lngFloat: 0.586513
-=== RUN   TestLoc2Index32/bn254#23
-=== RUN   TestLoc2Index32/bn254#23/groth16
-=== RUN   TestLoc2Index32/bn254#23/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#22
+=== RUN   TestLoc2Index32/bn254#22/groth16
+=== RUN   TestLoc2Index32/bn254#22/groth16/valid_witness
 lat: 0.738043, lng: 0.585368
 i: 6, j: 0, k: 4
 latFloat: 0.738043, lngFloat: 0.585368
-=== RUN   TestLoc2Index32/bn254#24
-=== RUN   TestLoc2Index32/bn254#24/groth16
-=== RUN   TestLoc2Index32/bn254#24/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#23
+=== RUN   TestLoc2Index32/bn254#23/groth16
+=== RUN   TestLoc2Index32/bn254#23/groth16/valid_witness
 lat: 0.739162, lng: 0.584375
 i: 6, j: 0, k: 4
 latFloat: 0.739162, lngFloat: 0.584375
-=== RUN   TestLoc2Index32/bn254#25
-=== RUN   TestLoc2Index32/bn254#25/groth16
-=== RUN   TestLoc2Index32/bn254#25/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#24
+=== RUN   TestLoc2Index32/bn254#24/groth16
+=== RUN   TestLoc2Index32/bn254#24/groth16/valid_witness
 lat: 0.740149, lng: 0.583500
 i: 6, j: 0, k: 4
 latFloat: 0.740149, lngFloat: 0.583500
-=== RUN   TestLoc2Index32/bn254#26
-    assert.go:200: 
-        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.1/test/assert.go:200
-        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.1/test/assert_checkcircuit.go:50
-        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.1/test/assert.go:66
-        	Error:      	[assertIsEqual] 0 == 1
-        	            	float.(*Context).AssertIsEqualOrULP
-        	            		float.go:375
-        	            	loc2index32.(*loc2Index32Circuit).Define
-        	            		loc2index32_test.go:118
-        	            	
-        	            	witness:{"Lat":1060993639,"Lng":1058365503,"Resolution":2,"I":6,"J":0,"K":4}
-        	Test:       	TestLoc2Index32/bn254#26
+=== RUN   TestLoc2Index32/bn254#25
+=== RUN   TestLoc2Index32/bn254#25/groth16
+=== RUN   TestLoc2Index32/bn254#25/groth16/valid_witness
 lat: 0.706731, lng: 0.584111
 i: 13, j: 0, k: 13
 latFloat: 0.706731, lngFloat: 0.584111
-=== RUN   TestLoc2Index32/bn254#27
-=== RUN   TestLoc2Index32/bn254#27/groth16
-=== RUN   TestLoc2Index32/bn254#27/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#26
+=== RUN   TestLoc2Index32/bn254#26/groth16
+=== RUN   TestLoc2Index32/bn254#26/groth16/valid_witness
 lat: 0.708364, lng: 0.581339
 i: 13, j: 0, k: 13
 latFloat: 0.708364, lngFloat: 0.581339
-=== RUN   TestLoc2Index32/bn254#28
-=== RUN   TestLoc2Index32/bn254#28/groth16
-=== RUN   TestLoc2Index32/bn254#28/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#27
+=== RUN   TestLoc2Index32/bn254#27/groth16
+=== RUN   TestLoc2Index32/bn254#27/groth16/valid_witness
 lat: 0.709318, lng: 0.579718
 i: 13, j: 0, k: 13
 latFloat: 0.709318, lngFloat: 0.579718
-=== RUN   TestLoc2Index32/bn254#29
-=== RUN   TestLoc2Index32/bn254#29/groth16
-=== RUN   TestLoc2Index32/bn254#29/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#28
+=== RUN   TestLoc2Index32/bn254#28/groth16
+=== RUN   TestLoc2Index32/bn254#28/groth16/valid_witness
 lat: 0.709996, lng: 0.578567
 i: 13, j: 0, k: 13
 latFloat: 0.709996, lngFloat: 0.578567
-=== RUN   TestLoc2Index32/bn254#30
-=== RUN   TestLoc2Index32/bn254#30/groth16
-=== RUN   TestLoc2Index32/bn254#30/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#29
+=== RUN   TestLoc2Index32/bn254#29/groth16
+=== RUN   TestLoc2Index32/bn254#29/groth16/valid_witness
 lat: 0.710521, lng: 0.577675
 i: 13, j: 0, k: 13
 latFloat: 0.710521, lngFloat: 0.577675
-=== RUN   TestLoc2Index32/bn254#31
-=== RUN   TestLoc2Index32/bn254#31/groth16
-=== RUN   TestLoc2Index32/bn254#31/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#30
+=== RUN   TestLoc2Index32/bn254#30/groth16
+=== RUN   TestLoc2Index32/bn254#30/groth16/valid_witness
 lat: 0.710951, lng: 0.576946
 i: 13, j: 0, k: 13
 latFloat: 0.710951, lngFloat: 0.576946
-=== RUN   TestLoc2Index32/bn254#32
-=== RUN   TestLoc2Index32/bn254#32/groth16
-=== RUN   TestLoc2Index32/bn254#32/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#31
+=== RUN   TestLoc2Index32/bn254#31/groth16
+=== RUN   TestLoc2Index32/bn254#31/groth16/valid_witness
 lat: 0.711314, lng: 0.576330
 i: 13, j: 0, k: 13
 latFloat: 0.711314, lngFloat: 0.576330
-=== RUN   TestLoc2Index32/bn254#33
-=== RUN   TestLoc2Index32/bn254#33/groth16
-=== RUN   TestLoc2Index32/bn254#33/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#32
+=== RUN   TestLoc2Index32/bn254#32/groth16
+=== RUN   TestLoc2Index32/bn254#32/groth16/valid_witness
 lat: 0.711628, lng: 0.575796
 i: 13, j: 0, k: 13
 latFloat: 0.711628, lngFloat: 0.575796
-=== RUN   TestLoc2Index32/bn254#34
-=== RUN   TestLoc2Index32/bn254#34/groth16
-=== RUN   TestLoc2Index32/bn254#34/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#33
+=== RUN   TestLoc2Index32/bn254#33/groth16
+=== RUN   TestLoc2Index32/bn254#33/groth16/valid_witness
 lat: 0.711906, lng: 0.575325
 i: 13, j: 0, k: 13
 latFloat: 0.711906, lngFloat: 0.575325
+=== RUN   TestLoc2Index32/bn254#34
+=== RUN   TestLoc2Index32/bn254#34/groth16
+=== RUN   TestLoc2Index32/bn254#34/groth16/valid_witness
+lat: 0.710190, lng: 0.575313
+i: 39, j: 0, k: 25
+latFloat: 0.710190, lngFloat: 0.575313
 === RUN   TestLoc2Index32/bn254#35
 === RUN   TestLoc2Index32/bn254#35/groth16
 === RUN   TestLoc2Index32/bn254#35/groth16/valid_witness
-lat: 0.710190, lng: 0.575313
-i: 39, j: 0, k: 25
-latFloat: 0.710190, lngFloat: 0.575313
-=== RUN   TestLoc2Index32/bn254#36
-=== RUN   TestLoc2Index32/bn254#36/groth16
-=== RUN   TestLoc2Index32/bn254#36/groth16/valid_witness
 lat: 0.711022, lng: 0.574577
 i: 39, j: 0, k: 25
 latFloat: 0.711022, lngFloat: 0.574577
-=== RUN   TestLoc2Index32/bn254#37
-=== RUN   TestLoc2Index32/bn254#37/groth16
-=== RUN   TestLoc2Index32/bn254#37/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#36
+=== RUN   TestLoc2Index32/bn254#36/groth16
+=== RUN   TestLoc2Index32/bn254#36/groth16/valid_witness
 lat: 0.711509, lng: 0.574146
 i: 39, j: 0, k: 25
 latFloat: 0.711509, lngFloat: 0.574146
-=== RUN   TestLoc2Index32/bn254#38
-=== RUN   TestLoc2Index32/bn254#38/groth16
-=== RUN   TestLoc2Index32/bn254#38/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#37
+=== RUN   TestLoc2Index32/bn254#37/groth16
+=== RUN   TestLoc2Index32/bn254#37/groth16/valid_witness
 lat: 0.711854, lng: 0.573841
 i: 39, j: 0, k: 25
 latFloat: 0.711854, lngFloat: 0.573841
-=== RUN   TestLoc2Index32/bn254#39
-=== RUN   TestLoc2Index32/bn254#39/groth16
-=== RUN   TestLoc2Index32/bn254#39/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#38
+=== RUN   TestLoc2Index32/bn254#38/groth16
+=== RUN   TestLoc2Index32/bn254#38/groth16/valid_witness
 lat: 0.712122, lng: 0.573604
 i: 39, j: 0, k: 25
 latFloat: 0.712122, lngFloat: 0.573604
-=== RUN   TestLoc2Index32/bn254#40
-=== RUN   TestLoc2Index32/bn254#40/groth16
-=== RUN   TestLoc2Index32/bn254#40/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#39
+=== RUN   TestLoc2Index32/bn254#39/groth16
+=== RUN   TestLoc2Index32/bn254#39/groth16/valid_witness
 lat: 0.712341, lng: 0.573410
 i: 39, j: 0, k: 25
 latFloat: 0.712341, lngFloat: 0.573410
-=== RUN   TestLoc2Index32/bn254#41
-=== RUN   TestLoc2Index32/bn254#41/groth16
-=== RUN   TestLoc2Index32/bn254#41/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#40
+=== RUN   TestLoc2Index32/bn254#40/groth16
+=== RUN   TestLoc2Index32/bn254#40/groth16/valid_witness
 lat: 0.712526, lng: 0.573246
 i: 39, j: 0, k: 25
 latFloat: 0.712526, lngFloat: 0.573246
-=== RUN   TestLoc2Index32/bn254#42
-=== RUN   TestLoc2Index32/bn254#42/groth16
-=== RUN   TestLoc2Index32/bn254#42/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#41
+=== RUN   TestLoc2Index32/bn254#41/groth16
+=== RUN   TestLoc2Index32/bn254#41/groth16/valid_witness
 lat: 0.712686, lng: 0.573105
 i: 39, j: 0, k: 25
 latFloat: 0.712686, lngFloat: 0.573105
-=== RUN   TestLoc2Index32/bn254#43
-=== RUN   TestLoc2Index32/bn254#43/groth16
-=== RUN   TestLoc2Index32/bn254#43/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#42
+=== RUN   TestLoc2Index32/bn254#42/groth16
+=== RUN   TestLoc2Index32/bn254#42/groth16/valid_witness
 lat: 0.712828, lng: 0.572980
 i: 39, j: 0, k: 25
 latFloat: 0.712828, lngFloat: 0.572980
-=== RUN   TestLoc2Index32/bn254#44
-=== RUN   TestLoc2Index32/bn254#44/groth16
-=== RUN   TestLoc2Index32/bn254#44/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#43
+=== RUN   TestLoc2Index32/bn254#43/groth16
+=== RUN   TestLoc2Index32/bn254#43/groth16/valid_witness
 lat: 0.710190, lng: 0.575313
 i: 92, j: 0, k: 89
 latFloat: 0.710190, lngFloat: 0.575313
-=== RUN   TestLoc2Index32/bn254#45
-=== RUN   TestLoc2Index32/bn254#45/groth16
-=== RUN   TestLoc2Index32/bn254#45/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#44
+=== RUN   TestLoc2Index32/bn254#44/groth16
+=== RUN   TestLoc2Index32/bn254#44/groth16/valid_witness
 lat: 0.710422, lng: 0.574916
 i: 92, j: 0, k: 89
 latFloat: 0.710422, lngFloat: 0.574916
-=== RUN   TestLoc2Index32/bn254#46
-=== RUN   TestLoc2Index32/bn254#46/groth16
-=== RUN   TestLoc2Index32/bn254#46/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#45
+=== RUN   TestLoc2Index32/bn254#45/groth16
+=== RUN   TestLoc2Index32/bn254#45/groth16/valid_witness
 lat: 0.710558, lng: 0.574684
 i: 92, j: 0, k: 89
 latFloat: 0.710558, lngFloat: 0.574684
-=== RUN   TestLoc2Index32/bn254#47
-=== RUN   TestLoc2Index32/bn254#47/groth16
-=== RUN   TestLoc2Index32/bn254#47/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#46
+=== RUN   TestLoc2Index32/bn254#46/groth16
+=== RUN   TestLoc2Index32/bn254#46/groth16/valid_witness
 lat: 0.710655, lng: 0.574519
 i: 92, j: 0, k: 89
 latFloat: 0.710655, lngFloat: 0.574519
-=== RUN   TestLoc2Index32/bn254#48
-=== RUN   TestLoc2Index32/bn254#48/groth16
-=== RUN   TestLoc2Index32/bn254#48/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#47
+=== RUN   TestLoc2Index32/bn254#47/groth16
+=== RUN   TestLoc2Index32/bn254#47/groth16/valid_witness
 lat: 0.710730, lng: 0.574391
 i: 92, j: 0, k: 89
 latFloat: 0.710730, lngFloat: 0.574391
-=== RUN   TestLoc2Index32/bn254#49
-=== RUN   TestLoc2Index32/bn254#49/groth16
-=== RUN   TestLoc2Index32/bn254#49/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#48
+=== RUN   TestLoc2Index32/bn254#48/groth16
+=== RUN   TestLoc2Index32/bn254#48/groth16/valid_witness
 lat: 0.710791, lng: 0.574287
 i: 92, j: 0, k: 89
 latFloat: 0.710791, lngFloat: 0.574287
-=== RUN   TestLoc2Index32/bn254#50
-=== RUN   TestLoc2Index32/bn254#50/groth16
-=== RUN   TestLoc2Index32/bn254#50/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#49
+=== RUN   TestLoc2Index32/bn254#49/groth16
+=== RUN   TestLoc2Index32/bn254#49/groth16/valid_witness
 lat: 0.710842, lng: 0.574198
 i: 92, j: 0, k: 89
 latFloat: 0.710842, lngFloat: 0.574198
-=== RUN   TestLoc2Index32/bn254#51
-=== RUN   TestLoc2Index32/bn254#51/groth16
-=== RUN   TestLoc2Index32/bn254#51/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#50
+=== RUN   TestLoc2Index32/bn254#50/groth16
+=== RUN   TestLoc2Index32/bn254#50/groth16/valid_witness
 lat: 0.710887, lng: 0.574122
 i: 92, j: 0, k: 89
 latFloat: 0.710887, lngFloat: 0.574122
-=== RUN   TestLoc2Index32/bn254#52
-=== RUN   TestLoc2Index32/bn254#52/groth16
-=== RUN   TestLoc2Index32/bn254#52/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#51
+=== RUN   TestLoc2Index32/bn254#51/groth16
+=== RUN   TestLoc2Index32/bn254#51/groth16/valid_witness
 lat: 0.710927, lng: 0.574054
 i: 92, j: 0, k: 89
 latFloat: 0.710927, lngFloat: 0.574054
-=== RUN   TestLoc2Index32/bn254#53
-=== RUN   TestLoc2Index32/bn254#53/groth16
-=== RUN   TestLoc2Index32/bn254#53/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#52
+=== RUN   TestLoc2Index32/bn254#52/groth16
+=== RUN   TestLoc2Index32/bn254#52/groth16/valid_witness
 lat: 0.709698, lng: 0.576573
 i: 273, j: 0, k: 176
 latFloat: 0.709698, lngFloat: 0.576573
-=== RUN   TestLoc2Index32/bn254#54
-=== RUN   TestLoc2Index32/bn254#54/groth16
-=== RUN   TestLoc2Index32/bn254#54/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#53
+=== RUN   TestLoc2Index32/bn254#53/groth16
+=== RUN   TestLoc2Index32/bn254#53/groth16/valid_witness
 lat: 0.709817, lng: 0.576468
 i: 273, j: 0, k: 176
 latFloat: 0.709817, lngFloat: 0.576468
-=== RUN   TestLoc2Index32/bn254#55
-=== RUN   TestLoc2Index32/bn254#55/groth16
-=== RUN   TestLoc2Index32/bn254#55/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#54
+=== RUN   TestLoc2Index32/bn254#54/groth16
+=== RUN   TestLoc2Index32/bn254#54/groth16/valid_witness
 lat: 0.709886, lng: 0.576407
 i: 273, j: 0, k: 176
 latFloat: 0.709886, lngFloat: 0.576407
-=== RUN   TestLoc2Index32/bn254#56
-=== RUN   TestLoc2Index32/bn254#56/groth16
-=== RUN   TestLoc2Index32/bn254#56/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#55
+=== RUN   TestLoc2Index32/bn254#55/groth16
+=== RUN   TestLoc2Index32/bn254#55/groth16/valid_witness
 lat: 0.709936, lng: 0.576364
 i: 273, j: 0, k: 176
 latFloat: 0.709936, lngFloat: 0.576364
-=== RUN   TestLoc2Index32/bn254#57
-=== RUN   TestLoc2Index32/bn254#57/groth16
-=== RUN   TestLoc2Index32/bn254#57/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#56
+=== RUN   TestLoc2Index32/bn254#56/groth16
+=== RUN   TestLoc2Index32/bn254#56/groth16/valid_witness
 lat: 0.709974, lng: 0.576330
 i: 273, j: 0, k: 176
 latFloat: 0.709974, lngFloat: 0.576330
-=== RUN   TestLoc2Index32/bn254#58
-=== RUN   TestLoc2Index32/bn254#58/groth16
-=== RUN   TestLoc2Index32/bn254#58/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#57
+=== RUN   TestLoc2Index32/bn254#57/groth16
+=== RUN   TestLoc2Index32/bn254#57/groth16/valid_witness
 lat: 0.710005, lng: 0.576302
 i: 273, j: 0, k: 176
 latFloat: 0.710005, lngFloat: 0.576302
-=== RUN   TestLoc2Index32/bn254#59
-=== RUN   TestLoc2Index32/bn254#59/groth16
-=== RUN   TestLoc2Index32/bn254#59/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#58
+=== RUN   TestLoc2Index32/bn254#58/groth16
+=== RUN   TestLoc2Index32/bn254#58/groth16/valid_witness
 lat: 0.710032, lng: 0.576279
 i: 273, j: 0, k: 176
 latFloat: 0.710032, lngFloat: 0.576279
-=== RUN   TestLoc2Index32/bn254#60
-=== RUN   TestLoc2Index32/bn254#60/groth16
-=== RUN   TestLoc2Index32/bn254#60/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#59
+=== RUN   TestLoc2Index32/bn254#59/groth16
+=== RUN   TestLoc2Index32/bn254#59/groth16/valid_witness
 lat: 0.710055, lng: 0.576259
 i: 273, j: 0, k: 176
 latFloat: 0.710055, lngFloat: 0.576259
-=== RUN   TestLoc2Index32/bn254#61
-=== RUN   TestLoc2Index32/bn254#61/groth16
-=== RUN   TestLoc2Index32/bn254#61/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#60
+=== RUN   TestLoc2Index32/bn254#60/groth16
+=== RUN   TestLoc2Index32/bn254#60/groth16/valid_witness
 lat: 0.710075, lng: 0.576241
 i: 273, j: 0, k: 176
 latFloat: 0.710075, lngFloat: 0.576241
-=== RUN   TestLoc2Index32/bn254#62
-=== RUN   TestLoc2Index32/bn254#62/groth16
-=== RUN   TestLoc2Index32/bn254#62/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#61
+=== RUN   TestLoc2Index32/bn254#61/groth16
+=== RUN   TestLoc2Index32/bn254#61/groth16/valid_witness
 lat: 0.710008, lng: 0.576891
 i: 644, j: 0, k: 626
 latFloat: 0.710008, lngFloat: 0.576891
-=== RUN   TestLoc2Index32/bn254#63
-=== RUN   TestLoc2Index32/bn254#63/groth16
-=== RUN   TestLoc2Index32/bn254#63/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#62
+=== RUN   TestLoc2Index32/bn254#62/groth16
+=== RUN   TestLoc2Index32/bn254#62/groth16/valid_witness
 lat: 0.710041, lng: 0.576835
 i: 644, j: 0, k: 626
 latFloat: 0.710041, lngFloat: 0.576835
-=== RUN   TestLoc2Index32/bn254#64
-=== RUN   TestLoc2Index32/bn254#64/groth16
-=== RUN   TestLoc2Index32/bn254#64/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#63
+=== RUN   TestLoc2Index32/bn254#63/groth16
+=== RUN   TestLoc2Index32/bn254#63/groth16/valid_witness
 lat: 0.710061, lng: 0.576802
 i: 644, j: 0, k: 626
 latFloat: 0.710061, lngFloat: 0.576802
-=== RUN   TestLoc2Index32/bn254#65
-=== RUN   TestLoc2Index32/bn254#65/groth16
-=== RUN   TestLoc2Index32/bn254#65/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#64
+=== RUN   TestLoc2Index32/bn254#64/groth16
+=== RUN   TestLoc2Index32/bn254#64/groth16/valid_witness
 lat: 0.710074, lng: 0.576778
 i: 644, j: 0, k: 626
 latFloat: 0.710074, lngFloat: 0.576778
-=== RUN   TestLoc2Index32/bn254#66
-=== RUN   TestLoc2Index32/bn254#66/groth16
-=== RUN   TestLoc2Index32/bn254#66/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#65
+=== RUN   TestLoc2Index32/bn254#65/groth16
+=== RUN   TestLoc2Index32/bn254#65/groth16/valid_witness
 lat: 0.710085, lng: 0.576760
 i: 644, j: 0, k: 626
 latFloat: 0.710085, lngFloat: 0.576760
-=== RUN   TestLoc2Index32/bn254#67
-=== RUN   TestLoc2Index32/bn254#67/groth16
-=== RUN   TestLoc2Index32/bn254#67/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#66
+=== RUN   TestLoc2Index32/bn254#66/groth16
+=== RUN   TestLoc2Index32/bn254#66/groth16/valid_witness
 lat: 0.710094, lng: 0.576745
 i: 644, j: 0, k: 626
 latFloat: 0.710094, lngFloat: 0.576745
-=== RUN   TestLoc2Index32/bn254#68
-=== RUN   TestLoc2Index32/bn254#68/groth16
-=== RUN   TestLoc2Index32/bn254#68/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#67
+=== RUN   TestLoc2Index32/bn254#67/groth16
+=== RUN   TestLoc2Index32/bn254#67/groth16/valid_witness
 lat: 0.710101, lng: 0.576732
 i: 644, j: 0, k: 626
 latFloat: 0.710101, lngFloat: 0.576732
-=== RUN   TestLoc2Index32/bn254#69
-=== RUN   TestLoc2Index32/bn254#69/groth16
-=== RUN   TestLoc2Index32/bn254#69/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#68
+=== RUN   TestLoc2Index32/bn254#68/groth16
+=== RUN   TestLoc2Index32/bn254#68/groth16/valid_witness
 lat: 0.710108, lng: 0.576721
 i: 644, j: 0, k: 626
 latFloat: 0.710108, lngFloat: 0.576721
-=== RUN   TestLoc2Index32/bn254#70
-=== RUN   TestLoc2Index32/bn254#70/groth16
-=== RUN   TestLoc2Index32/bn254#70/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#69
+=== RUN   TestLoc2Index32/bn254#69/groth16
+=== RUN   TestLoc2Index32/bn254#69/groth16/valid_witness
 lat: 0.710113, lng: 0.576712
 i: 644, j: 0, k: 626
 latFloat: 0.710113, lngFloat: 0.576712
-=== RUN   TestLoc2Index32/bn254#71
-=== RUN   TestLoc2Index32/bn254#71/groth16
-=== RUN   TestLoc2Index32/bn254#71/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#70
+=== RUN   TestLoc2Index32/bn254#70/groth16
+=== RUN   TestLoc2Index32/bn254#70/groth16/valid_witness
 lat: 0.710228, lng: 0.576697
 i: 1915, j: 0, k: 1233
 latFloat: 0.710228, lngFloat: 0.576697
-=== RUN   TestLoc2Index32/bn254#72
-=== RUN   TestLoc2Index32/bn254#72/groth16
-=== RUN   TestLoc2Index32/bn254#72/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#71
+=== RUN   TestLoc2Index32/bn254#71/groth16
+=== RUN   TestLoc2Index32/bn254#71/groth16/valid_witness
 lat: 0.710245, lng: 0.576682
 i: 1915, j: 0, k: 1233
 latFloat: 0.710245, lngFloat: 0.576682
-=== RUN   TestLoc2Index32/bn254#73
-=== RUN   TestLoc2Index32/bn254#73/groth16
-=== RUN   TestLoc2Index32/bn254#73/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#72
+=== RUN   TestLoc2Index32/bn254#72/groth16
+=== RUN   TestLoc2Index32/bn254#72/groth16/valid_witness
 lat: 0.710255, lng: 0.576674
 i: 1915, j: 0, k: 1233
 latFloat: 0.710255, lngFloat: 0.576674
-=== RUN   TestLoc2Index32/bn254#74
-=== RUN   TestLoc2Index32/bn254#74/groth16
-=== RUN   TestLoc2Index32/bn254#74/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#73
+=== RUN   TestLoc2Index32/bn254#73/groth16
+=== RUN   TestLoc2Index32/bn254#73/groth16/valid_witness
 lat: 0.710262, lng: 0.576667
 i: 1915, j: 0, k: 1233
 latFloat: 0.710262, lngFloat: 0.576667
-=== RUN   TestLoc2Index32/bn254#75
-    assert.go:200: 
-        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.1/test/assert.go:200
-        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.1/test/assert_checkcircuit.go:50
-        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.1/test/assert.go:66
-        	Error:      	[assertIsEqual] 0 == 1
-        	            	float.(*Context).AssertIsEqualOrULP
-        	            		float.go:375
-        	            	loc2index32.(*loc2Index32Circuit).Define
-        	            		loc2index32_test.go:118
-        	            	
-        	            	witness:{"Lat":1060492225,"Lng":1058250873,"Resolution":8,"I":1915,"J":0,"K":1233}
-        	Test:       	TestLoc2Index32/bn254#75
+=== RUN   TestLoc2Index32/bn254#74
+=== RUN   TestLoc2Index32/bn254#74/groth16
+=== RUN   TestLoc2Index32/bn254#74/groth16/valid_witness
 lat: 0.710268, lng: 0.576663
 i: 1915, j: 0, k: 1233
 latFloat: 0.710268, lngFloat: 0.576663
-=== RUN   TestLoc2Index32/bn254#76
-=== RUN   TestLoc2Index32/bn254#76/groth16
-=== RUN   TestLoc2Index32/bn254#76/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#75
+=== RUN   TestLoc2Index32/bn254#75/groth16
+=== RUN   TestLoc2Index32/bn254#75/groth16/valid_witness
 lat: 0.710272, lng: 0.576659
 i: 1915, j: 0, k: 1233
 latFloat: 0.710272, lngFloat: 0.576659
-=== RUN   TestLoc2Index32/bn254#77
-=== RUN   TestLoc2Index32/bn254#77/groth16
-=== RUN   TestLoc2Index32/bn254#77/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#76
+=== RUN   TestLoc2Index32/bn254#76/groth16
+=== RUN   TestLoc2Index32/bn254#76/groth16/valid_witness
 lat: 0.710276, lng: 0.576655
 i: 1915, j: 0, k: 1233
 latFloat: 0.710276, lngFloat: 0.576655
-=== RUN   TestLoc2Index32/bn254#78
-=== RUN   TestLoc2Index32/bn254#78/groth16
-=== RUN   TestLoc2Index32/bn254#78/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#77
+=== RUN   TestLoc2Index32/bn254#77/groth16
+=== RUN   TestLoc2Index32/bn254#77/groth16/valid_witness
 lat: 0.710279, lng: 0.576652
 i: 1915, j: 0, k: 1233
 latFloat: 0.710279, lngFloat: 0.576652
-=== RUN   TestLoc2Index32/bn254#79
-=== RUN   TestLoc2Index32/bn254#79/groth16
-=== RUN   TestLoc2Index32/bn254#79/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#78
+=== RUN   TestLoc2Index32/bn254#78/groth16
+=== RUN   TestLoc2Index32/bn254#78/groth16/valid_witness
 lat: 0.710282, lng: 0.576650
 i: 1915, j: 0, k: 1233
 latFloat: 0.710282, lngFloat: 0.576650
-=== RUN   TestLoc2Index32/bn254#80
-=== RUN   TestLoc2Index32/bn254#80/groth16
-=== RUN   TestLoc2Index32/bn254#80/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#79
+=== RUN   TestLoc2Index32/bn254#79/groth16
+=== RUN   TestLoc2Index32/bn254#79/groth16/valid_witness
 lat: 0.710175, lng: 0.576727
 i: 4511, j: 0, k: 4381
 latFloat: 0.710175, lngFloat: 0.576727
-=== RUN   TestLoc2Index32/bn254#81
-=== RUN   TestLoc2Index32/bn254#81/groth16
-=== RUN   TestLoc2Index32/bn254#81/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#80
+=== RUN   TestLoc2Index32/bn254#80/groth16
+=== RUN   TestLoc2Index32/bn254#80/groth16/valid_witness
 lat: 0.710180, lng: 0.576719
 i: 4511, j: 0, k: 4381
 latFloat: 0.710180, lngFloat: 0.576719
-=== RUN   TestLoc2Index32/bn254#82
-=== RUN   TestLoc2Index32/bn254#82/groth16
-=== RUN   TestLoc2Index32/bn254#82/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#81
+=== RUN   TestLoc2Index32/bn254#81/groth16
+=== RUN   TestLoc2Index32/bn254#81/groth16/valid_witness
 lat: 0.710183, lng: 0.576714
 i: 4511, j: 0, k: 4381
 latFloat: 0.710183, lngFloat: 0.576714
-=== RUN   TestLoc2Index32/bn254#83
-=== RUN   TestLoc2Index32/bn254#83/groth16
-=== RUN   TestLoc2Index32/bn254#83/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#82
+=== RUN   TestLoc2Index32/bn254#82/groth16
+=== RUN   TestLoc2Index32/bn254#82/groth16/valid_witness
 lat: 0.710185, lng: 0.576711
 i: 4511, j: 0, k: 4381
 latFloat: 0.710185, lngFloat: 0.576711
-=== RUN   TestLoc2Index32/bn254#84
-=== RUN   TestLoc2Index32/bn254#84/groth16
-=== RUN   TestLoc2Index32/bn254#84/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#83
+=== RUN   TestLoc2Index32/bn254#83/groth16
+=== RUN   TestLoc2Index32/bn254#83/groth16/valid_witness
 lat: 0.710186, lng: 0.576708
 i: 4511, j: 0, k: 4381
 latFloat: 0.710186, lngFloat: 0.576708
-=== RUN   TestLoc2Index32/bn254#85
-=== RUN   TestLoc2Index32/bn254#85/groth16
-=== RUN   TestLoc2Index32/bn254#85/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#84
+=== RUN   TestLoc2Index32/bn254#84/groth16
+=== RUN   TestLoc2Index32/bn254#84/groth16/valid_witness
 lat: 0.710188, lng: 0.576706
 i: 4511, j: 0, k: 4381
 latFloat: 0.710188, lngFloat: 0.576706
-=== RUN   TestLoc2Index32/bn254#86
-=== RUN   TestLoc2Index32/bn254#86/groth16
-=== RUN   TestLoc2Index32/bn254#86/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#85
+=== RUN   TestLoc2Index32/bn254#85/groth16
+=== RUN   TestLoc2Index32/bn254#85/groth16/valid_witness
 lat: 0.710189, lng: 0.576704
 i: 4511, j: 0, k: 4381
 latFloat: 0.710189, lngFloat: 0.576704
-=== RUN   TestLoc2Index32/bn254#87
-=== RUN   TestLoc2Index32/bn254#87/groth16
-=== RUN   TestLoc2Index32/bn254#87/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#86
+=== RUN   TestLoc2Index32/bn254#86/groth16
+=== RUN   TestLoc2Index32/bn254#86/groth16/valid_witness
 lat: 0.710190, lng: 0.576703
 i: 4511, j: 0, k: 4381
 latFloat: 0.710190, lngFloat: 0.576703
-=== RUN   TestLoc2Index32/bn254#88
-=== RUN   TestLoc2Index32/bn254#88/groth16
-=== RUN   TestLoc2Index32/bn254#88/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#87
+=== RUN   TestLoc2Index32/bn254#87/groth16
+=== RUN   TestLoc2Index32/bn254#87/groth16/valid_witness
 lat: 0.710190, lng: 0.576701
 i: 4511, j: 0, k: 4381
 latFloat: 0.710190, lngFloat: 0.576701
-=== RUN   TestLoc2Index32/bn254#89
-=== RUN   TestLoc2Index32/bn254#89/groth16
-=== RUN   TestLoc2Index32/bn254#89/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#88
+=== RUN   TestLoc2Index32/bn254#88/groth16
+=== RUN   TestLoc2Index32/bn254#88/groth16/valid_witness
 lat: 0.710154, lng: 0.576729
 i: 13402, j: 0, k: 8632
 latFloat: 0.710154, lngFloat: 0.576729
-=== RUN   TestLoc2Index32/bn254#90
-=== RUN   TestLoc2Index32/bn254#90/groth16
-=== RUN   TestLoc2Index32/bn254#90/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#89
+=== RUN   TestLoc2Index32/bn254#89/groth16
+=== RUN   TestLoc2Index32/bn254#89/groth16/valid_witness
 lat: 0.710156, lng: 0.576727
 i: 13402, j: 0, k: 8632
 latFloat: 0.710156, lngFloat: 0.576727
-=== RUN   TestLoc2Index32/bn254#91
-=== RUN   TestLoc2Index32/bn254#91/groth16
-=== RUN   TestLoc2Index32/bn254#91/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#90
+=== RUN   TestLoc2Index32/bn254#90/groth16
+=== RUN   TestLoc2Index32/bn254#90/groth16/valid_witness
 lat: 0.710158, lng: 0.576726
 i: 13402, j: 0, k: 8632
 latFloat: 0.710158, lngFloat: 0.576726
-=== RUN   TestLoc2Index32/bn254#92
-=== RUN   TestLoc2Index32/bn254#92/groth16
-=== RUN   TestLoc2Index32/bn254#92/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#91
+=== RUN   TestLoc2Index32/bn254#91/groth16
+=== RUN   TestLoc2Index32/bn254#91/groth16/valid_witness
 lat: 0.710159, lng: 0.576725
 i: 13402, j: 0, k: 8632
 latFloat: 0.710159, lngFloat: 0.576725
-=== RUN   TestLoc2Index32/bn254#93
-=== RUN   TestLoc2Index32/bn254#93/groth16
-=== RUN   TestLoc2Index32/bn254#93/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#92
+=== RUN   TestLoc2Index32/bn254#92/groth16
+=== RUN   TestLoc2Index32/bn254#92/groth16/valid_witness
 lat: 0.710160, lng: 0.576724
 i: 13402, j: 0, k: 8632
 latFloat: 0.710160, lngFloat: 0.576724
-=== RUN   TestLoc2Index32/bn254#94
-=== RUN   TestLoc2Index32/bn254#94/groth16
-=== RUN   TestLoc2Index32/bn254#94/groth16/valid_witness
+=== RUN   TestLoc2Index32/bn254#93
+=== RUN   TestLoc2Index32/bn254#93/groth16
+=== RUN   TestLoc2Index32/bn254#93/groth16/valid_witness
 lat: 0.710160, lng: 0.576723
 i: 13402, j: 0, k: 8632
 latFloat: 0.710160, lngFloat: 0.576723
+=== RUN   TestLoc2Index32/bn254#94
+=== RUN   TestLoc2Index32/bn254#94/groth16
+=== RUN   TestLoc2Index32/bn254#94/groth16/valid_witness
+lat: 0.710161, lng: 0.576723
+i: 13402, j: 0, k: 8632
+latFloat: 0.710161, lngFloat: 0.576723
 === RUN   TestLoc2Index32/bn254#95
 === RUN   TestLoc2Index32/bn254#95/groth16
 === RUN   TestLoc2Index32/bn254#95/groth16/valid_witness
@@ -609,31 +581,21 @@ latFloat: 0.710161, lngFloat: 0.576723
 === RUN   TestLoc2Index32/bn254#96
 === RUN   TestLoc2Index32/bn254#96/groth16
 === RUN   TestLoc2Index32/bn254#96/groth16/valid_witness
-lat: 0.710161, lng: 0.576723
-i: 13402, j: 0, k: 8632
-latFloat: 0.710161, lngFloat: 0.576723
-=== RUN   TestLoc2Index32/bn254#97
-=== RUN   TestLoc2Index32/bn254#97/groth16
-=== RUN   TestLoc2Index32/bn254#97/groth16/valid_witness
 lat: 0.710162, lng: 0.576722
 i: 13402, j: 0, k: 8632
 latFloat: 0.710162, lngFloat: 0.576722
-=== RUN   TestLoc2Index32/bn254#98
-    assert.go:200: 
-        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.1/test/assert.go:200
-        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.1/test/assert_checkcircuit.go:50
-        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.1/test/assert.go:66
-        	Error:      	[assertIsEqual] 0 == 1
-        	            	float.(*Context).AssertIsEqualOrULP
-        	            		float.go:375
-        	            	loc2index32.(*loc2Index32Circuit).Define
-        	            		loc2index32_test.go:118
-        	            	
-        	            	witness:{"Lat":1060490534,"Lng":1058251793,"Resolution":10,"I":13402,"J":0,"K":8632}
-        	Test:       	TestLoc2Index32/bn254#98
+=== RUN   TestLoc2Index32/bn254#97
+=== RUN   TestLoc2Index32/bn254#97/groth16
+=== RUN   TestLoc2Index32/bn254#97/groth16/valid_witness
 lat: 0.710160, lng: 0.576735
 i: 31575, j: 0, k: 30667
 latFloat: 0.710160, lngFloat: 0.576735
+=== RUN   TestLoc2Index32/bn254#98
+=== RUN   TestLoc2Index32/bn254#98/groth16
+=== RUN   TestLoc2Index32/bn254#98/groth16/valid_witness
+lat: 0.710161, lng: 0.576734
+i: 31575, j: 0, k: 30667
+latFloat: 0.710161, lngFloat: 0.576734
 === RUN   TestLoc2Index32/bn254#99
 === RUN   TestLoc2Index32/bn254#99/groth16
 === RUN   TestLoc2Index32/bn254#99/groth16/valid_witness
@@ -643,9 +605,9 @@ latFloat: 0.710161, lngFloat: 0.576734
 === RUN   TestLoc2Index32/bn254#100
 === RUN   TestLoc2Index32/bn254#100/groth16
 === RUN   TestLoc2Index32/bn254#100/groth16/valid_witness
-lat: 0.710161, lng: 0.576734
+lat: 0.710162, lng: 0.576733
 i: 31575, j: 0, k: 30667
-latFloat: 0.710161, lngFloat: 0.576734
+latFloat: 0.710162, lngFloat: 0.576733
 === RUN   TestLoc2Index32/bn254#101
 === RUN   TestLoc2Index32/bn254#101/groth16
 === RUN   TestLoc2Index32/bn254#101/groth16/valid_witness
@@ -653,27 +615,17 @@ lat: 0.710162, lng: 0.576733
 i: 31575, j: 0, k: 30667
 latFloat: 0.710162, lngFloat: 0.576733
 === RUN   TestLoc2Index32/bn254#102
-    assert.go:200: 
-        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.1/test/assert.go:200
-        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.1/test/assert_checkcircuit.go:50
-        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.1/test/assert.go:66
-        	Error:      	[assertIsEqual] 0 == 1
-        	            	float.(*Context).AssertIsEqualOrULP
-        	            		float.go:375
-        	            	loc2index32.(*loc2Index32Circuit).Define
-        	            		loc2index32_test.go:118
-        	            	
-        	            	witness:{"Lat":1060490534,"Lng":1058251977,"Resolution":11,"I":31575,"J":0,"K":30667}
-        	Test:       	TestLoc2Index32/bn254#102
+=== RUN   TestLoc2Index32/bn254#102/groth16
+=== RUN   TestLoc2Index32/bn254#102/groth16/valid_witness
 lat: 0.710162, lng: 0.576733
 i: 31575, j: 0, k: 30667
 latFloat: 0.710162, lngFloat: 0.576733
 === RUN   TestLoc2Index32/bn254#103
 === RUN   TestLoc2Index32/bn254#103/groth16
 === RUN   TestLoc2Index32/bn254#103/groth16/valid_witness
-lat: 0.710162, lng: 0.576733
+lat: 0.710162, lng: 0.576732
 i: 31575, j: 0, k: 30667
-latFloat: 0.710162, lngFloat: 0.576733
+latFloat: 0.710162, lngFloat: 0.576732
 === RUN   TestLoc2Index32/bn254#104
 === RUN   TestLoc2Index32/bn254#104/groth16
 === RUN   TestLoc2Index32/bn254#104/groth16/valid_witness
@@ -689,15 +641,15 @@ latFloat: 0.710162, lngFloat: 0.576732
 === RUN   TestLoc2Index32/bn254#106
 === RUN   TestLoc2Index32/bn254#106/groth16
 === RUN   TestLoc2Index32/bn254#106/groth16/valid_witness
-lat: 0.710162, lng: 0.576732
-i: 31575, j: 0, k: 30667
-latFloat: 0.710162, lngFloat: 0.576732
-=== RUN   TestLoc2Index32/bn254#107
-=== RUN   TestLoc2Index32/bn254#107/groth16
-=== RUN   TestLoc2Index32/bn254#107/groth16/valid_witness
 lat: 0.710160, lng: 0.576735
 i: 93817, j: 0, k: 60426
 latFloat: 0.710160, lngFloat: 0.576735
+=== RUN   TestLoc2Index32/bn254#107
+=== RUN   TestLoc2Index32/bn254#107/groth16
+=== RUN   TestLoc2Index32/bn254#107/groth16/valid_witness
+lat: 0.710161, lng: 0.576735
+i: 93817, j: 0, k: 60426
+latFloat: 0.710161, lngFloat: 0.576735
 === RUN   TestLoc2Index32/bn254#108
 === RUN   TestLoc2Index32/bn254#108/groth16
 === RUN   TestLoc2Index32/bn254#108/groth16/valid_witness
@@ -743,9 +695,9 @@ latFloat: 0.710161, lngFloat: 0.576735
 === RUN   TestLoc2Index32/bn254#115
 === RUN   TestLoc2Index32/bn254#115/groth16
 === RUN   TestLoc2Index32/bn254#115/groth16/valid_witness
-lat: 0.710161, lng: 0.576735
-i: 93817, j: 0, k: 60426
-latFloat: 0.710161, lngFloat: 0.576735
+lat: 0.710160, lng: 0.576734
+i: 221025, j: 0, k: 214668
+latFloat: 0.710160, lngFloat: 0.576734
 === RUN   TestLoc2Index32/bn254#116
 === RUN   TestLoc2Index32/bn254#116/groth16
 === RUN   TestLoc2Index32/bn254#116/groth16/valid_witness
@@ -755,9 +707,9 @@ latFloat: 0.710160, lngFloat: 0.576734
 === RUN   TestLoc2Index32/bn254#117
 === RUN   TestLoc2Index32/bn254#117/groth16
 === RUN   TestLoc2Index32/bn254#117/groth16/valid_witness
-lat: 0.710160, lng: 0.576734
+lat: 0.710161, lng: 0.576734
 i: 221025, j: 0, k: 214668
-latFloat: 0.710160, lngFloat: 0.576734
+latFloat: 0.710161, lngFloat: 0.576734
 === RUN   TestLoc2Index32/bn254#118
 === RUN   TestLoc2Index32/bn254#118/groth16
 === RUN   TestLoc2Index32/bn254#118/groth16/valid_witness
@@ -785,9 +737,9 @@ latFloat: 0.710161, lngFloat: 0.576734
 === RUN   TestLoc2Index32/bn254#122
 === RUN   TestLoc2Index32/bn254#122/groth16
 === RUN   TestLoc2Index32/bn254#122/groth16/valid_witness
-lat: 0.710161, lng: 0.576734
+lat: 0.710161, lng: 0.576733
 i: 221025, j: 0, k: 214668
-latFloat: 0.710161, lngFloat: 0.576734
+latFloat: 0.710161, lngFloat: 0.576733
 === RUN   TestLoc2Index32/bn254#123
 === RUN   TestLoc2Index32/bn254#123/groth16
 === RUN   TestLoc2Index32/bn254#123/groth16/valid_witness
@@ -797,15 +749,15 @@ latFloat: 0.710161, lngFloat: 0.576733
 === RUN   TestLoc2Index32/bn254#124
 === RUN   TestLoc2Index32/bn254#124/groth16
 === RUN   TestLoc2Index32/bn254#124/groth16/valid_witness
-lat: 0.710161, lng: 0.576733
-i: 221025, j: 0, k: 214668
-latFloat: 0.710161, lngFloat: 0.576733
-=== RUN   TestLoc2Index32/bn254#125
-=== RUN   TestLoc2Index32/bn254#125/groth16
-=== RUN   TestLoc2Index32/bn254#125/groth16/valid_witness
 lat: 0.710160, lng: 0.576735
 i: 656717, j: 0, k: 422980
 latFloat: 0.710160, lngFloat: 0.576735
+=== RUN   TestLoc2Index32/bn254#125
+=== RUN   TestLoc2Index32/bn254#125/groth16
+=== RUN   TestLoc2Index32/bn254#125/groth16/valid_witness
+lat: 0.710160, lng: 0.576734
+i: 656717, j: 0, k: 422980
+latFloat: 0.710160, lngFloat: 0.576734
 === RUN   TestLoc2Index32/bn254#126
 === RUN   TestLoc2Index32/bn254#126/groth16
 === RUN   TestLoc2Index32/bn254#126/groth16/valid_witness
@@ -852,11 +804,19 @@ latFloat: 0.710160, lngFloat: 0.576734
 === RUN   TestLoc2Index32/bn254#133/groth16
 === RUN   TestLoc2Index32/bn254#133/groth16/valid_witness
 lat: 0.710160, lng: 0.576734
-i: 656717, j: 0, k: 422980
+i: 1547172, j: 0, k: 1502677
 latFloat: 0.710160, lngFloat: 0.576734
 === RUN   TestLoc2Index32/bn254#134
-=== RUN   TestLoc2Index32/bn254#134/groth16
-=== RUN   TestLoc2Index32/bn254#134/groth16/valid_witness
+    assert.go:200: 
+        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.1/test/assert.go:200
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.1/test/assert_checkcircuit.go:50
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.1/test/assert.go:66
+        	Error:      	[assertIsEqual] 1547172 == 1547171
+        	            	loc2index32.(*loc2Index32Circuit).Define
+        	            		loc2index32_test.go:148
+        	            	
+        	            	witness:{"Lat":1060490506,"Lng":1058251998,"Resolution":15,"I":1547172,"J":0,"K":1502677}
+        	Test:       	TestLoc2Index32/bn254#134
 lat: 0.710160, lng: 0.576734
 i: 1547172, j: 0, k: 1502677
 latFloat: 0.710160, lngFloat: 0.576734
@@ -867,7 +827,7 @@ latFloat: 0.710160, lngFloat: 0.576734
         	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.1/test/assert.go:66
         	Error:      	[assertIsEqual] 1547172 == 1547171
         	            	loc2index32.(*loc2Index32Circuit).Define
-        	            		loc2index32_test.go:147
+        	            		loc2index32_test.go:148
         	            	
         	            	witness:{"Lat":1060490506,"Lng":1058251998,"Resolution":15,"I":1547172,"J":0,"K":1502677}
         	Test:       	TestLoc2Index32/bn254#135
@@ -875,16 +835,8 @@ lat: 0.710160, lng: 0.576734
 i: 1547172, j: 0, k: 1502677
 latFloat: 0.710160, lngFloat: 0.576734
 === RUN   TestLoc2Index32/bn254#136
-    assert.go:200: 
-        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.1/test/assert.go:200
-        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.1/test/assert_checkcircuit.go:50
-        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.1/test/assert.go:66
-        	Error:      	[assertIsEqual] 1547172 == 1547171
-        	            	loc2index32.(*loc2Index32Circuit).Define
-        	            		loc2index32_test.go:147
-        	            	
-        	            	witness:{"Lat":1060490506,"Lng":1058251998,"Resolution":15,"I":1547172,"J":0,"K":1502677}
-        	Test:       	TestLoc2Index32/bn254#136
+=== RUN   TestLoc2Index32/bn254#136/groth16
+=== RUN   TestLoc2Index32/bn254#136/groth16/valid_witness
 lat: 0.710160, lng: 0.576734
 i: 1547172, j: 0, k: 1502677
 latFloat: 0.710160, lngFloat: 0.576734
@@ -895,8 +847,16 @@ lat: 0.710160, lng: 0.576734
 i: 1547172, j: 0, k: 1502677
 latFloat: 0.710160, lngFloat: 0.576734
 === RUN   TestLoc2Index32/bn254#138
-=== RUN   TestLoc2Index32/bn254#138/groth16
-=== RUN   TestLoc2Index32/bn254#138/groth16/valid_witness
+    assert.go:200: 
+        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.1/test/assert.go:200
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.1/test/assert_checkcircuit.go:50
+        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.1/test/assert.go:66
+        	Error:      	[assertIsEqual] 1547172 == 1547171
+        	            	loc2index32.(*loc2Index32Circuit).Define
+        	            		loc2index32_test.go:148
+        	            	
+        	            	witness:{"Lat":1060490507,"Lng":1058251997,"Resolution":15,"I":1547172,"J":0,"K":1502677}
+        	Test:       	TestLoc2Index32/bn254#138
 lat: 0.710160, lng: 0.576734
 i: 1547172, j: 0, k: 1502677
 latFloat: 0.710160, lngFloat: 0.576734
@@ -907,7 +867,7 @@ latFloat: 0.710160, lngFloat: 0.576734
         	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.1/test/assert.go:66
         	Error:      	[assertIsEqual] 1547172 == 1547171
         	            	loc2index32.(*loc2Index32Circuit).Define
-        	            		loc2index32_test.go:147
+        	            		loc2index32_test.go:148
         	            	
         	            	witness:{"Lat":1060490507,"Lng":1058251997,"Resolution":15,"I":1547172,"J":0,"K":1502677}
         	Test:       	TestLoc2Index32/bn254#139
@@ -921,7 +881,7 @@ latFloat: 0.710160, lngFloat: 0.576734
         	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.1/test/assert.go:66
         	Error:      	[assertIsEqual] 1547172 == 1547171
         	            	loc2index32.(*loc2Index32Circuit).Define
-        	            		loc2index32_test.go:147
+        	            		loc2index32_test.go:148
         	            	
         	            	witness:{"Lat":1060490507,"Lng":1058251997,"Resolution":15,"I":1547172,"J":0,"K":1502677}
         	Test:       	TestLoc2Index32/bn254#140
@@ -935,7 +895,7 @@ latFloat: 0.710160, lngFloat: 0.576734
         	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.1/test/assert.go:66
         	Error:      	[assertIsEqual] 1547172 == 1547171
         	            	loc2index32.(*loc2Index32Circuit).Define
-        	            		loc2index32_test.go:147
+        	            		loc2index32_test.go:148
         	            	
         	            	witness:{"Lat":1060490507,"Lng":1058251997,"Resolution":15,"I":1547172,"J":0,"K":1502677}
         	Test:       	TestLoc2Index32/bn254#141
@@ -949,76 +909,64 @@ latFloat: 0.710160, lngFloat: 0.576734
         	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.1/test/assert.go:66
         	Error:      	[assertIsEqual] 1547172 == 1547171
         	            	loc2index32.(*loc2Index32Circuit).Define
-        	            		loc2index32_test.go:147
+        	            		loc2index32_test.go:148
         	            	
         	            	witness:{"Lat":1060490507,"Lng":1058251997,"Resolution":15,"I":1547172,"J":0,"K":1502677}
         	Test:       	TestLoc2Index32/bn254#142
-lat: 0.710160, lng: 0.576734
-i: 1547172, j: 0, k: 1502677
-latFloat: 0.710160, lngFloat: 0.576734
-=== RUN   TestLoc2Index32/bn254#143
-    assert.go:200: 
-        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.1/test/assert.go:200
-        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.1/test/assert_checkcircuit.go:50
-        	            				/Users/serious/golang/pkg/mod/github.com/consensys/gnark@v0.9.1/test/assert.go:66
-        	Error:      	[assertIsEqual] 1547172 == 1547171
-        	            	loc2index32.(*loc2Index32Circuit).Define
-        	            		loc2index32_test.go:147
-        	            	
-        	            	witness:{"Lat":1060490507,"Lng":1058251997,"Resolution":15,"I":1547172,"J":0,"K":1502677}
-        	Test:       	TestLoc2Index32/bn254#143
---- FAIL: TestLoc2Index32 (25.49s)
-    --- FAIL: TestLoc2Index32/bn254 (0.00s)
-    --- PASS: TestLoc2Index32/bn254#01 (0.22s)
-        --- PASS: TestLoc2Index32/bn254#01/groth16 (0.19s)
-            --- PASS: TestLoc2Index32/bn254#01/groth16/valid_witness (0.02s)
-    --- PASS: TestLoc2Index32/bn254#02 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#02/groth16 (0.17s)
+--- FAIL: TestLoc2Index32 (24.65s)
+    --- PASS: TestLoc2Index32/bn254 (0.20s)
+        --- PASS: TestLoc2Index32/bn254/groth16 (0.18s)
+            --- PASS: TestLoc2Index32/bn254/groth16/valid_witness (0.01s)
+    --- PASS: TestLoc2Index32/bn254#01 (0.18s)
+        --- PASS: TestLoc2Index32/bn254#01/groth16 (0.16s)
+            --- PASS: TestLoc2Index32/bn254#01/groth16/valid_witness (0.01s)
+    --- PASS: TestLoc2Index32/bn254#02 (0.18s)
+        --- PASS: TestLoc2Index32/bn254#02/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#02/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#03 (0.18s)
-        --- PASS: TestLoc2Index32/bn254#03/groth16 (0.16s)
+        --- PASS: TestLoc2Index32/bn254#03/groth16 (0.15s)
             --- PASS: TestLoc2Index32/bn254#03/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#04 (0.18s)
         --- PASS: TestLoc2Index32/bn254#04/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#04/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#05 (0.18s)
+    --- PASS: TestLoc2Index32/bn254#05 (0.17s)
         --- PASS: TestLoc2Index32/bn254#05/groth16 (0.15s)
             --- PASS: TestLoc2Index32/bn254#05/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#06 (0.18s)
         --- PASS: TestLoc2Index32/bn254#06/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#06/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#07 (0.18s)
-        --- PASS: TestLoc2Index32/bn254#07/groth16 (0.16s)
+        --- PASS: TestLoc2Index32/bn254#07/groth16 (0.15s)
             --- PASS: TestLoc2Index32/bn254#07/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#08 (0.18s)
-        --- PASS: TestLoc2Index32/bn254#08/groth16 (0.16s)
+        --- PASS: TestLoc2Index32/bn254#08/groth16 (0.15s)
             --- PASS: TestLoc2Index32/bn254#08/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#09 (0.18s)
-        --- PASS: TestLoc2Index32/bn254#09/groth16 (0.16s)
+        --- PASS: TestLoc2Index32/bn254#09/groth16 (0.15s)
             --- PASS: TestLoc2Index32/bn254#09/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#10 (0.18s)
-        --- PASS: TestLoc2Index32/bn254#10/groth16 (0.16s)
+        --- PASS: TestLoc2Index32/bn254#10/groth16 (0.15s)
             --- PASS: TestLoc2Index32/bn254#10/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#11 (0.18s)
         --- PASS: TestLoc2Index32/bn254#11/groth16 (0.15s)
             --- PASS: TestLoc2Index32/bn254#11/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#12 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#12/groth16 (0.17s)
-            --- PASS: TestLoc2Index32/bn254#12/groth16/valid_witness (0.02s)
-    --- PASS: TestLoc2Index32/bn254#13 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#13/groth16 (0.16s)
+    --- PASS: TestLoc2Index32/bn254#12 (0.18s)
+        --- PASS: TestLoc2Index32/bn254#12/groth16 (0.15s)
+            --- PASS: TestLoc2Index32/bn254#12/groth16/valid_witness (0.01s)
+    --- PASS: TestLoc2Index32/bn254#13 (0.18s)
+        --- PASS: TestLoc2Index32/bn254#13/groth16 (0.15s)
             --- PASS: TestLoc2Index32/bn254#13/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#14 (0.18s)
         --- PASS: TestLoc2Index32/bn254#14/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#14/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#15 (0.19s)
+    --- PASS: TestLoc2Index32/bn254#15 (0.18s)
         --- PASS: TestLoc2Index32/bn254#15/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#15/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#16 (0.18s)
         --- PASS: TestLoc2Index32/bn254#16/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#16/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#17 (0.21s)
-        --- PASS: TestLoc2Index32/bn254#17/groth16 (0.18s)
+    --- PASS: TestLoc2Index32/bn254#17 (0.18s)
+        --- PASS: TestLoc2Index32/bn254#17/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#17/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#18 (0.18s)
         --- PASS: TestLoc2Index32/bn254#18/groth16 (0.16s)
@@ -1027,10 +975,10 @@ latFloat: 0.710160, lngFloat: 0.576734
         --- PASS: TestLoc2Index32/bn254#19/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#19/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#20 (0.18s)
-        --- PASS: TestLoc2Index32/bn254#20/groth16 (0.16s)
+        --- PASS: TestLoc2Index32/bn254#20/groth16 (0.15s)
             --- PASS: TestLoc2Index32/bn254#20/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#21 (0.18s)
-        --- PASS: TestLoc2Index32/bn254#21/groth16 (0.15s)
+        --- PASS: TestLoc2Index32/bn254#21/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#21/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#22 (0.18s)
         --- PASS: TestLoc2Index32/bn254#22/groth16 (0.16s)
@@ -1042,55 +990,57 @@ latFloat: 0.710160, lngFloat: 0.576734
         --- PASS: TestLoc2Index32/bn254#24/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#24/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#25 (0.18s)
-        --- PASS: TestLoc2Index32/bn254#25/groth16 (0.16s)
+        --- PASS: TestLoc2Index32/bn254#25/groth16 (0.15s)
             --- PASS: TestLoc2Index32/bn254#25/groth16/valid_witness (0.01s)
-    --- FAIL: TestLoc2Index32/bn254#26 (0.00s)
+    --- PASS: TestLoc2Index32/bn254#26 (0.18s)
+        --- PASS: TestLoc2Index32/bn254#26/groth16 (0.16s)
+            --- PASS: TestLoc2Index32/bn254#26/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#27 (0.18s)
         --- PASS: TestLoc2Index32/bn254#27/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#27/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#28 (0.18s)
-        --- PASS: TestLoc2Index32/bn254#28/groth16 (0.16s)
+    --- PASS: TestLoc2Index32/bn254#28 (0.21s)
+        --- PASS: TestLoc2Index32/bn254#28/groth16 (0.19s)
             --- PASS: TestLoc2Index32/bn254#28/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#29 (0.18s)
-        --- PASS: TestLoc2Index32/bn254#29/groth16 (0.15s)
+        --- PASS: TestLoc2Index32/bn254#29/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#29/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#30 (0.18s)
         --- PASS: TestLoc2Index32/bn254#30/groth16 (0.15s)
             --- PASS: TestLoc2Index32/bn254#30/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#31 (0.18s)
-        --- PASS: TestLoc2Index32/bn254#31/groth16 (0.16s)
+        --- PASS: TestLoc2Index32/bn254#31/groth16 (0.15s)
             --- PASS: TestLoc2Index32/bn254#31/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#32 (0.18s)
-        --- PASS: TestLoc2Index32/bn254#32/groth16 (0.16s)
+    --- PASS: TestLoc2Index32/bn254#32 (0.21s)
+        --- PASS: TestLoc2Index32/bn254#32/groth16 (0.19s)
             --- PASS: TestLoc2Index32/bn254#32/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#33 (0.18s)
         --- PASS: TestLoc2Index32/bn254#33/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#33/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#34 (0.18s)
-        --- PASS: TestLoc2Index32/bn254#34/groth16 (0.15s)
+        --- PASS: TestLoc2Index32/bn254#34/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#34/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#35 (0.18s)
-        --- PASS: TestLoc2Index32/bn254#35/groth16 (0.15s)
-            --- PASS: TestLoc2Index32/bn254#35/groth16/valid_witness (0.01s)
+    --- PASS: TestLoc2Index32/bn254#35 (0.20s)
+        --- PASS: TestLoc2Index32/bn254#35/groth16 (0.18s)
+            --- PASS: TestLoc2Index32/bn254#35/groth16/valid_witness (0.02s)
     --- PASS: TestLoc2Index32/bn254#36 (0.18s)
-        --- PASS: TestLoc2Index32/bn254#36/groth16 (0.16s)
+        --- PASS: TestLoc2Index32/bn254#36/groth16 (0.15s)
             --- PASS: TestLoc2Index32/bn254#36/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#37 (0.18s)
-        --- PASS: TestLoc2Index32/bn254#37/groth16 (0.16s)
+        --- PASS: TestLoc2Index32/bn254#37/groth16 (0.15s)
             --- PASS: TestLoc2Index32/bn254#37/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#38 (0.18s)
         --- PASS: TestLoc2Index32/bn254#38/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#38/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#39 (0.18s)
-        --- PASS: TestLoc2Index32/bn254#39/groth16 (0.16s)
+        --- PASS: TestLoc2Index32/bn254#39/groth16 (0.15s)
             --- PASS: TestLoc2Index32/bn254#39/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#40 (0.18s)
+    --- PASS: TestLoc2Index32/bn254#40 (0.19s)
         --- PASS: TestLoc2Index32/bn254#40/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#40/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#41 (0.18s)
         --- PASS: TestLoc2Index32/bn254#41/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#41/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#42 (0.18s)
+    --- PASS: TestLoc2Index32/bn254#42 (0.19s)
         --- PASS: TestLoc2Index32/bn254#42/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#42/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#43 (0.18s)
@@ -1108,14 +1058,14 @@ latFloat: 0.710160, lngFloat: 0.576734
     --- PASS: TestLoc2Index32/bn254#47 (0.18s)
         --- PASS: TestLoc2Index32/bn254#47/groth16 (0.15s)
             --- PASS: TestLoc2Index32/bn254#47/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#48 (0.18s)
-        --- PASS: TestLoc2Index32/bn254#48/groth16 (0.16s)
+    --- PASS: TestLoc2Index32/bn254#48 (0.19s)
+        --- PASS: TestLoc2Index32/bn254#48/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#48/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#49 (0.18s)
         --- PASS: TestLoc2Index32/bn254#49/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#49/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#50 (0.18s)
-        --- PASS: TestLoc2Index32/bn254#50/groth16 (0.15s)
+        --- PASS: TestLoc2Index32/bn254#50/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#50/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#51 (0.18s)
         --- PASS: TestLoc2Index32/bn254#51/groth16 (0.16s)
@@ -1123,8 +1073,8 @@ latFloat: 0.710160, lngFloat: 0.576734
     --- PASS: TestLoc2Index32/bn254#52 (0.18s)
         --- PASS: TestLoc2Index32/bn254#52/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#52/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#53 (0.22s)
-        --- PASS: TestLoc2Index32/bn254#53/groth16 (0.20s)
+    --- PASS: TestLoc2Index32/bn254#53 (0.20s)
+        --- PASS: TestLoc2Index32/bn254#53/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#53/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#54 (0.18s)
         --- PASS: TestLoc2Index32/bn254#54/groth16 (0.16s)
@@ -1135,78 +1085,80 @@ latFloat: 0.710160, lngFloat: 0.576734
     --- PASS: TestLoc2Index32/bn254#56 (0.18s)
         --- PASS: TestLoc2Index32/bn254#56/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#56/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#57 (0.22s)
-        --- PASS: TestLoc2Index32/bn254#57/groth16 (0.20s)
-            --- PASS: TestLoc2Index32/bn254#57/groth16/valid_witness (0.03s)
-    --- PASS: TestLoc2Index32/bn254#58 (0.33s)
-        --- PASS: TestLoc2Index32/bn254#58/groth16 (0.27s)
-            --- PASS: TestLoc2Index32/bn254#58/groth16/valid_witness (0.02s)
-    --- PASS: TestLoc2Index32/bn254#59 (0.28s)
-        --- PASS: TestLoc2Index32/bn254#59/groth16 (0.25s)
-            --- PASS: TestLoc2Index32/bn254#59/groth16/valid_witness (0.02s)
-    --- PASS: TestLoc2Index32/bn254#60 (0.27s)
-        --- PASS: TestLoc2Index32/bn254#60/groth16 (0.24s)
-            --- PASS: TestLoc2Index32/bn254#60/groth16/valid_witness (0.02s)
-    --- PASS: TestLoc2Index32/bn254#61 (0.24s)
-        --- PASS: TestLoc2Index32/bn254#61/groth16 (0.21s)
+    --- PASS: TestLoc2Index32/bn254#57 (0.20s)
+        --- PASS: TestLoc2Index32/bn254#57/groth16 (0.17s)
+            --- PASS: TestLoc2Index32/bn254#57/groth16/valid_witness (0.01s)
+    --- PASS: TestLoc2Index32/bn254#58 (0.18s)
+        --- PASS: TestLoc2Index32/bn254#58/groth16 (0.16s)
+            --- PASS: TestLoc2Index32/bn254#58/groth16/valid_witness (0.01s)
+    --- PASS: TestLoc2Index32/bn254#59 (0.18s)
+        --- PASS: TestLoc2Index32/bn254#59/groth16 (0.16s)
+            --- PASS: TestLoc2Index32/bn254#59/groth16/valid_witness (0.01s)
+    --- PASS: TestLoc2Index32/bn254#60 (0.18s)
+        --- PASS: TestLoc2Index32/bn254#60/groth16 (0.16s)
+            --- PASS: TestLoc2Index32/bn254#60/groth16/valid_witness (0.01s)
+    --- PASS: TestLoc2Index32/bn254#61 (0.18s)
+        --- PASS: TestLoc2Index32/bn254#61/groth16 (0.15s)
             --- PASS: TestLoc2Index32/bn254#61/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#62 (0.21s)
-        --- PASS: TestLoc2Index32/bn254#62/groth16 (0.19s)
-            --- PASS: TestLoc2Index32/bn254#62/groth16/valid_witness (0.02s)
-    --- PASS: TestLoc2Index32/bn254#63 (0.22s)
-        --- PASS: TestLoc2Index32/bn254#63/groth16 (0.19s)
-            --- PASS: TestLoc2Index32/bn254#63/groth16/valid_witness (0.02s)
-    --- PASS: TestLoc2Index32/bn254#64 (0.21s)
-        --- PASS: TestLoc2Index32/bn254#64/groth16 (0.19s)
-            --- PASS: TestLoc2Index32/bn254#64/groth16/valid_witness (0.02s)
-    --- PASS: TestLoc2Index32/bn254#65 (0.22s)
-        --- PASS: TestLoc2Index32/bn254#65/groth16 (0.20s)
-            --- PASS: TestLoc2Index32/bn254#65/groth16/valid_witness (0.02s)
-    --- PASS: TestLoc2Index32/bn254#66 (0.31s)
-        --- PASS: TestLoc2Index32/bn254#66/groth16 (0.28s)
-            --- PASS: TestLoc2Index32/bn254#66/groth16/valid_witness (0.03s)
-    --- PASS: TestLoc2Index32/bn254#67 (0.30s)
-        --- PASS: TestLoc2Index32/bn254#67/groth16 (0.26s)
-            --- PASS: TestLoc2Index32/bn254#67/groth16/valid_witness (0.02s)
-    --- PASS: TestLoc2Index32/bn254#68 (0.35s)
-        --- PASS: TestLoc2Index32/bn254#68/groth16 (0.32s)
-            --- PASS: TestLoc2Index32/bn254#68/groth16/valid_witness (0.02s)
-    --- PASS: TestLoc2Index32/bn254#69 (0.23s)
-        --- PASS: TestLoc2Index32/bn254#69/groth16 (0.19s)
-            --- PASS: TestLoc2Index32/bn254#69/groth16/valid_witness (0.02s)
-    --- PASS: TestLoc2Index32/bn254#70 (0.21s)
-        --- PASS: TestLoc2Index32/bn254#70/groth16 (0.19s)
+    --- PASS: TestLoc2Index32/bn254#62 (0.18s)
+        --- PASS: TestLoc2Index32/bn254#62/groth16 (0.16s)
+            --- PASS: TestLoc2Index32/bn254#62/groth16/valid_witness (0.01s)
+    --- PASS: TestLoc2Index32/bn254#63 (0.18s)
+        --- PASS: TestLoc2Index32/bn254#63/groth16 (0.16s)
+            --- PASS: TestLoc2Index32/bn254#63/groth16/valid_witness (0.01s)
+    --- PASS: TestLoc2Index32/bn254#64 (0.18s)
+        --- PASS: TestLoc2Index32/bn254#64/groth16 (0.15s)
+            --- PASS: TestLoc2Index32/bn254#64/groth16/valid_witness (0.01s)
+    --- PASS: TestLoc2Index32/bn254#65 (0.18s)
+        --- PASS: TestLoc2Index32/bn254#65/groth16 (0.16s)
+            --- PASS: TestLoc2Index32/bn254#65/groth16/valid_witness (0.01s)
+    --- PASS: TestLoc2Index32/bn254#66 (0.18s)
+        --- PASS: TestLoc2Index32/bn254#66/groth16 (0.16s)
+            --- PASS: TestLoc2Index32/bn254#66/groth16/valid_witness (0.01s)
+    --- PASS: TestLoc2Index32/bn254#67 (0.18s)
+        --- PASS: TestLoc2Index32/bn254#67/groth16 (0.16s)
+            --- PASS: TestLoc2Index32/bn254#67/groth16/valid_witness (0.01s)
+    --- PASS: TestLoc2Index32/bn254#68 (0.18s)
+        --- PASS: TestLoc2Index32/bn254#68/groth16 (0.16s)
+            --- PASS: TestLoc2Index32/bn254#68/groth16/valid_witness (0.01s)
+    --- PASS: TestLoc2Index32/bn254#69 (0.18s)
+        --- PASS: TestLoc2Index32/bn254#69/groth16 (0.15s)
+            --- PASS: TestLoc2Index32/bn254#69/groth16/valid_witness (0.01s)
+    --- PASS: TestLoc2Index32/bn254#70 (0.18s)
+        --- PASS: TestLoc2Index32/bn254#70/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#70/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#71 (0.21s)
-        --- PASS: TestLoc2Index32/bn254#71/groth16 (0.18s)
+    --- PASS: TestLoc2Index32/bn254#71 (0.18s)
+        --- PASS: TestLoc2Index32/bn254#71/groth16 (0.15s)
             --- PASS: TestLoc2Index32/bn254#71/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#72 (0.21s)
-        --- PASS: TestLoc2Index32/bn254#72/groth16 (0.18s)
-            --- PASS: TestLoc2Index32/bn254#72/groth16/valid_witness (0.02s)
-    --- PASS: TestLoc2Index32/bn254#73 (0.21s)
-        --- PASS: TestLoc2Index32/bn254#73/groth16 (0.18s)
-            --- PASS: TestLoc2Index32/bn254#73/groth16/valid_witness (0.02s)
-    --- PASS: TestLoc2Index32/bn254#74 (0.22s)
-        --- PASS: TestLoc2Index32/bn254#74/groth16 (0.20s)
-            --- PASS: TestLoc2Index32/bn254#74/groth16/valid_witness (0.02s)
-    --- FAIL: TestLoc2Index32/bn254#75 (0.00s)
-    --- PASS: TestLoc2Index32/bn254#76 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#76/groth16 (0.17s)
+    --- PASS: TestLoc2Index32/bn254#72 (0.18s)
+        --- PASS: TestLoc2Index32/bn254#72/groth16 (0.15s)
+            --- PASS: TestLoc2Index32/bn254#72/groth16/valid_witness (0.01s)
+    --- PASS: TestLoc2Index32/bn254#73 (0.18s)
+        --- PASS: TestLoc2Index32/bn254#73/groth16 (0.16s)
+            --- PASS: TestLoc2Index32/bn254#73/groth16/valid_witness (0.01s)
+    --- PASS: TestLoc2Index32/bn254#74 (0.18s)
+        --- PASS: TestLoc2Index32/bn254#74/groth16 (0.16s)
+            --- PASS: TestLoc2Index32/bn254#74/groth16/valid_witness (0.01s)
+    --- PASS: TestLoc2Index32/bn254#75 (0.18s)
+        --- PASS: TestLoc2Index32/bn254#75/groth16 (0.16s)
+            --- PASS: TestLoc2Index32/bn254#75/groth16/valid_witness (0.01s)
+    --- PASS: TestLoc2Index32/bn254#76 (0.18s)
+        --- PASS: TestLoc2Index32/bn254#76/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#76/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#77 (0.18s)
-        --- PASS: TestLoc2Index32/bn254#77/groth16 (0.15s)
+        --- PASS: TestLoc2Index32/bn254#77/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#77/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#78 (0.18s)
         --- PASS: TestLoc2Index32/bn254#78/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#78/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#79 (0.18s)
-        --- PASS: TestLoc2Index32/bn254#79/groth16 (0.15s)
+        --- PASS: TestLoc2Index32/bn254#79/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#79/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#80 (0.18s)
-        --- PASS: TestLoc2Index32/bn254#80/groth16 (0.15s)
+        --- PASS: TestLoc2Index32/bn254#80/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#80/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#81 (0.18s)
-        --- PASS: TestLoc2Index32/bn254#81/groth16 (0.15s)
+        --- PASS: TestLoc2Index32/bn254#81/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#81/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#82 (0.18s)
         --- PASS: TestLoc2Index32/bn254#82/groth16 (0.15s)
@@ -1217,48 +1169,50 @@ latFloat: 0.710160, lngFloat: 0.576734
     --- PASS: TestLoc2Index32/bn254#84 (0.18s)
         --- PASS: TestLoc2Index32/bn254#84/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#84/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#85 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#85/groth16 (0.17s)
+    --- PASS: TestLoc2Index32/bn254#85 (0.18s)
+        --- PASS: TestLoc2Index32/bn254#85/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#85/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#86 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#86/groth16 (0.16s)
+    --- PASS: TestLoc2Index32/bn254#86 (0.18s)
+        --- PASS: TestLoc2Index32/bn254#86/groth16 (0.15s)
             --- PASS: TestLoc2Index32/bn254#86/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#87 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#87/groth16 (0.17s)
+    --- PASS: TestLoc2Index32/bn254#87 (0.18s)
+        --- PASS: TestLoc2Index32/bn254#87/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#87/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#88 (0.26s)
-        --- PASS: TestLoc2Index32/bn254#88/groth16 (0.24s)
+    --- PASS: TestLoc2Index32/bn254#88 (0.18s)
+        --- PASS: TestLoc2Index32/bn254#88/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#88/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#89 (0.21s)
-        --- PASS: TestLoc2Index32/bn254#89/groth16 (0.18s)
-            --- PASS: TestLoc2Index32/bn254#89/groth16/valid_witness (0.02s)
-    --- PASS: TestLoc2Index32/bn254#90 (0.20s)
-        --- PASS: TestLoc2Index32/bn254#90/groth16 (0.17s)
+    --- PASS: TestLoc2Index32/bn254#89 (0.18s)
+        --- PASS: TestLoc2Index32/bn254#89/groth16 (0.16s)
+            --- PASS: TestLoc2Index32/bn254#89/groth16/valid_witness (0.01s)
+    --- PASS: TestLoc2Index32/bn254#90 (0.18s)
+        --- PASS: TestLoc2Index32/bn254#90/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#90/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#91 (0.18s)
         --- PASS: TestLoc2Index32/bn254#91/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#91/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#92 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#92/groth16 (0.17s)
+    --- PASS: TestLoc2Index32/bn254#92 (0.18s)
+        --- PASS: TestLoc2Index32/bn254#92/groth16 (0.15s)
             --- PASS: TestLoc2Index32/bn254#92/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#93 (0.18s)
-        --- PASS: TestLoc2Index32/bn254#93/groth16 (0.16s)
+    --- PASS: TestLoc2Index32/bn254#93 (0.17s)
+        --- PASS: TestLoc2Index32/bn254#93/groth16 (0.15s)
             --- PASS: TestLoc2Index32/bn254#93/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#94 (0.18s)
         --- PASS: TestLoc2Index32/bn254#94/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#94/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#95 (0.18s)
-        --- PASS: TestLoc2Index32/bn254#95/groth16 (0.16s)
+        --- PASS: TestLoc2Index32/bn254#95/groth16 (0.15s)
             --- PASS: TestLoc2Index32/bn254#95/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#96 (0.18s)
         --- PASS: TestLoc2Index32/bn254#96/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#96/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#97 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#97/groth16 (0.17s)
+    --- PASS: TestLoc2Index32/bn254#97 (0.18s)
+        --- PASS: TestLoc2Index32/bn254#97/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#97/groth16/valid_witness (0.01s)
-    --- FAIL: TestLoc2Index32/bn254#98 (0.00s)
+    --- PASS: TestLoc2Index32/bn254#98 (0.18s)
+        --- PASS: TestLoc2Index32/bn254#98/groth16 (0.16s)
+            --- PASS: TestLoc2Index32/bn254#98/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#99 (0.18s)
-        --- PASS: TestLoc2Index32/bn254#99/groth16 (0.15s)
+        --- PASS: TestLoc2Index32/bn254#99/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#99/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#100 (0.18s)
         --- PASS: TestLoc2Index32/bn254#100/groth16 (0.16s)
@@ -1266,15 +1220,17 @@ latFloat: 0.710160, lngFloat: 0.576734
     --- PASS: TestLoc2Index32/bn254#101 (0.18s)
         --- PASS: TestLoc2Index32/bn254#101/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#101/groth16/valid_witness (0.01s)
-    --- FAIL: TestLoc2Index32/bn254#102 (0.00s)
+    --- PASS: TestLoc2Index32/bn254#102 (0.18s)
+        --- PASS: TestLoc2Index32/bn254#102/groth16 (0.16s)
+            --- PASS: TestLoc2Index32/bn254#102/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#103 (0.18s)
         --- PASS: TestLoc2Index32/bn254#103/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#103/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#104 (0.18s)
-        --- PASS: TestLoc2Index32/bn254#104/groth16 (0.15s)
+        --- PASS: TestLoc2Index32/bn254#104/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#104/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#105 (0.18s)
-        --- PASS: TestLoc2Index32/bn254#105/groth16 (0.16s)
+        --- PASS: TestLoc2Index32/bn254#105/groth16 (0.15s)
             --- PASS: TestLoc2Index32/bn254#105/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#106 (0.18s)
         --- PASS: TestLoc2Index32/bn254#106/groth16 (0.16s)
@@ -1282,100 +1238,97 @@ latFloat: 0.710160, lngFloat: 0.576734
     --- PASS: TestLoc2Index32/bn254#107 (0.18s)
         --- PASS: TestLoc2Index32/bn254#107/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#107/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#108 (0.19s)
+    --- PASS: TestLoc2Index32/bn254#108 (0.18s)
         --- PASS: TestLoc2Index32/bn254#108/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#108/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#109 (0.22s)
-        --- PASS: TestLoc2Index32/bn254#109/groth16 (0.20s)
-            --- PASS: TestLoc2Index32/bn254#109/groth16/valid_witness (0.02s)
-    --- PASS: TestLoc2Index32/bn254#110 (0.21s)
-        --- PASS: TestLoc2Index32/bn254#110/groth16 (0.18s)
+    --- PASS: TestLoc2Index32/bn254#109 (0.18s)
+        --- PASS: TestLoc2Index32/bn254#109/groth16 (0.15s)
+            --- PASS: TestLoc2Index32/bn254#109/groth16/valid_witness (0.01s)
+    --- PASS: TestLoc2Index32/bn254#110 (0.18s)
+        --- PASS: TestLoc2Index32/bn254#110/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#110/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#111 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#111/groth16 (0.17s)
+    --- PASS: TestLoc2Index32/bn254#111 (0.18s)
+        --- PASS: TestLoc2Index32/bn254#111/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#111/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#112 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#112/groth16 (0.16s)
+    --- PASS: TestLoc2Index32/bn254#112 (0.22s)
+        --- PASS: TestLoc2Index32/bn254#112/groth16 (0.20s)
             --- PASS: TestLoc2Index32/bn254#112/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#113 (0.18s)
         --- PASS: TestLoc2Index32/bn254#113/groth16 (0.15s)
             --- PASS: TestLoc2Index32/bn254#113/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#114 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#114/groth16 (0.17s)
+    --- PASS: TestLoc2Index32/bn254#114 (0.18s)
+        --- PASS: TestLoc2Index32/bn254#114/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#114/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#115 (0.20s)
-        --- PASS: TestLoc2Index32/bn254#115/groth16 (0.17s)
+    --- PASS: TestLoc2Index32/bn254#115 (0.18s)
+        --- PASS: TestLoc2Index32/bn254#115/groth16 (0.15s)
             --- PASS: TestLoc2Index32/bn254#115/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#116 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#116/groth16 (0.17s)
+    --- PASS: TestLoc2Index32/bn254#116 (0.18s)
+        --- PASS: TestLoc2Index32/bn254#116/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#116/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#117 (0.18s)
         --- PASS: TestLoc2Index32/bn254#117/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#117/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#118 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#118/groth16 (0.17s)
+    --- PASS: TestLoc2Index32/bn254#118 (0.18s)
+        --- PASS: TestLoc2Index32/bn254#118/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#118/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#119 (0.20s)
-        --- PASS: TestLoc2Index32/bn254#119/groth16 (0.18s)
-            --- PASS: TestLoc2Index32/bn254#119/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#120 (0.18s)
-        --- PASS: TestLoc2Index32/bn254#120/groth16 (0.16s)
-            --- PASS: TestLoc2Index32/bn254#120/groth16/valid_witness (0.01s)
+    --- PASS: TestLoc2Index32/bn254#119 (0.19s)
+        --- PASS: TestLoc2Index32/bn254#119/groth16 (0.17s)
+            --- PASS: TestLoc2Index32/bn254#119/groth16/valid_witness (0.02s)
+    --- PASS: TestLoc2Index32/bn254#120 (0.19s)
+        --- PASS: TestLoc2Index32/bn254#120/groth16 (0.17s)
+            --- PASS: TestLoc2Index32/bn254#120/groth16/valid_witness (0.02s)
     --- PASS: TestLoc2Index32/bn254#121 (0.18s)
         --- PASS: TestLoc2Index32/bn254#121/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#121/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#122 (0.20s)
-        --- PASS: TestLoc2Index32/bn254#122/groth16 (0.17s)
+    --- PASS: TestLoc2Index32/bn254#122 (0.18s)
+        --- PASS: TestLoc2Index32/bn254#122/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#122/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#123 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#123/groth16 (0.16s)
+    --- PASS: TestLoc2Index32/bn254#123 (0.18s)
+        --- PASS: TestLoc2Index32/bn254#123/groth16 (0.15s)
             --- PASS: TestLoc2Index32/bn254#123/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#124 (0.18s)
         --- PASS: TestLoc2Index32/bn254#124/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#124/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#125 (0.18s)
-        --- PASS: TestLoc2Index32/bn254#125/groth16 (0.16s)
-            --- PASS: TestLoc2Index32/bn254#125/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#126 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#126/groth16 (0.16s)
+    --- PASS: TestLoc2Index32/bn254#125 (0.19s)
+        --- PASS: TestLoc2Index32/bn254#125/groth16 (0.17s)
+            --- PASS: TestLoc2Index32/bn254#125/groth16/valid_witness (0.02s)
+    --- PASS: TestLoc2Index32/bn254#126 (0.20s)
+        --- PASS: TestLoc2Index32/bn254#126/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#126/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#127 (0.18s)
+    --- PASS: TestLoc2Index32/bn254#127 (0.19s)
         --- PASS: TestLoc2Index32/bn254#127/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#127/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#128 (0.18s)
         --- PASS: TestLoc2Index32/bn254#128/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#128/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#129 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#129/groth16 (0.16s)
-            --- PASS: TestLoc2Index32/bn254#129/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#130 (0.18s)
-        --- PASS: TestLoc2Index32/bn254#130/groth16 (0.16s)
+        --- PASS: TestLoc2Index32/bn254#129/groth16 (0.17s)
+            --- PASS: TestLoc2Index32/bn254#129/groth16/valid_witness (0.02s)
+    --- PASS: TestLoc2Index32/bn254#130 (0.20s)
+        --- PASS: TestLoc2Index32/bn254#130/groth16 (0.18s)
             --- PASS: TestLoc2Index32/bn254#130/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#131 (0.18s)
-        --- PASS: TestLoc2Index32/bn254#131/groth16 (0.16s)
+    --- PASS: TestLoc2Index32/bn254#131 (0.19s)
+        --- PASS: TestLoc2Index32/bn254#131/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#131/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#132 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#132/groth16 (0.17s)
+    --- PASS: TestLoc2Index32/bn254#132 (0.18s)
+        --- PASS: TestLoc2Index32/bn254#132/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#132/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#133 (0.18s)
         --- PASS: TestLoc2Index32/bn254#133/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#133/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#134 (0.18s)
-        --- PASS: TestLoc2Index32/bn254#134/groth16 (0.15s)
-            --- PASS: TestLoc2Index32/bn254#134/groth16/valid_witness (0.01s)
+    --- FAIL: TestLoc2Index32/bn254#134 (0.00s)
     --- FAIL: TestLoc2Index32/bn254#135 (0.00s)
-    --- FAIL: TestLoc2Index32/bn254#136 (0.00s)
+    --- PASS: TestLoc2Index32/bn254#136 (0.18s)
+        --- PASS: TestLoc2Index32/bn254#136/groth16 (0.16s)
+            --- PASS: TestLoc2Index32/bn254#136/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#137 (0.18s)
         --- PASS: TestLoc2Index32/bn254#137/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#137/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#138 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#138/groth16 (0.17s)
-            --- PASS: TestLoc2Index32/bn254#138/groth16/valid_witness (0.01s)
+    --- FAIL: TestLoc2Index32/bn254#138 (0.00s)
     --- FAIL: TestLoc2Index32/bn254#139 (0.00s)
     --- FAIL: TestLoc2Index32/bn254#140 (0.00s)
     --- FAIL: TestLoc2Index32/bn254#141 (0.00s)
     --- FAIL: TestLoc2Index32/bn254#142 (0.00s)
-    --- FAIL: TestLoc2Index32/bn254#143 (0.00s)
 FAIL
 exit status 1
-FAIL	gnark-float/loc2index32	26.296s
+FAIL	gnark-float/loc2index32	25.453s

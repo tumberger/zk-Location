@@ -293,22 +293,23 @@ func (c *loc2Index64Circuit) Define(api frontend.API) error {
 
 	// FOLLOWING CHECKS SHOULD BE ENABLED FOR SOUNDNESS, BUT FAIL DUE TO INACCURACY
 	// Check 1 (Identity) for Latitude and Longitude
-	// deltaLatSquared := ctx.Mul(deltaLat, deltaLat)
-	// gammaLatSquared := ctx.Mul(gammaLat, gammaLat)
-	// identityLat := ctx.Add(gammaLatSquared, deltaLatSquared)
-	// deltaLngSquared := ctx.Mul(deltaLng, deltaLng)
-	// gammaLngSquared := ctx.Mul(gammaLng, gammaLng)
-	// identityLng := ctx.Add(gammaLngSquared, deltaLngSquared)
-	// ctx.AssertIsEqualOrULP(identityLat, identityLng)
+	deltaLatSquared := ctx.Mul(deltaLat, deltaLat)
+	gammaLatSquared := ctx.Mul(gammaLat, gammaLat)
+	identityLat := ctx.Add(gammaLatSquared, deltaLatSquared)
+	deltaLngSquared := ctx.Mul(deltaLng, deltaLng)
+	gammaLngSquared := ctx.Mul(gammaLng, gammaLng)
+	identityLng := ctx.Add(gammaLngSquared, deltaLngSquared)
+	ctx.AssertIsEqualOrULP(identityLat, ctx.NewF64Constant(1))
+	ctx.AssertIsEqualOrULP(identityLng, ctx.NewF64Constant(1))
 
 	// Check 2 for Latitude and Longitude
 	ctx.AssertIsEqualOrULP(ctx.Mul(alphaLat, deltaLat), gammaLat)
 	ctx.AssertIsEqualOrULP(ctx.Mul(alphaLng, deltaLng), gammaLng)
 
 	// FOLLOWING CHECKS SHOULD BE ENABLED FOR SOUNDNESS, BUT FAIL DUE TO INACCURACY
-	// // Check 3 for Latitude and Longitude
-	// ctx.AssertIsEqualOrULP(ctx.Mul(ctx.NewF32Constant(2), ctx.Mul(gammaLat, deltaLat)), betaLat)
-	// ctx.AssertIsEqualOrULP(ctx.Mul(ctx.NewF32Constant(2), ctx.Mul(gammaLng, deltaLng)), betaLng)
+	// Check 3 for Latitude and Longitude
+	ctx.AssertIsEqualOrULP(ctx.Mul(ctx.NewF64Constant(2), ctx.Mul(gammaLat, deltaLat)), betaLat)
+	ctx.AssertIsEqualOrULP(ctx.Mul(ctx.NewF64Constant(2), ctx.Mul(gammaLng, deltaLng)), betaLng)
 
 	// Calculate Cosine for Latitude and Longitude
 	cosLat := ctx.Sub(ctx.Mul(deltaLat, deltaLat), ctx.Mul(gammaLat, gammaLat))

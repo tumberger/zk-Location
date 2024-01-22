@@ -115,7 +115,8 @@ func (c *loc2Index32Circuit) Define(api frontend.API) error {
 	deltaLngSquared := ctx.Mul(deltaLng, deltaLng)
 	gammaLngSquared := ctx.Mul(gammaLng, gammaLng)
 	identityLng := ctx.Add(gammaLngSquared, deltaLngSquared)
-	ctx.AssertIsEqualOrULP(identityLat, identityLng)
+	ctx.AssertIsEqualOrULP(identityLat, ctx.NewF32Constant(1))
+	ctx.AssertIsEqualOrULP(identityLng, ctx.NewF32Constant(1))
 
 	// Check 2 for Latitude and Longitude
 	ctx.AssertIsEqualOrULP(ctx.Mul(alphaLat, deltaLat), gammaLat)
