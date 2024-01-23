@@ -351,3 +351,50 @@ func BenchmarkLoc2IndexProof(b *testing.B) {
 		}
 	}
 }
+
+func BenchmarkLoc2IndexProofMemory(b *testing.B) {
+
+	file, _ := os.Open("../data/f32/loc2index32.txt")
+	defer file.Close()
+
+	var circuits, assignments []loc2Index32Circuit
+
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		data := strings.Fields(scanner.Text())
+
+		lat, _ := new(big.Int).SetString(data[0], 16)
+		lng, _ := new(big.Int).SetString(data[1], 16)
+		res, _ := new(big.Int).SetString(data[2], 16)
+		i, _ := new(big.Int).SetString(data[3], 16)
+		j, _ := new(big.Int).SetString(data[4], 16)
+		k, _ := new(big.Int).SetString(data[5], 16)
+
+		fmt.Printf("lat: %f, lng: %f\n", math.Float32frombits(uint32(lat.Uint64())), math.Float32frombits(uint32(lng.Uint64())))
+		fmt.Printf("i: %d, j: %d, k: %d\n", i, j, k)
+
+		circuit := loc2Index32Circuit{Lat: 0, Lng: 0, Resolution: 0}
+		assignment := loc2Index32Circuit{Lat: lat, Lng: lng, Resolution: res, I: i, J: j, K: k}
+
+		// Append the created structs to the slices
+		circuits = append(circuits, circuit)
+		assignments = append(assignments, assignment)
+		break
+	}
+
+	if err := scanner.Err(); err != nil {
+		b.Fatalf("Error reading file: %v", err)
+	}
+
+	// Ensure that the number of circuits and assignments is the same
+	if len(circuits) != len(assignments) {
+		b.Fatalf("Mismatch in number of circuits and assignments")
+	}
+
+	for i := range circuits {
+		if err := util.BenchProofMemory(b, &circuits[i], &assignments[i]); err != nil {
+			b.Logf("Error on benchmarking proof for entry %d: %v", i, err)
+			continue
+		}
+	}
+}

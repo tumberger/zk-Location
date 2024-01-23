@@ -598,3 +598,53 @@ func BenchProofToFile(b *testing.B, circuit, assignment frontend.Circuit, resolu
 	}
 	return nil
 }
+
+func BenchProofMemory(b *testing.B, circuit, assignment frontend.Circuit) error {
+
+	cs, err := frontend.Compile(ecc.BN254.ScalarField(), r1cs.NewBuilder, circuit, frontend.WithCompressThreshold(compressThreshold))
+	if err != nil {
+		b.Errorf("Failed to compile: %v", err)
+		return err
+	}
+
+	fullWitness, err := frontend.NewWitness(assignment, ecc.BN254.ScalarField())
+	if err != nil {
+		b.Errorf("Failed Full Witness: %v", err)
+		return err
+	}
+
+	pk, vk, err := groth16.Setup(cs)
+	if err != nil {
+		b.Errorf("Failed in setup: %v", err)
+		return err
+	}
+
+	// // Open the file in write mode for pk
+	// var bufPK bytes.Buffer
+	// _, _ = pk.WriteTo(&bufPK)
+	// err = os.WriteFile("../benchmarks/pk.dat", bufPK.Bytes(), 0644)
+	// if err != nil {
+	// 	b.Errorf("Failed in writing prover key: %v", err)
+	// 	return err
+	// }
+
+	// // Open the file in write mode for vk
+	// var bufVK bytes.Buffer
+	// _, _ = vk.WriteTo(&bufVK)
+	// err = os.WriteFile("../benchmarks/vk.dat", bufVK.Bytes(), 0644)
+	// if err != nil {
+	// 	b.Errorf("Failed in writing verifier key key: %v", err)
+	// 	return err
+	// }
+
+	proof, err := groth16.Prove(cs, pk, fullWitness)
+	if err != nil {
+		b.Errorf("Failed in proving: %v", err)
+		return err
+	}
+
+	publicWitness, _ := fullWitness.Public()
+	groth16.Verify(proof, vk, publicWitness)
+
+	return nil
+}
