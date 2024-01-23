@@ -300,9 +300,40 @@ func setupLoc2IndexWrapper() ([]loc2Index32CircuitWrapper, []loc2Index32CircuitW
 }
 
 func BenchmarkLoc2IndexProof(b *testing.B) {
-	circuits, assignments, resolutions, indices := setupLoc2IndexWrapper()
 
-	// fmt.Println(indices)
+	file, _ := os.Open("../data/f32/loc2index32.txt")
+	defer file.Close()
+
+	var circuits, assignments []loc2Index32CircuitWrapper
+	var resolutions, indices []int64
+	resolutionCounts := make(map[int64]int64)
+
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		data := strings.Fields(scanner.Text())
+
+		lat, _ := new(big.Int).SetString(data[0], 16)
+		lng, _ := new(big.Int).SetString(data[1], 16)
+		res, _ := new(big.Int).SetString(data[2], 16)
+		i, _ := new(big.Int).SetString(data[3], 16)
+		j, _ := new(big.Int).SetString(data[4], 16)
+		k, _ := new(big.Int).SetString(data[5], 16)
+
+		fmt.Printf("lat: %f, lng: %f\n", math.Float32frombits(uint32(lat.Uint64())), math.Float32frombits(uint32(lng.Uint64())))
+		fmt.Printf("i: %d, j: %d, k: %d\n", i, j, k)
+
+		// Update the count for this resolution
+		resolutionCounts[res.Int64()]++
+
+		circuit := loc2Index32CircuitWrapper{Lat: 0, Lng: 0, Resolution: 0}
+		assignment := loc2Index32CircuitWrapper{Lat: lat, Lng: lng, Resolution: res, I: i, J: j, K: k}
+
+		// Append the created structs to the slices
+		circuits = append(circuits, circuit)
+		assignments = append(assignments, assignment)
+		resolutions = append(resolutions, res.Int64())
+		indices = append(indices, resolutionCounts[res.Int64()])
+	}
 
 	// Ensure that the number of circuits and assignments is the same
 	if len(circuits) != len(assignments) {
