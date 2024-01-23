@@ -335,12 +335,19 @@ func BenchmarkLoc2IndexProof(b *testing.B) {
 		indices = append(indices, resolutionCounts[res.Int64()])
 	}
 
+	if err := scanner.Err(); err != nil {
+		b.Fatalf("Error reading file: %v", err)
+	}
+
 	// Ensure that the number of circuits and assignments is the same
 	if len(circuits) != len(assignments) {
 		b.Fatalf("Mismatch in number of circuits and assignments")
 	}
 
 	for i := range circuits {
-		util.BenchProofToFile(b, &circuits[i], &assignments[i], resolutions[i], indices[i])
+		if err := util.BenchProofToFile(b, &circuits[i], &assignments[i], resolutions[i], indices[i]); err != nil {
+			b.Logf("Error on benchmarking proof for entry %d: %v", i, err)
+			continue
+		}
 	}
 }

@@ -517,23 +517,25 @@ func BenchProof(b *testing.B, circuit, assignment frontend.Circuit) {
 		groth16.Verify(proof, vk, publicWitness)
 	}
 }
-
-func BenchProofToFile(b *testing.B, circuit, assignment frontend.Circuit, resolution int64, index int64) {
+func BenchProofToFile(b *testing.B, circuit, assignment frontend.Circuit, resolution int64, index int64) error {
 	// Open a file to save benchmark results
-	file, err := os.OpenFile("../benchmarks/bench_ZKLP32.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	file, err := os.OpenFile("../benchmarks/bench_ZKLP32_G16_BN254.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
-		b.Fatalf("Failed to open file: %v", err)
+		b.Errorf("Failed to open file: %v", err)
+		return err
 	}
 	defer file.Close()
 
 	info, err := file.Stat()
 	if err != nil {
-		b.Fatalf("Failed to get file stats: %v", err)
+		b.Errorf("Failed to get file stats: %v", err)
+		return err
 	}
 	if info.Size() == 0 {
 		_, err = fmt.Fprintln(file, "Resolution, Index, NbConstraints, CompilationTime, SetupTime, ProverTime, VerifierTime")
 		if err != nil {
-			b.Fatalf("Failed to write headers to file: %v", err)
+			b.Errorf("Failed to write headers to file: %v", err)
+			return err
 		}
 	}
 
@@ -542,14 +544,14 @@ func BenchProofToFile(b *testing.B, circuit, assignment frontend.Circuit, resolu
 
 	// Benchmarking loop
 	b.ResetTimer()
-	b.N = 20
+	b.N = 1
 	for i := 0; i < b.N; i++ {
-
 		// Compilation step with time measurement
 		start := time.Now().UnixMicro()
 		cs, err := frontend.Compile(ecc.BN254.ScalarField(), r1cs.NewBuilder, circuit, frontend.WithCompressThreshold(compressThreshold))
 		if err != nil {
-			b.Fatalf("Failed to compile: %v", err)
+			b.Errorf("Failed to compile: %v", err)
+			return err
 		}
 		compilationTime = time.Now().UnixMicro() - start
 
@@ -562,7 +564,8 @@ func BenchProofToFile(b *testing.B, circuit, assignment frontend.Circuit, resolu
 		start = time.Now().UnixMicro()
 		pk, vk, err := groth16.Setup(cs)
 		if err != nil {
-			b.Fatalf("Failed in setup: %v", err)
+			b.Errorf("Failed in setup: %v", err)
+			return err
 		}
 		setupTime = time.Now().UnixMicro() - start
 
@@ -572,7 +575,8 @@ func BenchProofToFile(b *testing.B, circuit, assignment frontend.Circuit, resolu
 		fmt.Println("groth16 proving", id)
 		proof, err := groth16.Prove(cs, pk, fullWitness)
 		if err != nil {
-			b.Fatalf("Failed in proving: %v", err)
+			b.Errorf("Failed in proving: %v", err)
+			return err
 		}
 		proverTime = time.Now().UnixMicro() - start
 
@@ -587,7 +591,9 @@ func BenchProofToFile(b *testing.B, circuit, assignment frontend.Circuit, resolu
 			resolution, index, cs.GetNbConstraints(),
 			compilationTime, setupTime, proverTime, verifierTime)
 		if err != nil {
-			b.Fatalf("Failed to write data to file: %v", err)
+			b.Errorf("Failed to write data to file: %v", err)
+			return err
 		}
 	}
+	return nil
 }
