@@ -8,6 +8,7 @@ require (
 )
 
 require (
+	github.com/LucaTheHacker/go-haversine v0.0.0-20220213075817-0d811fb84a1a // indirect
 	github.com/bits-and-blooms/bitset v1.8.0 // indirect
 	github.com/blang/semver/v4 v4.0.0 // indirect
 	github.com/consensys/bavard v0.1.13 // indirect
