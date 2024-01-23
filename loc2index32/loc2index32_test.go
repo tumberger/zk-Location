@@ -304,7 +304,7 @@ func BenchmarkLoc2IndexProof(b *testing.B) {
 	file, _ := os.Open("../data/f32/loc2index32.txt")
 	defer file.Close()
 
-	var circuits, assignments []loc2Index32CircuitWrapper
+	var circuits, assignments []loc2Index32Circuit
 	var resolutions, indices []int64
 	resolutionCounts := make(map[int64]int64)
 
@@ -325,8 +325,8 @@ func BenchmarkLoc2IndexProof(b *testing.B) {
 		// Update the count for this resolution
 		resolutionCounts[res.Int64()]++
 
-		circuit := loc2Index32CircuitWrapper{Lat: 0, Lng: 0, Resolution: 0}
-		assignment := loc2Index32CircuitWrapper{Lat: lat, Lng: lng, Resolution: res, I: i, J: j, K: k}
+		circuit := loc2Index32Circuit{Lat: 0, Lng: 0, Resolution: 0}
+		assignment := loc2Index32Circuit{Lat: lat, Lng: lng, Resolution: res, I: i, J: j, K: k}
 
 		// Append the created structs to the slices
 		circuits = append(circuits, circuit)
