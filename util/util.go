@@ -517,6 +517,7 @@ func BenchProof(b *testing.B, circuit, assignment frontend.Circuit) {
 		groth16.Verify(proof, vk, publicWitness)
 	}
 }
+
 func BenchProofToFile(b *testing.B, circuit, assignment frontend.Circuit, resolution int64, index int64) error {
 	// Open a file to save benchmark results
 	file, err := os.OpenFile("../benchmarks/bench_ZKLP32_G16_BN254.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
@@ -544,7 +545,7 @@ func BenchProofToFile(b *testing.B, circuit, assignment frontend.Circuit, resolu
 
 	// Benchmarking loop
 	b.ResetTimer()
-	b.N = 1
+	b.N = 20
 	for i := 0; i < b.N; i++ {
 		// Compilation step with time measurement
 		start := time.Now().UnixMicro()
