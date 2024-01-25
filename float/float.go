@@ -546,8 +546,8 @@ func (f *Context) Add(x, y FloatVar) FloatVar {
 		// Rule of addition:
 		// |       | +Inf | -Inf | NaN | other |
 		// |-------|------|------|-----|-------|
-		// | +Inf  | +Inf |   0  | NaN | +Inf  |
-		// | -Inf  |   0  | -Inf | NaN | -Inf  |
+		// | +Inf  | +Inf |  NaN | NaN | +Inf  |
+		// | -Inf  |  NaN | -Inf | NaN | -Inf  |
 		// | NaN   |  NaN |  NaN | NaN |  NaN  |
 		// | other | +Inf | -Inf | NaN |       |
 		Mantissa: f.Api.Select(
