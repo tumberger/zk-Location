@@ -67,10 +67,12 @@ func (f *IntGadget) LookupFinalizeConstraints() uint {
 
 func (f *IntGadget) AssertBitLength(v frontend.Variable, bit_length uint) {
 	f.rangechecker.Check(v, int(bit_length))
-	f.num_range_queries++
-	f.num_range_chunks += (bit_length + f.range_size - 1) / f.range_size
-	if bit_length % f.range_size != 0 {
-		f.num_range_chunks++
+	if f.range_size > 0 {
+		f.num_range_queries++
+		f.num_range_chunks += (bit_length + f.range_size - 1) / f.range_size
+		if bit_length % f.range_size != 0 {
+			f.num_range_chunks++
+		}
 	}
 }
 
