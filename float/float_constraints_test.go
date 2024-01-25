@@ -74,14 +74,9 @@ func (c *F32Circuit) Define(api frontend.API) error {
 }
 
 var (
-    _, b, _, _ = runtime.Caller(0)
-    basepath   = filepath.Dir(b)
+	_, b, _, _ = runtime.Caller(0)
+	basepath   = filepath.Dir(b)
 )
-
-
-// Note that although we can measure the number of constraints for multiple operations,
-// the result returned by gnark might be greater than the actual number when `CompressThreshold`
-// is not large enough.
 
 func TestF32CircuitConstraints(t *testing.T) {
 	ops := []string{"Init", "Add", "Sub", "Mul", "Div", "Sqrt", "Cmp"}
@@ -113,13 +108,19 @@ func TestF32CircuitConstraints(t *testing.T) {
 				} else {
 					result_all.WriteString("\n")
 				}
+
+				// Note that although we can measure the number of constraints for n operations,
+				// the result returned by gnark might be greater than the actual number when `CompressThreshold`
+				// is not large enough.
+				// Instead, we directly compute the number of constraints for n operations, which is guaranteed
+				// to be accurate.
 				var result_op strings.Builder
 				result_op.WriteString("#Operations, #Constraints (Total), #Constraints (Amortized)\n")
 				for j := 0; j < 16; j++ {
 					n := uint(1 << j)
 					result_op.WriteString(fmt.Sprint(n) + ", ")
-					result_op.WriteString(fmt.Sprint(n*(c.native + c.lookup_query) + c.lookup_global) + ", ")
-					result_op.WriteString(fmt.Sprint((n*(c.native + c.lookup_query) + c.lookup_global) / n) + "\n")
+					result_op.WriteString(fmt.Sprint(n*(c.native+c.lookup_query)+c.lookup_global) + ", ")
+					result_op.WriteString(fmt.Sprint((n*(c.native+c.lookup_query)+c.lookup_global)/n) + "\n")
 				}
 				err := os.WriteFile(filepath.Join(basepath, fmt.Sprintf("../benchmarks/float/%s/constraints_%s (T_RC = %d).csv", strings.ToLower(param.name), strings.ToLower(op), size)), []byte(result_op.String()), 0644)
 				if err != nil {
@@ -131,6 +132,6 @@ func TestF32CircuitConstraints(t *testing.T) {
 
 	err := os.WriteFile(filepath.Join(basepath, "../benchmarks/float/constraints.csv"), []byte(result_all.String()), 0644)
 	if err != nil {
-        t.Fatal(err)
-    }
+		t.Fatal(err)
+	}
 }
