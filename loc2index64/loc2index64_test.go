@@ -70,7 +70,7 @@ func (circuit *loc2Index64Wrapper) Define(api frontend.API) error {
 	api.AssertIsEqual(circuit.LatA, 0)
 	api.AssertIsEqual(circuit.LngA, 0)
 
-	f := float.NewContext(api, util.IEEE64ExponentBitwidth, util.IEEE64Precision)
+	f := float.NewContext(api, 0, util.IEEE64ExponentBitwidth, util.IEEE64Precision)
 	lat := float.FloatVar{
 		Sign:       circuit.LatS,
 		Exponent:   circuit.LatE,
@@ -203,7 +203,7 @@ type loc2Index64Circuit struct {
 
 func (c *loc2Index64Circuit) Define(api frontend.API) error {
 
-	ctx := float.NewContext(api, util.IEEE64ExponentBitwidth, util.IEEE64Precision)
+	ctx := float.NewContext(api, 0, util.IEEE64ExponentBitwidth, util.IEEE64Precision)
 	lat := ctx.NewFloat(c.Lat)
 	lng := ctx.NewFloat(c.Lng)
 

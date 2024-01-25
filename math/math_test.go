@@ -23,7 +23,7 @@ type PolynomialEvalCircuit struct {
 }
 
 func (c *PolynomialEvalCircuit) Define(api frontend.API) error {
-	ctx := float.NewContext(api, 11, 52) // F64
+	ctx := float.NewContext(api, 0, 11, 52) // F64
 
 	// Create a new float variable from the input
 	x := ctx.NewFloat(c.X)
@@ -91,7 +91,7 @@ type PolynomialEvalCircuitDegTen struct {
 }
 
 func (c *PolynomialEvalCircuitDegTen) Define(api frontend.API) error {
-	ctx := float.NewContext(api, 11, 52) // F64
+	ctx := float.NewContext(api, 0, 11, 52) // F64
 
 	// Create a new float variable from the input
 	x := ctx.NewFloat(c.X)
@@ -177,7 +177,7 @@ type CircuitATanRemez64 struct {
 
 func (c *CircuitATanRemez64) Define(api frontend.API) error {
 
-	ctx := float.NewContext(api, 11, 52)
+	ctx := float.NewContext(api, 0, 11, 52)
 
 	x := ctx.NewFloat(c.X)
 	z := ctx.NewFloat(c.Z)
@@ -200,7 +200,7 @@ type CircuitATanRemez32ULP struct {
 
 func (c *CircuitATanRemez32ULP) Define(api frontend.API) error {
 
-	ctx := float.NewContext(api, 8, 23)
+	ctx := float.NewContext(api, 0, 8, 23)
 
 	x := ctx.NewFloat(c.X)
 	z := ctx.NewFloat(c.Z)
@@ -226,7 +226,7 @@ type CircuitATanRemez64ULP struct {
 
 func (c *CircuitATanRemez64ULP) Define(api frontend.API) error {
 
-	ctx := float.NewContext(api, 11, 52)
+	ctx := float.NewContext(api, 0, 11, 52)
 
 	x := ctx.NewFloat(c.X)
 	z := ctx.NewFloat(c.Z)
@@ -249,7 +249,7 @@ type SinCircuit struct {
 }
 
 func (c *SinCircuit) Define(api frontend.API) error {
-	ctx := float.NewContext(api, 11, 52)
+	ctx := float.NewContext(api, 0, 11, 52)
 
 	x := ctx.NewFloat(c.X)
 	z := ctx.NewFloat(c.Z)
@@ -272,7 +272,7 @@ type CircuitSin64ULP struct {
 
 func (c *CircuitSin64ULP) Define(api frontend.API) error {
 
-	ctx := float.NewContext(api, 11, 52)
+	ctx := float.NewContext(api, 0, 11, 52)
 
 	x := ctx.NewFloat(c.X)
 	z := ctx.NewFloat(c.Z)

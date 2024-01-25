@@ -13,7 +13,7 @@ import (
 
 type Context struct {
 	Api          frontend.API
-	Gadget       gadget.IntGadget
+	Gadget       *gadget.IntGadget
 	E            uint // The number of bits in the encoded exponent
 	M            uint // The number of bits in the encoded mantissa
 	E_MAX        *big.Int
@@ -47,13 +47,13 @@ type FloatVar struct {
 	IsAbnormal frontend.Variable
 }
 
-func NewContext(api frontend.API, E, M uint) Context {
+func NewContext(api frontend.API, range_size uint, E, M uint) Context {
 	E_MAX := new(big.Int).Lsh(big.NewInt(1), E-1)
 	E_NORMAL_MIN := new(big.Int).Sub(big.NewInt(2), E_MAX)
 	E_MIN := new(big.Int).Sub(E_NORMAL_MIN, big.NewInt(int64(M+1)))
 	return Context{
 		Api:          api,
-		Gadget:       gadget.New(api, M+E+1),
+		Gadget:       gadget.New(api, range_size, M+E+1),
 		E:            E,
 		M:            M,
 		E_MAX:        E_MAX,

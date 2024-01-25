@@ -2,10 +2,10 @@ package gadget
 
 import (
 	"gnark-float/hint"
-	"gnark-float/logderivarg"
 	"math/big"
 
 	"github.com/consensys/gnark/frontend"
+	"github.com/consensys/gnark/std/logderivarg"
 	"github.com/consensys/gnark/std/rangecheck"
 )
 
@@ -36,19 +36,42 @@ func (t *PowersOfTwo) commit(api frontend.API) error {
 }
 
 type IntGadget struct {
-	api          frontend.API
-	rangechecker frontend.Rangechecker
-	pow2         *PowersOfTwo
+	api               frontend.API
+	rangechecker      frontend.Rangechecker
+	pow2              *PowersOfTwo
+	range_size        uint
+	pow2_size         uint
+	num_range_queries uint
+	num_range_chunks  uint
+	num_pow2_queries  uint
 }
 
-func New(api frontend.API, pow2_size uint) IntGadget {
-	rangechecker := rangecheck.New(api)
+func New(api frontend.API, range_size uint, pow2_size uint) *IntGadget {
+	rangechecker := rangecheck.NewSized(api, int(range_size))
 	pow2 := NewPowersOfTwoTable(api, pow2_size)
-	return IntGadget{api, rangechecker, pow2}
+	return &IntGadget{api, rangechecker, pow2, range_size, pow2_size, 0, 0, 0}
+}
+
+func (f *IntGadget) LookupEntryConstraints() uint {
+	return (1 << f.range_size) + f.pow2_size
+}
+
+func (f *IntGadget) LookupQueryConstraints() uint {
+	return f.num_range_queries + f.num_pow2_queries + f.num_range_chunks
+}
+
+func (f *IntGadget) LookupFinalizeConstraints() uint {
+	// 1 for rangecheck, 1 for pow2, 1 for multicommit (https://github.com/winderica/gnark/blob/17abec78e9610ecfe73d2dbf471550ac2c509785/std/multicommit/nativecommit.go#L100)
+	return 3
 }
 
 func (f *IntGadget) AssertBitLength(v frontend.Variable, bit_length uint) {
 	f.rangechecker.Check(v, int(bit_length))
+	f.num_range_queries++
+	f.num_range_chunks += (bit_length + f.range_size - 1) / f.range_size
+	if bit_length % f.range_size != 0 {
+		f.num_range_chunks++
+	}
 }
 
 func (f *IntGadget) Abs(v frontend.Variable, length uint) (frontend.Variable, frontend.Variable) {
@@ -105,5 +128,6 @@ func (f *IntGadget) QueryPowerOf2(exponent frontend.Variable) frontend.Variable 
 		f.api.Mul(exponent, new(big.Int).Lsh(big.NewInt(1), uint(len(f.pow2.entries)))),
 		result,
 	)})
+	f.num_pow2_queries++
 	return result
 }

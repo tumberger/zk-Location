@@ -36,7 +36,7 @@ type loc2Index32Circuit struct {
 
 func (c *loc2Index32Circuit) Define(api frontend.API) error {
 
-	ctx := float.NewContext(api, util.IEEE32ExponentBitwidth, util.IEEE32Precision)
+	ctx := float.NewContext(api, 0, util.IEEE32ExponentBitwidth, util.IEEE32Precision)
 	lat := ctx.NewFloat(c.Lat)
 	lng := ctx.NewFloat(c.Lng)
 
@@ -212,7 +212,7 @@ type loc2Index32CircuitWrapper struct {
 
 func (c *loc2Index32CircuitWrapper) Define(api frontend.API) error {
 
-	ctx := float.NewContext(api, util.IEEE32ExponentBitwidth, util.IEEE32Precision)
+	ctx := float.NewContext(api, 0, util.IEEE32ExponentBitwidth, util.IEEE32Precision)
 	lat := ctx.NewFloat(c.Lat)
 	lng := ctx.NewFloat(c.Lng)
 

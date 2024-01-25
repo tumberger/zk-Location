@@ -24,7 +24,7 @@ type F32UnaryCircuit struct {
 }
 
 func (c *F32UnaryCircuit) Define(api frontend.API) error {
-	ctx := NewContext(api, 8, 23)
+	ctx := NewContext(api, 0, 8, 23)
 	x := ctx.NewFloat(c.X)
 	y := ctx.NewFloat(c.Y)
 	ctx.AssertIsEqual(reflect.ValueOf(&ctx).MethodByName(c.op).Call([]reflect.Value{reflect.ValueOf(x)})[0].Interface().(FloatVar), y)
@@ -39,7 +39,7 @@ type F32BinaryCircuit struct {
 }
 
 func (c *F32BinaryCircuit) Define(api frontend.API) error {
-	ctx := NewContext(api, 8, 23)
+	ctx := NewContext(api, 0, 8, 23)
 	x := ctx.NewFloat(c.X)
 	y := ctx.NewFloat(c.Y)
 	z := ctx.NewFloat(c.Z)
@@ -55,7 +55,7 @@ type F32ComparisonCircuit struct {
 }
 
 func (c *F32ComparisonCircuit) Define(api frontend.API) error {
-	ctx := NewContext(api, 8, 23)
+	ctx := NewContext(api, 0, 8, 23)
 	x := ctx.NewFloat(c.X)
 	y := ctx.NewFloat(c.Y)
 	z := c.Z
@@ -70,7 +70,7 @@ type F32AllocationCircuit struct {
 }
 
 func (c *F32AllocationCircuit) Define(api frontend.API) error {
-	ctx := NewContext(api, 8, 23)
+	ctx := NewContext(api, 0, 8, 23)
 	x := ctx.NewFloat(c.X)
 	ctx.AssertIsEqual(x, ctx.NewConstant(c.y))
 	return nil
@@ -83,7 +83,7 @@ type F32ConversionCircuit struct {
 }
 
 func (c *F32ConversionCircuit) Define(api frontend.API) error {
-	ctx := NewContext(api, 8, 23)
+	ctx := NewContext(api, 0, 8, 23)
 	x := ctx.NewFloat(c.X)
 	x = reflect.ValueOf(&ctx).MethodByName(c.op).Call([]reflect.Value{reflect.ValueOf(x)})[0].Interface().(FloatVar)
 	api.AssertIsEqual(ctx.ToInt(x), c.Y)
@@ -97,7 +97,7 @@ type F64UnaryCircuit struct {
 }
 
 func (c *F64UnaryCircuit) Define(api frontend.API) error {
-	ctx := NewContext(api, 11, 52)
+	ctx := NewContext(api, 0, 11, 52)
 	x := ctx.NewFloat(c.X)
 	y := ctx.NewFloat(c.Y)
 	ctx.AssertIsEqual(reflect.ValueOf(&ctx).MethodByName(c.op).Call([]reflect.Value{reflect.ValueOf(x)})[0].Interface().(FloatVar), y)
@@ -112,7 +112,7 @@ type F64BinaryCircuit struct {
 }
 
 func (c *F64BinaryCircuit) Define(api frontend.API) error {
-	ctx := NewContext(api, 11, 52)
+	ctx := NewContext(api, 0, 11, 52)
 	x := ctx.NewFloat(c.X)
 	y := ctx.NewFloat(c.Y)
 	z := ctx.NewFloat(c.Z)
@@ -128,7 +128,7 @@ type F64ComparisonCircuit struct {
 }
 
 func (c *F64ComparisonCircuit) Define(api frontend.API) error {
-	ctx := NewContext(api, 11, 52)
+	ctx := NewContext(api, 0, 11, 52)
 	x := ctx.NewFloat(c.X)
 	y := ctx.NewFloat(c.Y)
 	z := c.Z
@@ -143,7 +143,7 @@ type F64AllocationCircuit struct {
 }
 
 func (c *F64AllocationCircuit) Define(api frontend.API) error {
-	ctx := NewContext(api, 11, 52)
+	ctx := NewContext(api, 0, 11, 52)
 	x := ctx.NewFloat(c.X)
 	ctx.AssertIsEqual(x, ctx.NewConstant(c.y))
 	return nil
@@ -156,7 +156,7 @@ type F64ConversionCircuit struct {
 }
 
 func (c *F64ConversionCircuit) Define(api frontend.API) error {
-	ctx := NewContext(api, 11, 52)
+	ctx := NewContext(api, 0, 11, 52)
 	x := ctx.NewFloat(c.X)
 	x = reflect.ValueOf(&ctx).MethodByName(c.op).Call([]reflect.Value{reflect.ValueOf(x)})[0].Interface().(FloatVar)
 	api.AssertIsEqual(ctx.ToInt(x), c.Y)
