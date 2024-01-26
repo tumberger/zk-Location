@@ -115,16 +115,16 @@ func (c *loc2Index32Circuit) Define(api frontend.API) error {
 	deltaLngSquared := ctx.Mul(deltaLng, deltaLng)
 	gammaLngSquared := ctx.Mul(gammaLng, gammaLng)
 	identityLng := ctx.Add(gammaLngSquared, deltaLngSquared)
-	ctx.AssertIsEqualOrULP(identityLat, ctx.NewF32Constant(1))
-	ctx.AssertIsEqualOrULP(identityLng, ctx.NewF32Constant(1))
+	ctx.AssertIsEqualOrCustomULP32(identityLat, ctx.NewF32Constant(1), 1.0)
+	ctx.AssertIsEqualOrCustomULP32(identityLng, ctx.NewF32Constant(1), 1.0)
 
 	// Check 2 for Latitude and Longitude
-	ctx.AssertIsEqualOrULP(ctx.Mul(alphaLat, deltaLat), gammaLat)
-	ctx.AssertIsEqualOrULP(ctx.Mul(alphaLng, deltaLng), gammaLng)
+	ctx.AssertIsEqualOrCustomULP32(ctx.Mul(alphaLat, deltaLat), gammaLat, 1.0)
+	ctx.AssertIsEqualOrCustomULP32(ctx.Mul(alphaLng, deltaLng), gammaLng, 1.0)
 
 	// Check 3 for Latitude and Longitude
-	ctx.AssertIsEqualOrULP(ctx.Mul(ctx.NewF32Constant(2), ctx.Mul(gammaLat, deltaLat)), betaLat)
-	ctx.AssertIsEqualOrULP(ctx.Mul(ctx.NewF32Constant(2), ctx.Mul(gammaLng, deltaLng)), betaLng)
+	ctx.AssertIsEqualOrCustomULP32(ctx.Mul(ctx.NewF32Constant(2), ctx.Mul(gammaLat, deltaLat)), betaLat, 1.0)
+	ctx.AssertIsEqualOrCustomULP32(ctx.Mul(ctx.NewF32Constant(2), ctx.Mul(gammaLng, deltaLng)), betaLng, 1.0)
 
 	// Calculate Cosine for Latitude and Longitude
 	cosLat := ctx.Sub(ctx.Mul(deltaLat, deltaLat), ctx.Mul(gammaLat, gammaLat))

@@ -325,7 +325,7 @@ func (f *Context) AssertIsEqual(x, y FloatVar) {
 	f.Api.AssertIsEqual(x.IsAbnormal, y.IsAbnormal)
 }
 
-// Enforce the equality between two numbers, relaxed to checking ULP <1
+// Enforce the equality between two numbers, relaxed to checking ULP <1 (optimized)
 func (f *Context) AssertIsEqualOrULP(x, y FloatVar) {
 	is_nan := f.Api.Or(
 		f.Api.And(x.IsAbnormal, f.Api.IsZero(x.Mantissa)),
@@ -369,6 +369,68 @@ func (f *Context) AssertIsEqualOrULP(x, y FloatVar) {
 	)
 
 	cmp := f.Api.Or(cmpOne, f.Api.Or(cmpTwo, cmpThree))
+
+	condOne := f.Gadget.IsEq(cmp, 1)
+
+	equalityOne := f.Gadget.IsEq(f.Api.Sub(x.Exponent, y.Exponent), 0)
+	equalityTwo := f.Gadget.IsEq(x.Mantissa, y.Mantissa)
+	equalityThree := f.Gadget.IsEq(x.IsAbnormal, y.IsAbnormal)
+
+	condTwo := f.Api.And(equalityOne, f.Api.And(equalityTwo, equalityThree))
+
+	f.Api.AssertIsEqual(f.Api.Or(condOne, condTwo), 1)
+}
+
+// Enforce the equality between two numbers, relaxed to checking ULP <X
+func (f *Context) AssertIsEqualOrCustomULP32(x, y FloatVar, ulp float32) {
+	is_nan := f.Api.Or(
+		f.Api.And(x.IsAbnormal, f.Api.IsZero(x.Mantissa)),
+		f.Api.And(y.IsAbnormal, f.Api.IsZero(y.Mantissa)),
+	)
+	f.Api.AssertIsEqual(f.Api.Select(
+		is_nan,
+		0,
+		x.Sign,
+	), f.Api.Select(
+		is_nan,
+		0,
+		y.Sign,
+	))
+
+	ulpFloat := f.NewF32Constant(ulp)
+
+	cmp := f.IsLe(f.Abs(f.Sub(x, y)), ulpFloat)
+
+	condOne := f.Gadget.IsEq(cmp, 1)
+
+	equalityOne := f.Gadget.IsEq(f.Api.Sub(x.Exponent, y.Exponent), 0)
+	equalityTwo := f.Gadget.IsEq(x.Mantissa, y.Mantissa)
+	equalityThree := f.Gadget.IsEq(x.IsAbnormal, y.IsAbnormal)
+
+	condTwo := f.Api.And(equalityOne, f.Api.And(equalityTwo, equalityThree))
+
+	f.Api.AssertIsEqual(f.Api.Or(condOne, condTwo), 1)
+}
+
+// Enforce the equality between two numbers, relaxed to checking ULP <X
+func (f *Context) AssertIsEqualOrCustomULP64(x, y FloatVar, ulp float64) {
+	is_nan := f.Api.Or(
+		f.Api.And(x.IsAbnormal, f.Api.IsZero(x.Mantissa)),
+		f.Api.And(y.IsAbnormal, f.Api.IsZero(y.Mantissa)),
+	)
+	f.Api.AssertIsEqual(f.Api.Select(
+		is_nan,
+		0,
+		x.Sign,
+	), f.Api.Select(
+		is_nan,
+		0,
+		y.Sign,
+	))
+
+	ulpFloat := f.NewF64Constant(ulp)
+
+	cmp := f.IsLe(f.Abs(f.Sub(x, y)), ulpFloat)
 
 	condOne := f.Gadget.IsEq(cmp, 1)
 
