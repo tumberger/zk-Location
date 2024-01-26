@@ -95,7 +95,7 @@ def generate_points(resolution):
         target_lat_rad = np.radians(target_lat)
         target_lng_rad = np.radians(target_lng)
 
-        for i in range(1, 10):
+        for i in range(2, 11):
             factor = np.log(i) / np.log(20)
             gen_lat_rad = center_lat_rad + (target_lat_rad - center_lat_rad) * factor
             gen_lng_rad = center_lng_rad + (target_lng_rad - center_lng_rad) * factor

@@ -47,9 +47,9 @@ latFloat: 0.691901, lngFloat: 0.574962
 === RUN   TestLoc2Index32/bn254#07
 === RUN   TestLoc2Index32/bn254#07/groth16
 === RUN   TestLoc2Index32/bn254#07/groth16/valid_witness
-lat: 0.721740, lng: 0.599830
-i: 2, j: 0, k: 2
-latFloat: 0.721740, lngFloat: 0.599830
+lat: 0.691902, lng: 0.565529
+i: 1, j: 0, k: 1
+latFloat: 0.691902, lngFloat: 0.565529
 === RUN   TestLoc2Index32/bn254#08
 === RUN   TestLoc2Index32/bn254#08/groth16
 === RUN   TestLoc2Index32/bn254#08/groth16/valid_witness
@@ -101,9 +101,9 @@ latFloat: 0.757009, lngFloat: 0.536072
 === RUN   TestLoc2Index32/bn254#16
 === RUN   TestLoc2Index32/bn254#16/groth16
 === RUN   TestLoc2Index32/bn254#16/groth16/valid_witness
-lat: 0.721740, lng: 0.599830
-i: 6, j: 0, k: 4
-latFloat: 0.721740, lngFloat: 0.599830
+lat: 0.758700, lng: 0.533015
+i: 2, j: 0, k: 2
+latFloat: 0.758700, lngFloat: 0.533015
 === RUN   TestLoc2Index32/bn254#17
 === RUN   TestLoc2Index32/bn254#17/groth16
 === RUN   TestLoc2Index32/bn254#17/groth16/valid_witness
@@ -155,9 +155,9 @@ latFloat: 0.740149, lngFloat: 0.583500
 === RUN   TestLoc2Index32/bn254#25
 === RUN   TestLoc2Index32/bn254#25/groth16
 === RUN   TestLoc2Index32/bn254#25/groth16/valid_witness
-lat: 0.706731, lng: 0.584111
-i: 13, j: 0, k: 13
-latFloat: 0.706731, lngFloat: 0.584111
+lat: 0.741032, lng: 0.582717
+i: 6, j: 0, k: 4
+latFloat: 0.741032, lngFloat: 0.582717
 === RUN   TestLoc2Index32/bn254#26
 === RUN   TestLoc2Index32/bn254#26/groth16
 === RUN   TestLoc2Index32/bn254#26/groth16/valid_witness
@@ -209,9 +209,9 @@ latFloat: 0.711906, lngFloat: 0.575325
 === RUN   TestLoc2Index32/bn254#34
 === RUN   TestLoc2Index32/bn254#34/groth16
 === RUN   TestLoc2Index32/bn254#34/groth16/valid_witness
-lat: 0.710190, lng: 0.575313
-i: 39, j: 0, k: 25
-latFloat: 0.710190, lngFloat: 0.575313
+lat: 0.712154, lng: 0.574903
+i: 13, j: 0, k: 13
+latFloat: 0.712154, lngFloat: 0.574903
 === RUN   TestLoc2Index32/bn254#35
 === RUN   TestLoc2Index32/bn254#35/groth16
 === RUN   TestLoc2Index32/bn254#35/groth16/valid_witness
@@ -263,9 +263,9 @@ latFloat: 0.712828, lngFloat: 0.572980
 === RUN   TestLoc2Index32/bn254#43
 === RUN   TestLoc2Index32/bn254#43/groth16
 === RUN   TestLoc2Index32/bn254#43/groth16/valid_witness
-lat: 0.710190, lng: 0.575313
-i: 92, j: 0, k: 89
-latFloat: 0.710190, lngFloat: 0.575313
+lat: 0.712954, lng: 0.572868
+i: 39, j: 0, k: 25
+latFloat: 0.712954, lngFloat: 0.572868
 === RUN   TestLoc2Index32/bn254#44
 === RUN   TestLoc2Index32/bn254#44/groth16
 === RUN   TestLoc2Index32/bn254#44/groth16/valid_witness
@@ -317,9 +317,9 @@ latFloat: 0.710927, lngFloat: 0.574054
 === RUN   TestLoc2Index32/bn254#52
 === RUN   TestLoc2Index32/bn254#52/groth16
 === RUN   TestLoc2Index32/bn254#52/groth16/valid_witness
-lat: 0.709698, lng: 0.576573
-i: 273, j: 0, k: 176
-latFloat: 0.709698, lngFloat: 0.576573
+lat: 0.710962, lng: 0.573994
+i: 92, j: 0, k: 89
+latFloat: 0.710962, lngFloat: 0.573994
 === RUN   TestLoc2Index32/bn254#53
 === RUN   TestLoc2Index32/bn254#53/groth16
 === RUN   TestLoc2Index32/bn254#53/groth16/valid_witness
@@ -371,9 +371,9 @@ latFloat: 0.710075, lngFloat: 0.576241
 === RUN   TestLoc2Index32/bn254#61
 === RUN   TestLoc2Index32/bn254#61/groth16
 === RUN   TestLoc2Index32/bn254#61/groth16/valid_witness
-lat: 0.710008, lng: 0.576891
-i: 644, j: 0, k: 626
-latFloat: 0.710008, lngFloat: 0.576891
+lat: 0.710093, lng: 0.576225
+i: 273, j: 0, k: 176
+latFloat: 0.710093, lngFloat: 0.576225
 === RUN   TestLoc2Index32/bn254#62
 === RUN   TestLoc2Index32/bn254#62/groth16
 === RUN   TestLoc2Index32/bn254#62/groth16/valid_witness
@@ -425,9 +425,9 @@ latFloat: 0.710113, lngFloat: 0.576712
 === RUN   TestLoc2Index32/bn254#70
 === RUN   TestLoc2Index32/bn254#70/groth16
 === RUN   TestLoc2Index32/bn254#70/groth16/valid_witness
-lat: 0.710228, lng: 0.576697
-i: 1915, j: 0, k: 1233
-latFloat: 0.710228, lngFloat: 0.576697
+lat: 0.710118, lng: 0.576703
+i: 644, j: 0, k: 626
+latFloat: 0.710118, lngFloat: 0.576703
 === RUN   TestLoc2Index32/bn254#71
 === RUN   TestLoc2Index32/bn254#71/groth16
 === RUN   TestLoc2Index32/bn254#71/groth16/valid_witness
@@ -479,9 +479,9 @@ latFloat: 0.710282, lngFloat: 0.576650
 === RUN   TestLoc2Index32/bn254#79
 === RUN   TestLoc2Index32/bn254#79/groth16
 === RUN   TestLoc2Index32/bn254#79/groth16/valid_witness
-lat: 0.710175, lng: 0.576727
-i: 4511, j: 0, k: 4381
-latFloat: 0.710175, lngFloat: 0.576727
+lat: 0.710285, lng: 0.576648
+i: 1915, j: 0, k: 1233
+latFloat: 0.710285, lngFloat: 0.576648
 === RUN   TestLoc2Index32/bn254#80
 === RUN   TestLoc2Index32/bn254#80/groth16
 === RUN   TestLoc2Index32/bn254#80/groth16/valid_witness
@@ -533,9 +533,9 @@ latFloat: 0.710190, lngFloat: 0.576701
 === RUN   TestLoc2Index32/bn254#88
 === RUN   TestLoc2Index32/bn254#88/groth16
 === RUN   TestLoc2Index32/bn254#88/groth16/valid_witness
-lat: 0.710154, lng: 0.576729
-i: 13402, j: 0, k: 8632
-latFloat: 0.710154, lngFloat: 0.576729
+lat: 0.710191, lng: 0.576700
+i: 4511, j: 0, k: 4381
+latFloat: 0.710191, lngFloat: 0.576700
 === RUN   TestLoc2Index32/bn254#89
 === RUN   TestLoc2Index32/bn254#89/groth16
 === RUN   TestLoc2Index32/bn254#89/groth16/valid_witness
@@ -587,9 +587,9 @@ latFloat: 0.710162, lngFloat: 0.576722
 === RUN   TestLoc2Index32/bn254#97
 === RUN   TestLoc2Index32/bn254#97/groth16
 === RUN   TestLoc2Index32/bn254#97/groth16/valid_witness
-lat: 0.710160, lng: 0.576735
-i: 31575, j: 0, k: 30667
-latFloat: 0.710160, lngFloat: 0.576735
+lat: 0.710162, lng: 0.576722
+i: 13402, j: 0, k: 8632
+latFloat: 0.710162, lngFloat: 0.576722
 === RUN   TestLoc2Index32/bn254#98
 === RUN   TestLoc2Index32/bn254#98/groth16
 === RUN   TestLoc2Index32/bn254#98/groth16/valid_witness
@@ -641,9 +641,9 @@ latFloat: 0.710162, lngFloat: 0.576732
 === RUN   TestLoc2Index32/bn254#106
 === RUN   TestLoc2Index32/bn254#106/groth16
 === RUN   TestLoc2Index32/bn254#106/groth16/valid_witness
-lat: 0.710160, lng: 0.576735
-i: 93817, j: 0, k: 60426
-latFloat: 0.710160, lngFloat: 0.576735
+lat: 0.710162, lng: 0.576732
+i: 31575, j: 0, k: 30667
+latFloat: 0.710162, lngFloat: 0.576732
 === RUN   TestLoc2Index32/bn254#107
 === RUN   TestLoc2Index32/bn254#107/groth16
 === RUN   TestLoc2Index32/bn254#107/groth16/valid_witness
@@ -695,9 +695,9 @@ latFloat: 0.710161, lngFloat: 0.576735
 === RUN   TestLoc2Index32/bn254#115
 === RUN   TestLoc2Index32/bn254#115/groth16
 === RUN   TestLoc2Index32/bn254#115/groth16/valid_witness
-lat: 0.710160, lng: 0.576734
-i: 221025, j: 0, k: 214668
-latFloat: 0.710160, lngFloat: 0.576734
+lat: 0.710161, lng: 0.576734
+i: 93817, j: 0, k: 60426
+latFloat: 0.710161, lngFloat: 0.576734
 === RUN   TestLoc2Index32/bn254#116
 === RUN   TestLoc2Index32/bn254#116/groth16
 === RUN   TestLoc2Index32/bn254#116/groth16/valid_witness
@@ -749,9 +749,9 @@ latFloat: 0.710161, lngFloat: 0.576733
 === RUN   TestLoc2Index32/bn254#124
 === RUN   TestLoc2Index32/bn254#124/groth16
 === RUN   TestLoc2Index32/bn254#124/groth16/valid_witness
-lat: 0.710160, lng: 0.576735
-i: 656717, j: 0, k: 422980
-latFloat: 0.710160, lngFloat: 0.576735
+lat: 0.710161, lng: 0.576733
+i: 221025, j: 0, k: 214668
+latFloat: 0.710161, lngFloat: 0.576733
 === RUN   TestLoc2Index32/bn254#125
 === RUN   TestLoc2Index32/bn254#125/groth16
 === RUN   TestLoc2Index32/bn254#125/groth16/valid_witness
@@ -804,19 +804,11 @@ latFloat: 0.710160, lngFloat: 0.576734
 === RUN   TestLoc2Index32/bn254#133/groth16
 === RUN   TestLoc2Index32/bn254#133/groth16/valid_witness
 lat: 0.710160, lng: 0.576734
-i: 1547172, j: 0, k: 1502677
+i: 656717, j: 0, k: 422980
 latFloat: 0.710160, lngFloat: 0.576734
 === RUN   TestLoc2Index32/bn254#134
-    assert.go:200: 
-        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/winderica/gnark@v0.0.0-20240125163642-17abec78e961/test/assert.go:200
-        	            				/Users/serious/golang/pkg/mod/github.com/winderica/gnark@v0.0.0-20240125163642-17abec78e961/test/assert_checkcircuit.go:51
-        	            				/Users/serious/golang/pkg/mod/github.com/winderica/gnark@v0.0.0-20240125163642-17abec78e961/test/assert.go:66
-        	Error:      	[assertIsEqual] 1547172 == 1547171
-        	            	loc2index32.(*loc2Index32Circuit).Define
-        	            		loc2index32_test.go:148
-        	            	
-        	            	witness:{"Lat":1060490506,"Lng":1058251998,"Resolution":15,"I":1547172,"J":0,"K":1502677}
-        	Test:       	TestLoc2Index32/bn254#134
+=== RUN   TestLoc2Index32/bn254#134/groth16
+=== RUN   TestLoc2Index32/bn254#134/groth16/valid_witness
 lat: 0.710160, lng: 0.576734
 i: 1547172, j: 0, k: 1502677
 latFloat: 0.710160, lngFloat: 0.576734
@@ -913,18 +905,32 @@ latFloat: 0.710160, lngFloat: 0.576734
         	            	
         	            	witness:{"Lat":1060490507,"Lng":1058251997,"Resolution":15,"I":1547172,"J":0,"K":1502677}
         	Test:       	TestLoc2Index32/bn254#142
---- FAIL: TestLoc2Index32 (26.24s)
+lat: 0.710160, lng: 0.576734
+i: 1547172, j: 0, k: 1502677
+latFloat: 0.710160, lngFloat: 0.576734
+=== RUN   TestLoc2Index32/bn254#143
+    assert.go:200: 
+        	Error Trace:	/Users/serious/golang/pkg/mod/github.com/winderica/gnark@v0.0.0-20240125163642-17abec78e961/test/assert.go:200
+        	            				/Users/serious/golang/pkg/mod/github.com/winderica/gnark@v0.0.0-20240125163642-17abec78e961/test/assert_checkcircuit.go:51
+        	            				/Users/serious/golang/pkg/mod/github.com/winderica/gnark@v0.0.0-20240125163642-17abec78e961/test/assert.go:66
+        	Error:      	[assertIsEqual] 1547172 == 1547171
+        	            	loc2index32.(*loc2Index32Circuit).Define
+        	            		loc2index32_test.go:148
+        	            	
+        	            	witness:{"Lat":1060490507,"Lng":1058251997,"Resolution":15,"I":1547172,"J":0,"K":1502677}
+        	Test:       	TestLoc2Index32/bn254#143
+--- FAIL: TestLoc2Index32 (26.53s)
     --- PASS: TestLoc2Index32/bn254 (0.22s)
         --- PASS: TestLoc2Index32/bn254/groth16 (0.19s)
             --- PASS: TestLoc2Index32/bn254/groth16/valid_witness (0.02s)
     --- PASS: TestLoc2Index32/bn254#01 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#01/groth16 (0.17s)
-            --- PASS: TestLoc2Index32/bn254#01/groth16/valid_witness (0.02s)
+        --- PASS: TestLoc2Index32/bn254#01/groth16 (0.16s)
+            --- PASS: TestLoc2Index32/bn254#01/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#02 (0.19s)
         --- PASS: TestLoc2Index32/bn254#02/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#02/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#03 (0.21s)
-        --- PASS: TestLoc2Index32/bn254#03/groth16 (0.18s)
+    --- PASS: TestLoc2Index32/bn254#03 (0.19s)
+        --- PASS: TestLoc2Index32/bn254#03/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#03/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#04 (0.19s)
         --- PASS: TestLoc2Index32/bn254#04/groth16 (0.16s)
@@ -936,13 +942,13 @@ latFloat: 0.710160, lngFloat: 0.576734
         --- PASS: TestLoc2Index32/bn254#06/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#06/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#07 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#07/groth16 (0.17s)
+        --- PASS: TestLoc2Index32/bn254#07/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#07/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#08 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#08/groth16 (0.17s)
+        --- PASS: TestLoc2Index32/bn254#08/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#08/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#09 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#09/groth16 (0.16s)
+        --- PASS: TestLoc2Index32/bn254#09/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#09/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#10 (0.19s)
         --- PASS: TestLoc2Index32/bn254#10/groth16 (0.16s)
@@ -954,115 +960,115 @@ latFloat: 0.710160, lngFloat: 0.576734
         --- PASS: TestLoc2Index32/bn254#12/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#12/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#13 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#13/groth16 (0.17s)
+        --- PASS: TestLoc2Index32/bn254#13/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#13/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#14 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#14/groth16 (0.17s)
+        --- PASS: TestLoc2Index32/bn254#14/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#14/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#15 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#15/groth16 (0.16s)
+        --- PASS: TestLoc2Index32/bn254#15/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#15/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#16 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#16/groth16 (0.16s)
+        --- PASS: TestLoc2Index32/bn254#16/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#16/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#17 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#17/groth16 (0.16s)
+    --- PASS: TestLoc2Index32/bn254#17 (0.20s)
+        --- PASS: TestLoc2Index32/bn254#17/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#17/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#18 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#18/groth16 (0.16s)
+        --- PASS: TestLoc2Index32/bn254#18/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#18/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#19 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#19/groth16 (0.16s)
+    --- PASS: TestLoc2Index32/bn254#19 (0.20s)
+        --- PASS: TestLoc2Index32/bn254#19/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#19/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#20 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#20/groth16 (0.16s)
+    --- PASS: TestLoc2Index32/bn254#20 (0.20s)
+        --- PASS: TestLoc2Index32/bn254#20/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#20/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#21 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#21/groth16 (0.16s)
+        --- PASS: TestLoc2Index32/bn254#21/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#21/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#22 (0.19s)
         --- PASS: TestLoc2Index32/bn254#22/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#22/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#23 (0.19s)
+    --- PASS: TestLoc2Index32/bn254#23 (0.20s)
         --- PASS: TestLoc2Index32/bn254#23/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#23/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#24 (0.19s)
         --- PASS: TestLoc2Index32/bn254#24/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#24/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#25 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#25/groth16 (0.16s)
+        --- PASS: TestLoc2Index32/bn254#25/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#25/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#26 (0.20s)
-        --- PASS: TestLoc2Index32/bn254#26/groth16 (0.17s)
+    --- PASS: TestLoc2Index32/bn254#26 (0.19s)
+        --- PASS: TestLoc2Index32/bn254#26/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#26/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#27 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#27/groth16 (0.17s)
+        --- PASS: TestLoc2Index32/bn254#27/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#27/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#28 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#28/groth16 (0.17s)
+        --- PASS: TestLoc2Index32/bn254#28/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#28/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#29 (0.20s)
         --- PASS: TestLoc2Index32/bn254#29/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#29/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#30 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#30/groth16 (0.16s)
+        --- PASS: TestLoc2Index32/bn254#30/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#30/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#31 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#31/groth16 (0.16s)
+    --- PASS: TestLoc2Index32/bn254#31 (0.20s)
+        --- PASS: TestLoc2Index32/bn254#31/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#31/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#32 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#32/groth16 (0.16s)
+        --- PASS: TestLoc2Index32/bn254#32/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#32/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#33 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#33/groth16 (0.16s)
+        --- PASS: TestLoc2Index32/bn254#33/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#33/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#34 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#34/groth16 (0.16s)
+    --- PASS: TestLoc2Index32/bn254#34 (0.20s)
+        --- PASS: TestLoc2Index32/bn254#34/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#34/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#35 (0.20s)
         --- PASS: TestLoc2Index32/bn254#35/groth16 (0.17s)
-            --- PASS: TestLoc2Index32/bn254#35/groth16/valid_witness (0.01s)
+            --- PASS: TestLoc2Index32/bn254#35/groth16/valid_witness (0.02s)
     --- PASS: TestLoc2Index32/bn254#36 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#36/groth16 (0.16s)
+        --- PASS: TestLoc2Index32/bn254#36/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#36/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#37 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#37/groth16 (0.16s)
+        --- PASS: TestLoc2Index32/bn254#37/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#37/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#38 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#38/groth16 (0.16s)
+        --- PASS: TestLoc2Index32/bn254#38/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#38/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#39 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#39/groth16 (0.16s)
+    --- PASS: TestLoc2Index32/bn254#39 (0.20s)
+        --- PASS: TestLoc2Index32/bn254#39/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#39/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#40 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#40/groth16 (0.16s)
+    --- PASS: TestLoc2Index32/bn254#40 (0.20s)
+        --- PASS: TestLoc2Index32/bn254#40/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#40/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#41 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#41/groth16 (0.16s)
+        --- PASS: TestLoc2Index32/bn254#41/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#41/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#42 (0.19s)
         --- PASS: TestLoc2Index32/bn254#42/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#42/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#43 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#43/groth16 (0.16s)
+        --- PASS: TestLoc2Index32/bn254#43/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#43/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#44 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#44/groth16 (0.16s)
+        --- PASS: TestLoc2Index32/bn254#44/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#44/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#45 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#45/groth16 (0.16s)
+        --- PASS: TestLoc2Index32/bn254#45/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#45/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#46 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#46/groth16 (0.16s)
+    --- PASS: TestLoc2Index32/bn254#46 (0.23s)
+        --- PASS: TestLoc2Index32/bn254#46/groth16 (0.20s)
             --- PASS: TestLoc2Index32/bn254#46/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#47 (0.18s)
-        --- PASS: TestLoc2Index32/bn254#47/groth16 (0.16s)
-            --- PASS: TestLoc2Index32/bn254#47/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#48 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#48/groth16 (0.16s)
-            --- PASS: TestLoc2Index32/bn254#48/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#49 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#49/groth16 (0.16s)
+    --- PASS: TestLoc2Index32/bn254#47 (0.21s)
+        --- PASS: TestLoc2Index32/bn254#47/groth16 (0.18s)
+            --- PASS: TestLoc2Index32/bn254#47/groth16/valid_witness (0.02s)
+    --- PASS: TestLoc2Index32/bn254#48 (0.20s)
+        --- PASS: TestLoc2Index32/bn254#48/groth16 (0.17s)
+            --- PASS: TestLoc2Index32/bn254#48/groth16/valid_witness (0.02s)
+    --- PASS: TestLoc2Index32/bn254#49 (0.20s)
+        --- PASS: TestLoc2Index32/bn254#49/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#49/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#50 (0.19s)
         --- PASS: TestLoc2Index32/bn254#50/groth16 (0.17s)
@@ -1070,8 +1076,8 @@ latFloat: 0.710160, lngFloat: 0.576734
     --- PASS: TestLoc2Index32/bn254#51 (0.19s)
         --- PASS: TestLoc2Index32/bn254#51/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#51/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#52 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#52/groth16 (0.16s)
+    --- PASS: TestLoc2Index32/bn254#52 (0.20s)
+        --- PASS: TestLoc2Index32/bn254#52/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#52/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#53 (0.19s)
         --- PASS: TestLoc2Index32/bn254#53/groth16 (0.16s)
@@ -1083,28 +1089,28 @@ latFloat: 0.710160, lngFloat: 0.576734
         --- PASS: TestLoc2Index32/bn254#55/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#55/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#56 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#56/groth16 (0.16s)
+        --- PASS: TestLoc2Index32/bn254#56/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#56/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#57 (0.19s)
         --- PASS: TestLoc2Index32/bn254#57/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#57/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#58 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#58/groth16 (0.17s)
+        --- PASS: TestLoc2Index32/bn254#58/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#58/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#59 (0.19s)
         --- PASS: TestLoc2Index32/bn254#59/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#59/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#60 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#60/groth16 (0.16s)
+        --- PASS: TestLoc2Index32/bn254#60/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#60/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#61 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#61/groth16 (0.17s)
+        --- PASS: TestLoc2Index32/bn254#61/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#61/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#62 (0.19s)
         --- PASS: TestLoc2Index32/bn254#62/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#62/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#63 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#63/groth16 (0.16s)
+        --- PASS: TestLoc2Index32/bn254#63/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#63/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#64 (0.19s)
         --- PASS: TestLoc2Index32/bn254#64/groth16 (0.16s)
@@ -1113,44 +1119,44 @@ latFloat: 0.710160, lngFloat: 0.576734
         --- PASS: TestLoc2Index32/bn254#65/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#65/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#66 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#66/groth16 (0.16s)
+        --- PASS: TestLoc2Index32/bn254#66/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#66/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#67 (0.19s)
         --- PASS: TestLoc2Index32/bn254#67/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#67/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#68 (0.19s)
+    --- PASS: TestLoc2Index32/bn254#68 (0.18s)
         --- PASS: TestLoc2Index32/bn254#68/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#68/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#69 (0.19s)
         --- PASS: TestLoc2Index32/bn254#69/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#69/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#70 (0.19s)
+    --- PASS: TestLoc2Index32/bn254#70 (0.20s)
         --- PASS: TestLoc2Index32/bn254#70/groth16 (0.17s)
-            --- PASS: TestLoc2Index32/bn254#70/groth16/valid_witness (0.02s)
-    --- PASS: TestLoc2Index32/bn254#71 (0.20s)
-        --- PASS: TestLoc2Index32/bn254#71/groth16 (0.18s)
+            --- PASS: TestLoc2Index32/bn254#70/groth16/valid_witness (0.01s)
+    --- PASS: TestLoc2Index32/bn254#71 (0.19s)
+        --- PASS: TestLoc2Index32/bn254#71/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#71/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#72 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#72/groth16 (0.17s)
+        --- PASS: TestLoc2Index32/bn254#72/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#72/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#73 (0.20s)
-        --- PASS: TestLoc2Index32/bn254#73/groth16 (0.17s)
+    --- PASS: TestLoc2Index32/bn254#73 (0.19s)
+        --- PASS: TestLoc2Index32/bn254#73/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#73/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#74 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#74/groth16 (0.17s)
+        --- PASS: TestLoc2Index32/bn254#74/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#74/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#75 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#75/groth16 (0.17s)
+        --- PASS: TestLoc2Index32/bn254#75/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#75/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#76 (0.21s)
-        --- PASS: TestLoc2Index32/bn254#76/groth16 (0.19s)
-            --- PASS: TestLoc2Index32/bn254#76/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#77 (0.21s)
-        --- PASS: TestLoc2Index32/bn254#77/groth16 (0.18s)
+    --- PASS: TestLoc2Index32/bn254#76 (0.20s)
+        --- PASS: TestLoc2Index32/bn254#76/groth16 (0.17s)
+            --- PASS: TestLoc2Index32/bn254#76/groth16/valid_witness (0.02s)
+    --- PASS: TestLoc2Index32/bn254#77 (0.20s)
+        --- PASS: TestLoc2Index32/bn254#77/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#77/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#78 (0.20s)
+    --- PASS: TestLoc2Index32/bn254#78 (0.19s)
         --- PASS: TestLoc2Index32/bn254#78/groth16 (0.17s)
-            --- PASS: TestLoc2Index32/bn254#78/groth16/valid_witness (0.02s)
+            --- PASS: TestLoc2Index32/bn254#78/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#79 (0.19s)
         --- PASS: TestLoc2Index32/bn254#79/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#79/groth16/valid_witness (0.01s)
@@ -1158,55 +1164,55 @@ latFloat: 0.710160, lngFloat: 0.576734
         --- PASS: TestLoc2Index32/bn254#80/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#80/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#81 (0.20s)
-        --- PASS: TestLoc2Index32/bn254#81/groth16 (0.17s)
-            --- PASS: TestLoc2Index32/bn254#81/groth16/valid_witness (0.02s)
-    --- PASS: TestLoc2Index32/bn254#82 (0.23s)
-        --- PASS: TestLoc2Index32/bn254#82/groth16 (0.20s)
+        --- PASS: TestLoc2Index32/bn254#81/groth16 (0.18s)
+            --- PASS: TestLoc2Index32/bn254#81/groth16/valid_witness (0.01s)
+    --- PASS: TestLoc2Index32/bn254#82 (0.19s)
+        --- PASS: TestLoc2Index32/bn254#82/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#82/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#83 (0.20s)
+    --- PASS: TestLoc2Index32/bn254#83 (0.19s)
         --- PASS: TestLoc2Index32/bn254#83/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#83/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#84 (0.20s)
-        --- PASS: TestLoc2Index32/bn254#84/groth16 (0.17s)
-            --- PASS: TestLoc2Index32/bn254#84/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#85 (0.21s)
-        --- PASS: TestLoc2Index32/bn254#85/groth16 (0.18s)
-            --- PASS: TestLoc2Index32/bn254#85/groth16/valid_witness (0.02s)
-    --- PASS: TestLoc2Index32/bn254#86 (0.21s)
-        --- PASS: TestLoc2Index32/bn254#86/groth16 (0.19s)
-            --- PASS: TestLoc2Index32/bn254#86/groth16/valid_witness (0.02s)
+    --- PASS: TestLoc2Index32/bn254#84 (0.21s)
+        --- PASS: TestLoc2Index32/bn254#84/groth16 (0.18s)
+            --- PASS: TestLoc2Index32/bn254#84/groth16/valid_witness (0.02s)
+    --- PASS: TestLoc2Index32/bn254#85 (0.22s)
+        --- PASS: TestLoc2Index32/bn254#85/groth16 (0.19s)
+            --- PASS: TestLoc2Index32/bn254#85/groth16/valid_witness (0.03s)
+    --- PASS: TestLoc2Index32/bn254#86 (0.19s)
+        --- PASS: TestLoc2Index32/bn254#86/groth16 (0.17s)
+            --- PASS: TestLoc2Index32/bn254#86/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#87 (0.19s)
         --- PASS: TestLoc2Index32/bn254#87/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#87/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#88 (0.19s)
+    --- PASS: TestLoc2Index32/bn254#88 (0.20s)
         --- PASS: TestLoc2Index32/bn254#88/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#88/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#89 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#89/groth16 (0.16s)
-            --- PASS: TestLoc2Index32/bn254#89/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#90 (0.19s)
+    --- PASS: TestLoc2Index32/bn254#89 (0.20s)
+        --- PASS: TestLoc2Index32/bn254#89/groth16 (0.17s)
+            --- PASS: TestLoc2Index32/bn254#89/groth16/valid_witness (0.02s)
+    --- PASS: TestLoc2Index32/bn254#90 (0.21s)
         --- PASS: TestLoc2Index32/bn254#90/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#90/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#91 (0.23s)
-        --- PASS: TestLoc2Index32/bn254#91/groth16 (0.20s)
+    --- PASS: TestLoc2Index32/bn254#91 (0.20s)
+        --- PASS: TestLoc2Index32/bn254#91/groth16 (0.18s)
             --- PASS: TestLoc2Index32/bn254#91/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#92 (0.21s)
-        --- PASS: TestLoc2Index32/bn254#92/groth16 (0.18s)
-            --- PASS: TestLoc2Index32/bn254#92/groth16/valid_witness (0.02s)
+    --- PASS: TestLoc2Index32/bn254#92 (0.20s)
+        --- PASS: TestLoc2Index32/bn254#92/groth16 (0.17s)
+            --- PASS: TestLoc2Index32/bn254#92/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#93 (0.20s)
-        --- PASS: TestLoc2Index32/bn254#93/groth16 (0.18s)
+        --- PASS: TestLoc2Index32/bn254#93/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#93/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#94 (0.20s)
-        --- PASS: TestLoc2Index32/bn254#94/groth16 (0.18s)
+    --- PASS: TestLoc2Index32/bn254#94 (0.19s)
+        --- PASS: TestLoc2Index32/bn254#94/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#94/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#95 (0.20s)
         --- PASS: TestLoc2Index32/bn254#95/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#95/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#96 (0.19s)
+    --- PASS: TestLoc2Index32/bn254#96 (0.20s)
         --- PASS: TestLoc2Index32/bn254#96/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#96/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#97 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#97/groth16 (0.17s)
+        --- PASS: TestLoc2Index32/bn254#97/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#97/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#98 (0.19s)
         --- PASS: TestLoc2Index32/bn254#98/groth16 (0.17s)
@@ -1214,22 +1220,22 @@ latFloat: 0.710160, lngFloat: 0.576734
     --- PASS: TestLoc2Index32/bn254#99 (0.19s)
         --- PASS: TestLoc2Index32/bn254#99/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#99/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#100 (0.20s)
-        --- PASS: TestLoc2Index32/bn254#100/groth16 (0.17s)
-            --- PASS: TestLoc2Index32/bn254#100/groth16/valid_witness (0.02s)
+    --- PASS: TestLoc2Index32/bn254#100 (0.19s)
+        --- PASS: TestLoc2Index32/bn254#100/groth16 (0.16s)
+            --- PASS: TestLoc2Index32/bn254#100/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#101 (0.20s)
-        --- PASS: TestLoc2Index32/bn254#101/groth16 (0.17s)
+        --- PASS: TestLoc2Index32/bn254#101/groth16 (0.18s)
             --- PASS: TestLoc2Index32/bn254#101/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#102 (0.20s)
-        --- PASS: TestLoc2Index32/bn254#102/groth16 (0.17s)
+    --- PASS: TestLoc2Index32/bn254#102 (0.22s)
+        --- PASS: TestLoc2Index32/bn254#102/groth16 (0.18s)
             --- PASS: TestLoc2Index32/bn254#102/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#103 (0.20s)
         --- PASS: TestLoc2Index32/bn254#103/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#103/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#104 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#104/groth16 (0.17s)
+    --- PASS: TestLoc2Index32/bn254#104 (0.20s)
+        --- PASS: TestLoc2Index32/bn254#104/groth16 (0.18s)
             --- PASS: TestLoc2Index32/bn254#104/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#105 (0.19s)
+    --- PASS: TestLoc2Index32/bn254#105 (0.20s)
         --- PASS: TestLoc2Index32/bn254#105/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#105/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#106 (0.19s)
@@ -1239,40 +1245,40 @@ latFloat: 0.710160, lngFloat: 0.576734
         --- PASS: TestLoc2Index32/bn254#107/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#107/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#108 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#108/groth16 (0.17s)
+        --- PASS: TestLoc2Index32/bn254#108/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#108/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#109 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#109/groth16 (0.17s)
+        --- PASS: TestLoc2Index32/bn254#109/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#109/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#110 (0.19s)
         --- PASS: TestLoc2Index32/bn254#110/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#110/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#111 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#111/groth16 (0.17s)
+        --- PASS: TestLoc2Index32/bn254#111/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#111/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#112 (0.19s)
         --- PASS: TestLoc2Index32/bn254#112/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#112/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#113 (0.20s)
-        --- PASS: TestLoc2Index32/bn254#113/groth16 (0.18s)
+    --- PASS: TestLoc2Index32/bn254#113 (0.19s)
+        --- PASS: TestLoc2Index32/bn254#113/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#113/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#114 (0.19s)
         --- PASS: TestLoc2Index32/bn254#114/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#114/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#115 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#115/groth16 (0.17s)
+        --- PASS: TestLoc2Index32/bn254#115/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#115/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#116 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#116/groth16 (0.17s)
+    --- PASS: TestLoc2Index32/bn254#116 (0.20s)
+        --- PASS: TestLoc2Index32/bn254#116/groth16 (0.18s)
             --- PASS: TestLoc2Index32/bn254#116/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#117 (0.19s)
+    --- PASS: TestLoc2Index32/bn254#117 (0.20s)
         --- PASS: TestLoc2Index32/bn254#117/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#117/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#118 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#118/groth16 (0.16s)
+        --- PASS: TestLoc2Index32/bn254#118/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#118/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#119 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#119/groth16 (0.16s)
+        --- PASS: TestLoc2Index32/bn254#119/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#119/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#120 (0.19s)
         --- PASS: TestLoc2Index32/bn254#120/groth16 (0.16s)
@@ -1280,11 +1286,11 @@ latFloat: 0.710160, lngFloat: 0.576734
     --- PASS: TestLoc2Index32/bn254#121 (0.19s)
         --- PASS: TestLoc2Index32/bn254#121/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#121/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#122 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#122/groth16 (0.17s)
-            --- PASS: TestLoc2Index32/bn254#122/groth16/valid_witness (0.02s)
-    --- PASS: TestLoc2Index32/bn254#123 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#123/groth16 (0.16s)
+    --- PASS: TestLoc2Index32/bn254#122 (0.20s)
+        --- PASS: TestLoc2Index32/bn254#122/groth16 (0.18s)
+            --- PASS: TestLoc2Index32/bn254#122/groth16/valid_witness (0.01s)
+    --- PASS: TestLoc2Index32/bn254#123 (0.20s)
+        --- PASS: TestLoc2Index32/bn254#123/groth16 (0.18s)
             --- PASS: TestLoc2Index32/bn254#123/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#124 (0.19s)
         --- PASS: TestLoc2Index32/bn254#124/groth16 (0.16s)
@@ -1296,13 +1302,13 @@ latFloat: 0.710160, lngFloat: 0.576734
         --- PASS: TestLoc2Index32/bn254#126/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#126/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#127 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#127/groth16 (0.17s)
+        --- PASS: TestLoc2Index32/bn254#127/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#127/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#128 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#128/groth16 (0.17s)
+        --- PASS: TestLoc2Index32/bn254#128/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#128/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#129 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#129/groth16 (0.17s)
+        --- PASS: TestLoc2Index32/bn254#129/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#129/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#130 (0.19s)
         --- PASS: TestLoc2Index32/bn254#130/groth16 (0.16s)
@@ -1311,24 +1317,27 @@ latFloat: 0.710160, lngFloat: 0.576734
         --- PASS: TestLoc2Index32/bn254#131/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#131/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#132 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#132/groth16 (0.17s)
+        --- PASS: TestLoc2Index32/bn254#132/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#132/groth16/valid_witness (0.01s)
     --- PASS: TestLoc2Index32/bn254#133 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#133/groth16 (0.17s)
+        --- PASS: TestLoc2Index32/bn254#133/groth16 (0.16s)
             --- PASS: TestLoc2Index32/bn254#133/groth16/valid_witness (0.01s)
-    --- FAIL: TestLoc2Index32/bn254#134 (0.00s)
+    --- PASS: TestLoc2Index32/bn254#134 (0.19s)
+        --- PASS: TestLoc2Index32/bn254#134/groth16 (0.16s)
+            --- PASS: TestLoc2Index32/bn254#134/groth16/valid_witness (0.01s)
     --- FAIL: TestLoc2Index32/bn254#135 (0.00s)
-    --- PASS: TestLoc2Index32/bn254#136 (0.19s)
-        --- PASS: TestLoc2Index32/bn254#136/groth16 (0.16s)
+    --- PASS: TestLoc2Index32/bn254#136 (0.20s)
+        --- PASS: TestLoc2Index32/bn254#136/groth16 (0.17s)
             --- PASS: TestLoc2Index32/bn254#136/groth16/valid_witness (0.01s)
-    --- PASS: TestLoc2Index32/bn254#137 (0.18s)
-        --- PASS: TestLoc2Index32/bn254#137/groth16 (0.16s)
-            --- PASS: TestLoc2Index32/bn254#137/groth16/valid_witness (0.01s)
+    --- PASS: TestLoc2Index32/bn254#137 (0.22s)
+        --- PASS: TestLoc2Index32/bn254#137/groth16 (0.19s)
+            --- PASS: TestLoc2Index32/bn254#137/groth16/valid_witness (0.02s)
     --- FAIL: TestLoc2Index32/bn254#138 (0.00s)
     --- FAIL: TestLoc2Index32/bn254#139 (0.00s)
     --- FAIL: TestLoc2Index32/bn254#140 (0.00s)
     --- FAIL: TestLoc2Index32/bn254#141 (0.00s)
     --- FAIL: TestLoc2Index32/bn254#142 (0.00s)
+    --- FAIL: TestLoc2Index32/bn254#143 (0.00s)
 FAIL
 exit status 1
-FAIL	gnark-float/loc2index32	27.103s
+FAIL	gnark-float/loc2index32	27.392s
