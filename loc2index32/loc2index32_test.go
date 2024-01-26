@@ -345,7 +345,7 @@ func BenchmarkLoc2IndexProof(b *testing.B) {
 	}
 
 	for i := range circuits {
-		if err := util.BenchProofToFile(b, &circuits[i], &assignments[i], resolutions[i], indices[i]); err != nil {
+		if err := util.BenchProofToFileGroth16(b, &circuits[i], &assignments[i], resolutions[i], indices[i]); err != nil {
 			b.Logf("Error on benchmarking proof for entry %d: %v", i, err)
 			continue
 		}
@@ -392,7 +392,7 @@ func BenchmarkLoc2IndexProofMemory(b *testing.B) {
 	}
 
 	for i := range circuits {
-		if err := util.BenchProofMemory(b, &circuits[i], &assignments[i]); err != nil {
+		if err := util.BenchProofMemoryGroth16(b, &circuits[i], &assignments[i]); err != nil {
 			b.Logf("Error on benchmarking proof for entry %d: %v", i, err)
 			continue
 		}

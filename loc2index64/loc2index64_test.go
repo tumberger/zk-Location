@@ -2,7 +2,6 @@ package loc2index64
 
 import (
 	"bufio"
-	"encoding/json"
 	"fmt"
 	"math"
 	"math/big"
@@ -12,7 +11,6 @@ import (
 
 	float "gnark-float/float"
 	"gnark-float/hint"
-	maths "gnark-float/math"
 	util "gnark-float/util"
 
 	"github.com/consensys/gnark-crypto/ecc"
@@ -22,174 +20,7 @@ import (
 	"github.com/consensys/gnark/test"
 )
 
-type loc2Index64Params struct {
-	LatS       int `json:"LatS,string"`
-	LatE       int `json:"LatE,string"`
-	LatM       int `json:"LatM,string"`
-	LatA       int `json:"LatA,string"`
-	LngS       int `json:"LngS,string"`
-	LngE       int `json:"LngE,string"`
-	LngM       int `json:"LngM,string"`
-	LngA       int `json:"LngA,string"`
-	Resolution int `json:"Resolution,string"`
-}
-
-const loc2Index64 = `{
-    "LatS": "1",
-	"LatE": "0",
-	"LatM": "4527589427376396",
-	"LatA": "0",
-    "LngS": "0",
-	"LngE": "0",
-	"LngM": "5370059476281135",
-	"LngA": "0",
-	"Resolution": "0"
-}`
-
-type loc2Index64Wrapper struct {
-
-	// SECRET INPUTS
-	LatS frontend.Variable
-	LatE frontend.Variable
-	LatM frontend.Variable
-	LatA frontend.Variable
-	LngS frontend.Variable
-	LngE frontend.Variable
-	LngM frontend.Variable
-	LngA frontend.Variable
-
-	// PUBLIC INPUTS
-	Resolution frontend.Variable `gnark:",public"`
-	I          frontend.Variable `gnark:",public"`
-	J          frontend.Variable `gnark:",public"`
-	K          frontend.Variable `gnark:",public"`
-}
-
-func (circuit *loc2Index64Wrapper) Define(api frontend.API) error {
-
-	api.AssertIsEqual(circuit.LatA, 0)
-	api.AssertIsEqual(circuit.LngA, 0)
-
-	f := float.NewContext(api, 0, util.IEEE64ExponentBitwidth, util.IEEE64Precision)
-	lat := float.FloatVar{
-		Sign:       circuit.LatS,
-		Exponent:   circuit.LatE,
-		Mantissa:   circuit.LatM,
-		IsAbnormal: circuit.LatA,
-	}
-	lng := float.FloatVar{
-		Sign:       circuit.LngS,
-		Exponent:   circuit.LngE,
-		Mantissa:   circuit.LngM,
-		IsAbnormal: circuit.LngA,
-	}
-	resolution := circuit.Resolution
-	pi := f.NewF64Constant(math.Pi)
-	halfPi := f.NewF64Constant(math.Pi / 2.0)
-	doublePi := f.NewF64Constant(math.Pi * 2.0)
-
-	// Lat can't be more than pi/2, Lng can't be more than pi and max resolution is 15
-	api.AssertIsEqual(f.IsGt(lat, halfPi), 0)
-	api.AssertIsEqual(f.IsGt(lng, pi), 0)
-	api.AssertIsLessOrEqual(resolution, util.MaxResolution)
-
-	// We calculate the 3d vector (x,y,z), starting with x
-
-	// Adding half pi to latitude to apply cos() -- lat always in range [-pi/2, pi/2]
-	term := f.Add(lat, halfPi)
-	cosLat := maths.SinTaylor64(&f, term)
-
-	// Adding half pi to longitude to apply cos() -- lng always in range [-pi, pi]
-	tmp := f.Add(lng, halfPi)
-	// TODO: If it makes no big difference in regards to constraints: (input % 2pi) - pi
-	// can be applied on the input at the start of SinTaylor and the next lines can be deleted
-	isGreater := f.IsGt(tmp, pi)
-	shifted := f.Sub(tmp, doublePi)
-	term.Sign = api.Select(isGreater, shifted.Sign, tmp.Sign)
-	term.Exponent = api.Select(isGreater, shifted.Exponent, tmp.Exponent)
-	term.Mantissa = api.Select(isGreater, shifted.Mantissa, tmp.Mantissa)
-	term.IsAbnormal = 0
-
-	cosLng := maths.SinTaylor64(&f, term)
-	x := f.Mul(cosLat, cosLng)
-
-	sinLng := maths.SinTaylor64(&f, lng)
-	y := f.Mul(cosLat, sinLng)
-
-	z := maths.SinTaylor64(&f, lat)
-
-	calc := closestFaceCalculations(&f, x, y, z, lng)
-
-	r := calculateR(&f, calc[0], resolution)
-	hex2d := calculateHex2d(&f, z, cosLat, sinLng, cosLng, calc[1], calc[2], calc[3], calc[4], calc[5], calc[6], calc[7], calc[8], r, resolution)
-
-	ijk := hex2dToCoordIJK(&f, hex2d[0], hex2d[1])
-
-	api.AssertIsEqual(circuit.I, ijk[0])
-	api.AssertIsEqual(circuit.J, ijk[1])
-	api.AssertIsEqual(circuit.K, ijk[2])
-
-	return nil
-}
-
-func setupLoc2IndexWrapper() (loc2Index64Wrapper, loc2Index64Wrapper) {
-	var data loc2Index64Params
-	err := json.Unmarshal([]byte(loc2Index64), &data)
-	if err != nil {
-		panic(err)
-	}
-
-	lat := math.Pow(2, float64(data.LatE)) * (float64(data.LatM) / math.Pow(2, float64(52)))
-	if data.LatS == 1 {
-		lat = -lat
-	}
-	lng := math.Pow(2, float64(data.LngE)) * (float64(data.LngM) / math.Pow(2, float64(52)))
-	if data.LngS == 1 {
-		lng = -lng
-	}
-
-	fmt.Printf("lat, lng: %f, %f\n", lat, lng)
-
-	// Calculate I, J, K using the H3 library in C
-	i, j, k, err := util.ExecuteLatLngToIJK(data.Resolution, util.RadiansToDegrees(lat), util.RadiansToDegrees(lng))
-	if err != nil {
-		panic(err)
-	}
-
-	// Update witness values with calculated I, J, K
-	assignment := loc2Index64Wrapper{
-		LatS:       data.LatS,
-		LatE:       data.LatE,
-		LatM:       data.LatM,
-		LatA:       data.LatA,
-		LngS:       data.LngS,
-		LngE:       data.LngE,
-		LngM:       data.LngM,
-		LngA:       data.LngA,
-		I:          i,
-		J:          j,
-		K:          k,
-		Resolution: data.Resolution,
-	}
-
-	circuit := loc2Index64Wrapper{
-		// The circuit does not need actual values for I, J, K since these are
-		// calculated within the circuit itself when running the proof or solving
-		LatS:       data.LatS,
-		LatE:       data.LatE,
-		LatM:       data.LatM,
-		LatA:       data.LatA,
-		LngS:       data.LngS,
-		LngE:       data.LngE,
-		LngM:       data.LngM,
-		LngA:       data.LngA,
-		Resolution: data.Resolution,
-	}
-	return circuit, assignment
-}
-
 type loc2Index64Circuit struct {
-
 	// SECRET INPUTS
 	Lat frontend.Variable `gnark:",secret"`
 	Lng frontend.Variable `gnark:",secret"`
@@ -372,7 +203,7 @@ func TestLoc2Index64(t *testing.T) {
 		assert.ProverSucceeded(
 			&loc2Index64Circuit{Lat: 0, Lng: 0, Resolution: 0},
 			&loc2Index64Circuit{Lat: lat, Lng: lng, Resolution: res, I: i, J: j, K: k},
-			test.WithCurves(ecc.BLS12_381),
+			test.WithCurves(ecc.BN254),
 			test.WithBackends(backend.GROTH16),
 		)
 	}
@@ -382,18 +213,102 @@ func TestLoc2Index64(t *testing.T) {
 	}
 }
 
-func TestLoc2Index64Solving(t *testing.T) {
-	assert := test.NewAssert(t)
-	circuit, assignment := setupLoc2IndexWrapper()
+func BenchmarkLoc2IndexProof(b *testing.B) {
 
-	// Solve the circuit and assert.
-	assert.SolvingSucceeded(&circuit, &assignment, test.WithBackends(backend.GROTH16))
+	file, _ := os.Open("../data/f64/loc2index64.txt")
+	defer file.Close()
+
+	var circuits, assignments []loc2Index64Circuit
+	var resolutions, indices []int64
+	resolutionCounts := make(map[int64]int64)
+
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		data := strings.Fields(scanner.Text())
+
+		lat, _ := new(big.Int).SetString(data[0], 16)
+		lng, _ := new(big.Int).SetString(data[1], 16)
+		res, _ := new(big.Int).SetString(data[2], 16)
+		i, _ := new(big.Int).SetString(data[3], 16)
+		j, _ := new(big.Int).SetString(data[4], 16)
+		k, _ := new(big.Int).SetString(data[5], 16)
+
+		fmt.Printf("lat: %f, lng: %f\n", math.Float64frombits(uint64(lat.Uint64())), math.Float64frombits(uint64(lng.Uint64())))
+		fmt.Printf("i: %d, j: %d, k: %d\n", i, j, k)
+
+		// Update the count for this resolution
+		resolutionCounts[res.Int64()]++
+
+		circuit := loc2Index64Circuit{Lat: 0, Lng: 0, Resolution: 0}
+		assignment := loc2Index64Circuit{Lat: lat, Lng: lng, Resolution: res, I: i, J: j, K: k}
+
+		// Append the created structs to the slices
+		circuits = append(circuits, circuit)
+		assignments = append(assignments, assignment)
+		resolutions = append(resolutions, res.Int64())
+		indices = append(indices, resolutionCounts[res.Int64()])
+	}
+
+	if err := scanner.Err(); err != nil {
+		b.Fatalf("Error reading file: %v", err)
+	}
+
+	// Ensure that the number of circuits and assignments is the same
+	if len(circuits) != len(assignments) {
+		b.Fatalf("Mismatch in number of circuits and assignments")
+	}
+
+	for i := range circuits {
+		if err := util.BenchProofToFileGroth16(b, &circuits[i], &assignments[i], resolutions[i], indices[i]); err != nil {
+			b.Logf("Error on benchmarking proof for entry %d: %v", i, err)
+			continue
+		}
+	}
 }
 
-func TestLoc2Index64Proving(t *testing.T) {
-	assert := test.NewAssert(t)
-	circuit, assignment := setupLoc2IndexWrapper()
+func BenchmarkLoc2IndexProofMemory(b *testing.B) {
 
-	// Proof successfully generated
-	assert.ProverSucceeded(&circuit, &assignment, test.WithBackends(backend.GROTH16))
+	file, _ := os.Open("../data/f64/loc2index64.txt")
+	defer file.Close()
+
+	var circuits, assignments []loc2Index64Circuit
+
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		data := strings.Fields(scanner.Text())
+
+		lat, _ := new(big.Int).SetString(data[0], 16)
+		lng, _ := new(big.Int).SetString(data[1], 16)
+		res, _ := new(big.Int).SetString(data[2], 16)
+		i, _ := new(big.Int).SetString(data[3], 16)
+		j, _ := new(big.Int).SetString(data[4], 16)
+		k, _ := new(big.Int).SetString(data[5], 16)
+
+		fmt.Printf("lat: %f, lng: %f\n", math.Float64frombits(uint64(lat.Uint64())), math.Float64frombits(uint64(lng.Uint64())))
+		fmt.Printf("i: %d, j: %d, k: %d\n", i, j, k)
+
+		circuit := loc2Index64Circuit{Lat: 0, Lng: 0, Resolution: 0}
+		assignment := loc2Index64Circuit{Lat: lat, Lng: lng, Resolution: res, I: i, J: j, K: k}
+
+		// Append the created structs to the slices
+		circuits = append(circuits, circuit)
+		assignments = append(assignments, assignment)
+		break
+	}
+
+	if err := scanner.Err(); err != nil {
+		b.Fatalf("Error reading file: %v", err)
+	}
+
+	// Ensure that the number of circuits and assignments is the same
+	if len(circuits) != len(assignments) {
+		b.Fatalf("Mismatch in number of circuits and assignments")
+	}
+
+	for i := range circuits {
+		if err := util.BenchProofMemoryGroth16(b, &circuits[i], &assignments[i]); err != nil {
+			b.Logf("Error on benchmarking proof for entry %d: %v", i, err)
+			continue
+		}
+	}
 }

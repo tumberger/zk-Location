@@ -8,6 +8,7 @@ import (
 	"math/rand"
 	"os"
 	"os/exec"
+	"reflect"
 	"regexp"
 	"strconv"
 	"testing"
@@ -15,8 +16,11 @@ import (
 
 	"github.com/consensys/gnark-crypto/ecc"
 	"github.com/consensys/gnark/backend/groth16"
+	"github.com/consensys/gnark/backend/plonk"
 	"github.com/consensys/gnark/frontend"
 	"github.com/consensys/gnark/frontend/cs/r1cs"
+	"github.com/consensys/gnark/frontend/cs/scs"
+	"github.com/consensys/gnark/test/unsafekzg"
 	"github.com/rs/zerolog/log"
 	"github.com/stretchr/testify/require"
 	"github.com/uber/h3-go/v4"
@@ -482,7 +486,7 @@ func StrToIntSlice(inputData string, hexRepresentation bool) []int {
 // compressThreshold --> if linear expressions are larger than this, the frontend will introduce
 // intermediate constraints. The lower this number is, the faster compile time should be (to a point)
 // but resulting circuit will have more constraints (slower proving time).
-const compressThreshold = 100
+const compressThreshold = 1000
 
 func BenchProof(b *testing.B, circuit, assignment frontend.Circuit) {
 	fmt.Println("compiling...")
@@ -518,7 +522,7 @@ func BenchProof(b *testing.B, circuit, assignment frontend.Circuit) {
 	}
 }
 
-func BenchProofToFile(b *testing.B, circuit, assignment frontend.Circuit, resolution int64, index int64) error {
+func BenchProofToFileGroth16(b *testing.B, circuit, assignment frontend.Circuit, resolution int64, index int64) error {
 	// Open a file to save benchmark results
 	file, err := os.OpenFile("../benchmarks/bench_ZKLP32_G16_BN254.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
@@ -545,7 +549,7 @@ func BenchProofToFile(b *testing.B, circuit, assignment frontend.Circuit, resolu
 
 	// Benchmarking loop
 	b.ResetTimer()
-	b.N = 20
+	b.N = 1
 	for i := 0; i < b.N; i++ {
 		// Compilation step with time measurement
 		start := time.Now().UnixMicro()
@@ -585,6 +589,10 @@ func BenchProofToFile(b *testing.B, circuit, assignment frontend.Circuit, resolu
 		start = time.Now().UnixMicro()
 		publicWitness, _ := fullWitness.Public()
 		groth16.Verify(proof, vk, publicWitness)
+		if err != nil {
+			b.Errorf("Failed in verifying: %v", err)
+			return err
+		}
 		verifierTime = time.Now().UnixMicro() - start
 
 		// Writing the captured data to the file
@@ -599,7 +607,99 @@ func BenchProofToFile(b *testing.B, circuit, assignment frontend.Circuit, resolu
 	return nil
 }
 
-func BenchProofMemory(b *testing.B, circuit, assignment frontend.Circuit) error {
+func BenchProofToFilePlonk(b *testing.B, circuit, assignment frontend.Circuit, resolution int64, index int64) error {
+	// Open a file to save benchmark results
+	file, err := os.OpenFile("../benchmarks/bench_ZKLP32_Plonk_BN254.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		b.Errorf("Failed to open file: %v", err)
+		return err
+	}
+	defer file.Close()
+
+	info, err := file.Stat()
+	if err != nil {
+		b.Errorf("Failed to get file stats: %v", err)
+		return err
+	}
+	if info.Size() == 0 {
+		_, err = fmt.Fprintln(file, "Resolution, Index, NbConstraints, CompilationTime, SetupTime, ProverTime, VerifierTime")
+		if err != nil {
+			b.Errorf("Failed to write headers to file: %v", err)
+			return err
+		}
+	}
+
+	// Variables for measuring times
+	var compilationTime, setupTime, proverTime, verifierTime int64
+
+	// Benchmarking loop
+	b.ResetTimer()
+	b.N = 1
+	for i := 0; i < b.N; i++ {
+		// Compilation step with time measurement
+		start := time.Now().UnixMicro()
+		ccs, err := frontend.Compile(ecc.BN254.ScalarField(), scs.NewBuilder, circuit, frontend.WithCompressThreshold(compressThreshold))
+		if err != nil {
+			b.Errorf("Failed to compile: %v", err)
+			return err
+		}
+		compilationTime = time.Now().UnixMicro() - start
+
+		// Print the number of constraints
+		fmt.Println("Number of constraints:", ccs.GetNbConstraints())
+
+		fullWitness, err := frontend.NewWitness(assignment, ecc.BN254.ScalarField())
+
+		// create srs
+		srs, srsLagrange, err := unsafekzg.NewSRS(ccs)
+		fmt.Println(reflect.TypeOf(srs))
+		if err != nil {
+			panic("Failed to create srs: " + err.Error())
+		}
+
+		// Setup step with time measurement
+		start = time.Now().UnixMicro()
+		pk, vk, err := plonk.Setup(ccs, srs, srsLagrange)
+		if err != nil {
+			b.Errorf("Failed in setup: %v", err)
+			return err
+		}
+		setupTime = time.Now().UnixMicro() - start
+
+		// Proving step with time measurement
+		id := rand.Uint32() % 256 // #nosec G404 -- This is a false positive
+		fmt.Println("plonk proving", id)
+		start = time.Now().UnixMicro()
+		proof, err := plonk.Prove(ccs, pk, fullWitness)
+		if err != nil {
+			b.Errorf("Failed in proving: %v", err)
+			return err
+		}
+		proverTime = time.Now().UnixMicro() - start
+
+		// Verifier step with time measurement
+		start = time.Now().UnixMicro()
+		publicWitness, _ := fullWitness.Public()
+		err = plonk.Verify(proof, vk, publicWitness)
+		verifierTime = time.Now().UnixMicro() - start
+		if err != nil {
+			b.Errorf("Failed in verifying: %v", err)
+			return err
+		}
+
+		// Writing the captured data to the file
+		_, err = fmt.Fprintf(file, "%d, %d, %d, %d, %d, %d, %d\n",
+			resolution, index, ccs.GetNbConstraints(),
+			compilationTime, setupTime, proverTime, verifierTime)
+		if err != nil {
+			b.Errorf("Failed to write data to file: %v", err)
+			return err
+		}
+	}
+	return nil
+}
+
+func BenchProofMemoryGroth16(b *testing.B, circuit, assignment frontend.Circuit) error {
 
 	cs, err := frontend.Compile(ecc.BN254.ScalarField(), r1cs.NewBuilder, circuit, frontend.WithCompressThreshold(compressThreshold))
 	if err != nil {
@@ -645,6 +745,62 @@ func BenchProofMemory(b *testing.B, circuit, assignment frontend.Circuit) error 
 
 	publicWitness, _ := fullWitness.Public()
 	groth16.Verify(proof, vk, publicWitness)
+
+	return nil
+}
+
+func BenchProofMemoryPlonk(b *testing.B, circuit, assignment frontend.Circuit) error {
+
+	ccs, err := frontend.Compile(ecc.BN254.ScalarField(), scs.NewBuilder, circuit, frontend.WithCompressThreshold(compressThreshold))
+	if err != nil {
+		b.Errorf("Failed to compile: %v", err)
+		return err
+	}
+
+	fullWitness, err := frontend.NewWitness(assignment, ecc.BN254.ScalarField())
+	if err != nil {
+		b.Errorf("Failed Full Witness: %v", err)
+		return err
+	}
+
+	srs, srsLagrange, err := unsafekzg.NewSRS(ccs)
+
+	pk, vk, err := plonk.Setup(ccs, srs, srsLagrange)
+	if err != nil {
+		b.Errorf("Failed in setup: %v", err)
+		return err
+	}
+
+	// // Open the file in write mode for pk
+	// var bufSRS bytes.Buffer
+	// _, _ = srs.WriteTo(&bufSRS)
+	// err = os.WriteFile("../benchmarks/srs.dat", bufSRS.Bytes(), 0644)
+	// if err != nil {
+	// 	b.Errorf("Failed in writing SRS: %v", err)
+	// 	return err
+	// }
+
+	// // Open the file in write mode for vk
+	// var bufVK bytes.Buffer
+	// _, _ = vk.WriteTo(&bufVK)
+	// err = os.WriteFile("../benchmarks/vk.dat", bufVK.Bytes(), 0644)
+	// if err != nil {
+	// 	b.Errorf("Failed in writing verifier key key: %v", err)
+	// 	return err
+	// }
+
+	proof, err := plonk.Prove(ccs, pk, fullWitness)
+	if err != nil {
+		b.Errorf("Failed in proving: %v", err)
+		return err
+	}
+
+	publicWitness, _ := fullWitness.Public()
+	err = plonk.Verify(proof, vk, publicWitness)
+	if err != nil {
+		b.Errorf("Failed in verifying: %v", err)
+		return err
+	}
 
 	return nil
 }
