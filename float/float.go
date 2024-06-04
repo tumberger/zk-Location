@@ -77,8 +77,8 @@ func (f *Context) NewFloat(v frontend.Variable) FloatVar {
 
 	// Enforce the bit length of sign, exponent and mantissa
 	f.Api.AssertIsBoolean(s)
-	f.Gadget.AssertBitLength(e, f.E)
-	f.Gadget.AssertBitLength(m, f.M)
+	f.Gadget.AssertBitLength(e, f.E, gadget.TightForUnknownRange)
+	f.Gadget.AssertBitLength(m, f.M, gadget.TightForUnknownRange)
 
 	exponent_min := new(big.Int).Sub(f.E_NORMAL_MIN, big.NewInt(1))
 	exponent_max := f.E_MAX
@@ -104,7 +104,7 @@ func (f *Context) NewFloat(v frontend.Variable) FloatVar {
 	// that `shift` is in the range `[0, M + E]`.
 	// However, we will check the range of `shifted_mantissa` later, which will implicitly provide
 	// tight upper bounds for `shift` and `two_to_shift`, and thus soundness still holds.
-	f.Gadget.AssertBitLength(shift, uint(big.NewInt(int64(f.M)).BitLen()))
+	f.Gadget.AssertBitLength(shift, uint(big.NewInt(int64(f.M)).BitLen()), gadget.Loose)
 	two_to_shift := f.Gadget.QueryPowerOf2(shift)
 
 	// Compute the shifted mantissa. Multiplication here is safe because we already know that
@@ -128,6 +128,7 @@ func (f *Context) NewFloat(v frontend.Variable) FloatVar {
 			f.Api.Mul(mantissa_is_not_zero, new(big.Int).Lsh(big.NewInt(1), f.M-1)),
 		),
 		f.M-1,
+		gadget.TightForSmallAbs,
 	)
 
 	exponent =
@@ -236,8 +237,8 @@ func (f *Context) round(
 	// Enforce the bit length of `p`, `q`, `r` and `s`
 	f.Api.AssertIsBoolean(q)
 	f.Api.AssertIsBoolean(r)
-	f.Gadget.AssertBitLength(p, p_len)
-	f.Gadget.AssertBitLength(s, s_len)
+	f.Gadget.AssertBitLength(p, p_len, gadget.Loose)
+	f.Gadget.AssertBitLength(s, s_len, gadget.TightForSmallAbs)
 
 	// Concatenate `p || q`, `r || s`, and `p || q || r || s`.
 	// `p || q` is what we want, i.e., the final mantissa, and `r || s` will be thrown away.
@@ -532,7 +533,7 @@ func (f *Context) Add(x, y FloatVar) FloatVar {
 	// that `shift` is in the range `[0, M + E]`.
 	// However, we will check the range of `|s| * two_to_shift` later, which will implicitly provide
 	// tight upper bounds for `shift` and `two_to_shift`, and thus soundness still holds.
-	f.Gadget.AssertBitLength(shift, uint(big.NewInt(int64(mantissa_bit_length)).BitLen()))
+	f.Gadget.AssertBitLength(shift, uint(big.NewInt(int64(mantissa_bit_length)).BitLen()), gadget.Loose)
 	two_to_shift := f.Gadget.QueryPowerOf2(shift)
 
 	// Compute the shifted absolute value of mantissa
@@ -561,6 +562,7 @@ func (f *Context) Add(x, y FloatVar) FloatVar {
 	f.Gadget.AssertBitLength(
 		f.Api.Sub(mantissa, f.Api.Mul(mantissa_is_not_zero, new(big.Int).Lsh(big.NewInt(1), mantissa_bit_length-1))),
 		mantissa_bit_length-1,
+		gadget.TightForSmallAbs,
 	)
 	// Decrement the exponent by `shift`.
 	exponent = f.Api.Sub(exponent, shift)
@@ -692,6 +694,7 @@ func (f *Context) Mul(x, y FloatVar) FloatVar {
 	f.Gadget.AssertBitLength(
 		f.Api.Sub(mantissa, f.Api.Mul(mantissa_msb, new(big.Int).Lsh(big.NewInt(1), mantissa_bit_length-1))),
 		mantissa_bit_length-1,
+		gadget.TightForSmallAbs,
 	)
 	// Shift the mantissa to the left to make the MSB 1.
 	// Since `mantissa` is in the range `[2^(2M), 2^(2M + 2))`, either the MSB is 1 or the second MSB is 1.
@@ -784,15 +787,15 @@ func (f *Context) Div(x, y FloatVar) FloatVar {
 	// Compute the remainder `(x.mantissa << (M + 2)) % y_mantissa`.
 	remainder := f.Api.Sub(f.Api.Mul(x.Mantissa, new(big.Int).Lsh(big.NewInt(1), f.M+2)), f.Api.Mul(mantissa, y_mantissa))
 	// Enforce that `0 <= remainder < y_mantissa`.
-	f.Gadget.AssertBitLength(remainder, f.M+1)
-	f.Gadget.AssertBitLength(f.Api.Sub(y_mantissa, f.Api.Add(remainder, big.NewInt(1))), f.M+1)
+	f.Gadget.AssertBitLength(remainder, f.M+1, gadget.Loose)
+	f.Gadget.AssertBitLength(f.Api.Sub(y_mantissa, f.Api.Add(remainder, big.NewInt(1))), f.M+1, gadget.Loose)
 	// Enforce that `mantissa_msb` is indeed the MSB of the mantissa.
 	// Soundness holds because
 	// * If `mantissa_msb == 0` but the actual MSB is 1, then the subtraction result will have at least
 	// mantissa_bit_length bits.
 	// * If `mantissa_msb == 1` but the actual MSB is 0, then the subtraction will underflow to a negative
 	// value.
-	f.Gadget.AssertBitLength(f.Api.Sub(mantissa, f.Api.Mul(mantissa_msb, new(big.Int).Lsh(big.NewInt(1), mantissa_bit_length-1))), mantissa_bit_length-1)
+	f.Gadget.AssertBitLength(f.Api.Sub(mantissa, f.Api.Mul(mantissa_msb, new(big.Int).Lsh(big.NewInt(1), mantissa_bit_length-1))), mantissa_bit_length-1, gadget.TightForUnknownRange)
 
 	// Since `mantissa` is in the range `[2^(2M), 2^(2M + 2))`, either the MSB is 1 or the second MSB is 1.
 	// Therefore, we can simply double the mantissa if the MSB is 0.
@@ -904,8 +907,8 @@ func (f *Context) Sqrt(x FloatVar) FloatVar {
 	// Compute the remainder `r = m - n^2`.
 	r := f.Api.Sub(m, f.Api.Mul(n, n))
 	// Enforce that `n^2 <= m < (n + 1)^2`.
-	f.Gadget.AssertBitLength(r, mantissa_bit_length+1)                             // n^2 <= m  =>  m - n^2 >= 0
-	f.Gadget.AssertBitLength(f.Api.Sub(f.Api.Add(n, n), r), mantissa_bit_length+1) // (n + 1)^2 > m  =>  n^2 + 2n + 1 - m > 0  =>  n^2 + 2n - m >= 0
+	f.Gadget.AssertBitLength(r, mantissa_bit_length+1, gadget.Loose)                             // n^2 <= m  =>  m - n^2 >= 0
+	f.Gadget.AssertBitLength(f.Api.Sub(f.Api.Add(n, n), r), mantissa_bit_length+1, gadget.Loose) // (n + 1)^2 > m  =>  n^2 + 2n + 1 - m > 0  =>  n^2 + 2n - m >= 0
 
 	n_is_zero := f.Api.IsZero(n)
 	n_is_not_zero := f.Api.Sub(big.NewInt(1), n_is_zero)
@@ -1063,9 +1066,9 @@ func (f *Context) Trunc(x FloatVar) FloatVar {
 	q := outputs[0]
 	r := f.Api.Sub(m, f.Api.Mul(q, new(big.Int).Lsh(big.NewInt(1), f.M+1)))
 	// Enforce `q` to be small
-	f.Gadget.AssertBitLength(q, f.M+1)
+	f.Gadget.AssertBitLength(q, f.M+1, gadget.Loose)
 	// Enforce that `0 <= r < 2^(M + 1)`, where `2^(M + 1)` is the divisor.
-	f.Gadget.AssertBitLength(r, f.M+1)
+	f.Gadget.AssertBitLength(r, f.M+1, gadget.TightForSmallAbs)
 
 	return FloatVar{
 		Sign:       x.Sign,
@@ -1099,9 +1102,9 @@ func (f *Context) Floor(x FloatVar) FloatVar {
 	q := outputs[0]
 	r := f.Api.Sub(m, f.Api.Mul(q, new(big.Int).Lsh(big.NewInt(1), f.M+1)))
 	// Enforce `q` to be small
-	f.Gadget.AssertBitLength(q, f.M+1)
+	f.Gadget.AssertBitLength(q, f.M+1, gadget.Loose)
 	// Enforce that `0 <= |r| < 2^(M + 1)`, where `2^(M + 1)` is the divisor.
-	f.Gadget.AssertBitLength(f.Api.Select(x.Sign, f.Api.Neg(r), r), f.M+1)
+	f.Gadget.AssertBitLength(f.Api.Select(x.Sign, f.Api.Neg(r), r), f.M+1, gadget.TightForSmallAbs)
 
 	mantissa := f.Api.Mul(q, two_to_e)
 	// `mantissa` may overflow when `x` is negative, so we need to fix it.

@@ -30,7 +30,7 @@ type Constraints struct {
 	lookup_global uint // A one-time cost that can be amortized over many queries
 }
 
-type F32Circuit struct {
+type FloatCircuit struct {
 	X      frontend.Variable `gnark:",secret"`
 	Y      frontend.Variable `gnark:",secret"`
 	E      uint
@@ -52,7 +52,7 @@ func count_constraints(ctx Context, f func()) Constraints {
 	}
 }
 
-func (c *F32Circuit) Define(api frontend.API) error {
+func (c *FloatCircuit) Define(api frontend.API) error {
 	ctx := NewContext(api, c.size, c.E, c.M)
 
 	x := ctx.NewFloat(c.X)
@@ -78,7 +78,7 @@ var (
 	basepath   = filepath.Dir(b)
 )
 
-func TestF32CircuitConstraints(t *testing.T) {
+func TestFloatCircuitConstraints(t *testing.T) {
 	ops := []string{"Init", "Add", "Sub", "Mul", "Div", "Sqrt", "Cmp"}
 
 	var result_all strings.Builder
@@ -94,7 +94,7 @@ func TestF32CircuitConstraints(t *testing.T) {
 			result_all.WriteString(param.name + ", ")
 			result_all.WriteString(fmt.Sprint(size) + ", ")
 
-			circuit := &F32Circuit{E: param.E, M: param.M, size: size}
+			circuit := &FloatCircuit{E: param.E, M: param.M, size: size}
 			_, err := frontend.Compile(ecc.BN254.ScalarField(), r1cs.NewBuilder, circuit)
 			if err != nil {
 				t.Fatal(err)
