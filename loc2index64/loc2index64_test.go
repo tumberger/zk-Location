@@ -259,14 +259,14 @@ func BenchmarkLoc2IndexProof(b *testing.B) {
 	}
 
 	for i := range circuits {
-		if err := util.BenchProofToFileGroth16(b, &circuits[i], &assignments[i], resolutions[i], indices[i], "../benchmarks/bench_ZKLP64_G16_BN254.txt"); err != nil {
+		if err := util.BenchProofToFileGroth16(b, &circuits[i], &assignments[i], resolutions[i], indices[i], "../benchmarks/raw/bench_ZKLP64_G16_BN254.txt"); err != nil {
 			b.Logf("Error on benchmarking proof for entry %d: %v", i, err)
 			continue
 		}
 	}
 
 	for i := range circuits {
-		if err := util.BenchProofToFilePlonk(b, &circuits[i], &assignments[i], resolutions[i], indices[i], "../benchmarks/bench_ZKLP64_Plonk_BN254.txt"); err != nil {
+		if err := util.BenchProofToFilePlonk(b, &circuits[i], &assignments[i], resolutions[i], indices[i], "../benchmarks/raw/bench_ZKLP64_Plonk_BN254.txt"); err != nil {
 			b.Logf("Error on benchmarking proof for entry %d: %v", i, err)
 			continue
 		}
