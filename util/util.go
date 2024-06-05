@@ -522,9 +522,9 @@ func BenchProof(b *testing.B, circuit, assignment frontend.Circuit) {
 	}
 }
 
-func BenchProofToFileGroth16(b *testing.B, circuit, assignment frontend.Circuit, resolution int64, index int64) error {
+func BenchProofToFileGroth16(b *testing.B, circuit, assignment frontend.Circuit, resolution int64, index int64, path string) error {
 	// Open a file to save benchmark results
-	file, err := os.OpenFile("../benchmarks/bench_ZKLP32_G16_BN254.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	file, err := os.OpenFile(path, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
 		b.Errorf("Failed to open file: %v", err)
 		return err
@@ -607,9 +607,9 @@ func BenchProofToFileGroth16(b *testing.B, circuit, assignment frontend.Circuit,
 	return nil
 }
 
-func BenchProofToFilePlonk(b *testing.B, circuit, assignment frontend.Circuit, resolution int64, index int64) error {
+func BenchProofToFilePlonk(b *testing.B, circuit, assignment frontend.Circuit, resolution int64, index int64, path string) error {
 	// Open a file to save benchmark results
-	file, err := os.OpenFile("../benchmarks/bench_ZKLP32_Plonk_BN254.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	file, err := os.OpenFile(path, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
 		b.Errorf("Failed to open file: %v", err)
 		return err
