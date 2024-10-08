@@ -2,6 +2,7 @@ import subprocess
 import re
 import numpy as np
 import struct
+import random
 
 def execute_command(cmd):
     output = subprocess.run(cmd, capture_output=True, text=True)
@@ -74,44 +75,47 @@ def haversine(lat1, lon1, lat2, lon2):
 
 def generate_points(resolution):
     points = []
-    for res in range(0, resolution + 1):
-        # Convert latitude and longitude to H3 cell index
-        h3_index = lat_lng_to_cell(res, 40.689167, 33.044444)  # Example coordinates in degrees
+    for j in range(0, 20):
+        lat = random.uniform(0, 90)
+        lng = random.uniform(0, 180)
+        for res in range(0, resolution + 1):
+            # Convert latitude and longitude to H3 cell index
+            h3_index = lat_lng_to_cell(res, lat, lng)  # Example coordinates in degrees
 
-        center_lat, center_lng = cell_to_lat_lng(h3_index)  # These are in degrees
+            center_lat, center_lng = cell_to_lat_lng(h3_index)  # These are in degrees
 
-        # Convert from degrees to radians
-        center_lat_rad = np.radians(center_lat)
-        center_lng_rad = np.radians(center_lng)
+            # Convert from degrees to radians
+            center_lat_rad = np.radians(center_lat)
+            center_lng_rad = np.radians(center_lng)
 
-        boundary = cell_to_boundary(h3_index)
+            boundary = cell_to_boundary(h3_index)
 
-        if not boundary:
-            continue
+            if not boundary:
+                continue
 
-        target_lat, target_lng = map(float, boundary[0])  # These are in degrees
+            target_lat, target_lng = map(float, boundary[0])  # These are in degrees
 
-        # Convert from degrees to radians
-        target_lat_rad = np.radians(target_lat)
-        target_lng_rad = np.radians(target_lng)
+            # Convert from degrees to radians
+            target_lat_rad = np.radians(target_lat)
+            target_lng_rad = np.radians(target_lng)
 
-        for i in range(2, 11):
-            factor = np.log(i) / np.log(20)
-            gen_lat_rad = center_lat_rad + (target_lat_rad - center_lat_rad) * factor
-            gen_lng_rad = center_lng_rad + (target_lng_rad - center_lng_rad) * factor
+            for i in range(18, 21):
+                factor = np.log(i) / np.log(20)
+                gen_lat_rad = center_lat_rad + (target_lat_rad - center_lat_rad) * factor
+                gen_lng_rad = center_lng_rad + (target_lng_rad - center_lng_rad) * factor
 
-            gen_lat = center_lat + (target_lat - center_lat) * factor
-            gen_lng = center_lng + (target_lng - center_lng) * factor
-            
-            # Convert generated point back to H3 cell index
-            gen_h3_index = execute_lat_lng_to_ijk(res, gen_lat, gen_lng)
-            points.append((gen_lat_rad, gen_lng_rad, res, gen_h3_index[0], gen_h3_index[1], gen_h3_index[2]))
+                gen_lat = center_lat + (target_lat - center_lat) * factor
+                gen_lng = center_lng + (target_lng - center_lng) * factor
+                
+                # Convert generated point back to H3 cell index
+                gen_h3_index = execute_lat_lng_to_ijk(res, gen_lat, gen_lng)
+                points.append((gen_lat_rad, gen_lng_rad, res, gen_h3_index[0], gen_h3_index[1], gen_h3_index[2]))
 
-            # Calculate and print the distance between generated point and boundary point            
-            distance = haversine(gen_lat, gen_lng, target_lat, target_lng)
-            print(f"Generated Point", gen_lat, gen_lng)
-            print(f"Boundary Point", target_lat, target_lng)
-            print(f"Distance between generated point and boundary point: {distance:.2f} meters")
+                # Calculate and print the distance between generated point and boundary point            
+                distance = haversine(gen_lat, gen_lng, target_lat, target_lng)
+                print(f"Generated Point", gen_lat, gen_lng)
+                print(f"Boundary Point", target_lat, target_lng)
+                print(f"Distance between generated point and boundary point: {distance:.2f} meters")
     return points
 
 def float32_to_hex(f):
