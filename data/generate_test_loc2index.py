@@ -73,9 +73,9 @@ def haversine(lat1, lon1, lat2, lon2):
     distance = R * c
     return distance
 
-def generate_points(resolution):
+def generate_points(resolution, i):
     points = []
-    for j in range(0, 20):
+    for j in range(0, 100):
         lat = random.uniform(0, 90)
         lng = random.uniform(0, 180)
         for res in range(0, resolution + 1):
@@ -99,23 +99,22 @@ def generate_points(resolution):
             target_lat_rad = np.radians(target_lat)
             target_lng_rad = np.radians(target_lng)
 
-            for i in range(18, 21):
-                factor = np.log(i) / np.log(20)
-                gen_lat_rad = center_lat_rad + (target_lat_rad - center_lat_rad) * factor
-                gen_lng_rad = center_lng_rad + (target_lng_rad - center_lng_rad) * factor
+            factor = 1 - 2**(-i)
+            gen_lat_rad = center_lat_rad + (target_lat_rad - center_lat_rad) * factor
+            gen_lng_rad = center_lng_rad + (target_lng_rad - center_lng_rad) * factor
 
-                gen_lat = center_lat + (target_lat - center_lat) * factor
-                gen_lng = center_lng + (target_lng - center_lng) * factor
-                
-                # Convert generated point back to H3 cell index
-                gen_h3_index = execute_lat_lng_to_ijk(res, gen_lat, gen_lng)
-                points.append((gen_lat_rad, gen_lng_rad, res, gen_h3_index[0], gen_h3_index[1], gen_h3_index[2]))
+            gen_lat = center_lat + (target_lat - center_lat) * factor
+            gen_lng = center_lng + (target_lng - center_lng) * factor
+            
+            # Convert generated point back to H3 cell index
+            gen_h3_index = execute_lat_lng_to_ijk(res, gen_lat, gen_lng)
+            points.append((gen_lat_rad, gen_lng_rad, res, gen_h3_index[0], gen_h3_index[1], gen_h3_index[2]))
 
-                # Calculate and print the distance between generated point and boundary point            
-                distance = haversine(gen_lat, gen_lng, target_lat, target_lng)
-                print(f"Generated Point", gen_lat, gen_lng)
-                print(f"Boundary Point", target_lat, target_lng)
-                print(f"Distance between generated point and boundary point: {distance:.2f} meters")
+            # Calculate and print the distance between generated point and boundary point            
+            distance = haversine(gen_lat, gen_lng, target_lat, target_lng)
+            print(f"Generated Point", gen_lat, gen_lng)
+            print(f"Boundary Point", target_lat, target_lng)
+            print(f"Distance between generated point and boundary point: {distance:.2f} meters")
     return points
 
 def float32_to_hex(f):
@@ -131,13 +130,13 @@ def float64_to_hex(f):
 def int_to_hex(i):
     # Convert an integer to hexadecimal
     return i
-def write_to_file(data, use_float32=False):
+def write_to_file(data, i, use_float32=False):
     if use_float32:
-        file_path = './f32/loc2index32.txt'
+        file_path = './f32/loc2index/' + str(i) + '_100.txt'
         to_hex = float32_to_hex  # Use the float32_to_hex function
         hex_format = '{:08X}'  # Format for 32-bit hex
     else:
-        file_path = './f64/loc2index64.txt'
+        file_path = './f64/loc2index/' + str(i) + '_100.txt'
         to_hex = float64_to_hex  # Use the float64_to_hex function
         hex_format = '{:016X}'  # Format for 64-bit hex
 
@@ -153,14 +152,15 @@ def write_to_file(data, use_float32=False):
 
 # Generate points for resolutions 1-15
 try:
-    generated_points = generate_points(15)
+    for i in range(0, 16):
+        generated_points = generate_points(15, i)
 
-    # Choose whether to use float32 or float64 precision
-    # Set use_float32 to True for float32 precision, False for float64
-    use_float32 = False  # or False
+        # Choose whether to use float32 or float64 precision
+        # Set use_float32 to True for float32 precision, False for float64
+        use_float32 = False  # or False
 
-    write_to_file(generated_points, use_float32)
-    precision_type = '32' if use_float32 else '64'
-    print(f"Data generation complete. Data saved to loc2index{precision_type}.txt.")
+        write_to_file(generated_points, i, use_float32)
+        precision_type = '32' if use_float32 else '64'
+        print(f"Data generation complete. Data saved to loc2index{precision_type}.txt.")
 except Exception as e:
     print(f"Error: {e}")

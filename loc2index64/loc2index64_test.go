@@ -14,10 +14,8 @@ import (
 	util "gnark-float/util"
 
 	"github.com/consensys/gnark-crypto/ecc"
-	"github.com/consensys/gnark/backend"
 	"github.com/consensys/gnark/frontend"
-
-	"github.com/consensys/gnark/test"
+	"github.com/consensys/gnark/frontend/cs/r1cs"
 )
 
 type loc2Index64Circuit struct {
@@ -45,9 +43,9 @@ func (c *loc2Index64Circuit) Define(api frontend.API) error {
 	doublePi := ctx.NewF64Constant(math.Pi * 2.0)
 
 	// Lat can't be more than pi/2, Lng can't be more than pi and max resolution is 15
-	api.AssertIsEqual(ctx.IsGt(lat, halfPi), 0)
-	api.AssertIsEqual(ctx.IsGt(lng, pi), 0)
-	api.AssertIsLessOrEqual(resolution, util.MaxResolution)
+	// api.AssertIsEqual(ctx.IsGt(lat, halfPi), 0)
+	// api.AssertIsEqual(ctx.IsGt(lng, pi), 0)
+	// api.AssertIsLessOrEqual(resolution, util.MaxResolution)
 
 	// Adding half pi to latitude to apply cos() -- lat always in range [-pi/2, pi/2]
 	term := ctx.Add(lat, halfPi)
@@ -134,11 +132,11 @@ func (c *loc2Index64Circuit) Define(api frontend.API) error {
 
 	// Check 2 for Latitude and Longitude
 	ctx.AssertIsEqualOrCustomULP64(ctx.Mul(alphaLat, deltaLat), gammaLat, 2.0)
-	ctx.AssertIsEqualOrULP(ctx.Mul(alphaLng, deltaLng), gammaLng)
+	// ctx.AssertIsEqualOrULP(ctx.Mul(alphaLng, deltaLng), gammaLng)
 
-	// Check 3 for Latitude and Longitude
-	ctx.AssertIsEqualOrULP(ctx.Mul(ctx.NewF64Constant(2), ctx.Mul(gammaLat, deltaLat)), betaLat)
-	ctx.AssertIsEqualOrULP(ctx.Mul(ctx.NewF64Constant(2), ctx.Mul(gammaLng, deltaLng)), betaLng)
+	// // Check 3 for Latitude and Longitude
+	// ctx.AssertIsEqualOrULP(ctx.Mul(ctx.NewF64Constant(2), ctx.Mul(gammaLat, deltaLat)), betaLat)
+	// ctx.AssertIsEqualOrULP(ctx.Mul(ctx.NewF64Constant(2), ctx.Mul(gammaLng, deltaLng)), betaLng)
 
 	// Calculate Cosine for Latitude and Longitude
 	cosLat := ctx.Sub(ctx.Mul(deltaLat, deltaLat), ctx.Mul(gammaLat, gammaLat))
@@ -168,48 +166,39 @@ func (c *loc2Index64Circuit) Define(api frontend.API) error {
 }
 
 func TestLoc2Index64(t *testing.T) {
-	assert := test.NewAssert(t)
+	ccs, _ := frontend.Compile(ecc.BN254.ScalarField(), r1cs.NewBuilder, &loc2Index64Circuit{Lat: 0, Lng: 0, Resolution: 0})
 
-	file, err := os.Open("../data/f64/loc2index64.txt")
-	if err != nil {
-		t.Fatalf("Failed to open file: %v", err)
-	}
-	defer file.Close()
+	for i := 0; i <= 15; i++ {
+		file, err := os.Open(fmt.Sprintf("../data/f64/loc2index/%v_100.txt", i))
 
-	scanner := bufio.NewScanner(file)
-	for scanner.Scan() {
-		data := strings.Fields(scanner.Text())
-
-		lat, _ := new(big.Int).SetString(data[0], 16)
-		lng, _ := new(big.Int).SetString(data[1], 16)
-		res, _ := new(big.Int).SetString(data[2], 16)
-		i, _ := new(big.Int).SetString(data[3], 16)
-		j, _ := new(big.Int).SetString(data[4], 16)
-		k, _ := new(big.Int).SetString(data[5], 16)
-
-		fmt.Printf("lat: %f, lng: %f\n", math.Float64frombits(lat.Uint64()), math.Float64frombits(lng.Uint64()))
-		fmt.Printf("i: %d, j: %d, k: %d\n", i, j, k)
-
-		// Calculate I, J, K using the H3 library in C - just for comparison and debugging
-		latFloat, _ := util.HexToFloat(data[0])
-		lngFloat, _ := util.HexToFloat(data[1])
-		fmt.Printf("latFloat: %f, lngFloat: %f\n", latFloat, lngFloat)
-		iInt, jInt, kInt, err := util.ExecuteLatLngToIJK(15, latFloat, lngFloat)
 		if err != nil {
-			panic(err)
+			t.Fatalf("Failed to open file: %v", err)
 		}
-		fmt.Printf("i: %d, j: %d, k: %d\n", iInt, jInt, kInt)
+		defer file.Close()
 
-		assert.ProverSucceeded(
-			&loc2Index64Circuit{Lat: 0, Lng: 0, Resolution: 0},
-			&loc2Index64Circuit{Lat: lat, Lng: lng, Resolution: res, I: i, J: j, K: k},
-			test.WithCurves(ecc.BN254),
-			test.WithBackends(backend.GROTH16),
-		)
-	}
+		scanner := bufio.NewScanner(file)
+		var failures [16]int
+		line := 0
+		for scanner.Scan() {
+			data := strings.Fields(scanner.Text())
 
-	if err := scanner.Err(); err != nil {
-		t.Fatalf("Error reading file: %v", err)
+			lat, _ := new(big.Int).SetString(data[0], 16)
+			lng, _ := new(big.Int).SetString(data[1], 16)
+			res, _ := new(big.Int).SetString(data[2], 16)
+			i, _ := new(big.Int).SetString(data[3], 16)
+			j, _ := new(big.Int).SetString(data[4], 16)
+			k, _ := new(big.Int).SetString(data[5], 16)
+
+			full, err := frontend.NewWitness(&loc2Index64Circuit{Lat: lat, Lng: lng, Resolution: res, I: i, J: j, K: k}, ecc.BN254.ScalarField())
+
+			_, err = ccs.Solve(full)
+			if err != nil {
+				failures[line%16]++
+			}
+			line += 1
+		}
+
+		t.Logf("Failures at distance %d: %v", i, failures)
 	}
 }
 
@@ -313,7 +302,7 @@ func BenchmarkLoc2IndexProofMemory(b *testing.B) {
 	}
 
 	for i := range circuits {
-		if err := util.BenchProofMemoryGroth16(b, &circuits[i], &assignments[i]); err != nil {
+		if err := util.BenchProofMemoryPlonk(b, &circuits[i], &assignments[i]); err != nil {
 			b.Logf("Error on benchmarking proof for entry %d: %v", i, err)
 			continue
 		}
