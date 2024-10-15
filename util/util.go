@@ -23,7 +23,6 @@ import (
 	"github.com/consensys/gnark/test/unsafekzg"
 	"github.com/rs/zerolog/log"
 	"github.com/stretchr/testify/require"
-	"github.com/uber/h3-go/v4"
 )
 
 var (
@@ -445,20 +444,6 @@ func ExecuteLatLngToIJK(resolution int, latitude float64, longitude float64) (in
 	return i, j, k, nil
 }
 
-// The following function translates to local IJ coordinates within the proximity of a given origin
-// (not for gloabl use)
-func LatLngToIJ(lat float64, lng float64, resolution int, origin h3.Cell) (I int, J int) {
-	// Create a new LatLng struct
-	latLng := h3.NewLatLng(lat, lng)
-
-	// Convert LatLng to H3 cell
-	cell := h3.LatLngToCell(latLng, resolution)
-
-	// Convert H3 cell to local IJ coordinates
-	coordIJ := h3.CellToLocalIJ(origin, cell)
-
-	return coordIJ.I, coordIJ.J
-}
 
 func StrToIntSlice(inputData string, hexRepresentation bool) []int {
 

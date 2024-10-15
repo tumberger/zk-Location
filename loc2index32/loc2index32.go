@@ -1,13 +1,20 @@
-package loc2index64
+package main
 
 import (
+	"fmt"
 	float "gnark-float/float"
+	"gnark-float/hint"
 	util "gnark-float/util"
+	"math/big"
+	"strings"
+	"time"
 
 	"math"
-	//"fmt"
 
+	"github.com/consensys/gnark-crypto/ecc"
+	"github.com/consensys/gnark/backend/groth16"
 	"github.com/consensys/gnark/frontend"
+	"github.com/consensys/gnark/frontend/cs/r1cs"
 )
 
 func scaleR(f *float.Context, r float.FloatVar, resolution frontend.Variable) float.FloatVar {
@@ -257,4 +264,183 @@ func NormalizeIJK(f *float.Context, iCoordNegative frontend.Variable, iCoord fro
 	k := api.Sub(kCoord, min)
 
 	return [3]frontend.Variable{i, j, k}
+}
+
+type Loc2Index32Circuit struct {
+
+	// SECRET INPUTS
+	Lat frontend.Variable `gnark:",secret"`
+	Lng frontend.Variable `gnark:",secret"`
+
+	// PUBLIC INPUTS
+	Resolution frontend.Variable `gnark:",public"`
+	I          frontend.Variable `gnark:",public"`
+	J          frontend.Variable `gnark:",public"`
+	K          frontend.Variable `gnark:",public"`
+}
+
+func (c *Loc2Index32Circuit) Define(api frontend.API) error {
+
+	ctx := float.NewContext(api, 0, util.IEEE32ExponentBitwidth, util.IEEE32Precision)
+	// lat := ctx.NewFloat(c.Lat)
+	lng := ctx.NewFloat(c.Lng)
+
+	resolution := c.Resolution
+
+	// pi := ctx.NewF32Constant(math.Pi)
+	// halfPi := ctx.NewF32Constant(math.Pi / 2.0)
+
+	// Lat can't be more than pi/2, Lng can't be more than pi and max resolution is 15
+	// api.AssertIsEqual(ctx.IsGt(lat, halfPi), 0)
+	// api.AssertIsEqual(ctx.IsGt(lng, pi), 0)
+	// api.AssertIsLessOrEqual(resolution, util.MaxResolution)
+
+	// Compute alpha, beta, gamma, delta for Latitude
+	alphaLat := ctx.NewFloat(0)
+	betaLat := ctx.NewFloat(0)
+	gammaLat := ctx.NewFloat(0)
+	deltaLat := ctx.NewFloat(0)
+	precomputeLat, err := ctx.Api.Compiler().NewHint(hint.PrecomputeHint32, 16, c.Lat, ctx.E, ctx.M)
+	if err != nil {
+		panic(err)
+	}
+	alphaLat.Sign = precomputeLat[0]
+	alphaLat.Exponent = precomputeLat[1]
+	alphaLat.Mantissa = precomputeLat[2]
+	alphaLat.IsAbnormal = precomputeLat[3]
+
+	betaLat.Sign = precomputeLat[4]
+	betaLat.Exponent = precomputeLat[5]
+	betaLat.Mantissa = precomputeLat[6]
+	betaLat.IsAbnormal = precomputeLat[7]
+
+	gammaLat.Sign = precomputeLat[8]
+	gammaLat.Exponent = precomputeLat[9]
+	gammaLat.Mantissa = precomputeLat[10]
+	gammaLat.IsAbnormal = precomputeLat[11]
+
+	deltaLat.Sign = precomputeLat[12]
+	deltaLat.Exponent = precomputeLat[13]
+	deltaLat.Mantissa = precomputeLat[14]
+	deltaLat.IsAbnormal = precomputeLat[15]
+
+	// Compute alpha, beta, gamma, delta for Longitude
+	alphaLng := ctx.NewFloat(0)
+	betaLng := ctx.NewFloat(0)
+	gammaLng := ctx.NewFloat(0)
+	deltaLng := ctx.NewFloat(0)
+	precomputeLng, err := ctx.Api.Compiler().NewHint(hint.PrecomputeHint32, 16, c.Lng, ctx.E, ctx.M)
+	if err != nil {
+		panic(err)
+	}
+	alphaLng.Sign = precomputeLng[0]
+	alphaLng.Exponent = precomputeLng[1]
+	alphaLng.Mantissa = precomputeLng[2]
+	alphaLng.IsAbnormal = precomputeLng[3]
+
+	betaLng.Sign = precomputeLng[4]
+	betaLng.Exponent = precomputeLng[5]
+	betaLng.Mantissa = precomputeLng[6]
+	betaLng.IsAbnormal = precomputeLng[7]
+
+	gammaLng.Sign = precomputeLng[8]
+	gammaLng.Exponent = precomputeLng[9]
+	gammaLng.Mantissa = precomputeLng[10]
+	gammaLng.IsAbnormal = precomputeLng[11]
+
+	deltaLng.Sign = precomputeLng[12]
+	deltaLng.Exponent = precomputeLng[13]
+	deltaLng.Mantissa = precomputeLng[14]
+	deltaLng.IsAbnormal = precomputeLng[15]
+
+	// Check 1 (Identity) for Latitude and Longitude
+	deltaLatSquared := ctx.Mul(deltaLat, deltaLat)
+	gammaLatSquared := ctx.Mul(gammaLat, gammaLat)
+	identityLat := ctx.Add(gammaLatSquared, deltaLatSquared)
+	deltaLngSquared := ctx.Mul(deltaLng, deltaLng)
+	gammaLngSquared := ctx.Mul(gammaLng, gammaLng)
+	identityLng := ctx.Add(gammaLngSquared, deltaLngSquared)
+	ctx.AssertIsEqualOrCustomULP32(identityLat, ctx.NewF32Constant(1), 1.0)
+	ctx.AssertIsEqualOrCustomULP32(identityLng, ctx.NewF32Constant(1), 1.0)
+
+	// Check 2 for Latitude and Longitude
+	ctx.AssertIsEqualOrCustomULP32(ctx.Mul(alphaLat, deltaLat), gammaLat, 1.0)
+	ctx.AssertIsEqualOrCustomULP32(ctx.Mul(alphaLng, deltaLng), gammaLng, 1.0)
+
+	// Check 3 for Latitude and Longitude
+	// ctx.AssertIsEqualOrCustomULP32(ctx.Mul(ctx.NewF32Constant(2), ctx.Mul(gammaLat, deltaLat)), betaLat, 1.0)
+	// ctx.AssertIsEqualOrCustomULP32(ctx.Mul(ctx.NewF32Constant(2), ctx.Mul(gammaLng, deltaLng)), betaLng, 1.0)
+
+	// Calculate Cosine for Latitude and Longitude
+	cosLat := ctx.Sub(ctx.Mul(deltaLat, deltaLat), ctx.Mul(gammaLat, gammaLat))
+	cosLng := ctx.Sub(ctx.Mul(deltaLng, deltaLng), ctx.Mul(gammaLng, gammaLng))
+
+	// Calculate Sin for Latitude and Longitude
+	z := betaLat
+	sinLng := betaLng
+
+	// Calculate x & z for 3D Cartesian
+	x := ctx.Mul(cosLat, cosLng)
+	y := ctx.Mul(cosLat, sinLng)
+
+	calc := closestFaceCalculations(&ctx, x, y, z, lng)
+
+	r := calculateR(&ctx, calc[0], resolution)
+	hex2d := calculateHex2d(&ctx, z, cosLat, sinLng, cosLng, calc[1], calc[2], calc[3], calc[4], calc[5], calc[6], calc[7], calc[8], r, resolution)
+
+	ijk := hex2dToCoordIJK(&ctx, hex2d[0], hex2d[1])
+
+	api.AssertIsEqual(c.I, ijk[0])
+	api.AssertIsEqual(c.J, ijk[1])
+	api.AssertIsEqual(c.K, ijk[2])
+
+	return nil
+}
+
+func main() {
+	data := strings.Fields("3E82569F 3D93378B F 10B21F 28C509 0")
+
+	lat, _ := new(big.Int).SetString(data[0], 16)
+	lng, _ := new(big.Int).SetString(data[1], 16)
+	res, _ := new(big.Int).SetString(data[2], 16)
+	i, _ := new(big.Int).SetString(data[3], 16)
+	j, _ := new(big.Int).SetString(data[4], 16)
+	k, _ := new(big.Int).SetString(data[5], 16)
+
+	full, _ := frontend.NewWitness(&Loc2Index32Circuit{Lat: lat, Lng: lng, Resolution: res, I: i, J: j, K: k}, ecc.BN254.ScalarField())
+
+	// Compilation step with time measurement
+	start := time.Now().UnixMicro()
+	cs, _ := frontend.Compile(ecc.BN254.ScalarField(), r1cs.NewBuilder, &Loc2Index32Circuit{Lat: 0, Lng: 0, Resolution: 0}, frontend.WithCompressThreshold(1000))
+	compilationTime := time.Now().UnixMicro() - start
+
+	// Print the number of constraints
+	fmt.Println("Number of constraints:", cs.GetNbConstraints())
+
+	// Setup step with time measurement
+	start = time.Now().UnixMicro()
+	pk, vk, _ := groth16.Setup(cs)
+	setupTime := time.Now().UnixMicro() - start
+
+	// Proving step with time measurement
+	start = time.Now().UnixMicro()
+	for i := 0; i < 20; i++ {
+		groth16.Prove(cs, pk, full)
+	}
+	proverTime := (time.Now().UnixMicro() - start) / 20
+
+	proof, _ := groth16.Prove(cs, pk, full)
+
+	// Verifier step with time measurement
+	start = time.Now().UnixMicro()
+	publicWitness, _ := full.Public()
+	groth16.Verify(proof, vk, publicWitness)
+
+	verifierTime := time.Now().UnixMicro() - start
+
+	// Print the time measurements
+	fmt.Println("Compilation time:", compilationTime)
+	fmt.Println("Setup time:", setupTime)
+	fmt.Println("Prover time:", proverTime)
+	fmt.Println("Verifier time:", verifierTime)
 }

@@ -5,7 +5,6 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/require"
-	"github.com/uber/h3-go/v4"
 )
 
 func TestExecuteLatLngToIJKWithRadians(t *testing.T) {
@@ -68,22 +67,4 @@ func TestExecuteLatLngToIJK(t *testing.T) {
 			}
 		})
 	}
-}
-
-// TestLatLngToIJ tests the conversion of latitude and longitude to local IJ coordinates.
-func TestLatLngToIJ(t *testing.T) {
-	// These values should be valid coordinates that you expect to convert correctly
-	lat := 37.3387
-	lng := -121.8853
-	resolution := 3 // Choose an appropriate resolution
-
-	// Assuming origin is a valid H3 cell index representing your origin
-	// You need to provide a valid H3 index for origin, the following line is just a placeholder
-	origin := 0x832834fffffffff
-
-	// Run the function under test
-	i, j := LatLngToIJ(lat, lng, resolution, h3.Cell(origin))
-
-	// Print the I and J coordinates
-	fmt.Printf("I coordinate: %d, J coordinate: %d\n", i, j)
 }

@@ -1,4 +1,4 @@
-package loc2index64
+package main
 
 import (
 	"bufio"
@@ -10,7 +10,6 @@ import (
 	"testing"
 
 	float "gnark-float/float"
-	"gnark-float/hint"
 	maths "gnark-float/math"
 	util "gnark-float/util"
 
@@ -19,139 +18,8 @@ import (
 	"github.com/consensys/gnark/frontend/cs/r1cs"
 )
 
-type loc2Index32Circuit struct {
-
-	// SECRET INPUTS
-	Lat frontend.Variable `gnark:",secret"`
-	Lng frontend.Variable `gnark:",secret"`
-
-	// PUBLIC INPUTS
-	Resolution frontend.Variable `gnark:",public"`
-	I          frontend.Variable `gnark:",public"`
-	J          frontend.Variable `gnark:",public"`
-	K          frontend.Variable `gnark:",public"`
-}
-
-func (c *loc2Index32Circuit) Define(api frontend.API) error {
-
-	ctx := float.NewContext(api, 0, util.IEEE32ExponentBitwidth, util.IEEE32Precision)
-	// lat := ctx.NewFloat(c.Lat)
-	lng := ctx.NewFloat(c.Lng)
-
-	resolution := c.Resolution
-
-	// pi := ctx.NewF32Constant(math.Pi)
-	// halfPi := ctx.NewF32Constant(math.Pi / 2.0)
-
-	// Lat can't be more than pi/2, Lng can't be more than pi and max resolution is 15
-	// api.AssertIsEqual(ctx.IsGt(lat, halfPi), 0)
-	// api.AssertIsEqual(ctx.IsGt(lng, pi), 0)
-	// api.AssertIsLessOrEqual(resolution, util.MaxResolution)
-
-	// Compute alpha, beta, gamma, delta for Latitude
-	alphaLat := ctx.NewFloat(0)
-	betaLat := ctx.NewFloat(0)
-	gammaLat := ctx.NewFloat(0)
-	deltaLat := ctx.NewFloat(0)
-	precomputeLat, err := ctx.Api.Compiler().NewHint(hint.PrecomputeHint32, 16, c.Lat, ctx.E, ctx.M)
-	if err != nil {
-		panic(err)
-	}
-	alphaLat.Sign = precomputeLat[0]
-	alphaLat.Exponent = precomputeLat[1]
-	alphaLat.Mantissa = precomputeLat[2]
-	alphaLat.IsAbnormal = precomputeLat[3]
-
-	betaLat.Sign = precomputeLat[4]
-	betaLat.Exponent = precomputeLat[5]
-	betaLat.Mantissa = precomputeLat[6]
-	betaLat.IsAbnormal = precomputeLat[7]
-
-	gammaLat.Sign = precomputeLat[8]
-	gammaLat.Exponent = precomputeLat[9]
-	gammaLat.Mantissa = precomputeLat[10]
-	gammaLat.IsAbnormal = precomputeLat[11]
-
-	deltaLat.Sign = precomputeLat[12]
-	deltaLat.Exponent = precomputeLat[13]
-	deltaLat.Mantissa = precomputeLat[14]
-	deltaLat.IsAbnormal = precomputeLat[15]
-
-	// Compute alpha, beta, gamma, delta for Longitude
-	alphaLng := ctx.NewFloat(0)
-	betaLng := ctx.NewFloat(0)
-	gammaLng := ctx.NewFloat(0)
-	deltaLng := ctx.NewFloat(0)
-	precomputeLng, err := ctx.Api.Compiler().NewHint(hint.PrecomputeHint32, 16, c.Lng, ctx.E, ctx.M)
-	if err != nil {
-		panic(err)
-	}
-	alphaLng.Sign = precomputeLng[0]
-	alphaLng.Exponent = precomputeLng[1]
-	alphaLng.Mantissa = precomputeLng[2]
-	alphaLng.IsAbnormal = precomputeLng[3]
-
-	betaLng.Sign = precomputeLng[4]
-	betaLng.Exponent = precomputeLng[5]
-	betaLng.Mantissa = precomputeLng[6]
-	betaLng.IsAbnormal = precomputeLng[7]
-
-	gammaLng.Sign = precomputeLng[8]
-	gammaLng.Exponent = precomputeLng[9]
-	gammaLng.Mantissa = precomputeLng[10]
-	gammaLng.IsAbnormal = precomputeLng[11]
-
-	deltaLng.Sign = precomputeLng[12]
-	deltaLng.Exponent = precomputeLng[13]
-	deltaLng.Mantissa = precomputeLng[14]
-	deltaLng.IsAbnormal = precomputeLng[15]
-
-	// Check 1 (Identity) for Latitude and Longitude
-	deltaLatSquared := ctx.Mul(deltaLat, deltaLat)
-	gammaLatSquared := ctx.Mul(gammaLat, gammaLat)
-	identityLat := ctx.Add(gammaLatSquared, deltaLatSquared)
-	deltaLngSquared := ctx.Mul(deltaLng, deltaLng)
-	gammaLngSquared := ctx.Mul(gammaLng, gammaLng)
-	identityLng := ctx.Add(gammaLngSquared, deltaLngSquared)
-	ctx.AssertIsEqualOrCustomULP32(identityLat, ctx.NewF32Constant(1), 1.0)
-	ctx.AssertIsEqualOrCustomULP32(identityLng, ctx.NewF32Constant(1), 1.0)
-
-	// Check 2 for Latitude and Longitude
-	ctx.AssertIsEqualOrCustomULP32(ctx.Mul(alphaLat, deltaLat), gammaLat, 1.0)
-	ctx.AssertIsEqualOrCustomULP32(ctx.Mul(alphaLng, deltaLng), gammaLng, 1.0)
-
-	// Check 3 for Latitude and Longitude
-	// ctx.AssertIsEqualOrCustomULP32(ctx.Mul(ctx.NewF32Constant(2), ctx.Mul(gammaLat, deltaLat)), betaLat, 1.0)
-	// ctx.AssertIsEqualOrCustomULP32(ctx.Mul(ctx.NewF32Constant(2), ctx.Mul(gammaLng, deltaLng)), betaLng, 1.0)
-
-	// Calculate Cosine for Latitude and Longitude
-	cosLat := ctx.Sub(ctx.Mul(deltaLat, deltaLat), ctx.Mul(gammaLat, gammaLat))
-	cosLng := ctx.Sub(ctx.Mul(deltaLng, deltaLng), ctx.Mul(gammaLng, gammaLng))
-
-	// Calculate Sin for Latitude and Longitude
-	z := betaLat
-	sinLng := betaLng
-
-	// Calculate x & z for 3D Cartesian
-	x := ctx.Mul(cosLat, cosLng)
-	y := ctx.Mul(cosLat, sinLng)
-
-	calc := closestFaceCalculations(&ctx, x, y, z, lng)
-
-	r := calculateR(&ctx, calc[0], resolution)
-	hex2d := calculateHex2d(&ctx, z, cosLat, sinLng, cosLng, calc[1], calc[2], calc[3], calc[4], calc[5], calc[6], calc[7], calc[8], r, resolution)
-
-	ijk := hex2dToCoordIJK(&ctx, hex2d[0], hex2d[1])
-
-	api.AssertIsEqual(c.I, ijk[0])
-	api.AssertIsEqual(c.J, ijk[1])
-	api.AssertIsEqual(c.K, ijk[2])
-
-	return nil
-}
-
 func TestLoc2Index32(t *testing.T) {
-	ccs, _ := frontend.Compile(ecc.BN254.ScalarField(), r1cs.NewBuilder, &loc2Index32Circuit{Lat: 0, Lng: 0, Resolution: 0})
+	ccs, _ := frontend.Compile(ecc.BN254.ScalarField(), r1cs.NewBuilder, &Loc2Index32Circuit{Lat: 0, Lng: 0, Resolution: 0})
 
 	for i := 0; i <= 15; i++ {
 		file, err := os.Open(fmt.Sprintf("../data/f32/loc2index/%v_100.txt", i))
@@ -174,7 +42,7 @@ func TestLoc2Index32(t *testing.T) {
 			j, _ := new(big.Int).SetString(data[4], 16)
 			k, _ := new(big.Int).SetString(data[5], 16)
 
-			full, err := frontend.NewWitness(&loc2Index32Circuit{Lat: lat, Lng: lng, Resolution: res, I: i, J: j, K: k}, ecc.BN254.ScalarField())
+			full, err := frontend.NewWitness(&Loc2Index32Circuit{Lat: lat, Lng: lng, Resolution: res, I: i, J: j, K: k}, ecc.BN254.ScalarField())
 
 			_, err = ccs.Solve(full)
 			if err != nil {
@@ -294,7 +162,7 @@ func BenchmarkLoc2IndexProof(b *testing.B) {
 	file, _ := os.Open("../data/f32/loc2index32.txt")
 	defer file.Close()
 
-	var circuits, assignments []loc2Index32Circuit
+	var circuits, assignments []Loc2Index32Circuit
 	var resolutions, indices []int64
 	resolutionCounts := make(map[int64]int64)
 
@@ -315,8 +183,8 @@ func BenchmarkLoc2IndexProof(b *testing.B) {
 		// Update the count for this resolution
 		resolutionCounts[res.Int64()]++
 
-		circuit := loc2Index32Circuit{Lat: 0, Lng: 0, Resolution: 0}
-		assignment := loc2Index32Circuit{Lat: lat, Lng: lng, Resolution: res, I: i, J: j, K: k}
+		circuit := Loc2Index32Circuit{Lat: 0, Lng: 0, Resolution: 0}
+		assignment := Loc2Index32Circuit{Lat: lat, Lng: lng, Resolution: res, I: i, J: j, K: k}
 
 		// Append the created structs to the slices
 		circuits = append(circuits, circuit)
@@ -354,7 +222,7 @@ func BenchmarkLoc2IndexProofMemory(b *testing.B) {
 	file, _ := os.Open("../data/f32/loc2index32.txt")
 	defer file.Close()
 
-	var circuits, assignments []loc2Index32Circuit
+	var circuits, assignments []Loc2Index32Circuit
 
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
@@ -370,8 +238,8 @@ func BenchmarkLoc2IndexProofMemory(b *testing.B) {
 		fmt.Printf("lat: %f, lng: %f\n", math.Float32frombits(uint32(lat.Uint64())), math.Float32frombits(uint32(lng.Uint64())))
 		fmt.Printf("i: %d, j: %d, k: %d\n", i, j, k)
 
-		circuit := loc2Index32Circuit{Lat: 0, Lng: 0, Resolution: 0}
-		assignment := loc2Index32Circuit{Lat: lat, Lng: lng, Resolution: res, I: i, J: j, K: k}
+		circuit := Loc2Index32Circuit{Lat: 0, Lng: 0, Resolution: 0}
+		assignment := Loc2Index32Circuit{Lat: lat, Lng: lng, Resolution: res, I: i, J: j, K: k}
 
 		// Append the created structs to the slices
 		circuits = append(circuits, circuit)
