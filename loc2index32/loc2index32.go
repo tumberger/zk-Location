@@ -398,7 +398,7 @@ func (c *Loc2Index32Circuit) Define(api frontend.API) error {
 }
 
 func main() {
-	data := strings.Fields("3E82569F 3D93378B F 10B21F 28C509 0")
+	data := strings.Fields("3DC30E53 3E9A787A 8 0 69F B6C")
 
 	lat, _ := new(big.Int).SetString(data[0], 16)
 	lng, _ := new(big.Int).SetString(data[1], 16)
