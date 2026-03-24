@@ -1,7 +1,7 @@
 package gadget
 
 import (
-	"gnark-float/hint"
+	"github.com/tumberger/zk-Location/hint"
 	"math/big"
 
 	"github.com/consensys/gnark/frontend"
@@ -35,14 +35,14 @@ func (t *PowersOfTwo) commit(api frontend.API) error {
 }
 
 type IntGadget struct {
-	api               frontend.API
-	rangechecker      *CommitChecker
-	pow2              *PowersOfTwo
-	range_size        uint
-	pow2_size         uint
+	api                      frontend.API
+	rangechecker             *CommitChecker
+	pow2                     *PowersOfTwo
+	range_size               uint
+	pow2_size                uint
 	num_range_decompositions uint
-	num_range_chunks  uint
-	num_pow2_queries  uint
+	num_range_chunks         uint
+	num_pow2_queries         uint
 }
 
 func New(api frontend.API, range_size uint, pow2_size uint) *IntGadget {
@@ -72,7 +72,7 @@ func (f *IntGadget) AssertBitLength(v frontend.Variable, bit_length uint, mode M
 			f.num_range_decompositions++
 		}
 		f.num_range_chunks += num_limbs
-		if mode == TightForUnknownRange && bit_length % f.range_size != 0 {
+		if mode == TightForUnknownRange && bit_length%f.range_size != 0 {
 			f.num_range_chunks++
 		}
 	}

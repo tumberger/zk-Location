@@ -1,7 +1,7 @@
 package hint
 
 import (
-	"gnark-float/util"
+	"github.com/tumberger/zk-Location/util"
 	"math"
 	"math/big"
 

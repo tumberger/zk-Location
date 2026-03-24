@@ -1,7 +1,7 @@
 package math
 
 import (
-	float "gnark-float/float"
+	float "github.com/tumberger/zk-Location/float"
 
 	//"fmt"
 	"math"
