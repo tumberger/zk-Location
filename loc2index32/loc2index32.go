@@ -1,8 +1,8 @@
 package loc2index64
 
 import (
-	float "gnark-float/float"
-	util "gnark-float/util"
+	float "github.com/tumberger/zk-Location/float"
+	util "github.com/tumberger/zk-Location/util"
 
 	"math"
 	//"fmt"

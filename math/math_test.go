@@ -3,7 +3,7 @@ package math
 import (
 	"bufio"
 	"fmt"
-	"gnark-float/float"
+	"github.com/tumberger/zk-Location/float"
 	"math/big"
 	"os"
 	"path/filepath"

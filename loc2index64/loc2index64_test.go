@@ -9,9 +9,9 @@ import (
 	"strings"
 	"testing"
 
-	float "gnark-float/float"
-	"gnark-float/hint"
-	util "gnark-float/util"
+	float "github.com/tumberger/zk-Location/float"
+	"github.com/tumberger/zk-Location/hint"
+	util "github.com/tumberger/zk-Location/util"
 
 	"github.com/consensys/gnark-crypto/ecc"
 	"github.com/consensys/gnark/backend"

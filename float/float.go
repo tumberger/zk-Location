@@ -6,9 +6,9 @@ import (
 
 	"github.com/consensys/gnark/frontend"
 
-	"gnark-float/gadget"
-	"gnark-float/hint"
-	"gnark-float/util"
+	"github.com/tumberger/zk-Location/gadget"
+	"github.com/tumberger/zk-Location/hint"
+	"github.com/tumberger/zk-Location/util"
 )
 
 type Context struct {
